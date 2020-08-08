@@ -57,7 +57,6 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_setkeyvalue.sas", "mp__setkeyvalue_8sas.html", null ],
     [ "mp_stprequests.sas", "mp__stprequests_8sas.html", null ],
     [ "mp_streamfile.sas", "mp__streamfile_8sas.html", null ],
-    [ "mp_testwritespeedlibrary.sas", "mp__testwritespeedlibrary_8sas.html", null ],
     [ "mp_unzip.sas", "mp__unzip_8sas.html", null ],
     [ "mp_updatevarlength.sas", "mp__updatevarlength_8sas.html", "mp__updatevarlength_8sas" ],
     [ "mp_zip.sas", "mp__zip_8sas.html", null ]

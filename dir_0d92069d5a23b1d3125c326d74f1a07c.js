@@ -28,6 +28,7 @@ var dir_0d92069d5a23b1d3125c326d74f1a07c =
     [ "mm_getservercontexts.sas", "mm__getservercontexts_8sas.html", null ],
     [ "mm_getstpcode.sas", "mm__getstpcode_8sas.html", "mm__getstpcode_8sas" ],
     [ "mm_getstps.sas", "mm__getstps_8sas.html", null ],
+    [ "mm_gettableid.sas", "mm__gettableid_8sas.html", null ],
     [ "mm_gettables.sas", "mm__gettables_8sas.html", null ],
     [ "mm_gettree.sas", "mm__gettree_8sas.html", null ],
     [ "mm_gettypes.sas", "mm__gettypes_8sas.html", null ],
