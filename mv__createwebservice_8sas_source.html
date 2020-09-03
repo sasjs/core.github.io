@@ -260,7 +260,7 @@ $(document).ready(function(){initNavTree('mv__createwebservice_8sas_source.html'
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;data _null_;</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  <span class="keyword">set</span> &amp;libref1..links;</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  <span class="keywordflow">if</span> rel=<span class="stringliteral">&#39;members&#39;</span> then call symputx(<span class="stringliteral">&#39;membercheck&#39;</span>,quote(trim(href)),<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  <span class="keywordflow">if</span> rel=<span class="stringliteral">&#39;members&#39;</span> then call symputx(<span class="stringliteral">&#39;membercheck&#39;</span>,quote(<span class="stringliteral">&quot;&amp;base_uri&quot;</span>!!trim(href)),<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  <span class="keywordflow">else</span> <span class="keywordflow">if</span> rel=<span class="stringliteral">&#39;self&#39;</span> then call symputx(<span class="stringliteral">&#39;parentFolderUri&#39;</span>,href,<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;run;</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;data _null_;</div>
@@ -726,7 +726,7 @@ $(document).ready(function(){initNavTree('mv__createwebservice_8sas_source.html'
 <div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;<span class="stringliteral">    in=&amp;fname3</span></div>
 <div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;<span class="stringliteral">    out=&amp;fname4</span></div>
 <div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;<span class="stringliteral">    &amp;oauth_bearer</span></div>
-<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;<span class="stringliteral">    url=&quot;</span>/jobDefinitions/definitions?parentFolderUri=&amp;parentFolderUri<span class="stringliteral">&quot;;</span></div>
+<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;<span class="stringliteral">    url=&quot;</span>&amp;base_uri/jobDefinitions/definitions?parentFolderUri=&amp;parentFolderUri<span class="stringliteral">&quot;;</span></div>
 <div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;<span class="stringliteral">    headers &#39;Content-Type&#39;=&#39;application/vnd.sas.job.definition+json&#39;</span></div>
 <div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;<span class="stringliteral">  %if &amp;grant_type=authorization_code %then %do;</span></div>
 <div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;<span class="stringliteral">            &quot;</span>Authorization<span class="stringliteral">&quot;=&quot;</span>Bearer &amp;&amp;&amp;access_token_var<span class="stringliteral">&quot;</span></div>

@@ -213,7 +213,7 @@ $(document).ready(function(){initNavTree('mv__createfolder_8sas_source.html','')
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    data _null_;</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      <span class="keyword">set</span> &amp;libref1..links;</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;      <span class="keywordflow">if</span> rel=<span class="stringliteral">&#39;createChild&#39;</span> then</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        call symputx(<span class="stringliteral">&#39;href&#39;</span>,quote(trim(href)),<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        call symputx(<span class="stringliteral">&#39;href&#39;</span>,quote(<span class="stringliteral">&quot;&amp;base_uri&quot;</span>!!trim(href)),<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    run;</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  %end;</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  %<span class="keywordflow">else</span> %<span class="keywordflow">if</span> &amp;SYS_PROCHTTP_STATUS_CODE=404 %then %<span class="keywordflow">do</span>;</div>
