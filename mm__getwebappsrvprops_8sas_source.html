@@ -216,40 +216,41 @@ $(document).ready(function(){initNavTree('mm__getwebappsrvprops_8sas_source.html
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;          when (&#39;&amp;<span class="preprocessor">#x0a;&#39;) rec=&#39;0A&#39;x;</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;          when (<span class="stringliteral">&#39;&amp;#x0d;&#39;</span>) rec=&#39;0D&#39;x;</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;          when (&#39;&amp;<span class="preprocessor">#36;&#39; ) rec=&#39;$&#39;  ;</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;          otherwise putlog <span class="stringliteral">&quot;WARNING: missing value for &quot;</span> entity=;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        end;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        rc =fput(fileid, substr(rec,1,1));</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        rc =fwrite(fileid);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;      end;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      <span class="keywordflow">else</span> <span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        rc =fput(fileid,rec);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        rc =fwrite(fileid);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      end;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    end;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  end;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  getout:</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  rc=fclose(filein);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  rc=fclose(fileid);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  run;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  data &amp;outds ;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    infile __shake dlm=<span class="charliteral">&#39;=&#39;</span> missover;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    length name $50 value $500;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    input name $ value $;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  run;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;%end;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;%<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  %put NOTE: Unable to retrieve Web App Server Properties;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  data &amp;outds;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    length name $50 value $500;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  run;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;%end;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">/* clear references */</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;filename __in clear;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;filename __out clear;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;filename __shake clear;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;%mend;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;          when (<span class="stringliteral">&#39;&amp;#x09;&#39;</span>) rec=&#39;09&#39;x;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;          otherwise putlog &quot;WARNING: missing value for &quot; entity=;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        end;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        rc =fput(fileid, substr(rec,1,1));</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        rc =fwrite(fileid);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      end;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      else do;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        rc =fput(fileid,rec);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        rc =fwrite(fileid);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;      end;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    end;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  end;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  getout:</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  rc=fclose(filein);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  rc=fclose(fileid);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  run;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  data &amp;outds ;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    infile __shake dlm=&#39;=&#39; missover;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    length name $50 value $500;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    input name $ value $;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  run;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;%end;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;%else %do;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  %put NOTE: Unable to retrieve Web App Server Properties;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  data &amp;outds;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    length name $50 value $500;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  run;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;%end;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">/* clear references */</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;filename __in clear;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;filename __out clear;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;filename __shake clear;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;%mend;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 
