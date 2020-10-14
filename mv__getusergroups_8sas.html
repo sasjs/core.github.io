@@ -121,13 +121,11 @@ $(document).ready(function(){initNavTree('mv__getusergroups_8sas.html',''); init
 
 <p><a href="mv__getusergroups_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>First, be sure you have an access token (which requires an app token).</p>
-<p>Using the macros here: </p><pre class="fragment">filename mc url
+<div class="textblock"><p>If using outside of Viya SPRE, then an access token is needed.</p>
+<p>Compile the macros here: </p><pre class="fragment">filename mc url
   "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %inc mc;
-</pre><p>An administrator needs to set you up with an access code: </p><pre class="fragment">%mv_registerclient(outds=client)
-</pre><p>Navigate to the url from the log (opting in to the groups) and paste the access code below: </p><pre class="fragment">%mv_tokenauth(inds=client,code=wKDZYTEPK6)
-</pre><p>Now we can run the macro! </p><pre class="fragment">%mv_getusergroups(&amp;sysuserid,outds=users)
+</pre><p>Then run the macro! </p><pre class="fragment">%mv_getusergroups(&amp;sysuserid,outds=users)
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>

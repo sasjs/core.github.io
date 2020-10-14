@@ -276,7 +276,7 @@ $(document).ready(function(){initNavTree('mp__getddl_8sas_source.html',''); init
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;      file &amp;fref mod;</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;      put &#39;);&#39;;</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    run;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="comment">/* Create Unique Indexes, but only if they were not already defined within the Constraints section. */</span></div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    data _null_;</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;      *length ds $128;</div>
@@ -456,7 +456,7 @@ $(document).ready(function(){initNavTree('mp__getddl_8sas_source.html',''); init
 <div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
 <div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;  %end;</div>
 <div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;%end;</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;%if &amp;showlog=YES %then %do;</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;%if %upcase(&amp;showlog)=YES %then %do;</div>
 <div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;  options ps=max;</div>
 <div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;  data _null_;</div>
 <div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    infile &amp;fref;</div>

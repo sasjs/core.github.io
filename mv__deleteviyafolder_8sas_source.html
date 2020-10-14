@@ -205,9 +205,9 @@ $(document).ready(function(){initNavTree('mv__deleteviyafolder_8sas_source.html'
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;data _null_;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="keyword">set</span> &amp;libref1..links;</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keywordflow">if</span> rel=<span class="stringliteral">&#39;deleteRecursively&#39;</span> then</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    call symputx(<span class="stringliteral">&#39;href&#39;</span>,quote(trim(href)),<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    call symputx(<span class="stringliteral">&#39;href&#39;</span>,quote(<span class="stringliteral">&quot;&amp;base_uri&quot;</span>!!trim(href)),<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="keywordflow">else</span> <span class="keywordflow">if</span> rel=<span class="stringliteral">&#39;members&#39;</span> then</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    call symputx(<span class="stringliteral">&#39;mref&#39;</span>,quote(cats(href,<span class="stringliteral">&#39;?recursive=true&#39;</span>)),<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    call symputx(<span class="stringliteral">&#39;mref&#39;</span>,quote(cats(<span class="stringliteral">&quot;&amp;base_uri&quot;</span>,href,<span class="stringliteral">&#39;?recursive=true&#39;</span>)),<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;run;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">/* before we can delete the folder, we need to delete the children */</span></div>
@@ -228,7 +228,7 @@ $(document).ready(function(){initNavTree('mv__deleteviyafolder_8sas_source.html'
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="keyword">set</span> &amp;libref1a..items_links;</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <span class="keywordflow">if</span> href=:<span class="stringliteral">&#39;/folders/folders&#39;</span> then <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="keywordflow">if</span> rel=<span class="stringliteral">&#39;deleteResource&#39;</span> then</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    call execute(<span class="stringliteral">&#39;proc http method=&quot;DELETE&quot; url=&#39;</span>!!quote(trim(href))</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    call execute(<span class="stringliteral">&#39;proc http method=&quot;DELETE&quot; url=&#39;</span>!!quote(<span class="stringliteral">&quot;&amp;base_uri&quot;</span>!!trim(href))</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    !!<span class="stringliteral">&#39;; headers &quot;Authorization&quot;=&quot;Bearer &amp;&amp;&amp;access_token_var&quot; &#39;</span></div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    !!<span class="stringliteral">&#39; &quot;Accept&quot;=&quot;*/*&quot;;run; /**/&#39;</span>);</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;run;</div>

@@ -304,7 +304,7 @@ $(document).ready(function(){initNavTree('mv__registerclient_8sas_source.html','
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="stringliteral">%end;</span></div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="stringliteral"></span> </div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="stringliteral">/* prepare url */</span></div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="stringliteral">%if &amp;grant_type=authorization_code %then %do;</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="stringliteral">%if %index(%superq(grant_type),authorization_code) %then %do;</span></div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="stringliteral">  data _null_;</span></div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="stringliteral">    if symexist(&#39;_baseurl&#39;) then do;</span></div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="stringliteral">      url=symget(&#39;_baseurl&#39;);</span></div>
@@ -323,7 +323,7 @@ $(document).ready(function(){initNavTree('mv__registerclient_8sas_source.html','
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="stringliteral">%put CLIENT_SECRET=&amp;client_secret;</span></div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="stringliteral">%put GRANT_TYPE=&amp;grant_type;</span></div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="stringliteral">%put;</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="stringliteral">%if &amp;grant_type=authorization_code %then %do;</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="stringliteral">%if %index(%superq(grant_type),authorization_code) %then %do;</span></div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="stringliteral">  /* cannot use base_uri here as it includes the protocol which may be incorrect externally */</span></div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="stringliteral">  %put NOTE: The developer must also register below and select &#39;openid&#39; to get the grant code:;</span></div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="stringliteral">  %put NOTE- ;</span></div>

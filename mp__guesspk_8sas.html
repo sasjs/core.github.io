@@ -121,9 +121,10 @@ $(document).ready(function(){initNavTree('mp__guesspk_8sas.html',''); initResiza
 
 <p><a href="mp__guesspk_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Tries to guess the primary key of a table based on the following logic:</p>
-<p>Columns with nulls are ignored Return only column combinations that provide unique results Start from one column, then move out to include composite keys of 2 to 6 columns</p>
-<p>The library of the target should be assigned before using this macro.</p>
+<div class="textblock"><p>Tries to guess the primary key of a table based on the following logic: </p><pre class="fragment">  Columns with nulls are ignored
+  Return only column combinations that provide unique results
+  Start from one column, then move out to include composite keys of 2 to 6 columns
+</pre><p>The library of the target should be assigned before using this macro.</p>
 <p>Usage: </p><pre class="fragment">filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %inc mc;
 %mp_guesspk(sashelp.class,outds=classpks)

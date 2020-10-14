@@ -181,7 +181,7 @@ $(document).ready(function(){initNavTree('mv__getfoldermembers_8sas_source.html'
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;%<span class="keywordflow">if</span> <span class="stringliteral">&quot;&amp;root&quot;</span>=<span class="stringliteral">&quot;/&quot;</span> %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="comment">/* if root just list root folders */</span></div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  proc http method=<span class="stringliteral">&#39;GET&#39;</span> out=&amp;fname1 &amp;oauth_bearer</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      url=<span class="stringliteral">&#39;%sysfunc(getoption(servicesbaseurl))/folders/rootFolders&#39;</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      url=<span class="stringliteral">&quot;&amp;base_uri/folders/rootFolders&quot;</span>;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  %<span class="keywordflow">if</span> &amp;grant_type=authorization_code %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      headers <span class="stringliteral">&quot;Authorization&quot;</span>=<span class="stringliteral">&quot;Bearer &amp;&amp;&amp;access_token_var&quot;</span>;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  %end;</div>
@@ -204,7 +204,7 @@ $(document).ready(function(){initNavTree('mv__getfoldermembers_8sas_source.html'
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="comment">/* now get the followon link to list members */</span></div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  data _null_;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">set</span> &amp;libref1..links;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">if</span> rel=<span class="stringliteral">&#39;members&#39;</span> then call symputx(<span class="stringliteral">&#39;href&#39;</span>,quote(trim(href)),<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">if</span> rel=<span class="stringliteral">&#39;members&#39;</span> then call symputx(<span class="stringliteral">&#39;href&#39;</span>,quote(<span class="stringliteral">&quot;&amp;base_uri&quot;</span>!!trim(href)),<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  run;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  %local fname2 libref2;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  %let fname2=%mf_getuniquefileref();</div>

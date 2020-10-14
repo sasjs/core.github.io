@@ -215,7 +215,7 @@ $(document).ready(function(){initNavTree('mv__deletefoldermember_8sas_source.htm
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;libname &amp;libref1 JSON fileref=&amp;fname1;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;data _null_;</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keyword">set</span> &amp;libref1..links;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordflow">if</span> rel=<span class="stringliteral">&#39;members&#39;</span> then call symputx(<span class="stringliteral">&#39;mref&#39;</span>,quote(trim(href)),<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordflow">if</span> rel=<span class="stringliteral">&#39;members&#39;</span> then call symputx(<span class="stringliteral">&#39;mref&#39;</span>,quote(<span class="stringliteral">&quot;&amp;base_uri&quot;</span>!!trim(href)),<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;run;</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">/* get the children */</span></div>
@@ -245,7 +245,7 @@ $(document).ready(function(){initNavTree('mv__deletefoldermember_8sas_source.htm
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  %put NOTE:;%put NOTE- &amp;sysmacroname: &amp;path/&amp;name NOT FOUND;%put NOTE- ;</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  %<span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;%end;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;proc http method=<span class="stringliteral">&quot;DELETE&quot;</span> url=<span class="stringliteral">&quot;&amp;uri&quot;</span> &amp;oauth_bearer;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;proc http method=<span class="stringliteral">&quot;DELETE&quot;</span> url=<span class="stringliteral">&quot;&amp;base_uri&amp;uri&quot;</span> &amp;oauth_bearer;</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  headers </div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;%<span class="keywordflow">if</span> &amp;grant_type=authorization_code %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;      <span class="stringliteral">&quot;Authorization&quot;</span>=<span class="stringliteral">&quot;Bearer &amp;&amp;&amp;access_token_var&quot;</span></div>

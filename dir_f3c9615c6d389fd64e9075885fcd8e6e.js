@@ -7,7 +7,7 @@ var dir_f3c9615c6d389fd64e9075885fcd8e6e =
     [ "mv_deleteviyafolder.sas", "mv__deleteviyafolder_8sas.html", "mv__deleteviyafolder_8sas" ],
     [ "mv_getaccesstoken.sas", "mv__getaccesstoken_8sas.html", null ],
     [ "mv_getapptoken.sas", "mv__getapptoken_8sas.html", null ],
-    [ "mv_getclients.sas", "mv__getclients_8sas_source.html", null ],
+    [ "mv_getclients.sas", "mv__getclients_8sas.html", null ],
     [ "mv_getfoldermembers.sas", "mv__getfoldermembers_8sas.html", null ],
     [ "mv_getgroupmembers.sas", "mv__getgroupmembers_8sas.html", "mv__getgroupmembers_8sas" ],
     [ "mv_getgroups.sas", "mv__getgroups_8sas.html", "mv__getgroups_8sas" ],

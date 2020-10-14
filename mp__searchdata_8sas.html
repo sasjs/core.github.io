@@ -121,7 +121,7 @@ $(document).ready(function(){initNavTree('mp__searchdata_8sas.html',''); initRes
 
 <p><a href="mp__searchdata_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Scans an entire library and creates a copy of any table containing a specific string or numeric value. Only matching records are written out. If both a string and numval are provided, the string will take precedence.</p>
+<div class="textblock"><p>Scans an entire library and creates a copy of any table containing a specific string OR numeric value. Only matching records are written out. If both a string and numval are provided, the string will take precedence.</p>
 <p>Usage: </p><pre class="fragment">%mp_searchdata(lib=sashelp, string=Jan)
 %mp_searchdata(lib=sashelp, numval=1)
 </pre><p>Outputs zero or more tables to an MPSEARCH library with specific records.</p>
