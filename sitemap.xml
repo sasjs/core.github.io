@@ -253,10 +253,10 @@
     <loc>https://core.sasjs.io/mp__distinctfmtvalues_8sas_source.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mp__dropmembers_8sas_source.html</loc>
+    <loc>https://core.sasjs.io/mp__distinctfmtvalues_8sas.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mp__distinctfmtvalues_8sas.html</loc>
+    <loc>https://core.sasjs.io/mp__dropmembers_8sas_source.html</loc>
   </url>
   <url>
     <loc>https://core.sasjs.io/mp__dropmembers_8sas.html</loc>
@@ -688,10 +688,10 @@
     <loc>https://core.sasjs.io/mv__getapptoken_8sas.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mv__getclients_8sas_source.html</loc>
+    <loc>https://core.sasjs.io/mv__registerclient_8sas.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mv__registerclient_8sas.html</loc>
+    <loc>https://core.sasjs.io/mv__getclients_8sas_source.html</loc>
   </url>
   <url>
     <loc>https://core.sasjs.io/mv__getclients_8sas.html</loc>
@@ -739,10 +739,10 @@
     <loc>https://core.sasjs.io/mv__registerclient_8sas_source.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mv__tokenrefresh_8sas_source.html</loc>
+    <loc>https://core.sasjs.io/mv__tokenauth_8sas_source.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mv__tokenauth_8sas_source.html</loc>
+    <loc>https://core.sasjs.io/mv__tokenrefresh_8sas_source.html</loc>
   </url>
   <url>
     <loc>https://core.sasjs.io/mv__webout_8sas_source.html</loc>
