@@ -138,27 +138,29 @@ $(document).ready(function(){initNavTree('mf__getengine_8sas_source.html',''); i
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">  @version 9.2</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">  @author Allan Bowe</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;%macro mf_getEngine(libref</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  %local dsid engnum rc engine;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="comment">/* in case the parameter is a libref.tablename, pull off just the libref */</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  %let libref = %upcase(%scan(&amp;libref, 1, %str(.)));</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  %let dsid=%sysfunc(open(sashelp.vlibnam(where=(libname=<span class="stringliteral">&quot;%upcase(&amp;libref)&quot;</span>)),i));</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  %<span class="keywordflow">if</span> (&amp;dsid ^= 0) %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    %let engnum=%sysfunc(varnum(&amp;dsid,ENGINE));</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    %let rc=%sysfunc(fetch(&amp;dsid));</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    %let engine=%sysfunc(getvarc(&amp;dsid,&amp;engnum));</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    %put &amp;libref. ENGINE is &amp;engine.;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    %let rc= %sysfunc(close(&amp;dsid));</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  %end;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; &amp;engine</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;%mend;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">  @cond</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;%macro mf_getengine(libref</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  %local dsid engnum rc engine;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="comment">/* in case the parameter is a libref.tablename, pull off just the libref */</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  %let libref = %upcase(%scan(&amp;libref, 1, %str(.)));</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  %let dsid=%sysfunc(open(sashelp.vlibnam(where=(libname=<span class="stringliteral">&quot;%upcase(&amp;libref)&quot;</span>)),i));</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  %<span class="keywordflow">if</span> (&amp;dsid ^= 0) %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    %let engnum=%sysfunc(varnum(&amp;dsid,ENGINE));</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    %let rc=%sysfunc(fetch(&amp;dsid));</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    %let engine=%sysfunc(getvarc(&amp;dsid,&amp;engnum));</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    %put &amp;libref. ENGINE is &amp;engine.;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    %let rc= %sysfunc(close(&amp;dsid));</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  %end;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; &amp;engine</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;%mend;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">/* @endcond */</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 
