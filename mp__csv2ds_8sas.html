@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MacroCore: base/mp_dirlist.sas File Reference</title>
+<title>MacroCore: base/mp_csv2ds.sas File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -92,7 +92,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('mp__dirlist_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mp__csv2ds_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -112,47 +112,37 @@ $(document).ready(function(){initNavTree('mp__dirlist_8sas.html',''); initResiza
 
 <div class="header">
   <div class="headertitle">
-<div class="title">mp_dirlist.sas File Reference</div>  </div>
+<div class="title">mp_csv2ds.sas File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Returns all files and subdirectories within a specified parent.  
+<p>Efficient import of arbitrary CSV using a dataset as template.  
 <a href="#details">More...</a></p>
 
-<p><a href="mp__dirlist_8sas_source.html">Go to the source code of this file.</a></p>
+<p><a href="mp__csv2ds_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>When used with getattrs=NO, is not OS specific (uses dopen / dread).</p>
-<p>If getattrs=YES then the doptname / foptname functions are used to scan all properties - any characters that are not valid in a SAS name (v7) are simply stripped, and the table is transposed so theat each property is a column and there is one file per row. An attempt is made to get all properties whether a file or folder, but some files/folders cannot be accessed, and so not all properties can / will be populated.</p>
-<p>Credit for the rename approach: <a href="https://communities.sas.com/t5/SAS-Programming/SAS-Function-to-convert-string-to-Legal-SAS-Name/m-p/27375/highlight/true#M5003">https://communities.sas.com/t5/SAS-Programming/SAS-Function-to-convert-string-to-Legal-SAS-Name/m-p/27375/highlight/true#M5003</a></p>
-<p>usage: </p><pre class="fragment">%mp_dirlist(path=/some/location,outds=myTable)
+<div class="textblock"><p>Used to import relevant columns from a large CSV using a dataset to provide the types and lengths. Assumes that a header row is provided, and datarows start on line 2. Extra columns in both the CSV and base dataset are ignored.</p>
+<p>Usage: </p><pre class="fragment">filename mycsv temp;
+data _null_;
+  file mycsv;
+  put 'name,age,nickname';
+  put 'John,48,Jonny';
+  put 'Jennifer,23,Jen';
+run;
 
-%mp_dirlist(outds=cwdfileprops, getattrs=YES)
-
-%mp_dirlist(fref=MYFREF)
-</pre><dl class="section warning"><dt>Warning</dt><dd>In a Unix environment, the existence of a named pipe will cause this macro to hang. Therefore this tool should be used with caution in a SAS 9 web application, as it can use up all available multibridge sessions if requests are resubmitted. If anyone finds a way to positively identify a named pipe using SAS (without X CMD) do please raise an issue!</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
+%mp_csv2ds(inref=mycsv,outds=myds,baseds=sashelp.class)
+</pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path=</td><td>for which to return contents </td></tr>
-    <tr><td class="paramname">fref=</td><td>Provide a DISK engine fileref as an alternative to PATH </td></tr>
-    <tr><td class="paramname">outds=</td><td>the output dataset to create </td></tr>
-    <tr><td class="paramname">getattrs=</td><td>YES/NO (default=NO). Uses doptname and foptname to return all attributes for each file / folder.</td></tr>
+    <tr><td class="paramname">inref=</td><td>fileref to the CSV </td></tr>
+    <tr><td class="paramname">outds=</td><td>output ds. Could also be a view (eg <code>outds=myds/view=myds</code>) </td></tr>
+    <tr><td class="paramname">baseds=</td><td>Template dataset on which to create the input statement. Is used to determine types, lengths, and any informats.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>outds contains the following variables:<ul>
-<li>directory (containing folder)</li>
-<li>file_or_folder (file / folder)</li>
-<li>filepath (path/to/file.name)</li>
-<li>filename (just the file name)</li>
-<li>ext (.extension)</li>
-<li>msg (system message if any issues)</li>
-<li>OS SPECIFIC variables, if <code>getattrs=</code> is used.</li>
-</ul>
-</dd></dl>
 <dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="mp__dirlist_8sas_source.html">mp_dirlist.sas</a>.</p>
+<p class="definition">Definition in file <a class="el" href="mp__csv2ds_8sas_source.html">mp_csv2ds.sas</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 
