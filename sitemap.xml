@@ -52,10 +52,10 @@
     <loc>https://core.sasjs.io/mf__getattrn_8sas.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mf__getengine_8sas_source.html</loc>
+    <loc>https://core.sasjs.io/mf__getengine_8sas.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mf__getengine_8sas.html</loc>
+    <loc>https://core.sasjs.io/mf__getengine_8sas_source.html</loc>
   </url>
   <url>
     <loc>https://core.sasjs.io/mf__getfilesize_8sas_source.html</loc>
@@ -259,10 +259,10 @@
     <loc>https://core.sasjs.io/mp__distinctfmtvalues_8sas_source.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mp__dropmembers_8sas_source.html</loc>
+    <loc>https://core.sasjs.io/mp__distinctfmtvalues_8sas.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mp__distinctfmtvalues_8sas.html</loc>
+    <loc>https://core.sasjs.io/mp__dropmembers_8sas_source.html</loc>
   </url>
   <url>
     <loc>https://core.sasjs.io/mp__dropmembers_8sas.html</loc>
@@ -400,10 +400,10 @@
     <loc>https://core.sasjs.io/mm__assignlib_8sas_source.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mm__createapplication_8sas_source.html</loc>
+    <loc>https://core.sasjs.io/mm__assignlib_8sas.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mm__assignlib_8sas.html</loc>
+    <loc>https://core.sasjs.io/mm__createapplication_8sas_source.html</loc>
   </url>
   <url>
     <loc>https://core.sasjs.io/mm__createapplication_8sas.html</loc>
@@ -541,10 +541,10 @@
     <loc>https://core.sasjs.io/mm__getservercontexts_8sas.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mm__getstpcode_8sas.html</loc>
+    <loc>https://core.sasjs.io/mm__getstpcode_8sas_source.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mm__getstpcode_8sas_source.html</loc>
+    <loc>https://core.sasjs.io/mm__getstpcode_8sas.html</loc>
   </url>
   <url>
     <loc>https://core.sasjs.io/mm__getstps_8sas_source.html</loc>
@@ -553,10 +553,10 @@
     <loc>https://core.sasjs.io/mm__getstps_8sas.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mm__gettableid_8sas_source.html</loc>
+    <loc>https://core.sasjs.io/mm__gettableid_8sas.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mm__gettableid_8sas.html</loc>
+    <loc>https://core.sasjs.io/mm__gettableid_8sas_source.html</loc>
   </url>
   <url>
     <loc>https://core.sasjs.io/mm__gettables_8sas_source.html</loc>
@@ -739,10 +739,10 @@
     <loc>https://core.sasjs.io/mv__getusers_8sas_source.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mv__getusers_8sas.html</loc>
+    <loc>https://core.sasjs.io/mv__registerclient_8sas_source.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mv__registerclient_8sas_source.html</loc>
+    <loc>https://core.sasjs.io/mv__getusers_8sas.html</loc>
   </url>
   <url>
     <loc>https://core.sasjs.io/mv__tokenauth_8sas_source.html</loc>
