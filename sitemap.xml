@@ -160,6 +160,12 @@
     <loc>https://core.sasjs.io/mf__isblank_8sas.html</loc>
   </url>
   <url>
+    <loc>https://core.sasjs.io/mf__isdir_8sas_source.html</loc>
+  </url>
+  <url>
+    <loc>https://core.sasjs.io/mf__isdir_8sas.html</loc>
+  </url>
+  <url>
     <loc>https://core.sasjs.io/mf__loc_8sas_source.html</loc>
   </url>
   <url>
@@ -451,10 +457,10 @@
     <loc>https://core.sasjs.io/mm__createwebservice_8sas.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mm__deletedocument_8sas.html</loc>
+    <loc>https://core.sasjs.io/mm__deletedocument_8sas_source.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mm__deletedocument_8sas_source.html</loc>
+    <loc>https://core.sasjs.io/mm__deletedocument_8sas.html</loc>
   </url>
   <url>
     <loc>https://core.sasjs.io/mm__deletestp_8sas_source.html</loc>
