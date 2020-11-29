@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MacroCore: base/mf_getuniquefileref.sas File Reference</title>
+<title>My Project: base/mf_getuniquefileref.sas File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -35,13 +35,7 @@
   <td id="projectlogo">
     <img alt="Logo" src="Macro_core_website_1.png"/></td>
 <td id="projectalign" style="padding-left: 0.5em;">
-  <div id="projectname">MacroCore
-   </div>
-   <div id="projectbrief">
-    Production Ready Macros for SAS Application Developers</br>
-    <a href="https://github.com/sasjs/core">
-        https://github.com/sasjs/core
-    </a>
+  <div id="projectname">My Project
    </div>
   </td>
    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
@@ -112,14 +106,16 @@ $(document).ready(function(){initNavTree('mf__getuniquefileref_8sas.html',''); i
 
 <p><a href="mf__getuniquefileref_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Use as follows:</p>
-<p>let fileref1=mf_getuniquefileref(); let fileref2=mf_getuniquefileref(); put &amp;fileref1 </p>
-<p>which returns:</p>
+<div class="textblock"><p>Use as follows: </p><pre class="fragment">%let fileref1=%mf_getuniquefileref();
+%let fileref2=%mf_getuniquefileref();
+%put &amp;fileref1 &amp;fileref2;
+</pre><p>which returns:</p>
 <blockquote class="doxtable">
 <p>mcref0 mcref1 </p>
 </blockquote>
-<p>@prefix= first part of fileref. Remember that filerefs can only be 8 characters, so a 7 letter prefix would mean that <code>maxtries</code> should be 10. </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">prefix=</td><td>first part of fileref. Remember that filerefs can only be 8 characters, so a 7 letter prefix would mean that <code>maxtries</code> should be 10. </td></tr>
     <tr><td class="paramname">maxtries=</td><td>the last part of the libref. Provide an integer value.</td></tr>
   </table>
   </dd>

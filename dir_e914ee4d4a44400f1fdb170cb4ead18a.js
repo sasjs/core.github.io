@@ -2,8 +2,8 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
 [
     [ "mf_abort.sas", "mf__abort_8sas.html", null ],
     [ "mf_existds.sas", "mf__existds_8sas.html", null ],
-    [ "mf_existfeature.sas", "mf__existfeature_8sas.html", "mf__existfeature_8sas" ],
-    [ "mf_existvar.sas", "mf__existvar_8sas.html", null ],
+    [ "mf_existfeature.sas", "mf__existfeature_8sas.html", null ],
+    [ "mf_existvar.sas", "mf__existvar_8sas.html", "mf__existvar_8sas" ],
     [ "mf_existvarlist.sas", "mf__existvarlist_8sas.html", null ],
     [ "mf_getattrc.sas", "mf__getattrc_8sas.html", null ],
     [ "mf_getattrn.sas", "mf__getattrn_8sas.html", null ],
