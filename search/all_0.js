@@ -122,8 +122,9 @@ var searchData=
   ['mv_5fgetrefreshtoken_2esas_119',['mv_getrefreshtoken.sas',['../mv__getrefreshtoken_8sas.html',1,'']]],
   ['mv_5fgetusergroups_2esas_120',['mv_getusergroups.sas',['../mv__getusergroups_8sas.html',1,'']]],
   ['mv_5fgetusers_2esas_121',['mv_getusers.sas',['../mv__getusers_8sas.html',1,'']]],
-  ['mv_5fregisterclient_2esas_122',['mv_registerclient.sas',['../mv__registerclient_8sas.html',1,'']]],
-  ['mv_5ftokenauth_2esas_123',['mv_tokenauth.sas',['../mv__tokenauth_8sas.html',1,'']]],
-  ['mv_5ftokenrefresh_2esas_124',['mv_tokenrefresh.sas',['../mv__tokenrefresh_8sas.html',1,'']]],
-  ['mv_5fwebout_2esas_125',['mv_webout.sas',['../mv__webout_8sas.html',1,'']]]
+  ['mv_5fjobexecute_2esas_122',['mv_jobexecute.sas',['../mv__jobexecute_8sas.html',1,'']]],
+  ['mv_5fregisterclient_2esas_123',['mv_registerclient.sas',['../mv__registerclient_8sas.html',1,'']]],
+  ['mv_5ftokenauth_2esas_124',['mv_tokenauth.sas',['../mv__tokenauth_8sas.html',1,'']]],
+  ['mv_5ftokenrefresh_2esas_125',['mv_tokenrefresh.sas',['../mv__tokenrefresh_8sas.html',1,'']]],
+  ['mv_5fwebout_2esas_126',['mv_webout.sas',['../mv__webout_8sas.html',1,'']]]
 ];
