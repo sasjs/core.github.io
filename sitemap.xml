@@ -31,10 +31,10 @@
     <loc>https://core.sasjs.io/mf__existvar_8sas_source.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mf__existvarlist_8sas_source.html</loc>
+    <loc>https://core.sasjs.io/mf__existvar_8sas.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mf__existvar_8sas.html</loc>
+    <loc>https://core.sasjs.io/mf__existvarlist_8sas_source.html</loc>
   </url>
   <url>
     <loc>https://core.sasjs.io/mf__existvarlist_8sas.html</loc>
@@ -130,10 +130,10 @@
     <loc>https://core.sasjs.io/mf__getvarformat_8sas.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mf__getvarlen_8sas.html</loc>
+    <loc>https://core.sasjs.io/mf__getvarlen_8sas_source.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mf__getvarlen_8sas_source.html</loc>
+    <loc>https://core.sasjs.io/mf__getvarlen_8sas.html</loc>
   </url>
   <url>
     <loc>https://core.sasjs.io/mf__getvarlist_8sas_source.html</loc>
@@ -304,6 +304,9 @@
     <loc>https://core.sasjs.io/mp__getmaxvarlengths_8sas.html</loc>
   </url>
   <url>
+    <loc>https://core.sasjs.io/mp__guesspk_8sas_source.html</loc>
+  </url>
+  <url>
     <loc>https://core.sasjs.io/mp__guesspk_8sas.html</loc>
   </url>
   <url>
@@ -314,9 +317,6 @@
   </url>
   <url>
     <loc>https://core.sasjs.io/mp__lib2cards_8sas_source.html</loc>
-  </url>
-  <url>
-    <loc>https://core.sasjs.io/mp__guesspk_8sas_source.html</loc>
   </url>
   <url>
     <loc>https://core.sasjs.io/mp__lib2cards_8sas.html</loc>
