@@ -7,10 +7,10 @@
     <loc>https://core.sasjs.io/files.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/dir_e914ee4d4a44400f1fdb170cb4ead18a.html</loc>
+    <loc>https://core.sasjs.io/mf__abort_8sas_source.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mf__abort_8sas_source.html</loc>
+    <loc>https://core.sasjs.io/dir_e914ee4d4a44400f1fdb170cb4ead18a.html</loc>
   </url>
   <url>
     <loc>https://core.sasjs.io/mf__abort_8sas.html</loc>
@@ -374,6 +374,12 @@
   </url>
   <url>
     <loc>https://core.sasjs.io/mp__streamfile_8sas.html</loc>
+  </url>
+  <url>
+    <loc>https://core.sasjs.io/mp__tree_8sas_source.html</loc>
+  </url>
+  <url>
+    <loc>https://core.sasjs.io/mp__tree_8sas.html</loc>
   </url>
   <url>
     <loc>https://core.sasjs.io/mp__unzip_8sas_source.html</loc>
@@ -767,5 +773,11 @@
   </url>
   <url>
     <loc>https://core.sasjs.io/mv__webout_8sas.html</loc>
+  </url>
+  <url>
+    <loc>https://core.sasjs.io/mv__jobexecute_8sas.html</loc>
+  </url>
+  <url>
+    <loc>https://core.sasjs.io/mv__jobexecute_8sas_source.html</loc>
   </url>
 </urlset>
