@@ -10,9 +10,6 @@
     <loc>https://core.sasjs.io/dir_e914ee4d4a44400f1fdb170cb4ead18a.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mf__abort_8sas_source.html</loc>
-  </url>
-  <url>
     <loc>https://core.sasjs.io/mf__abort_8sas.html</loc>
   </url>
   <url>
@@ -26,6 +23,9 @@
   </url>
   <url>
     <loc>https://core.sasjs.io/mf__existfeature_8sas.html</loc>
+  </url>
+  <url>
+    <loc>https://core.sasjs.io/mf__abort_8sas_source.html</loc>
   </url>
   <url>
     <loc>https://core.sasjs.io/mf__existvar_8sas_source.html</loc>
@@ -142,10 +142,10 @@
     <loc>https://core.sasjs.io/mf__getvarlist_8sas.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mf__getvarnum_8sas_source.html</loc>
+    <loc>https://core.sasjs.io/mf__getvarnum_8sas.html</loc>
   </url>
   <url>
-    <loc>https://core.sasjs.io/mf__getvarnum_8sas.html</loc>
+    <loc>https://core.sasjs.io/mf__getvarnum_8sas_source.html</loc>
   </url>
   <url>
     <loc>https://core.sasjs.io/mf__getvartype_8sas_source.html</loc>
