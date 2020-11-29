@@ -120,14 +120,17 @@ $(document).ready(function(){initNavTree('mv__jobexecute_8sas.html',''); initRes
 </pre><p>Then, execute the job! </p><pre class="fragment">%mv_jobexecute(path=/Public/folder
   ,name=somejob
 )
-</pre><dl class="params"><dt>Parameters</dt><dd>
+</pre><p>Example with parameters:</p>
+<p>mv_jobexecute(path=/Public/folder ,name=somejob ,paramstring=str("macvarname":"macvarvalue","answer":42) )</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
     <tr><td class="paramname">grant_type=</td><td>valid values: password authorization_code detect - will check if access_token exists, if not will use sas_services if a SASStudioV session else authorization_code. Default option. sas_services - will use oauth_bearer=sas_services</td></tr>
     <tr><td class="paramname">path=</td><td>The SAS Drive path to the job being executed </td></tr>
     <tr><td class="paramname">name=</td><td>The name of the job to execute </td></tr>
-    <tr><td class="paramname">params=</td><td>A macro quoted string to append to the URL </td></tr>
+    <tr><td class="paramname">paramstring=</td><td>A JSON fragment with name:value pairs, eg: <code>"name":"value"</code> or "name":"value","name2":42<code>. This will need to be wrapped in</code>str()`.</td></tr>
     <tr><td class="paramname">contextName=</td><td>Context name with which to run the job. Default = <code>SAS Job Execution compute context</code></td></tr>
+    <tr><td class="paramname">outds=</td><td>The output dataset containing links (Default=work.mv_jobexecute)</td></tr>
   </table>
   </dd>
 </dl>
@@ -138,6 +141,7 @@ $(document).ready(function(){initNavTree('mv__jobexecute_8sas.html',''); initRes
 <li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
 <li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
 <li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
+<li><a class="el" href="mf__getuniquelibref_8sas.html" title="Returns an unused libref.">mf_getuniquelibref.sas</a> </li>
 <li><a class="el" href="mv__getfoldermembers_8sas.html" title="Gets a list of folders (and ids) for a given root.">mv_getfoldermembers.sas</a> </li>
 </ul>
 
