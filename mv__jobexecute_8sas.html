@@ -1,6 +1,6 @@
 <!-- HTML header for doxygen 1.8.17-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
@@ -116,24 +116,28 @@ $(document).ready(function(){initNavTree('mv__jobexecute_8sas.html',''); initRes
 <p>First, compile the macros: </p><pre class="fragment">filename mc url
 "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %inc mc;
-</pre><p>Then, execute the job! </p><pre class="fragment">%mv_jobexecute(job=/Public/folder/somejob,params=%nrstr(x=y&amp;a=b))
+</pre><p>Then, execute the job! </p><pre class="fragment">%mv_jobexecute(path=/Public/folder
+  ,name=somejob
+)
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
     <tr><td class="paramname">grant_type=</td><td>valid values: password authorization_code detect - will check if access_token exists, if not will use sas_services if a SASStudioV session else authorization_code. Default option. sas_services - will use oauth_bearer=sas_services</td></tr>
-    <tr><td class="paramname">job=</td><td>The full path to the job being executed </td></tr>
-    <tr><td class="paramname">params=</td><td>A macro quoted string to append to the URL</td></tr>
+    <tr><td class="paramname">path=</td><td>The SAS Drive path to the job being executed </td></tr>
+    <tr><td class="paramname">name=</td><td>The name of the job to execute </td></tr>
+    <tr><td class="paramname">params=</td><td>A macro quoted string to append to the URL </td></tr>
+    <tr><td class="paramname">contextName=</td><td>Context name with which to run the job. Default = <code>SAS Job Execution compute context</code></td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section version"><dt>Version</dt><dd>VIYA V.03.04 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe @source <a href="https://github.com/sasjs/core">https://github.com/sasjs/core</a></dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Allan Bowe, source: <a href="https://github.com/sasjs/core">https://github.com/sasjs/core</a></dd></dl>
 <h4>Dependencies </h4>
 <ul>
 <li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
 <li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
 <li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
-<li><a class="el" href="mf__getuniquelibref_8sas.html" title="Returns an unused libref.">mf_getuniquelibref.sas</a> </li>
+<li><a class="el" href="mv__getfoldermembers_8sas.html" title="Gets a list of folders (and ids) for a given root.">mv_getfoldermembers.sas</a> </li>
 </ul>
 
 <p class="definition">Definition in file <a class="el" href="mv__jobexecute_8sas_source.html">mv_jobexecute.sas</a>.</p>

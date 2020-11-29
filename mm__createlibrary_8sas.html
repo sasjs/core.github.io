@@ -1,6 +1,6 @@
 <!-- HTML header for doxygen 1.8.17-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
@@ -114,9 +114,16 @@ $(document).ready(function(){initNavTree('mm__createlibrary_8sas.html',''); init
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Currently only supports BASE engine</p>
 <p>This macro is idempotent - if you run it twice (for the same libref or libname), it will only create one library. There is a dependency on other macros in this library - they should be installed as a suite (see README).</p>
-<p>Usage:</p>
-<p>mm_createlibrary( libname=My New Library ,libref=mynewlib ,libdesc=Super &amp; &lt;fine&gt; ,engine=BASE ,tree=/User Folders/sasdemo ,servercontext=SASApp ,directory=/tmp/tests ,mDebug=1)</p>
-<h4>Dependencies </h4>
+<p>Usage: </p><pre class="fragment">%mm_createlibrary(
+  libname=My New Library
+  ,libref=mynewlib
+  ,libdesc=Super &amp; &lt;fine&gt;
+  ,engine=BASE
+  ,tree=/User Folders/sasdemo
+  ,servercontext=SASApp
+  ,directory=/tmp/tests
+  ,mDebug=1)
+</pre><h4>Dependencies </h4>
 <ul>
 <li><a class="el" href="mf__verifymacvars_8sas.html" title="Checks if a set of macro variables exist / contain values.">mf_verifymacvars.sas</a> </li>
 <li><a class="el" href="mm__createfolder_8sas.html" title="Recursively create a metadata folder.">mm_createfolder.sas</a></li>
