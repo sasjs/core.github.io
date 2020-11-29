@@ -113,10 +113,26 @@ $(document).ready(function(){initNavTree('mv__createwebservice_8sas.html',''); i
 
 <p><a href="mv__createwebservice_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Code is passed in as one or more filerefs.</p>
-<p>%* Step 1 - compile macros ; filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas"; inc mc;</p>
-<p>%* Step 2 - Create some code and add it to a web service; filename ft15f001 temp; parmcards4; webout(FETCH) %* fetch any tables sent from frontend; %* do some sas, any inputs are now already WORK tables; data example1 example2; set sashelp.class; run; %* send data back; webout(OPEN) webout(ARR,example1) * Array format, fast, suitable for large tables ; webout(OBJ,example2) * Object format, easier to work with ; webout(CLOSE) ;;;; mv_createwebservice(path=/Public/app/common,name=appinit)</p>
-<p>Notes: To minimise postgres requests, output json is stored in a temporary file and then sent to _webout in one go at the end.</p>
+<div class="textblock"><p>Code is passed in as one or more filerefs. </p><pre class="fragment">%* Step 1 - compile macros ;
+filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
+%inc mc;
+
+%* Step 2 - Create some code and add it to a web service;
+filename ft15f001 temp;
+parmcards4;
+    %webout(FETCH) %* fetch any tables sent from frontend;
+    %* do some sas, any inputs are now already WORK tables;
+    data example1 example2;
+      set sashelp.class;
+    run;
+    %* send data back;
+    %webout(OPEN)
+    %webout(ARR,example1) * Array format, fast, suitable for large tables ;
+    %webout(OBJ,example2) * Object format, easier to work with ;
+    %webout(CLOSE)
+;;;;
+%mv_createwebservice(path=/Public/app/common,name=appinit)
+</pre><p>Notes: To minimise postgres requests, output json is stored in a temporary file and then sent to _webout in one go at the end.</p>
 <h4>Dependencies </h4>
 <ul>
 <li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
@@ -143,7 +159,7 @@ $(document).ready(function(){initNavTree('mv__createwebservice_8sas.html',''); i
   </dd>
 </dl>
 <dl class="section version"><dt>Version</dt><dd>VIYA V.03.04 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe @source <a href="https://github.com/sasjs/core">https://github.com/sasjs/core</a> </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Allan Bowe, source: <a href="https://github.com/sasjs/core">https://github.com/sasjs/core</a> </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="mv__createwebservice_8sas_source.html">mv_createwebservice.sas</a>.</p>
 </div></div><!-- contents -->

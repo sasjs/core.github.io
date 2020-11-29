@@ -120,9 +120,11 @@ $(document).ready(function(){initNavTree('mv__jobexecute_8sas.html',''); initRes
 </pre><p>Then, execute the job! </p><pre class="fragment">%mv_jobexecute(path=/Public/folder
   ,name=somejob
 )
-</pre><p>Example with parameters:</p>
-<p>mv_jobexecute(path=/Public/folder ,name=somejob ,paramstring=str("macvarname":"macvarvalue","answer":42) )</p>
-<dl class="params"><dt>Parameters</dt><dd>
+</pre><p>Example with parameters: </p><pre class="fragment">%mv_jobexecute(path=/Public/folder
+  ,name=somejob
+  ,paramstring=%str("macvarname":"macvarvalue","answer":42)
+)
+</pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
     <tr><td class="paramname">grant_type=</td><td>valid values: password authorization_code detect - will check if access_token exists, if not will use sas_services if a SASStudioV session else authorization_code. Default option. sas_services - will use oauth_bearer=sas_services</td></tr>
