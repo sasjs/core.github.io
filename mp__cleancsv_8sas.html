@@ -114,8 +114,9 @@ $(document).ready(function(){initNavTree('mp__cleancsv_8sas.html',''); initResiz
 <p><a href="mp__cleancsv_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>CSVs will sometimes contain lf or crlf within quotes (eg when saved by excel). When the termstr is ALSO lf or crlf that can be tricky to process using SAS defaults. This macro converts any csv to follow the convention of a windows excel file, applying CRLF line endings and converting embedded cr and crlf to lf.</p>
-<p>usage: fileref mycsv "/path/your/csv"; mp_cleancsv(in=mycsv,out=/path/new.csv)</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>usage: </p><pre class="fragment">fileref mycsv "/path/your/csv";
+%mp_cleancsv(in=mycsv,out=/path/new.csv)
+</pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">in=</td><td>provide path or fileref to input csv </td></tr>
     <tr><td class="paramname">out=</td><td>output path or fileref to output csv </td></tr>
