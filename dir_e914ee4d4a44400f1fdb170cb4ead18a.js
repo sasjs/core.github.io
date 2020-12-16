@@ -45,6 +45,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_distinctfmtvalues.sas", "mp__distinctfmtvalues_8sas.html", null ],
     [ "mp_dropmembers.sas", "mp__dropmembers_8sas.html", null ],
     [ "mp_ds2cards.sas", "mp__ds2cards_8sas.html", "mp__ds2cards_8sas" ],
+    [ "mp_ds2csv.sas", "mp__ds2csv_8sas.html", null ],
     [ "mp_getconstraints.sas", "mp__getconstraints_8sas.html", null ],
     [ "mp_getdbml.sas", "mp__getdbml_8sas.html", null ],
     [ "mp_getddl.sas", "mp__getddl_8sas.html", null ],
