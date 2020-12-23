@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MacroCore: meta/mm_spkexport.sas File Reference</title>
+<title>MacroCore: base/mp_testwritespeedlibrary.sas File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,7 +88,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('mm__spkexport_8sas.html','');});
+$(document).ready(function(){initNavTree('mp__testwritespeedlibrary_8sas.html','');});
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -108,72 +108,44 @@ $(document).ready(function(){initNavTree('mm__spkexport_8sas.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">mm_spkexport.sas File Reference</div>  </div>
+<div class="title">mp_testwritespeedlibrary.sas File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Creates an batch spk export command.  
+<p>Tests the write speed of a new table in a SAS library.  
 <a href="#details">More...</a></p>
 
-<p><a href="mm__spkexport_8sas_source.html">Go to the source code of this file.</a></p>
+<p><a href="mp__testwritespeedlibrary_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Creates a script that will export everything in a metadata folder to a specified location. If you have XCMD enabled, then you can use mmx_spkexport (which performs the actual export)</p>
-<p>Note - the batch tools require a username and password. For security, these are expected to have been provided in a protected directory.</p>
-<p>Usage: </p><pre class="fragment">%* import the macros (or make them available some other way);
-filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
-%inc mc;
-
-%* create sample text file as input to the macro;
-filename tmp temp;
-data _null_;
-  file tmp;
-  put '%let mmxuser="sasdemo";';
-  put '%let mmxpass="Mars321";';
-run;
-
-filename myref "%sysfunc(pathname(work))/mmxexport.sh";
-%mm_spkexport(metaloc=%str(/my/meta/loc)
-    ,outref=myref
-    ,secureref=tmp
-    ,cmdoutloc=%str(/tmp)
+<div class="textblock"><p>Will create a new table of a certain size in an existing SAS library. The table will have one column, and will be subsequently deleted. </p><pre class="fragment">%mp_testwritespeedlibrary(
+  lib=work
+  ,size=0.5
+  ,outds=work.results
 )
-</pre><p>Alternatively, call without inputs to create a function style output </p><pre class="fragment">filename myref "/tmp/mmscript.sh";
-%mm_spkexport(metaloc=%str(/my/meta/loc)
-     outref=myref
-    ,cmdoutloc=%str(/tmp)
-    ,cmdoutname=mmx
-)
-</pre><p>You can then navigate and execute as follows: </p><pre class="fragment">cd /tmp
-./mmscript.sh "myuser" "mypass"
-</pre><h4>Dependencies </h4>
-<ul>
-<li><a class="el" href="mf__loc_8sas.html" title="Returns physical location of various SAS items. ">mf_loc.sas</a> </li>
-<li><a class="el" href="mm__tree_8sas.html" title="Returns all folders / subfolder content for a particular root. ">mm_tree.sas</a> </li>
-<li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref. ">mf_getuniquefileref.sas</a> </li>
-<li><a class="el" href="mf__isblank_8sas.html" title="Checks whether a macro variable is empty (blank) ">mf_isblank.sas</a> </li>
-<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context ">mp_abort.sas</a></li>
-</ul>
-<dl class="params"><dt>Parameters</dt><dd>
+</pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">metaloc=</td><td>the metadata folder to export </td></tr>
-    <tr><td class="paramname">secureref=</td><td>fileref containing the username / password (should point to a file in a secure location). Leave blank to substitute $bash type vars. </td></tr>
-    <tr><td class="paramname">outref=</td><td>fileref to which to write the command </td></tr>
-    <tr><td class="paramname">cmdoutloc=</td><td>the directory to which the command will write the SPK (default=WORK) </td></tr>
-    <tr><td class="paramname">cmdoutname=</td><td>the name of the spk / log files to create (will be identical just with .spk or .log extension)</td></tr>
+    <tr><td class="paramname">lib=</td><td>(WORK) The library in which to create the table </td></tr>
+    <tr><td class="paramname">size=</td><td>(0.1) The size in GB of the table to create </td></tr>
+    <tr><td class="paramname">outds=</td><td>(WORK.RESULTS) The output dataset to be created.</td></tr>
   </table>
   </dd>
 </dl>
+<h4>Dependencies </h4>
+<ul>
+<li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name. ">mf_getuniquename.sas</a> </li>
+<li><a class="el" href="mf__existds_8sas.html" title="Checks whether a dataset OR a view exists. ">mf_existds.sas</a></li>
+</ul>
 <dl class="section version"><dt>Version</dt><dd>9.4 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="mm__spkexport_8sas_source.html">mm_spkexport.sas</a>.</p>
+<p class="definition">Definition in file <a class="el" href="mp__testwritespeedlibrary_8sas_source.html">mp_testwritespeedlibrary.sas</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_0d92069d5a23b1d3125c326d74f1a07c.html">meta</a></li><li class="navelem"><a class="el" href="mm__spkexport_8sas.html">mm_spkexport.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_e914ee4d4a44400f1fdb170cb4ead18a.html">base</a></li><li class="navelem"><a class="el" href="mp__testwritespeedlibrary_8sas.html">mp_testwritespeedlibrary.sas</a></li>
     <li class="footer">Generated by
     <a href="https://www.doxygen.org/index.html">
       <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
