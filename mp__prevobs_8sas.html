@@ -119,8 +119,26 @@ $(document).ready(function(){initNavTree('mp__prevobs_8sas.html','');});
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Remembers the last X observations by storing them in a hash table. Is a convenience over the use of lag() or retain, when an entire observation needs to be restored.</p>
 <p>This macro will also restore automatic variables (such as <em>n</em> and <em>error</em>).</p>
-<p>Example Usage:</p>
-<div class="fragment"><div class="line">data example;</div><div class="line">  <span class="keyword">set</span> sashelp.class;</div><div class="line">  calc_var=_n_*3;</div><div class="line">    initialise hash and save from PDV ;</div><div class="line">  %mp_prevobs(INIT,history=2)</div><div class="line">  if _n_ =10 then do;</div><div class="line">      fetch previous but 1 record;</div><div class="line">    %mp_prevobs(FETCH,-2) </div><div class="line">    put _n_= name= age= calc_var=; </div><div class="line">      fetch previous record;</div><div class="line">    %mp_prevobs(FETCH,-1) </div><div class="line">    put _n_= name= age= calc_var=; </div><div class="line">      reinstate current record ;</div><div class="line">    %mp_prevobs(FETCH,0) </div><div class="line">    put _n_= name= age= calc_var=;</div><div class="line">  end;</div><div class="line">run;</div></div><!-- fragment --><p>Result:</p>
+<p>Example Usage: </p><pre class="fragment">~~~{.sas}
+data example;
+  set sashelp.class;
+  calc_var=_n_*3;
+  %* initialise hash and save from PDV ;
+  %mp_prevobs(INIT,history=2)
+  if _n_ =10 then do;
+    %* fetch previous but 1 record;
+    %mp_prevobs(FETCH,-2) 
+    put _n_= name= age= calc_var=; 
+    %* fetch previous record;
+    %mp_prevobs(FETCH,-1) 
+    put _n_= name= age= calc_var=; 
+    %* reinstate current record ;
+    %mp_prevobs(FETCH,0) 
+    put _n_= name= age= calc_var=;
+  end;
+run;
+~~~
+</pre><p>Result:</p>
 <div class="image">
 <img src="https://imgur.com/PSjHoET.png" alt="mp_prevobs sas" width="400"/>
 </div>
