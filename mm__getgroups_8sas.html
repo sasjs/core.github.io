@@ -119,15 +119,15 @@ $(document).ready(function(){initNavTree('mm__getgroups_8sas.html','');});
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Provide a metadata user to get groups for just that user, or leave blank to return all groups. Usage:</p>
 <ul>
-<li>all groups mm_getGroups()</li>
-<li>all groups for a particular user mm_getgroups(user=&amp;sysuserid)</li>
+<li>all groups: <code>mm_getGroups()</code></li>
+<li>all groups for a particular user: <code>mm_getgroups(user=&amp;sysuserid)</code></li>
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">user=</td><td>the metadata user to return groups for. Leave blank for all groups. </td></tr>
-    <tr><td class="paramname">outds=</td><td>the dataset to create that contains the list of groups </td></tr>
-    <tr><td class="paramname">repo=</td><td>the metadata repository that contains the user/group information </td></tr>
-    <tr><td class="paramname">mDebug=</td><td>set to 1 to show debug messages in the log</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">user=</td><td>the metadata user to return groups for. Leave blank for all groups. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">repo=</td><td>the metadata repository that contains the user/group information </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mDebug=</td><td>set to 1 to show debug messages in the log </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>the dataset to create that contains the list of groups</td></tr>
   </table>
   </dd>
 </dl>
