@@ -11,6 +11,7 @@ var dir_f3c9615c6d389fd64e9075885fcd8e6e =
     [ "mv_getfoldermembers.sas", "mv__getfoldermembers_8sas.html", null ],
     [ "mv_getgroupmembers.sas", "mv__getgroupmembers_8sas.html", "mv__getgroupmembers_8sas" ],
     [ "mv_getgroups.sas", "mv__getgroups_8sas.html", "mv__getgroups_8sas" ],
+    [ "mv_getjobcode.sas", "mv__getjobcode_8sas.html", "mv__getjobcode_8sas" ],
     [ "mv_getrefreshtoken.sas", "mv__getrefreshtoken_8sas.html", null ],
     [ "mv_getusergroups.sas", "mv__getusergroups_8sas.html", "mv__getusergroups_8sas" ],
     [ "mv_getusers.sas", "mv__getusers_8sas.html", "mv__getusers_8sas" ],

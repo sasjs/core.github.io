@@ -122,6 +122,7 @@ var searchData=
   ['mv_5fgetfoldermembers_2esas',['mv_getfoldermembers.sas',['../mv__getfoldermembers_8sas.html',1,'']]],
   ['mv_5fgetgroupmembers_2esas',['mv_getgroupmembers.sas',['../mv__getgroupmembers_8sas.html',1,'']]],
   ['mv_5fgetgroups_2esas',['mv_getgroups.sas',['../mv__getgroups_8sas.html',1,'']]],
+  ['mv_5fgetjobcode_2esas',['mv_getjobcode.sas',['../mv__getjobcode_8sas.html',1,'']]],
   ['mv_5fgetrefreshtoken_2esas',['mv_getrefreshtoken.sas',['../mv__getrefreshtoken_8sas.html',1,'']]],
   ['mv_5fgetusergroups_2esas',['mv_getusergroups.sas',['../mv__getusergroups_8sas.html',1,'']]],
   ['mv_5fgetusers_2esas',['mv_getusers.sas',['../mv__getusers_8sas.html',1,'']]],
