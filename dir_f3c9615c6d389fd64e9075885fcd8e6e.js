@@ -16,6 +16,7 @@ var dir_f3c9615c6d389fd64e9075885fcd8e6e =
     [ "mv_getusergroups.sas", "mv__getusergroups_8sas.html", "mv__getusergroups_8sas" ],
     [ "mv_getusers.sas", "mv__getusers_8sas.html", "mv__getusers_8sas" ],
     [ "mv_jobexecute.sas", "mv__jobexecute_8sas.html", "mv__jobexecute_8sas" ],
+    [ "mv_jobwaitfor.sas", "mv__jobwaitfor_8sas.html", "mv__jobwaitfor_8sas" ],
     [ "mv_registerclient.sas", "mv__registerclient_8sas.html", "mv__registerclient_8sas" ],
     [ "mv_tokenauth.sas", "mv__tokenauth_8sas.html", "mv__tokenauth_8sas" ],
     [ "mv_tokenrefresh.sas", "mv__tokenrefresh_8sas.html", "mv__tokenrefresh_8sas" ],
