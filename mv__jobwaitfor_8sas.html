@@ -161,14 +161,20 @@ run;
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>valid values: <pre class="fragment">password
-authorization_code
-detect - will check if access_token exists, if not will use sas_services if
-a SASStudioV session else authorization_code.  Default option.
-sas_services - will use oauth_bearer=sas_services
-</pre></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>valid values:</td></tr>
+  </table>
+  </dd>
+</dl>
+<ul>
+<li>password</li>
+<li>authorization_code</li>
+<li>detect - will check if access_token exists, if not will use sas_services if a SASStudioV session else authorization_code. Default option.</li>
+<li>sas_services - will use oauth_bearer=sas_services</li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">inds=</td><td>The input dataset containing the list of job uris, in the following format: <code>/jobExecution/jobs/&amp;JOBID./state</code> and the corresponding job name. The uri should be in a <code>uri</code> variable, and the job path/name should be in a <code>_program</code> variable. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>The output dataset containing the list of states by job (default=mv_jobexecute)</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>The output dataset containing the list of states by job (default=work.mv_jobexecute)</td></tr>
   </table>
   </dd>
 </dl>
