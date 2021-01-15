@@ -148,12 +148,19 @@ run;
 
 %mv_getjobstate(uri=&amp;uri,outds=results)
 </pre><p>You can run this macro as part of a loop to await the final 'completed' status. The full list of status values is:</p>
-<p>idle pending running canceled completed failed</p>
+<ul>
+<li>idle</li>
+<li>pending</li>
+<li>running</li>
+<li>canceled</li>
+<li>completed</li>
+<li>failed</li>
+</ul>
 <p>If you have one or more jobs that you'd like to wait for completion you can also use the <a href="/mv__jobwaitfor_8sas.html">mv_jobwaitfor</a> macro.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>valid values: password authorization_code detect - will check if access_token exists, if not will use sas_services if a SASStudioV session else authorization_code. Default option. sas_services - will use oauth_bearer=sas_services </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>valid values <em>password</em>, <em>authorization_code</em>, detect* (will check if access_token exists, if not will use sas_services if a SASStudioV session else authorization_code. Default option.), sas_services* (will use oauth_bearer=sas_services). </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">uri=</td><td>The uri of the running job for which to fetch the status, in the format <code>/jobExecution/jobs/$UUID/state</code> (unquoted). </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>The output dataset in which to APPEND the status. Three fields are appended: <code>CHECK_TM</code>, <code>URI</code> and <code>STATE</code>. If the dataset does not exist, it is created.</td></tr>
   </table>
