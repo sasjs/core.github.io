@@ -108,12 +108,12 @@ $(document).ready(function(){initNavTree('mv__jobwaitfor_8sas.html',''); initRes
 </div><!--header-->
 <div class="contents">
 
-<p>Takes a dataset of running jobs and waits for them to complete.  
+<p>Takes a dataset of running jobs and waits for ANY or ALL of them to complete.  
 <a href="#details">More...</a></p>
 
 <p><a href="mv__jobwaitfor_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Will poll <code>/jobs/{jobId}/state</code> at set intervals until they are all completed. Completion is determined by reference to the returned <em>state</em>, as per the following table:</p>
+<div class="textblock"><p>Will poll <code>/jobs/{jobId}/state</code> at set intervals until ANY or ALL jobs are completed. Completion is determined by reference to the returned <em>state</em>, as per the following table:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">state </th><th class="markdownTableHeadNone">Wait? </th><th class="markdownTableHeadNone">Notes  </th></tr>
@@ -130,7 +130,7 @@ $(document).ready(function(){initNavTree('mv__jobwaitfor_8sas.html',''); initRes
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">failed </td><td class="markdownTableBodyNone">no </td><td class="markdownTableBodyNone">Job failed to execute, could be a problem when calling the apis  </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md2"></a>
+<h2><a class="anchor" id="autotoc_md4"></a>
 Example</h2>
 <p>First, compile the macros: </p><pre class="fragment">filename mc url
 "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
@@ -156,7 +156,7 @@ data work.jobs;
   where method='GET' and rel='state';
 run;
 
-%mv_jobwaitfor(inds=work.jobs,outds=work.jobstates)
+%mv_jobwaitfor(ALL,inds=work.jobs,outds=work.jobstates)
 </pre><p>Delete the job: </p><pre class="fragment">%mv_deletejes(path=/Public/temp,name=demo)
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -167,6 +167,7 @@ run;
   a SASStudioV session else authorization_code.  Default option.
 - sas_services - will use oauth_bearer=sas_services
 </pre></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">action=Either</td><td>ALL (to wait for every job) or ANY (if one job completes, processing will continue). Default=ALL. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">inds=</td><td>The input dataset containing the list of job uris, in the following format: <code>/jobExecution/jobs/&amp;JOBID./state</code> and the corresponding job name. The uri should be in a <code>uri</code> variable, and the job path/name should be in a <code>_program</code> variable. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>The output dataset containing the list of states by job (default=work.mv_jobexecute)</td></tr>
   </table>

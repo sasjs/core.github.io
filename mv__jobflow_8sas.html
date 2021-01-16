@@ -114,13 +114,24 @@ $(document).ready(function(){initNavTree('mv__jobflow_8sas.html',''); initResiza
 <p><a href="mv__jobflow_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Very (very) simple flow manager. Jobs execute in sequential waves, all previous waves must finish successfully.</p>
-<p>The input table is formed as per below. Each observation represents one job. Each variable is converted into a macro variable with the same name. </p><pre class="fragment">| variable| description   |
+<p>The input table is formed as per below. Each observation represents one job. Each variable is converted into a macro variable with the same name.</p>
+<h2><a class="anchor" id="autotoc_md1"></a>
+Input table (minimum variables needed)</h2>
+<pre class="fragment">| variable| description   |
 |---|---|---|
-|FLOW_ID| Provides the sequential ordering capability|
+|FLOW_ID| Numeric value, provides sequential ordering capability|
 |_CONTEXTNAME|Dictates which context should be used to run the job. If
  blank, will default to `SAS Job Execution compute context`.|
 |_PROGRAM|Provides the path to the job itself|
-</pre><h2><a class="anchor" id="autotoc_md1"></a>
+</pre><h2><a class="anchor" id="autotoc_md2"></a>
+Output table (minimum variables produced)</h2>
+<pre class="fragment">| variable| description   |
+|---|---|---|
+|FLOW_ID| Numeric value, provides sequential ordering capability|
+|_CONTEXTNAME|Dictates which context should be used to run the job. If
+ blank, will default to `SAS Job Execution compute context`.|
+|_PROGRAM|Provides the path to the job itself|
+</pre><h2><a class="anchor" id="autotoc_md3"></a>
 Example</h2>
 <p>First, compile the macros: </p><pre class="fragment">filename mc url
 "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
@@ -133,6 +144,7 @@ parmcards4;
     rand=ranuni(0)*&amp;macrovar1;
     do x=1 to rand;
       y=rand*&amp;macrovar2;
+      if y=100 then abort;
       output;
     end;
   run;
@@ -142,14 +154,15 @@ parmcards4;
 </pre><p>Prepare an input table with 60 executions: </p><pre class="fragment">data work.inputjobs;
   _contextName='SAS Job Execution compute context';
   do flow_id=1 to 3;
-    do job=1 to 10;
-      _program='/Public/temp/name/demo1';
-      macrovar1=10*job;
-      macrovar2=4*job;
+    do i=1 to 20;
+      _program='/Public/temp/demo1';
+      macrovar1=10*i;
+      macrovar2=4*i;
       output;
-      _program='/Public/temp/name/demo2';
-      macrovar1=40*job;
-      macrovar2=44*job;
+      i+1;
+      _program='/Public/temp/demo2';
+      macrovar1=40*i;
+      macrovar2=44*i;
       output;
     end;
   end;
@@ -158,9 +171,15 @@ run;
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>valid values: password authorization_code detect - will check if access_token exists, if not will use sas_services if a SASStudioV session else authorization_code. Default option. sas_services - will use oauth_bearer=sas_services </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>valid values: <ul>
+<li>password </li>
+<li>authorization_code </li>
+<li>detect - will check if access_token exists, if not will use sas_services if a SASStudioV session else authorization_code. Default option. </li>
+<li>sas_services - will use oauth_bearer=sas_services </li>
+</ul>
+</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">inds=</td><td>The input dataset containing a list of jobs and parameters </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">maxconcurrency=</td><td>The max number of parallel jobs to run. If set to 0 (default) then there is no limit applied. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">maxconcurrency=</td><td>The max number of parallel jobs to run. Default=8. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>The output dataset containing the results</td></tr>
   </table>
   </dd>
@@ -169,10 +188,13 @@ run;
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe, source: <a href="https://github.com/sasjs/core">https://github.com/sasjs/core</a></dd></dl>
 <h4>SAS Macros </h4>
 <ul>
+<li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a> </li>
 <li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
 <li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
 <li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
 <li><a class="el" href="mf__existvarlist_8sas.html" title="Checks if a set of variables ALL exist in a data set.">mf_existvarlist.sas</a> </li>
+<li><a class="el" href="mv__jobwaitfor_8sas.html" title="Takes a dataset of running jobs and waits for ANY or ALL of them to complete.">mv_jobwaitfor.sas</a> </li>
+<li><a class="el" href="mv__jobexecute_8sas.html" title="Executes a SAS Viya Job.">mv_jobexecute.sas</a> </li>
 </ul>
 
 <p class="definition">Definition in file <a class="el" href="mv__jobflow_8sas_source.html">mv_jobflow.sas</a>.</p>
