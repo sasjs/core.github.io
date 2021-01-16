@@ -117,21 +117,32 @@ $(document).ready(function(){initNavTree('mv__jobflow_8sas.html',''); initResiza
 <p>The input table is formed as per below. Each observation represents one job. Each variable is converted into a macro variable with the same name.</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Input table (minimum variables needed)</h2>
-<pre class="fragment">| variable| description   |
-|---|---|---|
-|FLOW_ID| Numeric value, provides sequential ordering capability|
-|_CONTEXTNAME|Dictates which context should be used to run the job. If
- blank, will default to `SAS Job Execution compute context`.|
-|_PROGRAM|Provides the path to the job itself|
-</pre><h2><a class="anchor" id="autotoc_md2"></a>
+<ul>
+<li>FLOW_ID - Numeric value, provides sequential ordering capability </li>
+<li>_CONTEXTNAME - Dictates which context should be used to run the job. If blank, will default to <code>SAS Job Execution compute context</code>. </li>
+<li>_PROGRAM - Provides the path to the job itself</li>
+</ul>
+<p>Any additional variables provided in this table are converted into macro variables and passed into the relevant job.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">FLOW_ID </th><th class="markdownTableHeadNone">_CONTEXTNAME </th><th class="markdownTableHeadNone">_PROGRAM  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">0 </td><td class="markdownTableBodyNone">SAS Job Execution compute context </td><td class="markdownTableBodyNone">/Public/jobs/somejob1  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">0 </td><td class="markdownTableBodyNone">SAS Job Execution compute context </td><td class="markdownTableBodyNone">/Public/jobs/somejob2  </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md2"></a>
 Output table (minimum variables produced)</h2>
-<pre class="fragment">| variable| description   |
-|---|---|---|
-|FLOW_ID| Numeric value, provides sequential ordering capability|
-|_CONTEXTNAME|Dictates which context should be used to run the job. If
- blank, will default to `SAS Job Execution compute context`.|
-|_PROGRAM|Provides the path to the job itself|
-</pre><h2><a class="anchor" id="autotoc_md3"></a>
+<ul>
+<li>_PROGRAM - the SAS Drive path of the job </li>
+<li>URI - the URI of the executed job </li>
+<li>STATE - the completed state of the job </li>
+<li>TIMESTAMP - the datetime that the job completed </li>
+<li>JOBPARAMS - the parameters that were passed to the job </li>
+<li>FLOW_ID - the id of the flow in which the job was executed</li>
+</ul>
+<p><img src="https://i.imgur.com/nZE9PvT.png" alt="https://i.imgur.com/nZE9PvT.png" class="inline"/></p>
+<h2><a class="anchor" id="autotoc_md3"></a>
 Example</h2>
 <p>First, compile the macros: </p><pre class="fragment">filename mc url
 "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
