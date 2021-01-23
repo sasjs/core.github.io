@@ -113,10 +113,13 @@ $(document).ready(function(){initNavTree('mf__getquotedstr_8sas.html',''); initR
 
 <p><a href="mf__getquotedstr_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Can be used in open code, eg as follows:</p>
-<p>put mf_getquotedstr(blah blah blah);</p>
-<p>which returns: </p><blockquote class="doxtable">
+<div class="textblock"><p>Can be used in open code, eg as follows: </p><pre class="fragment">%put %mf_getquotedstr(blah   blah  blah);
+</pre><p>which returns: </p><blockquote class="doxtable">
 <p>'blah','blah','blah' </p>
+</blockquote>
+<p>Alternatively: </p><pre class="fragment">%put %mf_getquotedstr(these words are double quoted,quote=D)
+</pre><p>for: </p><blockquote class="doxtable">
+<p>"these","words","are","double","quoted" </p>
 </blockquote>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
