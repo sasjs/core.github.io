@@ -143,7 +143,7 @@ parmcards4;
   call symputx('uri',uri);
 run;
 </pre><p>Finally, fetch the log: </p><pre class="fragment">%mv_getjoblog(uri=&amp;uri,outref=mylog)
-</pre><p>This macro is used by the mv_jobwaitfor macro, which is generally a more convenient way to wait for the job to finish before fetching the log.</p>
+</pre><p>This macro is used by the <a class="el" href="mv__jobwaitfor_8sas.html" title="Takes a dataset of running jobs and waits for ANY or ALL of them to complete.">mv_jobwaitfor.sas</a> macro, which is generally a more convenient way to wait for the job to finish before fetching the log.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
