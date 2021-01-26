@@ -169,7 +169,8 @@ run;
 </pre></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">action=Either</td><td>ALL (to wait for every job) or ANY (if one job completes, processing will continue). Default=ALL. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">inds=</td><td>The input dataset containing the list of job uris, in the following format: <code>/jobExecution/jobs/&amp;JOBID./state</code> and the corresponding job name. The uri should be in a <code>uri</code> variable, and the job path/name should be in a <code>_program</code> variable. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>The output dataset containing the list of states by job (default=work.mv_jobexecute)</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>The output dataset containing the list of states by job (default=work.mv_jobexecute) </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>A fileref to which the spawned job logs should be appended.</td></tr>
   </table>
   </dd>
 </dl>
@@ -182,6 +183,7 @@ run;
 <li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
 <li><a class="el" href="mf__existvar_8sas.html" title="Checks if a variable exists in a data set.">mf_existvar.sas</a> </li>
 <li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a> </li>
+<li><a class="el" href="mv__getjoblog_8sas.html" title="Extract the log from a completed SAS Viya Job.">mv_getjoblog.sas</a> </li>
 </ul>
 
 <p class="definition">Definition in file <a class="el" href="mv__jobwaitfor_8sas_source.html">mv_jobwaitfor.sas</a>.</p>
