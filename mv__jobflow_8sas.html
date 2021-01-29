@@ -118,18 +118,18 @@ $(document).ready(function(){initNavTree('mv__jobflow_8sas.html',''); initResiza
 <h2><a class="anchor" id="autotoc_md2"></a>
 Input table (minimum variables needed)</h2>
 <ul>
-<li>FLOW_ID - Numeric value, provides sequential ordering capability </li>
-<li>_CONTEXTNAME - Dictates which context should be used to run the job. If blank, will default to <code>SAS Job Execution compute context</code>. </li>
-<li>_PROGRAM - Provides the path to the job itself</li>
+<li>_PROGRAM - Provides the path to the job itself </li>
+<li>FLOW_ID - Numeric value, provides sequential ordering capability. Is optional, will default to 0 if not provided. </li>
+<li>_CONTEXTNAME - Dictates which context should be used to run the job. If blank (or not provided), will default to <code>SAS Job Execution compute context</code>.</li>
 </ul>
 <p>Any additional variables provided in this table are converted into macro variables and passed into the relevant job.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">FLOW_ID </th><th class="markdownTableHeadNone">_CONTEXTNAME </th><th class="markdownTableHeadNone">_PROGRAM  </th></tr>
+<th class="markdownTableHeadNone">_PROGRAM </th><th class="markdownTableHeadNone">FLOW_ID (optional) </th><th class="markdownTableHeadNone">_CONTEXTNAME (optional)  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">0 </td><td class="markdownTableBodyNone">SAS Job Execution compute context </td><td class="markdownTableBodyNone">/Public/jobs/somejob1  </td></tr>
+<td class="markdownTableBodyNone">/Public/jobs/somejob1 </td><td class="markdownTableBodyNone">0 </td><td class="markdownTableBodyNone">SAS Job Execution compute context  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">0 </td><td class="markdownTableBodyNone">SAS Job Execution compute context </td><td class="markdownTableBodyNone">/Public/jobs/somejob2  </td></tr>
+<td class="markdownTableBodyNone">/Public/jobs/somejob2 </td><td class="markdownTableBodyNone">0 </td><td class="markdownTableBodyNone">SAS Job Execution compute context  </td></tr>
 </table>
 <h2><a class="anchor" id="autotoc_md3"></a>
 Output table (minimum variables produced)</h2>
@@ -178,7 +178,16 @@ parmcards4;
     end;
   end;
 run;
-</pre><p>Trigger the flow </p><pre class="fragment">%mv_jobflow(inds=work.inputjobs,outds=work.results,maxconcurrency=4)
+</pre><p>Trigger the flow </p><pre class="fragment">%mv_jobflow(inds=work.inputjobs
+  ,maxconcurrency=4
+  ,outds=work.results
+  ,outref=myjoblog
+)
+
+data _null_;
+  infile myjoblog;
+  input; put _infile_;
+run;
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
@@ -191,7 +200,8 @@ run;
 </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">inds=</td><td>The input dataset containing a list of jobs and parameters </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">maxconcurrency=</td><td>The max number of parallel jobs to run. Default=8. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>The output dataset containing the results</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>The output dataset containing the results </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>The output fileref to which to append the log file(s).</td></tr>
   </table>
   </dd>
 </dl>
