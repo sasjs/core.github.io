@@ -108,10 +108,15 @@ $(document).ready(function(){initNavTree('mp__lib2cards_8sas.html',''); initResi
 
 <p><a href="mp__lib2cards_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Gets list of members then calls the <code>mp_ds2cards()</code> macro Usage: </p><pre class="fragment">%mp_lib2cards(lib=sashelp
+<div class="textblock"><p>Gets list of members then calls the <code>mp_ds2cards()</code> macro. Usage: </p><pre class="fragment">%mp_lib2cards(lib=sashelp
     , outloc= C:\temp )
-</pre><p>The output will be one cards file in the <code>outloc</code> directory per dataset in the input <code>lib</code> library. If the <code>outloc</code> does not exist, it is created.</p>
-<h4>SAS Macros </h4>
+</pre><p>The output will be one cards file in the <code>outloc</code> directory per dataset in the input <code>lib</code> library. If the <code>outloc</code> directory does not exist, it is created.</p>
+<p>To create a single SAS file with the first 1000 records of each table in a library you could use this syntax: </p><pre class="fragment">%mp_lib2cards(lib=sashelp
+    , outloc= /tmp
+    , outfile= myfile.sas
+    , maxobs= 1000
+)
+</pre><h4>SAS Macros </h4>
 <ul>
 <li><a class="el" href="mf__mkdir_8sas.html" title="Creates a directory, including any intermediate directories.">mf_mkdir.sas</a> </li>
 <li><a class="el" href="mf__trimstr_8sas.html" title="Removes character(s) from the end, if they exist.">mf_trimstr.sas</a> </li>
