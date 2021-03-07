@@ -17,6 +17,7 @@ var dir_0d92069d5a23b1d3125c326d74f1a07c =
     [ "mm_getdetails.sas", "mm__getdetails_8sas.html", null ],
     [ "mm_getdirectories.sas", "mm__getdirectories_8sas.html", null ],
     [ "mm_getdocument.sas", "mm__getdocument_8sas.html", "mm__getdocument_8sas" ],
+    [ "mm_getfoldermembers.sas", "mm__getfoldermembers_8sas.html", null ],
     [ "mm_getfoldertree.sas", "mm__getfoldertree_8sas.html", null ],
     [ "mm_getgroupmembers.sas", "mm__getgroupmembers_8sas.html", null ],
     [ "mm_getgroups.sas", "mm__getgroups_8sas.html", null ],

@@ -8,7 +8,7 @@
     <meta name="author" content="Allan Bowe">
     <meta name="generator" content="Doxygen 1.8.18" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MacroCore: meta/mm_getfoldertree.sas File Reference</title>
+    <title>MacroCore: meta/mm_getfoldermembers.sas File Reference</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -81,7 +81,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('mm__getfoldertree_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mm__getfoldermembers_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -101,19 +101,20 @@ $(document).ready(function(){initNavTree('mm__getfoldertree_8sas.html',''); init
 
 <div class="header">
   <div class="headertitle">
-<div class="title">mm_getfoldertree.sas File Reference</div>  </div>
+<div class="title">mm_getfoldermembers.sas File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Returns all folders / subfolder content for a particular root.  
+<p>Returns all direct child members of a particular folder.  
 <a href="#details">More...</a></p>
 
-<p><a href="mm__getfoldertree_8sas_source.html">Go to the source code of this file.</a></p>
+<p><a href="mm__getfoldermembers_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Shows all members and SubTrees recursively for a particular root. Note - for big sites, this returns a lot of data! So you may wish to reduce the logging to speed up the process (see example below), OR - use <a class="el" href="mm__tree_8sas.html" title="Returns all folders / subfolder content for a particular root.">mm_tree.sas</a> which uses proc metadata and is far more efficient.</p>
-<p>Usage:</p>
-<p>options ps=max nonotes nosource; mm_getfoldertree(root=/My/Meta/Path, outds=iwantthisdataset) options notes source;</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<div class="textblock"><p>Displays the children for a particular folder, in a similar fashion to the viya counterpart (<a class="el" href="mv__getfoldermembers_8sas.html" title="Gets a list of folders (and ids) for a given root.">mv_getfoldermembers.sas</a>)</p>
+<p>Usage: </p><pre class="fragment">%mm_getfoldermembers(root=/, outds=rootfolders)
+
+%mm_getfoldermembers(root=/User Folders/&amp;sysuserid, outds=usercontent)
+</pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">root=</td><td>the parent folder under which to return all contents </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>the dataset to create that contains the list of directories </td></tr>
@@ -121,11 +122,19 @@ $(document).ready(function(){initNavTree('mm__getfoldertree_8sas.html',''); init
   </table>
   </dd>
 </dl>
+<h4>Data Outputs </h4>
+<p>Example for <code>root=/</code>:</p>
+<p>|metauri:$17.|metaname:$256|metatype:$32| |&mdash;|&mdash;| |A5XLSNXI.AA000001|Products |Folder| |A5XLSNXI.AA000002|Shared Data |Folder| |A5XLSNXI.AA000003|User Folders |Folder| |A5XLSNXI.AA000004|System |Folder| |A5XLSNXI.AA00003K|30.SASApps |Folder| |A5XLSNXI.AA00006A|Public|Folder|</p>
 <h4>SAS Macros </h4>
+<ul>
+<li><a class="el" href="mm__getfoldertree_8sas.html" title="Returns all folders / subfolder content for a particular root.">mm_getfoldertree.sas</a> </li>
+<li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
+<li><a class="el" href="mf__getuniquelibref_8sas.html" title="Returns an unused libref.">mf_getuniquelibref.sas</a></li>
+</ul>
 <dl class="section version"><dt>Version</dt><dd>9.4 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="mm__getfoldertree_8sas_source.html">mm_getfoldertree.sas</a>.</p>
+<p class="definition">Definition in file <a class="el" href="mm__getfoldermembers_8sas_source.html">mm_getfoldermembers.sas</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
@@ -133,7 +142,7 @@ $(document).ready(function(){initNavTree('mm__getfoldertree_8sas.html',''); init
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_0d92069d5a23b1d3125c326d74f1a07c.html">meta</a></li><li class="navelem"><a class="el" href="mm__getfoldertree_8sas.html">mm_getfoldertree.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_0d92069d5a23b1d3125c326d74f1a07c.html">meta</a></li><li class="navelem"><a class="el" href="mm__getfoldermembers_8sas.html">mm_getfoldermembers.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">
