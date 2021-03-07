@@ -111,21 +111,25 @@ $(document).ready(function(){initNavTree('mm__updatestpsourcecode_8sas.html','')
 <p><a href="mm__updatestpsourcecode_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Uploads the contents of a text file or fileref to an existing type 2 STP. A type 2 STP has its source code saved in metadata.</p>
-<p>Usage:</p>
-<p>mm_updatestpsourcecode(stp=/my/metadata/path/mystpname ,stpcode="/file/system/source.sas")</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Usage: </p><pre class="fragment">%mm_updatestpsourcecode(stp=/my/metadata/path/mystpname
+  ,stpcode="/file/system/source.sas")
+</pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">stp=</td><td>the BIP Tree folder path plus Stored Process Name </td></tr>
-    <tr><td class="paramname">stpcode=</td><td>the source file (or fileref) containing the SAS code to load into the stp. For multiple files, they should simply be concatenated first. </td></tr>
-    <tr><td class="paramname">minify=</td><td>set to YES in order to strip comments, blank lines, and CRLFs.</td></tr>
-    <tr><td class="paramname">frefin=</td><td>change default inref if it clashes with an existing one </td></tr>
-    <tr><td class="paramname">frefout=</td><td>change default outref if it clashes with an existing one </td></tr>
-    <tr><td class="paramname">mDebug=</td><td>set to 1 to show debug messages in the log</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stp=</td><td>the BIP Tree folder path plus Stored Process Name </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stpcode=</td><td>the source file (or fileref) containing the SAS code to load into the stp. For multiple files, they should simply be concatenated first. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">minify=</td><td>set to YES in order to strip comments, blank lines, and CRLFs.</td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">frefin=</td><td>deprecated - a unique fileref is now always used </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">frefout=</td><td>deprecated - a unique fileref is now always used </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">mDebug=</td><td>set to 1 to show debug messages in the log</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section version"><dt>Version</dt><dd>9.3 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Allan Bowe</dd></dl>
+<h4>SAS Macros </h4>
+<ul>
+<li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
+</ul>
 
 <p class="definition">Definition in file <a class="el" href="mm__updatestpsourcecode_8sas_source.html">mm_updatestpsourcecode.sas</a>.</p>
 </div></div><!-- contents -->

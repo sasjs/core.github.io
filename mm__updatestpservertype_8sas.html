@@ -111,10 +111,9 @@ $(document).ready(function(){initNavTree('mm__updatestpservertype_8sas.html','')
 <p><a href="mm__updatestpservertype_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Only works on Type 2 (9.3 compatible) STPs</p>
-<p>Usage:</p>
-<p>mm_updatestpservertype(target=/some/meta/path/myStoredProcess ,type=WKS)</p>
-<h4>SAS Macros </h4>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Usage: </p><pre class="fragment">%mm_updatestpservertype(target=/some/meta/path/myStoredProcess
+  ,type=WKS)
+</pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">target=</td><td>full path to the STP being deleted </td></tr>
     <tr><td class="paramname">type=</td><td>Either WKS or STP depending on whether Workspace or Stored Process type required</td></tr>
