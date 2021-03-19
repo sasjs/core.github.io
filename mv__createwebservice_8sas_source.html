@@ -672,23 +672,23 @@ $(document).ready(function(){initNavTree('mv__createwebservice_8sas_source.html'
 <div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;<span class="stringliteral">    rec = &quot;20&quot;x;</span></div>
 <div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;<span class="stringliteral">    do while(fread(filein)=0);</span></div>
 <div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;<span class="stringliteral">      rc = fget(filein,rec,1);</span></div>
-<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;<span class="stringliteral">      if rec=&#39;</span><span class="stringliteral">&quot;&#39; then do;</span></div>
+<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;<span class="stringliteral">      if rec=&#39;</span><span class="stringliteral">&quot;&#39; then do;  /* DOUBLE QUOTE */</span></div>
 <div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;\&#39;);rc =fwrite(fileid);</span></div>
 <div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;&quot;</span><span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
 <div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;<span class="stringliteral">      end;</span></div>
-<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;<span class="stringliteral">      else if rec=&#39;</span>0A<span class="stringliteral">&#39;x then do;</span></div>
+<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;<span class="stringliteral">      else if rec=&#39;</span>0A<span class="stringliteral">&#39;x then do; /* LF */</span></div>
 <div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>\<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
-<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>r<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
+<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>n<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
 <div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;<span class="stringliteral">      end;</span></div>
-<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;<span class="stringliteral">      else if rec=&#39;</span>0D<span class="stringliteral">&#39;x then do;</span></div>
+<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;<span class="stringliteral">      else if rec=&#39;</span>0D<span class="stringliteral">&#39;x then do; /* CR */</span></div>
 <div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>\<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
-<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>n<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
+<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>r<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
 <div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;<span class="stringliteral">      end;</span></div>
-<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;<span class="stringliteral">      else if rec=&#39;</span>09<span class="stringliteral">&#39;x then do;</span></div>
+<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;<span class="stringliteral">      else if rec=&#39;</span>09<span class="stringliteral">&#39;x then do; /* TAB */</span></div>
 <div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>\<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
 <div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>t<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
 <div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;<span class="stringliteral">      end;</span></div>
-<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;<span class="stringliteral">      else if rec=&#39;</span>5C<span class="stringliteral">&#39;x then do;</span></div>
+<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;<span class="stringliteral">      else if rec=&#39;</span>5C<span class="stringliteral">&#39;x then do; /* BACKSLASH */</span></div>
 <div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>\<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
 <div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>\<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
 <div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;<span class="stringliteral">      end;</span></div>
