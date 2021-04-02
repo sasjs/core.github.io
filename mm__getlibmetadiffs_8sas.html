@@ -112,15 +112,94 @@ $(document).ready(function(){initNavTree('mm__getlibmetadiffs_8sas.html',''); in
 
 <p><a href="mm__getlibmetadiffs_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="params"><dt>Parameters</dt><dd>
+<div class="textblock"><p>Creates a series of output tables that show the differences between metadata and physical tables. Each output can be created with an optional prefix.</p>
+<p>Credit - Paul Homes <a href="https://platformadmin.com/blogs/paul/2012/11/sas-proc-metalib-ods-output">https://platformadmin.com/blogs/paul/2012/11/sas-proc-metalib-ods-output</a></p>
+<p>Usage: </p><pre class="fragment">%* create (and assign) a library for testing purposes ;
+%mm_createlibrary(
+  libname=My Temp Library,
+  libref=XXTEMPXX,
+  tree=/User Folders/&amp;sysuserid,
+  directory=%sysfunc(pathname(work))
+)
+
+%* create some tables;
+data work.table1 table2 table3;
+  a=1;b='two';c=3;
+run;
+
+%* register the tables;
+proc metalib;
+  omr=(library="My Temp Library");
+  report(type=detail);
+  update_rule (delete);
+run;
+
+%* modify the tables;
+proc sql;
+drop table table3;
+alter table table2 drop c;
+alter table table2 add d num;
+
+%* run the macro;
+%mm_getlibmetadiffs(libname=My Temp Library)
+
+%* delete the library ;
+%mm_deletelibrary(name=My Temp Library)
+</pre><p>The program will create four output tables, with the following structure (and example data):</p>
+<h4><a class="anchor" id="autotoc_md9"></a>
+&amp;prefix.added</h4>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">name:$32. </th><th class="markdownTableHeadNone">metaID:$17. </th><th class="markdownTableHeadNone">SAStabName:$32.  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone" colspan="2"></td><td class="markdownTableBodyNone">DATA1  </td></tr>
+</table>
+<h4><a class="anchor" id="autotoc_md10"></a>
+&amp;prefix.deleted</h4>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">name:$32. </th><th class="markdownTableHeadNone">metaID:$17. </th><th class="markdownTableHeadNone">SAStabName:$32.  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">TABLE3 </td><td class="markdownTableBodyNone">A5XLSNXI.BK0001HO </td><td class="markdownTableBodyNone">TABLE3  </td></tr>
+</table>
+<h4><a class="anchor" id="autotoc_md11"></a>
+&amp;prefix.updated</h4>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">tabName:$32. </th><th class="markdownTableHeadNone">tabMetaID:$17. </th><th class="markdownTableHeadNone">SAStabName:$32. </th><th class="markdownTableHeadNone">metaName:$32. </th><th class="markdownTableHeadNone">metaID:$17. </th><th class="markdownTableHeadNone">sasname:$32. </th><th class="markdownTableHeadNone">metaType:$16. </th><th class="markdownTableHeadNone">change:$64.  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">TABLE2 </td><td class="markdownTableBodyNone">A5XLSNXI.BK0001HN </td><td class="markdownTableBodyNone">TABLE2 </td><td class="markdownTableBodyNone">c </td><td class="markdownTableBodyNone">A5XLSNXI.BM000MA9 </td><td class="markdownTableBodyNone">c </td><td class="markdownTableBodyNone">Column </td><td class="markdownTableBodyNone">Deleted  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone" colspan="3"></td><td class="markdownTableBodyNone" colspan="2">d </td><td class="markdownTableBodyNone">d </td><td class="markdownTableBodyNone">Column </td><td class="markdownTableBodyNone">Added  </td></tr>
+</table>
+<h4><a class="anchor" id="autotoc_md12"></a>
+&amp;prefix.meta</h4>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Label1:$28. </th><th class="markdownTableHeadNone">cValue1:$1. </th><th class="markdownTableHeadNone">nValue1:D12.3  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Total tables analyzed </td><td class="markdownTableBodyNone">4 </td><td class="markdownTableBodyNone">4  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Tables to be Updated </td><td class="markdownTableBodyNone">1 </td><td class="markdownTableBodyNone">1  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Tables to be Deleted </td><td class="markdownTableBodyNone">1 </td><td class="markdownTableBodyNone">1  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Tables to be Added </td><td class="markdownTableBodyNone">1 </td><td class="markdownTableBodyNone">1  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Tables matching data source </td><td class="markdownTableBodyNone">1 </td><td class="markdownTableBodyNone">1  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Tables not processed </td><td class="markdownTableBodyNone">0 </td><td class="markdownTableBodyNone">0  </td></tr>
+</table>
+<p>If you are interested in more functionality like this (checking the health of SAS metadata and your SAS 9 environment) then do contact <a href="https://www.linkedin.com/in/allanbowe">Allan Bowe</a> for details of our SAS 9 Health Check service.</p>
+<p>Our system scan will perform hundreds of checks to identify common issues, such as dangling metadata, embedded passwords, security issues and more.</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">prefix</td><td>the dataset to create that contains the list of libraries </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">mDebug</td><td>set to anything but 0 to show debug messages in the log</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">libname=</td><td>the metadata name of the library to be compared </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outlib=</td><td>The output library in which to store the output tables. Default=WORK. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">prefix</td><td>The prefix for the four tables created. Default=metadiff.</td></tr>
   </table>
   </dd>
 </dl>
-<p>IN PROGRESS</p>
-<p>Creates a series of output tables that show the differences between metadata and physical tables. Each output can be created with an optional prefix.</p>
 <dl class="section version"><dt>Version</dt><dd>9.3 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 

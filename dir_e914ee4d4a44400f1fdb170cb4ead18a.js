@@ -54,6 +54,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_guesspk.sas", "mp__guesspk_8sas.html", null ],
     [ "mp_jsonout.sas", "mp__jsonout_8sas.html", null ],
     [ "mp_lib2cards.sas", "mp__lib2cards_8sas.html", null ],
+    [ "mp_mdtablewrite.sas", "mp__mdtablewrite_8sas.html", null ],
     [ "mp_perflog.sas", "mp__perflog_8sas.html", null ],
     [ "mp_prevobs.sas", "mp__prevobs_8sas.html", null ],
     [ "mp_recursivejoin.sas", "mp__recursivejoin_8sas.html", null ],

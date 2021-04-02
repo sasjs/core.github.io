@@ -83,7 +83,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('mv__getjoblog_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mp__mdtablewrite_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,73 +103,49 @@ $(document).ready(function(){initNavTree('mv__getjoblog_8sas.html',''); initResi
 
 <div class="header">
   <div class="headertitle">
-<div class="title">mv_getjoblog.sas File Reference</div>  </div>
+<div class="title">mp_mdtablewrite.sas File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Extract the log from a completed SAS Viya Job.  
+<p>Create a Markdown Table from a dataset.  
 <a href="#details">More...</a></p>
 
-<p><a href="mv__getjoblog_8sas_source.html">Go to the source code of this file.</a></p>
+<p><a href="mp__mdtablewrite_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Extracts log from a Viya job and writes it out to a fileref</p>
-<p>To query the job, you need the URI. Sample code for achieving this is provided below.</p>
-<h2><a class="anchor" id="autotoc_md13"></a>
-Example</h2>
-<p>First, compile the macros: </p><pre class="fragment">filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
-%inc mc;
-</pre><p>Next, create a job (in this case, a web service): </p><pre class="fragment">filename ft15f001 temp;
-parmcards4;
-  data ;
-    rand=ranuni(0)*1000;
-    do x=1 to rand;
-      y=rand*4;
-      output;
-    end;
-  run;
-  proc sort data=&amp;syslast
-    by descending y;
-  run;
-;;;;
-%mv_createwebservice(path=/Public/temp,name=demo)
-</pre><p>Execute it: </p><pre class="fragment">%mv_jobexecute(path=/Public/temp
-  ,name=demo
-  ,outds=work.info
-)
-</pre><p>Wait for it to finish, and grab the uri: </p><pre class="fragment">data _null_;
-  set work.info;
-  if method='GET' and rel='self';
-  call symputx('uri',uri);
-run;
-</pre><p>Finally, fetch the log: </p><pre class="fragment">%mv_getjoblog(uri=&amp;uri,outref=mylog)
-</pre><p>This macro is used by the <a class="el" href="mv__jobwaitfor_8sas.html" title="Takes a dataset of running jobs and waits for ANY or ALL of them to complete.">mv_jobwaitfor.sas</a> macro, which is generally a more convenient way to wait for the job to finish before fetching the log.</p>
+<div class="textblock"><p>A markdown table is a simple table representation for use in documents written in markdown format.</p>
+<p>An online generator is available here: <a href="https://www.tablesgenerator.com/markdown_tables">https://www.tablesgenerator.com/markdown_tables</a></p>
+<p>This structure is also used by the Macro Core library for documenting input/ output datasets, as well as the sasjs/cli tool for documenting inputs/outputs for web services.</p>
+<p>We take the standard definition one step further by embedding the informat in the table header row, like so: </p><pre class="fragment">|var1:$|var2:best.|var3:date9.|
+|---|---|---|
+|some text|42|01JAN1960|
+|blah|1|31DEC1999|
+</pre><p>Which resolves to:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">var1:$ </th><th class="markdownTableHeadNone">var2:best. </th><th class="markdownTableHeadNone">var3:date9.  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">some text </td><td class="markdownTableBodyNone">42 </td><td class="markdownTableBodyNone">01JAN1960  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">blah </td><td class="markdownTableBodyNone">1 </td><td class="markdownTableBodyNone">31DEC1999  </td></tr>
+</table>
+<p>Usage: </p><pre class="fragment">%mp_mdtablewrite(libds=sashelp.class,showlog=YES)
+</pre><h4>SAS Macros </h4>
+<ul>
+<li><a class="el" href="mf__getvarlist_8sas.html" title="Returns dataset variable list direct from header.">mf_getvarlist.sas</a> </li>
+<li><a class="el" href="mf__getvarformat_8sas.html" title="Returns the format of a variable.">mf_getvarformat.sas</a></li>
+</ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>set to 1 to enable DEBUG messages </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>valid values: <ul>
-<li>password </li>
-<li>authorization_code </li>
-<li>detect - will check if access_token exists, if not will use sas_services if a SASStudioV session else authorization_code. Default option. </li>
-<li>sas_services - will use oauth_bearer=sas_services. </li>
-</ul>
-</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">uri=</td><td>The uri of the running job for which to fetch the status, in the format <code>/jobExecution/jobs/$UUID/state</code> (unquoted). </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>The output fileref to which to APPEND the log (is always appended).</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">libds=</td><td>the library / dataset to create or read from. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">fref=</td><td>Fileref to contain the markdown. Default=mdtable. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">showlog=</td><td>set to YES to show the markdown in the log. Default=NO.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section version"><dt>Version</dt><dd>VIYA V.03.04 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe, source: <a href="https://github.com/sasjs/core">https://github.com/sasjs/core</a></dd></dl>
-<h4>SAS Macros </h4>
-<ul>
-<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
-<li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
-<li><a class="el" href="mf__existfileref_8sas.html" title="Checks whether a fileref exists.">mf_existfileref.sas</a> </li>
-<li><a class="el" href="ml__json_8sas.html" title="Compiles the json.lua lua file.">ml_json.sas</a> </li>
-</ul>
+<dl class="section version"><dt>Version</dt><dd>9.3 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="mv__getjoblog_8sas_source.html">mv_getjoblog.sas</a>.</p>
+<p class="definition">Definition in file <a class="el" href="mp__mdtablewrite_8sas_source.html">mp_mdtablewrite.sas</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
@@ -177,7 +153,7 @@ run;
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_f3c9615c6d389fd64e9075885fcd8e6e.html">viya</a></li><li class="navelem"><a class="el" href="mv__getjoblog_8sas.html">mv_getjoblog.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_e914ee4d4a44400f1fdb170cb4ead18a.html">base</a></li><li class="navelem"><a class="el" href="mp__mdtablewrite_8sas.html">mp_mdtablewrite.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">
