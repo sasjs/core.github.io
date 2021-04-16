@@ -115,7 +115,8 @@ $(document).ready(function(){initNavTree('mm__spkexport_8sas.html',''); initResi
 <div class="textblock"><p>Creates a script that will export everything in a metadata folder to a specified location. If you have XCMD enabled, then you can use mmx_spkexport (which performs the actual export)</p>
 <p>Note - the batch tools require a username and password. For security, these are expected to have been provided in a protected directory.</p>
 <p>Usage: </p><pre class="fragment">%* import the macros (or make them available some other way);
-filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
+filename mc url
+  "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %inc mc;
 
 %* create sample text file as input to the macro;
@@ -134,7 +135,7 @@ filename myref "%sysfunc(pathname(work))/mmxexport.sh";
 )
 </pre><p>Alternatively, call without inputs to create a function style output </p><pre class="fragment">filename myref "/tmp/mmscript.sh";
 %mm_spkexport(metaloc=%str(/my/meta/loc)
-     outref=myref
+    outref=myref
     ,cmdoutloc=%str(/tmp)
     ,cmdoutname=mmx
 )

@@ -113,8 +113,8 @@ $(document).ready(function(){initNavTree('mf__getvartype_8sas.html',''); initRes
 <p><a href="mf__getvartype_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Usage: </p><pre class="fragment">  data test;
-     length str $1.  num 8.;
-     stop;
+    length str $1.  num 8.;
+    stop;
   run;
   %put %mf_getvartype(test,str);
   %put %mf_getvartype(work.test,num);

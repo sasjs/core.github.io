@@ -121,7 +121,7 @@ $(document).ready(function(){initNavTree('mp__createconstraints_8sas_source.html
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">          constraint unq unique(tx_from, dd_type),</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">          constraint nnn not null(DD_SHORTDESC)</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">        );</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">      </span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">      %mp_getconstraints(lib=work,ds=example,outds=work.constraints)</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">      %mp_deleteconstraints(inds=work.constraints,outds=dropped,execute=YES)</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">      %mp_createconstraints(inds=work.constraints,outds=created,execute=YES)</span></div>
@@ -156,7 +156,7 @@ $(document).ready(function(){initNavTree('mp__createconstraints_8sas_source.html
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">else</span> type=constraint_type;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    create_statement=catx(<span class="stringliteral">&quot; &quot;</span>,<span class="stringliteral">&quot;alter table&quot;</span>,libref,<span class="stringliteral">&quot;.&quot;</span>,table_name</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      ,<span class="stringliteral">&quot;add constraint&quot;</span>,constraint_name,type,<span class="stringliteral">&quot;(&quot;</span>);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">if</span> last.constraint_name then </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">if</span> last.constraint_name then</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      create_statement=cats(create_statement,column_name,<span class="stringliteral">&quot;);&quot;</span>);</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">else</span> create_statement=cats(create_statement,column_name,<span class="stringliteral">&quot;,&quot;</span>);</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">if</span> <span class="stringliteral">&quot;&amp;execute&quot;</span>=<span class="stringliteral">&quot;YES&quot;</span> then call execute(create_statement);</div>

@@ -122,7 +122,7 @@ $(document).ready(function(){initNavTree('mp__getconstraints_8sas_source.html','
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">          constraint unq unique(tx_from, dd_type),</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">          constraint nnn not null(DD_SHORTDESC)</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">        );</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">      </span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">      %mp_getconstraints(lib=work,ds=example,outds=work.constraints)</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">  @param lib= The target library (default=WORK)</span></div>
@@ -157,8 +157,8 @@ $(document).ready(function(){initNavTree('mp__getconstraints_8sas_source.html','
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  on a.TABLE_CATALOG=b.TABLE_CATALOG</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    and a.TABLE_NAME=b.TABLE_NAME</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    and a.constraint_name=b.constraint_name</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  where a.TABLE_CATALOG=<span class="stringliteral">&quot;&amp;lib&quot;</span>  </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    and b.TABLE_CATALOG=<span class="stringliteral">&quot;&amp;lib&quot;</span>  </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  where a.TABLE_CATALOG=<span class="stringliteral">&quot;&amp;lib&quot;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    and b.TABLE_CATALOG=<span class="stringliteral">&quot;&amp;lib&quot;</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  %<span class="keywordflow">if</span> <span class="stringliteral">&quot;&amp;ds&quot;</span> ne <span class="stringliteral">&quot;&quot;</span> %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    and a.TABLE_NAME=<span class="stringliteral">&quot;&amp;ds&quot;</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    and b.TABLE_NAME=<span class="stringliteral">&quot;&amp;ds&quot;</span></div>

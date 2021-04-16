@@ -114,8 +114,8 @@ $(document).ready(function(){initNavTree('mf__getvarnum_8sas.html',''); initResi
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Uses varnum function to determine position.</p>
 <p>Usage: </p><pre class="fragment">data work.test;
-   format str $1.  num datetime19.;
-   stop;
+  format str $1.  num datetime19.;
+  stop;
 run;
 %put %mf_getVarNum(work.test,str);
 %put %mf_getVarNum(work.test,num);

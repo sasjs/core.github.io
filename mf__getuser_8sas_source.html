@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('mf__getuser_8sas_source.html',''); ini
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  @file</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  @brief Returns a userid according to session context</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  @details In a workspace session, a user is generally represented by &lt;code&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    &amp;sysuserid&lt;/code&gt; or &lt;code&gt;SYS_COMPUTE_SESSION_OWNER&lt;/code&gt; if it exists.  </span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    &amp;sysuserid&lt;/code&gt; or &lt;code&gt;SYS_COMPUTE_SESSION_OWNER&lt;/code&gt; if it exists.</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    In a Stored Process session, &lt;code&gt;&amp;sysuserid&lt;/code&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">    resolves to a system account (default=sassrv) and instead there are several</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">    metadata username variables to choose from (_metauser, _metaperson</span></div>
@@ -120,7 +120,7 @@ $(document).ready(function(){initNavTree('mf__getuser_8sas_source.html',''); ini
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">        %let user= %mf_getUser();</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">        %put &amp;user;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">        </span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">  @param type - do not use, may be deprecated in a future release</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">  @return SYSUSERID (if workspace server)</span></div>

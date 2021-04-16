@@ -113,9 +113,9 @@ $(document).ready(function(){initNavTree('mf__getvarformat_8sas.html',''); initR
 <p><a href="mf__getvarformat_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Uses varfmt function to identify the format of a particular variable. Usage: </p><pre class="fragment">data test;
-   format str1 $1.  num1 datetime19.;
-   str2='hello mum!'; num2=666;
-   stop;
+  format str1 $1.  num1 datetime19.;
+  str2='hello mum!'; num2=666;
+  stop;
 run;
 %put %mf_getVarFormat(test,str1);
 %put %mf_getVarFormat(work.test,num1);

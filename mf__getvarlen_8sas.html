@@ -113,8 +113,8 @@ $(document).ready(function(){initNavTree('mf__getvarlen_8sas.html',''); initResi
 <p><a href="mf__getvarlen_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Uses varlen function to identify the length of a particular variable. Usage: </p><pre class="fragment">data test;
-   format str $1.  num datetime19.;
-   stop;
+  format str $1.  num datetime19.;
+  stop;
 run;
 %put %mf_getVarLen(test,str);
 %put %mf_getVarLen(work.test,num);

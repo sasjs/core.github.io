@@ -121,13 +121,13 @@ $(document).ready(function(){initNavTree('mp__prevobs_8sas.html',''); initResiza
   %mp_prevobs(INIT,history=2)
   if _n_ =10 then do;
     %* fetch previous but 1 record;
-    %mp_prevobs(FETCH,-2) 
-    put _n_= name= age= calc_var=; 
+    %mp_prevobs(FETCH,-2)
+    put _n_= name= age= calc_var=;
     %* fetch previous record;
-    %mp_prevobs(FETCH,-1) 
-    put _n_= name= age= calc_var=; 
+    %mp_prevobs(FETCH,-1)
+    put _n_= name= age= calc_var=;
     %* reinstate current record ;
-    %mp_prevobs(FETCH,0) 
+    %mp_prevobs(FETCH,0)
     put _n_= name= age= calc_var=;
   end;
 run;
@@ -137,8 +137,7 @@ run;
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">action</td><td>Either FETCH a current or previous record, or INITialise. </td></tr>
-    <tr><td class="paramname">record</td><td>The relative (to current) position of the previous observation to return. <br  />
- </td></tr>
+    <tr><td class="paramname">record</td><td>The relative (to current) position of the previous observation to return. </td></tr>
     <tr><td class="paramname">history=</td><td>The number of records to retain in the hash table. Default=5 </td></tr>
     <tr><td class="paramname">prefix=</td><td>the prefix to give to the variables used to store the hash name and index. Default=mp_prevobs</td></tr>
   </table>

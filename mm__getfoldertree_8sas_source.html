@@ -121,81 +121,82 @@ $(document).ready(function(){initNavTree('mm__getfoldertree_8sas_source.html',''
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">    options notes source;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">  @param [in] root= the parent folder under which to return all contents</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">  @param [out] outds= the dataset to create that contains the list of directories</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">  @param [in] mDebug= set to 1 to show debug messages in the log</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">  @version 9.4</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">  @author Allan Bowe</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;%macro mm_getfoldertree(</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;     root=</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    ,outds=work.mm_getfoldertree</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    ,mDebug=0</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    ,depth=50 <span class="comment">/* how many nested folders to query */</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    ,level=1 <span class="comment">/* system var - to track current level depth */</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    ,append=NO  <span class="comment">/* system var - when YES means appending within nested loop */</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;%<span class="keywordflow">if</span> &amp;level&gt;&amp;depth %then %<span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;%local mD;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;%<span class="keywordflow">if</span> &amp;mDebug=1 %then %let mD=;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;%<span class="keywordflow">else</span> %let mD=%str(*);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;%&amp;mD.put Executing &amp;sysmacroname;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;%&amp;mD.put _local_;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;%<span class="keywordflow">if</span> &amp;append=NO %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="comment">/* ensure table doesn&#39;t exist already */</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  data &amp;outds; run;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  proc sql; drop table &amp;outds;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;%end;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">/* get folder contents */</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;data &amp;outds.TMP/view=&amp;outds.TMP;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  length metauri pathuri $64 name $256 path $1024</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    assoctype publictype MetadataUpdated MetadataCreated $32;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  keep metauri assoctype name publictype MetadataUpdated MetadataCreated path;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  call missing(of _all_);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  path=<span class="stringliteral">&quot;&amp;root&quot;</span>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  rc=metadata_pathobj(<span class="stringliteral">&quot;&quot;</span>,path,<span class="stringliteral">&quot;Folder&quot;</span>,publictype,pathuri);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordflow">if</span> publictype ne <span class="stringliteral">&#39;Tree&#39;</span> then <span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    putlog <span class="stringliteral">&quot;%str(WAR)NING: Tree &quot;</span> path <span class="stringliteral">&#39;does not exist!&#39;</span> publictype=;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    stop;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  end;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  __n1=1;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordflow">do</span> <span class="keywordflow">while</span>(metadata_getnasl(pathuri,__n1,assoctype)&gt;0);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    __n1+1;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">/* Walk through all possible associations of this object. */</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    __n2=1;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span> assoctype in (<span class="stringliteral">&#39;Members&#39;</span>,<span class="stringliteral">&#39;SubTrees&#39;</span>) then</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    do while(metadata_getnasn(pathuri,assoctype,__n2,metauri)&gt;0);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      __n2+1;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      call missing(name,publictype,MetadataUpdated,MetadataCreated);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      __rc1=metadata_getattr(metauri,&quot;Name&quot;, name);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      __rc2=metadata_getattr(metauri,&quot;MetadataUpdated&quot;, MetadataUpdated);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      __rc3=metadata_getattr(metauri,&quot;MetadataCreated&quot;, MetadataCreated);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      __rc4=metadata_getattr(metauri,&quot;PublicType&quot;, PublicType);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      output;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    end;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    n1+1;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  end;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  drop __:;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;run;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;proc append base=&amp;outds data=&amp;outds.TMP;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;run;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;data _null_;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  set &amp;outds.TMP(where=(assoctype=&#39;SubTrees&#39;));</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  call execute(&#39;%mm_getfoldertree(root=&#39;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    !!cats(path,&quot;/&quot;,name)!!&quot;,outds=&amp;outds,mDebug=&amp;mdebug,depth=&amp;depth&quot;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    !!&quot;,level=%eval(&amp;level+1),append=YES)&quot;);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;run;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;%mend;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">  @param [out] outds= the dataset to create that contains the list of</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">    directories</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">  @param [in] mDebug= set to 1 to show debug messages in the log</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">  @version 9.4</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">  @author Allan Bowe</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;%macro mm_getfoldertree(</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    root=</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    ,outds=work.mm_getfoldertree</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    ,mDebug=0</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    ,depth=50 <span class="comment">/* how many nested folders to query */</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    ,level=1 <span class="comment">/* system var - to track current level depth */</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    ,append=NO  <span class="comment">/* system var - when YES means appending within nested loop */</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;%<span class="keywordflow">if</span> &amp;level&gt;&amp;depth %then %<span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;%local mD;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;%<span class="keywordflow">if</span> &amp;mDebug=1 %then %let mD=;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;%<span class="keywordflow">else</span> %let mD=%str(*);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;%&amp;mD.put Executing &amp;sysmacroname;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;%&amp;mD.put _local_;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;%<span class="keywordflow">if</span> &amp;append=NO %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="comment">/* ensure table doesn&#39;t exist already */</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  data &amp;outds; run;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  proc sql; drop table &amp;outds;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;%end;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/* get folder contents */</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;data &amp;outds.TMP/view=&amp;outds.TMP;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  length metauri pathuri $64 name $256 path $1024</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    assoctype publictype MetadataUpdated MetadataCreated $32;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  keep metauri assoctype name publictype MetadataUpdated MetadataCreated path;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  call missing(of _all_);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  path=<span class="stringliteral">&quot;&amp;root&quot;</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  rc=metadata_pathobj(<span class="stringliteral">&quot;&quot;</span>,path,<span class="stringliteral">&quot;Folder&quot;</span>,publictype,pathuri);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordflow">if</span> publictype ne <span class="stringliteral">&#39;Tree&#39;</span> then <span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    putlog <span class="stringliteral">&quot;%str(WAR)NING: Tree &quot;</span> path <span class="stringliteral">&#39;does not exist!&#39;</span> publictype=;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    stop;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  end;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  __n1=1;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordflow">do</span> <span class="keywordflow">while</span>(metadata_getnasl(pathuri,__n1,assoctype)&gt;0);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    __n1+1;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">/* Walk through all possible associations of this object. */</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    __n2=1;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">if</span> assoctype in (<span class="stringliteral">&#39;Members&#39;</span>,<span class="stringliteral">&#39;SubTrees&#39;</span>) then</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    do while(metadata_getnasn(pathuri,assoctype,__n2,metauri)&gt;0);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      __n2+1;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      call missing(name,publictype,MetadataUpdated,MetadataCreated);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      __rc1=metadata_getattr(metauri,&quot;Name&quot;, name);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      __rc2=metadata_getattr(metauri,&quot;MetadataUpdated&quot;, MetadataUpdated);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      __rc3=metadata_getattr(metauri,&quot;MetadataCreated&quot;, MetadataCreated);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      __rc4=metadata_getattr(metauri,&quot;PublicType&quot;, PublicType);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      output;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    end;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    n1+1;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  end;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  drop __:;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;run;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;proc append base=&amp;outds data=&amp;outds.TMP;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;run;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;data _null_;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  set &amp;outds.TMP(where=(assoctype=&#39;SubTrees&#39;));</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  call execute(&#39;%mm_getfoldertree(root=&#39;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    !!cats(path,&quot;/&quot;,name)!!&quot;,outds=&amp;outds,mDebug=&amp;mdebug,depth=&amp;depth&quot;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    !!&quot;,level=%eval(&amp;level+1),append=YES)&quot;);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;run;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;%mend;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

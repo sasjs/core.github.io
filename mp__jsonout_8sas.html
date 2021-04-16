@@ -113,12 +113,22 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas.html',''); initResiza
 <p><a href="mp__jsonout_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>PROC JSON is faster but will produce errs like the ones below if special chars are encountered.</p>
-<p>&gt;An object or array close is not valid at this point in the JSON text. &gt;Date value out of range</p>
+<blockquote class="doxtable">
+<p>ERROR: Some code points did not transcode. </p>
+</blockquote>
+<blockquote class="doxtable">
+<p>An object or array close is not valid at this point in the JSON text. </p>
+</blockquote>
+<blockquote class="doxtable">
+<p>Date value out of range </p>
+</blockquote>
 <p>If this happens, try running with ENGINE=DATASTEP.</p>
 <p>Usage: </p><pre class="fragment">  filename tmp temp;
   data class; set sashelp.class;run;
 
+  %mp_jsonout(OPEN,jref=tmp)
   %mp_jsonout(OBJ,class,jref=tmp)
+  %mp_jsonout(CLOSE,jref=tmp)
 
   data _null_;
   infile tmp;
@@ -127,12 +137,22 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas.html',''); initResiza
 </pre><p>If you are building web apps with SAS then you are strongly encouraged to use the mX_createwebservice macros in combination with the <a href="https://github.com/sasjs/adapter">sasjs adapter</a>. For more information see <a href="https://sasjs.io">https://sasjs.io</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">action</td><td>Valid values: OPEN - opens the JSON OBJ - sends a table with each row as an object ARR - sends a table with each row in an array CLOSE - closes the JSON</td></tr>
+    <tr><td class="paramname">action</td><td>Valid values: <ul>
+<li>OPEN - opens the JSON </li>
+<li>OBJ - sends a table with each row as an object </li>
+<li>ARR - sends a table with each row in an array </li>
+<li>CLOSE - closes the JSON</li>
+</ul>
+</td></tr>
     <tr><td class="paramname">ds</td><td>the dataset to send. Must be a work table. </td></tr>
     <tr><td class="paramname">jref=</td><td>the fileref to which to send the JSON </td></tr>
     <tr><td class="paramname">dslabel=</td><td>the name to give the table in the exported JSON </td></tr>
     <tr><td class="paramname">fmt=</td><td>Whether to keep or strip formats from the table </td></tr>
-    <tr><td class="paramname">engine=</td><td>Which engine to use to send the JSON, options are: PROCJSON (default) DATASTEP</td></tr>
+    <tr><td class="paramname">engine=</td><td>Which engine to use to send the JSON, valid options are: <ul>
+<li>PROCJSON (default) </li>
+<li>DATASTEP (more reliable when data has non standard characters)</li>
+</ul>
+</td></tr>
     <tr><td class="paramname">dbg=</td><td>DEPRECATED - was used to conditionally add PRETTY to proc json but this can cause line truncation in large files.</td></tr>
   </table>
   </dd>

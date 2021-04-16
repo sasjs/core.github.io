@@ -113,7 +113,8 @@ $(document).ready(function(){initNavTree('mv__createwebservice_8sas.html',''); i
 <p><a href="mv__createwebservice_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Code is passed in as one or more filerefs. </p><pre class="fragment">%* Step 1 - compile macros ;
-filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
+filename mc url
+  "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %inc mc;
 
 %* Step 2 - Create some code and add it to a web service;
@@ -126,7 +127,7 @@ parmcards4;
     run;
     %* send data back;
     %webout(OPEN)
-    %webout(ARR,example1) * Array format, fast, suitable for large tables ;
+    %webout(ARR,example1) * Array format, fast, suitable for large tables;
     %webout(OBJ,example2) * Object format, easier to work with ;
     %webout(CLOSE)
 ;;;;

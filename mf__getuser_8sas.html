@@ -112,8 +112,7 @@ $(document).ready(function(){initNavTree('mf__getuser_8sas.html',''); initResiza
 
 <p><a href="mf__getuser_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>In a workspace session, a user is generally represented by <code> &amp;sysuserid</code> or <code>SYS_COMPUTE_SESSION_OWNER</code> if it exists. <br  />
- In a Stored Process session, <code>&amp;sysuserid</code> resolves to a system account (default=sassrv) and instead there are several metadata username variables to choose from (_metauser, _metaperson ,_username, _secureusername). The OS account is represented by <code> _secureusername</code> whilst the metadata account is under <code> _metaperson</code>. </p><pre class="fragment">%let user= %mf_getUser();
+<div class="textblock"><p>In a workspace session, a user is generally represented by <code> &amp;sysuserid</code> or <code>SYS_COMPUTE_SESSION_OWNER</code> if it exists. In a Stored Process session, <code>&amp;sysuserid</code> resolves to a system account (default=sassrv) and instead there are several metadata username variables to choose from (_metauser, _metaperson ,_username, _secureusername). The OS account is represented by <code> _secureusername</code> whilst the metadata account is under <code> _metaperson</code>. </p><pre class="fragment">%let user= %mf_getUser();
 %put &amp;user;
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">

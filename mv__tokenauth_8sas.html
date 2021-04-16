@@ -115,7 +115,8 @@ $(document).ready(function(){initNavTree('mv__tokenauth_8sas.html',''); initResi
 <div class="textblock"><p>Before a Refresh Token can be obtained, the client must be registered by an administrator. This can be done using the <code>mv_registerclient</code> macro, after which the user must visit a URL to get an additional code (if using oauth).</p>
 <p>That code (or username / password) is used here to get the Refresh Token (and an initial Access Token). THIS MACRO CAN ONLY BE USED ONCE - further access tokens can be obtained using the <code>mv_gettokenrefresh</code> macro.</p>
 <p>Access tokens expire frequently (every 10 hours or so) whilst refresh tokens expire periodically (every month or so). This is all configurable.</p>
-<p>Usage: </p><pre class="fragment">filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
+<p>Usage: </p><pre class="fragment">filename mc url
+  "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %inc mc;
 
 

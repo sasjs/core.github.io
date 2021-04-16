@@ -110,57 +110,58 @@ $(document).ready(function(){initNavTree('mp__binarycopy_8sas_source.html',''); 
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  @file</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  @brief Copy any file using binary input / output streams</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  @details Reads in a file byte by byte and writes it back out.  Is an</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    os-independent method to copy files.  In case of naming collision, the</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    default filerefs can be modified.</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">    Based on http://stackoverflow.com/questions/13046116/using-sas-to-copy-a-text-file</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">        %mp_binarycopy(inloc=&quot;/home/me/blah.txt&quot;, outref=_webout)</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">  @param inloc full, quoted &quot;path/and/filename.ext&quot; of the object to be copied</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">  @param outloc full, quoted &quot;path/and/filename.ext&quot; of object to be created</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">  @param inref can override default input fileref to avoid naming clash</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">  @param outref an override default output fileref to avoid naming clash</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">  @returns nothing</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">  @version 9.2</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;%macro mp_binarycopy(</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;     inloc=           <span class="comment">/* full path and filename of the object to be copied */</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    ,outloc=          <span class="comment">/* full path and filename of object to be created */</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    ,inref=____in   <span class="comment">/* override default to use own filerefs */</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    ,outref=____out <span class="comment">/* override default to use own filerefs */</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;   <span class="comment">/* these IN and OUT filerefs can point to anything */</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  %<span class="keywordflow">if</span> &amp;inref = ____in %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    filename &amp;inref &amp;inloc lrecl=1048576 ;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  %end;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  %<span class="keywordflow">if</span> &amp;outref=____out %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    filename &amp;outref &amp;outloc lrecl=1048576 ;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  %end;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;   <span class="comment">/* copy the file byte-for-byte  */</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;   data _null_;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;     length filein 8 fileid 8;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;     filein = fopen(<span class="stringliteral">&quot;&amp;inref&quot;</span>,<span class="charliteral">&#39;I&#39;</span>,1,<span class="charliteral">&#39;B&#39;</span>);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;     fileid = fopen(<span class="stringliteral">&quot;&amp;outref&quot;</span>,<span class="charliteral">&#39;O&#39;</span>,1,<span class="charliteral">&#39;B&#39;</span>);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;     rec = <span class="stringliteral">&#39;20&#39;</span>x;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;     <span class="keywordflow">do</span> <span class="keywordflow">while</span>(fread(filein)=0);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        rc = fget(filein,rec,1);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        rc = fput(fileid, rec);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        rc =fwrite(fileid);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;     end;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;     rc = fclose(filein);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;     rc = fclose(fileid);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;   run;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  %<span class="keywordflow">if</span> &amp;inref = ____in %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    filename &amp;inref clear;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  %end;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  %<span class="keywordflow">if</span> &amp;outref=____out %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    filename &amp;outref clear;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  %end;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;%mend;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  os-independent method to copy files.  In case of naming collision, the</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">  default filerefs can be modified.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">  Based on:</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">  https://stackoverflow.com/questions/13046116/using-sas-to-copy-a-text-file</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">        %mp_binarycopy(inloc=&quot;/home/me/blah.txt&quot;, outref=_webout)</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">  @param inloc full, quoted &quot;path/and/filename.ext&quot; of the object to be copied</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">  @param outloc full, quoted &quot;path/and/filename.ext&quot; of object to be created</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">  @param inref can override default input fileref to avoid naming clash</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">  @param outref an override default output fileref to avoid naming clash</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">  @returns nothing</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">  @version 9.2</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;%macro mp_binarycopy(</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    inloc=           <span class="comment">/* full path and filename of the object to be copied */</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    ,outloc=          <span class="comment">/* full path and filename of object to be created */</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    ,inref=____in   <span class="comment">/* override default to use own filerefs */</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    ,outref=____out <span class="comment">/* override default to use own filerefs */</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="comment">/* these IN and OUT filerefs can point to anything */</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  %<span class="keywordflow">if</span> &amp;inref = ____in %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    filename &amp;inref &amp;inloc lrecl=1048576 ;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  %end;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  %<span class="keywordflow">if</span> &amp;outref=____out %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    filename &amp;outref &amp;outloc lrecl=1048576 ;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  %end;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="comment">/* copy the file byte-for-byte  */</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  data _null_;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    length filein 8 fileid 8;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    filein = fopen(<span class="stringliteral">&quot;&amp;inref&quot;</span>,<span class="charliteral">&#39;I&#39;</span>,1,<span class="charliteral">&#39;B&#39;</span>);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    fileid = fopen(<span class="stringliteral">&quot;&amp;outref&quot;</span>,<span class="charliteral">&#39;O&#39;</span>,1,<span class="charliteral">&#39;B&#39;</span>);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    rec = <span class="stringliteral">&#39;20&#39;</span>x;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">do</span> <span class="keywordflow">while</span>(fread(filein)=0);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;      rc = fget(filein,rec,1);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      rc = fput(fileid, rec);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      rc =fwrite(fileid);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    end;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    rc = fclose(filein);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    rc = fclose(fileid);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  run;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  %<span class="keywordflow">if</span> &amp;inref = ____in %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    filename &amp;inref clear;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  %end;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  %<span class="keywordflow">if</span> &amp;outref=____out %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    filename &amp;outref clear;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  %end;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;%mend;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('mp__binarycopy_8sas.html',''); initRes
 
 <p><a href="mp__binarycopy_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Reads in a file byte by byte and writes it back out. Is an os-independent method to copy files. In case of naming collision, the default filerefs can be modified. Based on <a href="http://stackoverflow.com/questions/13046116/using-sas-to-copy-a-text-file">http://stackoverflow.com/questions/13046116/using-sas-to-copy-a-text-file</a> </p><pre class="fragment">%mp_binarycopy(inloc="/home/me/blah.txt", outref=_webout)
+<div class="textblock"><p>Reads in a file byte by byte and writes it back out. Is an os-independent method to copy files. In case of naming collision, the default filerefs can be modified. Based on: <a href="https://stackoverflow.com/questions/13046116/using-sas-to-copy-a-text-file">https://stackoverflow.com/questions/13046116/using-sas-to-copy-a-text-file</a> </p><pre class="fragment">  %mp_binarycopy(inloc="/home/me/blah.txt", outref=_webout)
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">inloc</td><td>full, quoted "path/and/filename.ext" of the object to be copied </td></tr>

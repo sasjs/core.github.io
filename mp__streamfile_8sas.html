@@ -113,7 +113,8 @@ $(document).ready(function(){initNavTree('mp__streamfile_8sas.html',''); initRes
 <p><a href="mp__streamfile_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Will set headers using appropriate functions (SAS 9 vs Viya) and send content as a binary stream.</p>
-<p>Usage: </p><pre class="fragment">filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
+<p>Usage: </p><pre class="fragment">filename mc url
+  "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %inc mc;
 
 %mp_streamfile(contenttype=csv,inloc=/some/where.txt,outname=myfile.txt)

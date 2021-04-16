@@ -120,7 +120,8 @@ publictype char(32),
 MetadataUpdated char(32),
 MetadataCreated char(32)
 </pre><p>Usage: </p><pre class="fragment">%* load macros;
-filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
+filename mc url
+  "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %inc mc;
 
 %* export everything;
@@ -137,16 +138,16 @@ filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 
 %* with specific types;
 %mm_tree(root=%str(/my/folder)
-  ,types= 
-      DeployedJob 
-      ExternalFile 
-      Folder 
-      Folder.SecuredData 
-      GeneratedTransform 
-      InformationMap.Relational 
-      Job 
-      Library 
-      Prompt 
+  ,types=
+      DeployedJob
+      ExternalFile
+      Folder
+      Folder.SecuredData
+      GeneratedTransform
+      InformationMap.Relational
+      Job
+      Library
+      Prompt
       StoredProcess
       Table
   ,outds=morestuff)
@@ -160,8 +161,7 @@ filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
   <table class="params">
     <tr><td class="paramname">root=</td><td>the parent folder under which to return all contents </td></tr>
     <tr><td class="paramname">outds=</td><td>the dataset to create that contains the list of directories </td></tr>
-    <tr><td class="paramname">types=</td><td>Space-seperated, unquoted list of types for filtering the output. Special types: <br  />
-</td></tr>
+    <tr><td class="paramname">types=</td><td>Space-seperated, unquoted list of types for filtering the output. Special types:</td></tr>
   </table>
   </dd>
 </dl>

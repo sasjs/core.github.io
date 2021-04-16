@@ -126,7 +126,8 @@ data _null_;
 run;
 
 filename outref "%sysfunc(pathname(work))";
-%mmx_spkexport(metaloc=%str(/30.Projects/3001.Internal/300115.DataController/dc1)
+%mmx_spkexport(
+    metaloc=%str(/30.Projects/3001.Internal/300115.DataController/dc1)
     ,secureref=tmp
     ,outspkpath=%str(/tmp)
 )

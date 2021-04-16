@@ -127,7 +127,7 @@ $(document).ready(function(){initNavTree('mp__distinctfmtvalues_8sas_source.html
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;%macro mp_distinctfmtvalues(</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;     libds=</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    libds=</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    ,var=</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    ,outvar=formatted_value</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    ,outds=work.mp_distinctfmtvalues</div>
@@ -142,7 +142,7 @@ $(document).ready(function(){initNavTree('mp__distinctfmtvalues_8sas_source.html
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  create table &amp;outds as</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    select distinct</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    %<span class="keywordflow">if</span> &amp;vtype=C &amp; %trim(&amp;fmt)=%str() %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;       &amp;var</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      &amp;var</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    %end;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    %<span class="keywordflow">else</span> %<span class="keywordflow">if</span> &amp;vtype=C %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;      put(&amp;var,&amp;fmt)</div>
@@ -153,7 +153,7 @@ $(document).ready(function(){initNavTree('mp__distinctfmtvalues_8sas_source.html
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      put(&amp;var,&amp;fmt)</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    %end;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;       as &amp;outvar length=&amp;varlen</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        as &amp;outvar length=&amp;varlen</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    from &amp;libds;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;%mend;</div>
 </div><!-- fragment --></div><!-- contents -->

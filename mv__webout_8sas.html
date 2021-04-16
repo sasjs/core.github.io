@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('mv__webout_8sas.html',''); initResizab
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This macro should be added to the start of each Job Execution Service, <b>immediately</b> followed by a call to: </p><pre class="fragment">  %mv_webout(FETCH)
 </pre><p>This will read all the input data and create same-named SAS datasets in the WORK library. You can then insert your code, and send data back using the following syntax: </p><pre class="fragment">data some datasets; * make some data ;
-retain some columns;
+  retain some columns;
 run;
 
 %mv_webout(OPEN)

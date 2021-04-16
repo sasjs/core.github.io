@@ -116,7 +116,8 @@ $(document).ready(function(){initNavTree('mv__getjoblog_8sas.html',''); initResi
 <p>To query the job, you need the URI. Sample code for achieving this is provided below.</p>
 <h2><a class="anchor" id="autotoc_md13"></a>
 Example</h2>
-<p>First, compile the macros: </p><pre class="fragment">filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
+<p>First, compile the macros: </p><pre class="fragment">filename mc url
+  "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %inc mc;
 </pre><p>Next, create a job (in this case, a web service): </p><pre class="fragment">filename ft15f001 temp;
 parmcards4;
