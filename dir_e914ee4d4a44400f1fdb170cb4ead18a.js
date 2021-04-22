@@ -52,6 +52,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_getddl.sas", "mp__getddl_8sas.html", null ],
     [ "mp_getmaxvarlengths.sas", "mp__getmaxvarlengths_8sas.html", null ],
     [ "mp_guesspk.sas", "mp__guesspk_8sas.html", null ],
+    [ "mp_hashdataset.sas", "mp__hashdataset_8sas.html", null ],
     [ "mp_jsonout.sas", "mp__jsonout_8sas.html", null ],
     [ "mp_lib2cards.sas", "mp__lib2cards_8sas.html", null ],
     [ "mp_mdtablewrite.sas", "mp__mdtablewrite_8sas.html", null ],
@@ -70,6 +71,5 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_tree.sas", "mp__tree_8sas.html", null ],
     [ "mp_unzip.sas", "mp__unzip_8sas.html", null ],
     [ "mp_updatevarlength.sas", "mp__updatevarlength_8sas.html", "mp__updatevarlength_8sas" ],
-    [ "mp_validatefilter.sas", "mp__validatefilter_8sas.html", null ],
     [ "mp_zip.sas", "mp__zip_8sas.html", null ]
 ];
