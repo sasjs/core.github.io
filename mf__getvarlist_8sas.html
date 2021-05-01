@@ -116,15 +116,15 @@ $(document).ready(function(){initNavTree('mf__getvarlist_8sas.html',''); initRes
 </pre><p> returns: </p><blockquote class="doxtable">
 <p>List of Variables=Name Sex Age Height Weight </p>
 </blockquote>
-<p>put mf_getvarlist(sashelp.class,dlm=str(,),quote=double);</p>
-<p>returns: </p><blockquote class="doxtable">
+<p>For a seperated list of column values: </p><pre class="fragment">  %put %mf_getvarlist(sashelp.class,dlm=%str(,),quote=double);
+</pre><p> returns: </p><blockquote class="doxtable">
 <p>"Name","Sex","Age","Height","Weight" </p>
 </blockquote>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">libds</td><td>Two part dataset (or view) reference. </td></tr>
-    <tr><td class="paramname">dlm=</td><td>provide a delimiter (eg comma or space) to separate the vars </td></tr>
-    <tr><td class="paramname">quote=</td><td>use either DOUBLE or SINGLE to quote the results</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">libds</td><td>Two part dataset (or view) reference. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dlm=</td><td>( ) Provide a delimiter (eg comma or space) to separate the variables </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">quote=</td><td>(none) use either DOUBLE or SINGLE to quote the results</td></tr>
   </table>
   </dd>
 </dl>
