@@ -146,6 +146,9 @@ data _null_;
   put _infile_;
 run;
 </pre><p> Will write the following query to the log:</p>
+<blockquote class="doxtable">
+<p>( AGE = 12 AND SEX &lt;= 'M' ) AND ( Name NOT IN ('Jane','Alfred') OR Weight &gt;= 7 ) </p>
+</blockquote>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">inds</td><td>The input table with query values </td></tr>
