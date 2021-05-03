@@ -83,7 +83,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('mp__filtergenerate_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mp__filtergenerate_8test_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,72 +103,23 @@ $(document).ready(function(){initNavTree('mp__filtergenerate_8sas.html',''); ini
 
 <div class="header">
   <div class="headertitle">
-<div class="title">mp_filtergenerate.sas File Reference</div>  </div>
+<div class="title">mp_filtergenerate.test.sas File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Generates a filter clause from an input table, to a fileref.  
+<p>Testing mp_filtergenerate macro.  
 <a href="#details">More...</a></p>
 
-<p><a href="mp__filtergenerate_8sas_source.html">Go to the source code of this file.</a></p>
+<p><a href="mp__filtergenerate_8test_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Uses the input table to generate an output filter clause. This feature is used to create dynamic dropdowns in <a href="https://datacontroller.io">Data Controller for SAS&amp;reg</a>. The input table should be in the format below:</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">GROUP_LOGIC:$3   </th><th class="markdownTableHeadNone">SUBGROUP_LOGIC:$3   </th><th class="markdownTableHeadNone">SUBGROUP_ID:8.   </th><th class="markdownTableHeadNone">VARIABLE_NM:$32   </th><th class="markdownTableHeadNone">OPERATOR_NM:$10   </th><th class="markdownTableHeadNone">RAW_VALUE:$4000    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">AND   </td><td class="markdownTableBodyNone">AND   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">AGE   </td><td class="markdownTableBodyNone">=   </td><td class="markdownTableBodyNone">12    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">AND   </td><td class="markdownTableBodyNone">AND   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">SEX   </td><td class="markdownTableBodyNone">&lt;=   </td><td class="markdownTableBodyNone">'M'    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">AND   </td><td class="markdownTableBodyNone">OR   </td><td class="markdownTableBodyNone">2   </td><td class="markdownTableBodyNone">Name   </td><td class="markdownTableBodyNone">NOT IN   </td><td class="markdownTableBodyNone">('Jane','Alfred')    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">AND   </td><td class="markdownTableBodyNone">OR   </td><td class="markdownTableBodyNone">2   </td><td class="markdownTableBodyNone">Weight   </td><td class="markdownTableBodyNone">&gt;=   </td><td class="markdownTableBodyNone">7   </td></tr>
-</table>
-<p>Note - if the above table is received from an external client, the values should first be validated using the <a class="el" href="mp__filtercheck_8sas.html" title="Checks an input filter table for validity.">mp_filtercheck.sas</a> macro to avoid risk of SQL injection.</p>
-<p>To generate the filter, run the following code: </p><pre class="fragment">data work.filtertable;
-  infile datalines4 dsd;
-  input GROUP_LOGIC:$3. SUBGROUP_LOGIC:$3. SUBGROUP_ID:8. VARIABLE_NM:$32.
-    OPERATOR_NM:$10. RAW_VALUE:$32767.;
-datalines4;
-AND,AND,1,AGE,=,12
-AND,AND,1,SEX,&lt;=,"'M'"
-AND,OR,2,Name,NOT IN,"('Jane','Alfred')"
-AND,OR,2,Weight,&gt;=,7
-;;;;
-run;
-
-%mp_filtergenerate(work.filtertable,outref=myfilter)
-
-data _null_;
-  infile myfilter;
-  input;
-  put _infile_;
-run;
-</pre><p> Will write the following query to the log:</p>
-<blockquote class="doxtable">
-<p>( AGE = 12 AND SEX &lt;= 'M' ) AND ( Name NOT IN ('Jane','Alfred') OR Weight &gt;= 7 ) </p>
-</blockquote>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">inds</td><td>The input table with query values </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>The output fileref to contain the filter clause. Will be created (or replaced).</td></tr>
-  </table>
-  </dd>
-</dl>
-<h4>Related Macros </h4>
+<div class="textblock"><h4>SAS Macros </h4>
 <ul>
-<li><a class="el" href="mp__filtercheck_8sas.html" title="Checks an input filter table for validity.">mp_filtercheck.sas</a></li>
+<li><a class="el" href="mp__filtergenerate_8sas.html" title="Generates a filter clause from an input table, to a fileref.">mp_filtergenerate.sas</a> </li>
+<li><a class="el" href="mp__filtercheck_8sas.html" title="Checks an input filter table for validity.">mp_filtercheck.sas</a> </li>
+<li><a class="el" href="mp__assertdsobs_8sas.html" title="Asserts the number of observations in a dataset.">mp_assertdsobs.sas</a> </li>
 </ul>
-<h4>SAS Macros </h4>
-<ul>
-<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
-<li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a></li>
-</ul>
-<dl class="section version"><dt>Version</dt><dd>9.3 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="mp__filtergenerate_8sas_source.html">mp_filtergenerate.sas</a>.</p>
+<p class="definition">Definition in file <a class="el" href="mp__filtergenerate_8test_8sas_source.html">mp_filtergenerate.test.sas</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
@@ -176,7 +127,7 @@ run;
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e914ee4d4a44400f1fdb170cb4ead18a.html">base</a></li><li class="navelem"><a class="el" href="mp__filtergenerate_8sas.html">mp_filtergenerate.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_59425e443f801f1f2fd8bbe4959a3ccf.html">tests</a></li><li class="navelem"><a class="el" href="dir_a49f9b051925a4cbbe82ac92a0123656.html">base</a></li><li class="navelem"><a class="el" href="mp__filtergenerate_8test_8sas.html">mp_filtergenerate.test.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">

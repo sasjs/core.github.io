@@ -112,13 +112,13 @@ $(document).ready(function(){initNavTree('mp__filtercheck_8sas.html',''); initRe
 
 <p><a href="mp__filtercheck_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Performs checks on the input table to ensure it arrives in the correct format. This is necessary to prevent code injection. Will update SYSCC to 1008 if bad records are found.</p>
+<div class="textblock"><p>Performs checks on the input table to ensure it arrives in the correct format. This is necessary to prevent code injection. Will update SYSCC to 1008 if bad records are found, and call <a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> for a graceful service exit (configurable).</p>
 <p>Used for dynamic filtering in <a href="https://datacontroller.io">Data Controller for SAS&reg;</a>.</p>
 <p>Usage: </p><pre class="fragment">%mp_filtercheck(work.filter,targetds=sashelp.class,outds=work.badrecords)
 </pre><p> The input table should have the following format:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">GROUP_LOGIC:$3   </th><th class="markdownTableHeadNone">SUBGROUP_LOGIC:$3   </th><th class="markdownTableHeadNone">SUBGROUP_ID:8.   </th><th class="markdownTableHeadNone">VARIABLE_NM:$32   </th><th class="markdownTableHeadNone">OPERATOR_NM:$10   </th><th class="markdownTableHeadNone">RAW_VALUE:$32767    </th></tr>
+<th class="markdownTableHeadNone">GROUP_LOGIC:$3   </th><th class="markdownTableHeadNone">SUBGROUP_LOGIC:$3   </th><th class="markdownTableHeadNone">SUBGROUP_ID:8.   </th><th class="markdownTableHeadNone">VARIABLE_NM:$32   </th><th class="markdownTableHeadNone">OPERATOR_NM:$10   </th><th class="markdownTableHeadNone">RAW_VALUE:$4000    </th></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">AND   </td><td class="markdownTableBodyNone">AND   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">AGE   </td><td class="markdownTableBodyNone">=   </td><td class="markdownTableBodyNone">12    </td></tr>
 <tr class="markdownTableRowEven">
@@ -142,6 +142,7 @@ $(document).ready(function(){initNavTree('mp__filtercheck_8sas.html',''); initRe
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">inds</td><td>The table to be checked, with the format above </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">targetds=</td><td>The target dataset against which to verify VARIABLE_NM </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">abort=</td><td>(YES) If YES will call <a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> on any exceptions </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>The output table, which is a copy of the &amp;inds. table plus a REASON_CD column, containing only bad records. If bad records found, the SYSCC value will be set to 1008 (general data problem). Downstream processes should check this table (and return code) before continuing.</td></tr>
   </table>
   </dd>

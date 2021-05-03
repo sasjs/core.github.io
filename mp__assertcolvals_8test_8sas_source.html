@@ -83,7 +83,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('mp__filtergenerate_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mp__assertcolvals_8test_8sas_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,80 +103,53 @@ $(document).ready(function(){initNavTree('mp__filtergenerate_8sas.html',''); ini
 
 <div class="header">
   <div class="headertitle">
-<div class="title">mp_filtergenerate.sas File Reference</div>  </div>
+<div class="title">mp_assertcolvals.test.sas</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Generates a filter clause from an input table, to a fileref.  
-<a href="#details">More...</a></p>
-
-<p><a href="mp__filtergenerate_8sas_source.html">Go to the source code of this file.</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Uses the input table to generate an output filter clause. This feature is used to create dynamic dropdowns in <a href="https://datacontroller.io">Data Controller for SAS&amp;reg</a>. The input table should be in the format below:</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">GROUP_LOGIC:$3   </th><th class="markdownTableHeadNone">SUBGROUP_LOGIC:$3   </th><th class="markdownTableHeadNone">SUBGROUP_ID:8.   </th><th class="markdownTableHeadNone">VARIABLE_NM:$32   </th><th class="markdownTableHeadNone">OPERATOR_NM:$10   </th><th class="markdownTableHeadNone">RAW_VALUE:$4000    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">AND   </td><td class="markdownTableBodyNone">AND   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">AGE   </td><td class="markdownTableBodyNone">=   </td><td class="markdownTableBodyNone">12    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">AND   </td><td class="markdownTableBodyNone">AND   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">SEX   </td><td class="markdownTableBodyNone">&lt;=   </td><td class="markdownTableBodyNone">'M'    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">AND   </td><td class="markdownTableBodyNone">OR   </td><td class="markdownTableBodyNone">2   </td><td class="markdownTableBodyNone">Name   </td><td class="markdownTableBodyNone">NOT IN   </td><td class="markdownTableBodyNone">('Jane','Alfred')    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">AND   </td><td class="markdownTableBodyNone">OR   </td><td class="markdownTableBodyNone">2   </td><td class="markdownTableBodyNone">Weight   </td><td class="markdownTableBodyNone">&gt;=   </td><td class="markdownTableBodyNone">7   </td></tr>
-</table>
-<p>Note - if the above table is received from an external client, the values should first be validated using the <a class="el" href="mp__filtercheck_8sas.html" title="Checks an input filter table for validity.">mp_filtercheck.sas</a> macro to avoid risk of SQL injection.</p>
-<p>To generate the filter, run the following code: </p><pre class="fragment">data work.filtertable;
-  infile datalines4 dsd;
-  input GROUP_LOGIC:$3. SUBGROUP_LOGIC:$3. SUBGROUP_ID:8. VARIABLE_NM:$32.
-    OPERATOR_NM:$10. RAW_VALUE:$32767.;
-datalines4;
-AND,AND,1,AGE,=,12
-AND,AND,1,SEX,&lt;=,"'M'"
-AND,OR,2,Name,NOT IN,"('Jane','Alfred')"
-AND,OR,2,Weight,&gt;=,7
-;;;;
-run;
-
-%mp_filtergenerate(work.filtertable,outref=myfilter)
-
-data _null_;
-  infile myfilter;
-  input;
-  put _infile_;
-run;
-</pre><p> Will write the following query to the log:</p>
-<blockquote class="doxtable">
-<p>( AGE = 12 AND SEX &lt;= 'M' ) AND ( Name NOT IN ('Jane','Alfred') OR Weight &gt;= 7 ) </p>
-</blockquote>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">inds</td><td>The input table with query values </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>The output fileref to contain the filter clause. Will be created (or replaced).</td></tr>
-  </table>
-  </dd>
-</dl>
-<h4>Related Macros </h4>
-<ul>
-<li><a class="el" href="mp__filtercheck_8sas.html" title="Checks an input filter table for validity.">mp_filtercheck.sas</a></li>
-</ul>
-<h4>SAS Macros </h4>
-<ul>
-<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
-<li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a></li>
-</ul>
-<dl class="section version"><dt>Version</dt><dd>9.3 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
-
-<p class="definition">Definition in file <a class="el" href="mp__filtergenerate_8sas_source.html">mp_filtergenerate.sas</a>.</p>
-</div></div><!-- contents -->
+<a href="mp__assertcolvals_8test_8sas.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  @file</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  @brief Testing mp_assertcolvals macro</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">  @li mp_assertcolvals.sas</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;data work.checkds;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keywordflow">do</span> checkval=<span class="stringliteral">&#39;Jane&#39;</span>,<span class="stringliteral">&#39;James&#39;</span>,<span class="stringliteral">&#39;Jill&#39;</span>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    output;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  end;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;run;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;%mp_assertcolvals(sashelp.class.name,</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  checkvals=work.checkds.checkval,</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  desc=At least one value has a match,</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  test=ANYVAL</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;)</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;data work.check;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keywordflow">do</span> val=<span class="charliteral">&#39;M&#39;</span>,<span class="charliteral">&#39;F&#39;</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    output;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  end;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;run;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;%mp_assertcolvals(sashelp.class.sex,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  checkvals=work.check.val,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  desc=All values have a match,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  test=ALLVALS</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;%webout(OPEN)</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;%webout(OBJ, TEST_RESULTS)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;%webout(CLOSE)</div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e914ee4d4a44400f1fdb170cb4ead18a.html">base</a></li><li class="navelem"><a class="el" href="mp__filtergenerate_8sas.html">mp_filtergenerate.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_59425e443f801f1f2fd8bbe4959a3ccf.html">tests</a></li><li class="navelem"><a class="el" href="dir_a49f9b051925a4cbbe82ac92a0123656.html">base</a></li><li class="navelem"><a class="el" href="mp__assertcolvals_8test_8sas.html">mp_assertcolvals.test.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">

@@ -116,15 +116,17 @@ $(document).ready(function(){initNavTree('mp__assertdsobs_8sas.html',''); initRe
 <p>Example usage: </p><pre class="fragment">%mp_assertdsobs(sashelp.class) %* tests if any observations are present;
 </pre> <h4>SAS Macros </h4>
 <ul>
-<li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a></li>
+<li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a> </li>
+<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a></li>
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">inds</td><td>input dataset to test for presence of observations </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">desc=</td><td>(Testing observations) The user provided test description </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">test=</td><td>(HASOBS) The test to apply. Valid values are: <ul>
-<li>HASOBS Test is a PASS if the input dataset has any observations </li>
-<li>EMPTY Test is a PASS if input dataset is empty </li>
+<li>HASOBS - Test is a PASS if the input dataset has any observations </li>
+<li>EMPTY - Test is a PASS if input dataset is empty </li>
+<li>EQUALS [integer] - Test passes if obs count matches the provided integer </li>
 </ul>
 </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.test_results) The output dataset to contain the results. If it does not exist, it will be created, with the following format: <table class="markdownTable">
@@ -137,6 +139,10 @@ $(document).ready(function(){initNavTree('mp__assertdsobs_8sas.html',''); initRe
   </table>
   </dd>
 </dl>
+<h4>Related Macros </h4>
+<ul>
+<li><a class="el" href="mp__assertcolvals_8sas.html" title="Asserts the values in a column.">mp_assertcolvals.sas</a></li>
+</ul>
 <dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
