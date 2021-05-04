@@ -78,5 +78,6 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_tree.sas", "mp__tree_8sas.html", null ],
     [ "mp_unzip.sas", "mp__unzip_8sas.html", null ],
     [ "mp_updatevarlength.sas", "mp__updatevarlength_8sas.html", "mp__updatevarlength_8sas" ],
+    [ "mp_validatecol.sas", "mp__validatecol_8sas.html", null ],
     [ "mp_zip.sas", "mp__zip_8sas.html", null ]
 ];

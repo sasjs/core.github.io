@@ -110,11 +110,11 @@ $(document).ready(function(){initNavTree('mp__zip_8sas_source.html',''); initRes
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  @file</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  @brief Creates a zip file</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  @details For DIRECTORY usage, will ignore subfolders. For DATASET usage,</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    provide a column that contains the full file path to each file to be zipped.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  provide a column that contains the full file path to each file to be zipped.</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">    %mp_zip(in=myzips,type=directory,outname=myDir)</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">    %mp_zip(in=/my/file/path.txt,type=FILE,outname=myFile)</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">    %mp_zip(in=SOMEDS,incol=FPATH,type=DATASET,outname=myFile)</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">      %mp_zip(in=myzips,type=directory,outname=myDir)</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">      %mp_zip(in=/my/file/path.txt,type=FILE,outname=myFile)</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">      %mp_zip(in=SOMEDS,incol=FPATH,type=DATASET,outname=myFile)</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">  If you are sending zipped output to the _webout destination as part of an STP</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">  be sure that _debug is not set (else the SPWA will send non zipped content</span></div>
