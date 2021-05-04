@@ -196,7 +196,7 @@ $(document).ready(function(){initNavTree('mm__createlibrary_8sas_source.html',''
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  putlog (_all_)(=);</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;run;</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;%<span class="keywordflow">if</span> &amp;checktype = SASLibrary %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  %put WARNING: Library (&amp;liburi) already exists with libname (&amp;libname)  ;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  %put %str(WARN)ING: Library (&amp;liburi) already exists with libname (&amp;libname);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  %<span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;%end;</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"></span> </div>
@@ -211,7 +211,7 @@ $(document).ready(function(){initNavTree('mm__createlibrary_8sas_source.html',''
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  putlog (_all_)(=);</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;run;</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;%<span class="keywordflow">if</span> &amp;checktype = SASLibrary %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  %put WARNING: Library (&amp;liburi) already exists with libref (&amp;libref)  ;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  %put %str(WARN)ING: Library (&amp;liburi) already exists with libref (&amp;libref)  ;</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  %<span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;%end;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
@@ -231,7 +231,7 @@ $(document).ready(function(){initNavTree('mm__createlibrary_8sas_source.html',''
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  call symputx(<span class="stringliteral">&#39;treeuri&#39;</span>,uri,<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;run;</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;%<span class="keywordflow">if</span> &amp;foldertype ne Tree %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  %put WARNING: Tree &amp;tree does not exist!;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  %put %str(WARN)ING: Tree &amp;tree does not exist!;</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  %<span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;%end;</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment"></span> </div>
@@ -339,7 +339,7 @@ $(document).ready(function(){initNavTree('mm__createlibrary_8sas_source.html',''
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">    *  check SAS version</span></div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">    */</span></div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;  %<span class="keywordflow">if</span> %sysevalf(&amp;sysver lt 9.3) %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    %put WARNING: Version 9.3 or later required;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    %put %str(WARN)ING: Version 9.3 or later required;</div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    %<span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;  %end;</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment"></span> </div>

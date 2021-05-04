@@ -166,12 +166,12 @@ $(document).ready(function(){initNavTree('mm__updatedocument_8sas_source.html','
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;run;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;%<span class="keywordflow">if</span> &amp;tsuri=stopifempty %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  %put WARNING:  &amp;path/&amp;name.(Document) not found!;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  %put %str(WARN)ING:  &amp;path/&amp;name.(Document) not found!;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  %<span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;%end;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;%<span class="keywordflow">if</span> %length(&amp;text)&lt;2 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  %put WARNING:  No text supplied!!;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  %put %str(WARN)ING:  No text supplied!!;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  %<span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;%end;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>

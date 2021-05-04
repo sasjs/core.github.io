@@ -151,7 +151,7 @@ $(document).ready(function(){initNavTree('mp__ds2cards_8sas_source.html',''); in
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;%local i setds nvars;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;%<span class="keywordflow">if</span> not %sysfunc(exist(&amp;base_ds)) %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  %put WARNING:  &amp;base_ds does not exist;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  %put %str(WARN)ING:  &amp;base_ds does not exist;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  %<span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;%end;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
@@ -169,7 +169,7 @@ $(document).ready(function(){initNavTree('mp__ds2cards_8sas_source.html',''); in
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  where libname=&quot;%scan(%upcase(&amp;base_ds),1)&quot;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    and memname=&quot;%scan(%upcase(&amp;base_ds),2)&quot;;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;%if &amp;nvars=0 %then %do;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  %put WARNING:  Dataset &amp;base_ds has no variables!  It will not be converted.;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  %put %str(WARN)ING: Dataset &amp;base_ds has no variables, will not be converted.;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  %return;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;%end;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>

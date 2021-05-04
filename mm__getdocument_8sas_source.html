@@ -233,7 +233,7 @@ $(document).ready(function(){initNavTree('mm__getdocument_8sas_source.html','');
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;          when (<span class="stringliteral">&#39;&amp;#x0d;&#39;</span>) rec=&#39;0D&#39;x;</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;          when (&#39;&amp;<span class="preprocessor">#36;&#39; ) rec=&#39;$&#39;  ;</span></div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;          when (<span class="stringliteral">&#39;&amp;#x09;&#39;</span>) rec=&#39;09&#39;x;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;          otherwise putlog &quot;WARNING: missing value for &quot; entity=;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;          otherwise putlog &quot;%str(WARN)ING: missing value for &quot; entity=;</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        end;</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        rc =fput(fileid, substr(rec,1,1));</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        rc =fwrite(fileid);</div>
