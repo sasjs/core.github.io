@@ -126,17 +126,19 @@ $(document).ready(function(){initNavTree('mv__jobexecute_8sas.html',''); initRes
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>valid values: <pre class="fragment">password
-authorization_code
-detect - will check if access_token exists, if not will use sas_services if
-a SASStudioV session else authorization_code.  Default option.
-sas_services - will use oauth_bearer=sas_services
-</pre> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>valid values: <ul>
+<li>password </li>
+<li>authorization_code </li>
+<li>detect - will check if access_token exists, if not will use sas_services if a SASStudioV session else authorization_code. Default option. </li>
+<li>sas_services - will use oauth_bearer=sas_services</li>
+</ul>
+</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">path=</td><td>The SAS Drive path to the job being executed </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">name=</td><td>The name of the job to execute </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">paramstring=</td><td>A JSON fragment with name:value pairs, eg: <code>"name":"value"</code> or "name":"value","name2":42<code>. This will need to be wrapped in</code>str()`.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">contextName=</td><td>Context name with which to run the job. Default = <code>SAS Job Execution compute context</code></td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>The output dataset containing links (Default=work.mv_jobexecute)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">contextName=</td><td>Context name with which to run the job. Default = <code>SAS Job Execution compute context</code> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>set to 1 to enable DEBUG messages </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mv_jobexecute) The output dataset containing links</td></tr>
   </table>
   </dd>
 </dl>

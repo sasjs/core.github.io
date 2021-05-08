@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('mv__jobflow_8sas.html',''); initResiza
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Very (very) simple flow manager. Jobs execute in sequential waves, all previous waves must finish successfully.</p>
 <p>The input table is formed as per below. Each observation represents one job. Each variable is converted into a macro variable with the same name.</p>
-<h2><a class="anchor" id="autotoc_md15"></a>
+<h2><a class="anchor" id="autotoc_md16"></a>
 Input table (minimum variables needed)</h2>
 <ul>
 <li>_PROGRAM - Provides the path to the job itself </li>
@@ -130,7 +130,7 @@ Input table (minimum variables needed)</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">/Public/jobs/somejob2   </td><td class="markdownTableBodyNone">0   </td><td class="markdownTableBodyNone">SAS Job Execution compute context   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md16"></a>
+<h2><a class="anchor" id="autotoc_md17"></a>
 Output table (minimum variables produced)</h2>
 <ul>
 <li>_PROGRAM - the SAS Drive path of the job </li>
@@ -142,7 +142,7 @@ Output table (minimum variables produced)</h2>
 </ul>
 <p><img src="https://i.imgur.com/nZE9PvT.png" alt="https://i.imgur.com/nZE9PvT.png" class="inline"/></p>
 <p>To avoid hammering the box with many hits in rapid succession, a one second pause is made between every request.</p>
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md18"></a>
 Example</h2>
 <p>First, compile the macros: </p><pre class="fragment">filename mc url
 "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
@@ -216,7 +216,7 @@ run;
 <li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
 <li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
 <li><a class="el" href="mf__existvarlist_8sas.html" title="Checks if a set of variables ALL exist in a data set.">mf_existvarlist.sas</a> </li>
-<li><a class="el" href="mv__jobwaitfor_8sas.html" title="Takes a dataset of running jobs and waits for ANY or ALL of them to complete.">mv_jobwaitfor.sas</a> </li>
+<li><a class="el" href="mv__jobwaitfor_8sas.html" title="Takes a table of running jobs and waits for ANY/ALL of them to complete.">mv_jobwaitfor.sas</a> </li>
 <li><a class="el" href="mv__jobexecute_8sas.html" title="Executes a SAS Viya Job.">mv_jobexecute.sas</a> </li>
 </ul>
 

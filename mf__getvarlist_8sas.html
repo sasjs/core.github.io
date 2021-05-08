@@ -124,7 +124,13 @@ $(document).ready(function(){initNavTree('mf__getvarlist_8sas.html',''); initRes
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">libds</td><td>Two part dataset (or view) reference. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">dlm=</td><td>( ) Provide a delimiter (eg comma or space) to separate the variables </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">quote=</td><td>(none) use either DOUBLE or SINGLE to quote the results</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">quote=</td><td>(none) use either DOUBLE or SINGLE to quote the results </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">typefilter=</td><td>(A) Filter for certain types of column. Valid values: <ul>
+<li>A Return All columns </li>
+<li>C Return Character columns </li>
+<li>N Return Numeric columns</li>
+</ul>
+</td></tr>
   </table>
   </dd>
 </dl>

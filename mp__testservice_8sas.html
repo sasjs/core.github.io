@@ -83,7 +83,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('mm__getstpcode_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mp__testservice_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,37 +103,52 @@ $(document).ready(function(){initNavTree('mm__getstpcode_8sas.html',''); initRes
 
 <div class="header">
   <div class="headertitle">
-<div class="title">mm_getstpcode.sas File Reference</div>  </div>
+<div class="title">mp_testservice.sas File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Writes the code of an STP to an external file.  
+<p>Will execute a test against a SASjs web service on SAS 9 or Viya.  
 <a href="#details">More...</a></p>
 
-<p><a href="mm__getstpcode_8sas_source.html">Go to the source code of this file.</a></p>
+<p><a href="mp__testservice_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Fetches the SAS code from a Stored Process where the code is stored in metadata.</p>
-<p>Usage: </p><pre class="fragment">%mm_getstpcode(tree=/some/meta/path
-  ,name=someSTP
-  ,outloc=/some/unquoted/filename.ext
+<div class="textblock"><p>Prepares the input files and retrieves the resulting datasets from the response JSON. </p><pre class="fragment">%mp_testjob(
+  duration=60*5
 )
-</pre> <dl class="params"><dt>Parameters</dt><dd>
+</pre><p> Note - the _webout fileref should NOT be assigned prior to running this macro.</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">tree=</td><td>The metadata path of the Stored Process (can also contain name) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">name=</td><td>Stored Process name. Leave blank if included above. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outloc=</td><td>(0) full and unquoted path to the desired text file. This will be overwritten if it already exists. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>(0) Fileref to which to write the code. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">showlog=(NO)</td><td>Set to YES to print log to the window</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">program</td><td>The _PROGRAM endpoint to test </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">inputfiles=(0)</td><td>A list of space seperated fileref:filename pairs as follows: inputfiles=inref:filename inref2:filename2 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">inputparams=(0)</td><td>A dataset containing name/value pairs in the following format: <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">name:$32   </th><th class="markdownTableHeadNone">value:$1000    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">stpmacname   </td><td class="markdownTableBodyNone">some value    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">mustbevalidname   </td><td class="markdownTableBodyNone">can be anything, oops, abort!!   </td></tr>
+</table>
+</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">debug=</td><td>(log) Provide the _debug value </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outlib=</td><td>(0) Output libref to contain the final tables. Set to 0 if the service output is not in JSON format. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>(0) Output fileref to create, to contain the full _webout response.</td></tr>
   </table>
   </dd>
 </dl>
 <h4>SAS Macros </h4>
 <ul>
-<li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a></li>
+<li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
+<li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
+<li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
+<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
+<li><a class="el" href="mp__binarycopy_8sas.html" title="Copy any file using binary input / output streams.">mp_binarycopy.sas</a> </li>
+<li><a class="el" href="mv__getjobresult_8sas.html" title="Extract the result from a completed SAS Viya Job.">mv_getjobresult.sas</a> </li>
+<li><a class="el" href="mv__jobflow_8sas.html" title="Execute a series of job flows.">mv_jobflow.sas</a></li>
 </ul>
+<dl class="section version"><dt>Version</dt><dd>9.4 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="mm__getstpcode_8sas_source.html">mm_getstpcode.sas</a>.</p>
+<p class="definition">Definition in file <a class="el" href="mp__testservice_8sas_source.html">mp_testservice.sas</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
@@ -141,7 +156,7 @@ $(document).ready(function(){initNavTree('mm__getstpcode_8sas.html',''); initRes
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_0d92069d5a23b1d3125c326d74f1a07c.html">meta</a></li><li class="navelem"><a class="el" href="mm__getstpcode_8sas.html">mm_getstpcode.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_e914ee4d4a44400f1fdb170cb4ead18a.html">base</a></li><li class="navelem"><a class="el" href="mp__testservice_8sas.html">mp_testservice.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">

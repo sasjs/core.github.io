@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('mv__jobwaitfor_8sas.html',''); initRes
 </div><!--header-->
 <div class="contents">
 
-<p>Takes a dataset of running jobs and waits for ANY or ALL of them to complete.  
+<p>Takes a table of running jobs and waits for ANY/ALL of them to complete.  
 <a href="#details">More...</a></p>
 
 <p><a href="mv__jobwaitfor_8sas_source.html">Go to the source code of this file.</a></p>
@@ -129,7 +129,7 @@ $(document).ready(function(){initNavTree('mv__jobwaitfor_8sas.html',''); initRes
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">failed   </td><td class="markdownTableBodyNone">no   </td><td class="markdownTableBodyNone">Job failed to execute, could be a problem when calling the apis   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md18"></a>
+<h2><a class="anchor" id="autotoc_md19"></a>
 Example</h2>
 <p>First, compile the macros: </p><pre class="fragment">filename mc url
 "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
@@ -162,13 +162,14 @@ run;
     <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>valid values: <pre class="fragment">- password
 - authorization_code
-- detect - will check if access_token exists, if not will use sas_services if
-  a SASStudioV session else authorization_code.  Default option.
+- detect - will check if access_token exists, if not will use sas_services
+  if a SASStudioV session else authorization_code.  Default option.
 - sas_services - will use oauth_bearer=sas_services
 </pre> </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">action=Either</td><td>ALL (to wait for every job) or ANY (if one job completes, processing will continue). Default=ALL. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">inds=</td><td>The input dataset containing the list of job uris, in the following format: <code>/jobExecution/jobs/&amp;JOBID./state</code> and the corresponding job name. The uri should be in a <code>uri</code> variable, and the job path/name should be in a <code>_program</code> variable. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">raise_err=0</td><td>Set to 1 to raise SYSCC when a job does not complete succcessfully </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>set to 1 to enable DEBUG messages </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>The output dataset containing the list of states by job (default=work.mv_jobexecute) </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>A fileref to which the spawned job logs should be appended.</td></tr>
   </table>

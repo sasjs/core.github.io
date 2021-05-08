@@ -120,11 +120,17 @@ $(document).ready(function(){initNavTree('mv__getjobcode_8sas.html',''); initRes
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>valid values: password authorization_code detect - will check if access_token exists, if not will use sas_services if a SASStudioV session else authorization_code. Default option. sas_services - will use oauth_bearer=sas_services </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>valid values: <ul>
+<li>password @liauthorization_code </li>
+<li>detect - will check if access_token exists, if not will use sas_services if a SASStudioV session else authorization_code. Default option. </li>
+<li>sas_services - will use oauth_bearer=sas_services </li>
+</ul>
+</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">path=</td><td>The SAS Drive path of the job </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">name=</td><td>The name of the job </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>A fileref to which to write the source code </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outfile=</td><td>A file to which to write the source code</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=(0)</td><td>set to 1 to enable DEBUG messages </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outref=(0)</td><td>A fileref to which to write the source code </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outfile=(0)</td><td>A file to which to write the source code</td></tr>
   </table>
   </dd>
 </dl>

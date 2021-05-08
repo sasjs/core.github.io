@@ -129,50 +129,56 @@ $(document).ready(function(){initNavTree('mf__getvarlist_8sas_source.html',''); 
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">  @param [in] dlm= ( ) Provide a delimiter (eg comma or space) to separate the</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">    variables</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">  @param [in] quote= (none) use either DOUBLE or SINGLE to quote the results</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">  @version 9.2</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">  @author Allan Bowe</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;%macro mf_getvarlist(libds</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;      ,dlm=%str( )</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;      ,quote=no</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="comment">/* declare local vars */</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  %local outvar dsid nvars x rc dlm q var;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="comment">/* credit Rowland Hale  - byte34 is double quote, 39 is single quote */</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  %<span class="keywordflow">if</span> %upcase(&amp;quote)=DOUBLE %then %let q=%qsysfunc(<span class="keywordtype">byte</span>(34));</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  %<span class="keywordflow">else</span> %<span class="keywordflow">if</span> %upcase(&amp;quote)=SINGLE %then %let q=%qsysfunc(<span class="keywordtype">byte</span>(39));</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="comment">/* open dataset in macro */</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  %let dsid=%sysfunc(open(&amp;libds));</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  %<span class="keywordflow">if</span> &amp;dsid %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    %let nvars=%sysfunc(attrn(&amp;dsid,NVARS));</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    %<span class="keywordflow">if</span> &amp;nvars&gt;0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      <span class="comment">/* add first dataset variable to global macro variable */</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      %let outvar=&amp;q.%sysfunc(varname(&amp;dsid,1))&amp;q.;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      <span class="comment">/* add remaining variables with supplied delimeter */</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      %<span class="keywordflow">do</span> x=1 %to &amp;nvars;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        %let var=&amp;q.%sysfunc(varname(&amp;dsid,&amp;x))&amp;q.;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        %<span class="keywordflow">if</span> &amp;var=&amp;q&amp;q %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;          %put &amp;sysmacroname: Empty column found in &amp;libds!;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;          %let var=&amp;q. &amp;q.;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        %end;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        %<span class="keywordflow">if</span> &amp;x=1 %then %let outvar=&amp;var;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        %<span class="keywordflow">else</span> %let outvar=&amp;outvar.&amp;dlm.&amp;var.;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      %end;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    %end;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    %let rc=%sysfunc(close(&amp;dsid));</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  %end;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    %put unable to open &amp;libds (rc=&amp;dsid);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    %let rc=%sysfunc(close(&amp;dsid));</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  %end;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  &amp;outvar</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;%mend;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">  @param [in] typefilter= (A) Filter for certain types of column.  Valid values:</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">    @li A Return All columns</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">    @li C Return Character columns</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">    @li N Return Numeric columns</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">  @version 9.2</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">  @author Allan Bowe</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;%macro mf_getvarlist(libds</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;      ,dlm=%str( )</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;      ,quote=no</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      ,typefilter=A</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="comment">/* declare local vars */</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  %local outvar dsid nvars x rc dlm q var vtype;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="comment">/* credit Rowland Hale  - byte34 is double quote, 39 is single quote */</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  %<span class="keywordflow">if</span> %upcase(&amp;quote)=DOUBLE %then %let q=%qsysfunc(<span class="keywordtype">byte</span>(34));</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  %<span class="keywordflow">else</span> %<span class="keywordflow">if</span> %upcase(&amp;quote)=SINGLE %then %let q=%qsysfunc(<span class="keywordtype">byte</span>(39));</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="comment">/* open dataset in macro */</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  %let dsid=%sysfunc(open(&amp;libds));</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  %<span class="keywordflow">if</span> &amp;dsid %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    %let nvars=%sysfunc(attrn(&amp;dsid,NVARS));</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    %<span class="keywordflow">if</span> &amp;nvars&gt;0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      <span class="comment">/* add variables with supplied delimeter */</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      %<span class="keywordflow">do</span> x=1 %to &amp;nvars;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="comment">/* get variable type */</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        %let vtype=%sysfunc(vartype(&amp;dsid,&amp;x));</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        %<span class="keywordflow">if</span> &amp;vtype=&amp;typefilter or &amp;typefilter=A %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;          %let var=&amp;q.%sysfunc(varname(&amp;dsid,&amp;x))&amp;q.;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;          %<span class="keywordflow">if</span> &amp;var=&amp;q&amp;q %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            %put &amp;sysmacroname: Empty column found in &amp;libds!;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            %let var=&amp;q. &amp;q.;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;          %end;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;          %<span class="keywordflow">if</span> %quote(&amp;outvar)=%quote() %then %let outvar=&amp;var;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;          %<span class="keywordflow">else</span> %let outvar=&amp;outvar.&amp;dlm.&amp;var.;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        %end;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      %end;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    %end;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    %let rc=%sysfunc(close(&amp;dsid));</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  %end;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    %put unable to open &amp;libds (rc=&amp;dsid);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    %let rc=%sysfunc(close(&amp;dsid));</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  %end;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  &amp;outvar</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;%mend mf_getvarlist;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
