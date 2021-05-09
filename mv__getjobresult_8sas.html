@@ -158,7 +158,11 @@ run;
 </ul>
 </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">uri=</td><td>The uri of the running job for which to fetch the status, in the format <code>/jobExecution/jobs/$UUID</code> (unquoted).</td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">result=</td><td>(WEBOUT_JSON) The result type to capture. Resolves to "_[column name]" from the results table when parsed with the JSON libname engine.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">result=</td><td>(WEBOUT_JSON) The result type to capture. Resolves to "_[column name]" from the results table when parsed with the JSON libname engine. Example values: <ul>
+<li>WEBOUT_JSON </li>
+<li>WEBOUT_TXT</li>
+</ul>
+</td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>(0) The output fileref to which to write the results </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outlib=</td><td>(0) The output library to which to assign the results (assumes the data is in JSON format)</td></tr>
   </table>

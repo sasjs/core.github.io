@@ -214,8 +214,8 @@ $(document).ready(function(){initNavTree('mv__jobwaitfor_8sas_source.html',''); 
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;%<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  %put &amp;sysmacroname entry vars:;</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  %put _local_;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  %let dbg=*;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;%end;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;%end;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;%<span class="keywordflow">else</span> %let dbg=*;</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;%local oauth_bearer;</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;%<span class="keywordflow">if</span> &amp;grant_type=detect %then %<span class="keywordflow">do</span>;</div>

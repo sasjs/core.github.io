@@ -198,8 +198,8 @@ $(document).ready(function(){initNavTree('mv__getjoblog_8sas_source.html',''); i
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;%<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  %put &amp;sysmacroname entry vars:;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  %put _local_;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  %let dbg=*;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;%end;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;%end;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;%<span class="keywordflow">else</span> %let dbg=*;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;%local oauth_bearer;</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;%<span class="keywordflow">if</span> &amp;grant_type=detect %then %<span class="keywordflow">do</span>;</div>

@@ -126,8 +126,8 @@ $(document).ready(function(){initNavTree('mf__getuniquename_8sas_source.html',''
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;%macro mf_getuniquename(prefix=MC);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  &amp;prefix.%substr(%sysfunc(compress(%sysfunc(uuidgen()),-)),1,32-%length(&amp;prefix))</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;%mend;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;&amp;prefix.%substr(%sysfunc(compress(%sysfunc(uuidgen()),-)),1,32-%length(&amp;prefix))</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;%mend mf_getuniquename;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

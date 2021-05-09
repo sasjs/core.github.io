@@ -145,16 +145,17 @@ parmcards4;
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path=</td><td>The full path (on SAS Drive) where the service will be created </td></tr>
-    <tr><td class="paramname">name=</td><td>The name of the service </td></tr>
-    <tr><td class="paramname">desc=</td><td>The description of the service </td></tr>
-    <tr><td class="paramname">precode=</td><td>Space separated list of filerefs, pointing to the code that needs to be attached to the beginning of the service </td></tr>
-    <tr><td class="paramname">code=</td><td>Fileref(s) of the actual code to be added </td></tr>
-    <tr><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
-    <tr><td class="paramname">grant_type=</td><td>valid values are "password" or "authorization_code" (unquoted). The default is authorization_code. </td></tr>
-    <tr><td class="paramname">replace=</td><td>select NO to avoid replacing any existing service in that location </td></tr>
-    <tr><td class="paramname">adapter=</td><td>the macro uses the sasjs adapter by default. To use another adapter, add a (different) fileref here. </td></tr>
-    <tr><td class="paramname">contextname=</td><td>Choose a specific context on which to run the Job. Leave blank to use the default context. From Viya 3.5 it is possible to configure a shared context - see <a href="https://go.documentation.sas.com/?docsetId=calcontexts&docsetTarget=n1hjn8eobk5pyhn1wg3ja0drdl6h.htm&docsetVersion=3.5&locale=en">https://go.documentation.sas.com/?docsetId=calcontexts&amp;docsetTarget=n1hjn8eobk5pyhn1wg3ja0drdl6h.htm&amp;docsetVersion=3.5&amp;locale=en</a></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">path=</td><td>The full path (on SAS Drive) where the service will be created </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">name=</td><td>The name of the service </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">desc=</td><td>The description of the service </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">precode=</td><td>Space separated list of filerefs, pointing to the code that needs to be attached to the beginning of the service </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">code=</td><td>Fileref(s) of the actual code to be added </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>valid values are "password" or "authorization_code" (unquoted). The default is authorization_code. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">replace=(YES)</td><td>Select NO to avoid replacing any existing service in that location </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">adapter=</td><td>the macro uses the sasjs adapter by default. To use another adapter, add a (different) fileref here. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">contextname=</td><td>Choose a specific context on which to run the Job. Leave blank to use the default context. From Viya 3.5 it is possible to configure a shared context - see <a href="https://go.documentation.sas.com/?docsetId=calcontexts&docsetTarget=n1hjn8eobk5pyhn1wg3ja0drdl6h.htm&docsetVersion=3.5&locale=en">https://go.documentation.sas.com/?docsetId=calcontexts&amp;docsetTarget=n1hjn8eobk5pyhn1wg3ja0drdl6h.htm&amp;docsetVersion=3.5&amp;locale=en</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=(0)</td><td>set to 1 to enable DEBUG messages</td></tr>
   </table>
   </dd>
 </dl>
