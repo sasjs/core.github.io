@@ -107,23 +107,14 @@ $(document).ready(function(){initNavTree('mf__abort_8sas.html',''); initResizabl
 </div><!--header-->
 <div class="contents">
 
-<p>abort gracefully according to context  
+<p>to be deprecated  
 <a href="#details">More...</a></p>
 
 <p><a href="mf__abort_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Do not use directly! See bottom of explanation for details.</p>
-<p>Configures an abort mechanism according to site specific policies or the particulars of an environment. For instance, can stream custom results back to the client in an STP Web App context, or completely stop in the case of a batch run.</p>
-<p>For the sharp eyed readers - this is no longer a macro function!! It became a macro procedure during a project and now it's kinda stuck that way until that project is updated (if it's ever updated). In the meantime we created <code>mp_abort</code> which is just a wrapper for this one, and so we recomend you use that for forwards compatibility reasons.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">mac=</td><td>to contain the name of the calling macro </td></tr>
-    <tr><td class="paramname">type=</td><td>deprecated. Not used. </td></tr>
-    <tr><td class="paramname">msg=</td><td>message to be returned </td></tr>
-    <tr><td class="paramname">iftrue=</td><td>supply a condition under which the macro should be executed.</td></tr>
-  </table>
-  </dd>
-</dl>
+<div class="textblock"><p>We will deprecate this macro in 2022</p>
+<p>As you can see, it's not a macro function.</p>
+<p>Use <a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> instead.</p>
 <dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
