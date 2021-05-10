@@ -204,15 +204,15 @@ Header Properties</h2>
 <p>All macros must be commented in the doxygen format, to enable the <a href="https://core.sasjs.io">online documentation</a>.</p>
 <h3><a class="anchor" id="autotoc_md6"></a>
 Dependencies</h3>
-<p>SAS code can contain one of two types of dependency - SAS Macros, and SAS Programs. When compiling projects using the <a href="https://cli.sasjs.io">SASjs CLI</a> the doxygen header is scanned for <code>@li</code> items under the following headers:</p>
+<p>SAS code can contain one of two types of dependency - SAS Macros, and SAS Includes. When compiling projects using the <a href="https://cli.sasjs.io">SASjs CLI</a> the doxygen header is scanned for <code>@li</code> items under the following headers:</p>
 <div class="fragment"><div class="line">&lt;h4&gt; SAS Macros &lt;/h4&gt;</div>
 <div class="line">@li mf_nobs.sas</div>
 <div class="line">@li mm_assignlib.sas</div>
 <div class="line"> </div>
-<div class="line">&lt;h4&gt; SAS Programs &lt;/h4&gt;</div>
+<div class="line">&lt;h4&gt; SAS Includes &lt;/h4&gt;</div>
 <div class="line">@li somefile.ddl SOMEFREF</div>
 <div class="line">@li someprogram.sas FREFTWO</div>
-</div><!-- fragment --><p>The CLI can then extract all the dependencies and insert as precode (SAS Macros) or in a temp engine fileref (SAS Programs) when creating SAS Jobs and Services.</p>
+</div><!-- fragment --><p>The CLI can then extract all the dependencies and insert as precode (SAS Macros) or in a temp engine fileref (SAS Includes) when creating SAS Jobs and Services.</p>
 <p>When contributing to this library, it is therefore important to ensure that all dependencies are listed in the header in this format.</p>
 <h2><a class="anchor" id="autotoc_md7"></a>
 Coding Standards</h2>
