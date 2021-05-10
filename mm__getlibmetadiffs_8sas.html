@@ -148,12 +148,7 @@ alter table table2 add d num;
 </pre><p> The program will create four output tables, with the following structure (and example data):</p>
 <h4><a class="anchor" id="autotoc_md9"></a>
 &amp;prefix.added</h4>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">name:$32.   </th><th class="markdownTableHeadNone">metaID:$17.   </th><th class="markdownTableHeadNone">SAStabName:$32.    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone" colspan="2"></td><td class="markdownTableBodyNone">DATA1   </td></tr>
-</table>
+<p>|name:$32.|metaID:$17.|SAStabName:$32.| |&mdash;|&mdash;|&mdash;| | |DATA1|</p>
 <h4><a class="anchor" id="autotoc_md10"></a>
 &amp;prefix.deleted</h4>
 <table class="markdownTable">
@@ -170,7 +165,7 @@ alter table table2 add d num;
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">TABLE2   </td><td class="markdownTableBodyNone">A5XLSNXI.BK0001HN   </td><td class="markdownTableBodyNone">TABLE2   </td><td class="markdownTableBodyNone">c   </td><td class="markdownTableBodyNone">A5XLSNXI.BM000MA9   </td><td class="markdownTableBodyNone">c   </td><td class="markdownTableBodyNone">Column   </td><td class="markdownTableBodyNone">Deleted    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone" colspan="3"></td><td class="markdownTableBodyNone" colspan="2">d   </td><td class="markdownTableBodyNone">d   </td><td class="markdownTableBodyNone">Column   </td><td class="markdownTableBodyNone">Added   </td></tr>
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone" colspan="2">d   </td><td class="markdownTableBodyNone">d   </td><td class="markdownTableBodyNone">Column   </td><td class="markdownTableBodyNone">Added   </td></tr>
 </table>
 <h4><a class="anchor" id="autotoc_md12"></a>
 &amp;prefix.meta</h4>
@@ -195,8 +190,8 @@ alter table table2 add d num;
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">libname=</td><td>the metadata name of the library to be compared </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outlib=</td><td>The output library in which to store the output tables. Default=WORK. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">prefix</td><td>The prefix for the four tables created. Default=metadiff.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outlib=(work)</td><td>The library in which to store the output tables. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">prefix=(metadiff)</td><td>The prefix for the four tables created.</td></tr>
   </table>
   </dd>
 </dl>
