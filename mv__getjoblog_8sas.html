@@ -112,14 +112,17 @@ $(document).ready(function(){initNavTree('mv__getjoblog_8sas.html',''); initResi
 
 <p><a href="mv__getjoblog_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Extracts log from a Viya job and writes it out to a fileref</p>
+<div class="textblock"><p>Extracts log from a Viya job and writes it out to a fileref.</p>
 <p>To query the job, you need the URI. Sample code for achieving this is provided below.</p>
 <h2><a class="anchor" id="autotoc_md13"></a>
 Example</h2>
-<p>First, compile the macros: </p><pre class="fragment">filename mc url
+<pre class="fragment">%* First, compile the macros;
+filename mc url
   "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %inc mc;
-</pre><p> Next, create a job (in this case, a web service): </p><pre class="fragment">filename ft15f001 temp;
+
+%* Next, create a job (in this case, a web service);
+filename ft15f001 temp;
 parmcards4;
   data ;
     rand=ranuni(0)*1000;
@@ -133,18 +136,35 @@ parmcards4;
   run;
 ;;;;
 %mv_createwebservice(path=/Public/temp,name=demo)
-</pre><p> Execute it: </p><pre class="fragment">%mv_jobexecute(path=/Public/temp
+
+%* Execute it;
+%mv_jobexecute(path=/Public/temp
   ,name=demo
   ,outds=work.info
 )
-</pre><p> Wait for it to finish, and grab the uri: </p><pre class="fragment">data _null_;
+
+%* Wait for it to finish;
+data work.info;
   set work.info;
-  if method='GET' and rel='self';
+  where method='GET' and rel='state';
+run;
+%mv_jobwaitfor(ALL,inds=work.info,outds=work.jobstates)
+
+%* and grab the uri;
+data _null_;
+  set work.jobstates;
   call symputx('uri',uri);
 run;
-</pre><p> Finally, fetch the log: </p><pre class="fragment">%mv_getjoblog(uri=&amp;uri,outref=mylog)
+
+%* Finally, fetch the log;
+%mv_getjoblog(uri=&amp;uri,outref=mylog)
 </pre><p> This macro is used by the <a class="el" href="mv__jobwaitfor_8sas.html" title="Takes a table of running jobs and waits for ANY/ALL of them to complete.">mv_jobwaitfor.sas</a> macro, which is generally a more convenient way to wait for the job to finish before fetching the log.</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>If the remote session calls <code>endsas</code> then it is not possible to get the log from the provided uri, and so the log from the parent session is fetched instead. This happens for a 400 response, eg below: </p><pre class="fragment">ErrorResponse[version=2,status=400,err=5113,id=,message=The session
+requested is currently in a failed or stopped state.,detail=[path:
+/compute/sessions/LONGURI-ses0006/jobs/LONGURI/log/content, traceId: 63
+51aa617d01fd2b],remediation=Correct the errors in the session request,
+and create a new session.,targetUri=&lt;null&gt;,errors=[],links=[]]
+</pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>set to 1 to enable DEBUG messages </td></tr>
@@ -155,7 +175,7 @@ run;
 <li>sas_services - will use oauth_bearer=sas_services. </li>
 </ul>
 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">uri=</td><td>The uri of the running job for which to fetch the status, in the format <code>/jobExecution/jobs/$UUID/state</code> (unquoted). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">uri=</td><td>The uri of the running job for which to fetch the status, in the format <code>/jobExecution/jobs/$UUID</code> (unquoted). </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>The output fileref to which to APPEND the log (is always appended).</td></tr>
   </table>
   </dd>
