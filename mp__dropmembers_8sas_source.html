@@ -118,7 +118,7 @@ $(document).ready(function(){initNavTree('mp__dropmembers_8sas_source.html','');
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">      proc sql;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">      create table data1 as select * from sashelp.class;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">      create view view2 as select * from sashelp.class;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">      %mp_dropmembers(libref=WORK, list=data1 view2)</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">      %mp_dropmembers(data1 view2, libref=WORK)</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
