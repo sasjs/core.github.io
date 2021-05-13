@@ -169,7 +169,7 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas_source.html',''); ini
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;%put output location=&amp;jref;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;%<span class="keywordflow">if</span> &amp;action=OPEN %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  OPTIONS NOBOMFILE;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  options nobomfile;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  data _null_;file &amp;jref encoding=<span class="stringliteral">&#39;utf-8&#39;</span>;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    put <span class="stringliteral">&#39;{&quot;START_DTTM&quot; : &quot;&#39;</span> <span class="stringliteral">&quot;%sysfunc(datetime(),datetime20.3)&quot;</span> <span class="charliteral">&#39;&quot;&#39;</span>;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  run;</div>

@@ -141,7 +141,7 @@ $(document).ready(function(){initNavTree('mp__filtercheck_8sas.html',''); initRe
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">inds</td><td>The table to be checked, with the format above </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">targetds=</td><td>The target dataset against which to verify VARIABLE_NM </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">targetds=</td><td>The target dataset against which to verify VARIABLE_NM. This must be available (ie, the library must be assigned). </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">abort=</td><td>(YES) If YES will call <a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> on any exceptions </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>The output table, which is a copy of the &amp;inds. table plus a REASON_CD column, containing only bad records. If bad records found, the SYSCC value will be set to 1008 (general data problem). Downstream processes should check this table (and return code) before continuing.</td></tr>
   </table>

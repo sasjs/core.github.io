@@ -349,7 +349,7 @@ $(document).ready(function(){initNavTree('mv__createwebservice_8sas_source.html'
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;  put <span class="stringliteral">&#39;)/*/STORE SOURCE*/; &#39;</span>;</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  put <span class="stringliteral">&#39;%put output location=&amp;jref; &#39;</span>;</div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  put <span class="stringliteral">&#39;%if &amp;action=OPEN %then %do; &#39;</span>;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;  put <span class="stringliteral">&#39;  OPTIONS NOBOMFILE; &#39;</span>;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;  put <span class="stringliteral">&#39;  options nobomfile; &#39;</span>;</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;  put <span class="stringliteral">&#39;  data _null_;file &amp;jref encoding=&#39;</span><span class="stringliteral">&#39;utf-8&#39;</span><span class="stringliteral">&#39;; &#39;</span>;</div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  put <span class="stringliteral">&#39;    put &#39;</span><span class="stringliteral">&#39;{&quot;START_DTTM&quot; : &quot;&#39;</span><span class="stringliteral">&#39; &quot;%sysfunc(datetime(),datetime20.3)&quot; &#39;</span><span class="charliteral">&#39;&quot;&#39;</span><span class="stringliteral">&#39;; &#39;</span>;</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  put <span class="stringliteral">&#39;  run; &#39;</span>;</div>

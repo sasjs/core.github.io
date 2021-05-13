@@ -117,7 +117,7 @@ $(document).ready(function(){initNavTree('mp__abort_8sas.html',''); initResizabl
 <ul>
 <li>should not use endsas or abort cancel in 9.4m3 environments as this can cause hung multibridge sessions and result in a frozen STP server </li>
 <li>should not use endsas in viya 3.5 as this destroys the session and cannot fetch results (although both <a class="el" href="mv__getjoblog_8sas.html" title="Extract the log from a completed SAS Viya Job.">mv_getjoblog.sas</a> and the @sasjs/adapter will recognise this and fetch the log of the parent session instead) </li>
-<li>STP environments must finish cleanly to avoid the log being sent to _webout. To assist with this, we also run stpsrvset('program error', 0) and set SYSCC=0. For 9.4m3 we take a unique approach - we open a macro but don't close it! This provides a graceful abort, EXCEPT when called called within a include within a macro. See tests/mp_abort.test.1.sas for an example case. If you know of another way to gracefully abort a 9.4m3 STP session, we'd love to hear about it!</li>
+<li>STP environments must finish cleanly to avoid the log being sent to _webout. To assist with this, we also run stpsrvset('program error', 0) and set SYSCC=0. For 9.4m3 we take a unique approach - we open a macro but don't close it! This provides a graceful abort, EXCEPT when called called within a include within a macro (and that macro contains additional logic). See <a class="el" href="mp__abort_8test_8nofix_8sas.html" title="Testing mp_abort macro.">mp_abort.test.nofix.sas</a> for the example case. If you know of another way to gracefully abort a 9.4m3 STP session, we'd love to hear about it!</li>
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">

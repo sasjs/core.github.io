@@ -125,8 +125,8 @@ $(document).ready(function(){initNavTree('mp__abort_8sas_source.html',''); initR
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">    _webout.  To assist with this, we also run stpsrvset(&#39;program error&#39;, 0)</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">    and set SYSCC=0.  For 9.4m3 we take a unique approach - we open a macro</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">    but don&#39;t close it!  This provides a graceful abort, EXCEPT when called</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">    called within a %include within a macro.  See tests/mp_abort.test.1.sas for</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    an example case.</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">    called within a %include within a macro (and that macro contains additional</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    logic).  See mp_abort.test.nofix.sas for the example case.</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">    If you know of another way to gracefully abort a 9.4m3 STP session, we&#39;d</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    love to hear about it!</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"></span> </div>
@@ -182,7 +182,7 @@ $(document).ready(function(){initNavTree('mp__abort_8sas_source.html',''); initR
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;          input;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;          i=1;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;          stoploop=0;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;          <span class="keywordflow">if</span> _n_ ge &amp;logline-5 and stoploop=0 then <span class="keywordflow">do</span> until (i&gt;12);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;          <span class="keywordflow">if</span> _n_ ge &amp;logline-15 and stoploop=0 then <span class="keywordflow">do</span> until (i&gt;22);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            call symputx(<span class="stringliteral">&#39;logmsg&#39;</span>,catx(<span class="charliteral">&#39;\n&#39;</span>,symget(<span class="stringliteral">&#39;logmsg&#39;</span>),_infile_));</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            input;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            i+1;</div>
