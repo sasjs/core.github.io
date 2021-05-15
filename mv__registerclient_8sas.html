@@ -112,9 +112,14 @@ $(document).ready(function(){initNavTree('mv__registerclient_8sas.html',''); ini
 
 <p><a href="mv__registerclient_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>When building apps on SAS Viya, an client id and secret is required. This macro will obtain the Consul Token and use that to call the Web Service.</p>
-<p>more info: <a href="https://developer.sas.com/reference/auth/#register">https://developer.sas.com/reference/auth/#register</a> and: <a href="http://proc-x.com/2019/01/authentication-to-sas-viya-a-couple-of-approaches">http://proc-x.com/2019/01/authentication-to-sas-viya-a-couple-of-approaches</a></p>
-<p>The default viyaroot location is /opt/sas/viya/config</p>
+<div class="textblock"><p>When building apps on SAS Viya, an client id and secret are sometimes required. In order to generate them, filesystem access to the Consul Token is needed (it is not enough to be in the SASAdministrator group in SAS Environment Manager).</p>
+<p>If you are registering a lot of clients / secrets, you may find it more convenient to use the <a href="https://sasjs.io/apps/#viya-client-token-generator">Viya Token Generator</a> (a SASjs Web App to automate the generation of clients &amp; secrets with various settings).</p>
+<p>For further information on clients / secrets, see; </p><ul>
+<li><a href="https://developer.sas.com/reference/auth/#register">https://developer.sas.com/reference/auth/#register</a> </li>
+<li><a href="https://proc-x.com/2019/01/authentication-to-sas-viya-a-couple-of-approaches">https://proc-x.com/2019/01/authentication-to-sas-viya-a-couple-of-approaches</a> </li>
+<li><a href="https://cli.sasjs.io/faq/#how-can-i-obtain-a-viya-client-and-secret">https://cli.sasjs.io/faq/#how-can-i-obtain-a-viya-client-and-secret</a></li>
+</ul>
+<p>The default viyaroot location is: <code>/opt/sas/viya/config</code></p>
 <p>Usage: </p><pre class="fragment">%* compile macros;
 filename mc url
   "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
@@ -137,17 +142,17 @@ filename mc url
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">client_id=</td><td>The client name. Auto generated if blank. </td></tr>
-    <tr><td class="paramname">client_secret=</td><td>Client secret Auto generated if client is blank. </td></tr>
-    <tr><td class="paramname">scopes=</td><td>list of space-seperated unquoted scopes (default is openid) </td></tr>
-    <tr><td class="paramname">grant_type=</td><td>valid values are "password" or "authorization_code" (unquoted) </td></tr>
-    <tr><td class="paramname">outds=</td><td>the dataset to contain the registered client id and secret </td></tr>
-    <tr><td class="paramname">access_token_validity=</td><td>The duration of validity of the access token in seconds. A value of DEFAULT will omit the entry (and use system default) </td></tr>
-    <tr><td class="paramname">refresh_token_validity=</td><td>The duration of validity of the refresh token in seconds. A value of DEFAULT will omit the entry (and use system default) </td></tr>
-    <tr><td class="paramname">name=</td><td>A human readable name for the client </td></tr>
+    <tr><td class="paramname">client_secret=</td><td>Client secret. Auto generated if client is blank. </td></tr>
+    <tr><td class="paramname">scopes=(openid)</td><td>List of space-seperated unquoted scopes </td></tr>
+    <tr><td class="paramname">grant_type=(authorization_code|refresh_token)</td><td>Valid values are "password" or "authorization_code" (unquoted) </td></tr>
+    <tr><td class="paramname">outds=(mv_registerclient)</td><td>The dataset to contain the registered client id and secret </td></tr>
+    <tr><td class="paramname">access_token_validity=(DEFAULT)</td><td>The duration of validity of the access token in seconds. A value of DEFAULT will omit the entry (and use system default) </td></tr>
+    <tr><td class="paramname">refresh_token_validity=(DEFAULT)</td><td>The duration of validity of the refresh token in seconds. A value of DEFAULT will omit the entry (and use system default) </td></tr>
+    <tr><td class="paramname">name=</td><td>An optional, human readable name for the client </td></tr>
     <tr><td class="paramname">required_user_groups=</td><td>A list of group names. If a user does not belong to all the required groups, the user will not be authenticated and no tokens are issued to this client for that user. If this field is not specified, authentication and token issuance proceeds normally. </td></tr>
     <tr><td class="paramname">autoapprove=</td><td>During the auth step the user can choose which scope to apply. Setting this to true will autoapprove all the client scopes. </td></tr>
     <tr><td class="paramname">use_session=</td><td>If true, access tokens issued to this client will be associated with an HTTP session and revoked upon logout or time-out. </td></tr>
-    <tr><td class="paramname">outjson=</td><td>A dataset containing the lines of JSON submitted. Useful for debugging. Default= <em>null</em>.</td></tr>
+    <tr><td class="paramname">outjson=</td><td>(<em>null</em>) A dataset containing the lines of JSON submitted. Useful for debugging.</td></tr>
   </table>
   </dd>
 </dl>
