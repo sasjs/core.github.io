@@ -126,7 +126,7 @@ $(document).ready(function(){initNavTree('mp__assertdsobs_8sas.html',''); initRe
     <tr><td class="paramdir">[in]</td><td class="paramname">test=</td><td>(HASOBS) The test to apply. Valid values are: <ul>
 <li>HASOBS - Test is a PASS if the input dataset has any observations </li>
 <li>EMPTY - Test is a PASS if input dataset is empty </li>
-<li>EQUALS [integer] - Test passes if obs count matches the provided integer </li>
+<li>EQUALS [integer] - Test passes if row count matches the provided integer @LI ATLEAST [integer] - Test passes if row count is more than or equal to the provided integer @LI ATMOST [integer] - Test passes if row count is less than or equal to the provided integer </li>
 </ul>
 </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.test_results) The output dataset to contain the results. If it does not exist, it will be created, with the following format: <table class="markdownTable">
@@ -141,7 +141,9 @@ $(document).ready(function(){initNavTree('mp__assertdsobs_8sas.html',''); initRe
 </dl>
 <h4>Related Macros </h4>
 <ul>
-<li><a class="el" href="mp__assertcolvals_8sas.html" title="Asserts the values in a column.">mp_assertcolvals.sas</a></li>
+<li><a class="el" href="mp__assertcolvals_8sas.html" title="Asserts the values in a column.">mp_assertcolvals.sas</a> </li>
+<li><a class="el" href="mp__assert_8sas.html" title="Generic assertion.">mp_assert.sas</a> </li>
+<li><a class="el" href="mp__assertcols_8sas.html" title="Asserts the existence (or not) of columns.">mp_assertcols.sas</a></li>
 </ul>
 <dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>

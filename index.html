@@ -106,7 +106,8 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="title">Macro Core </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> Much quality. Many standards. The <b>Macro Core</b> library exists to save time and development effort! Herein ye shall find a veritable host of MIT-licenced, production quality SAS macros. These are a mix of tools, utilities, functions and code generators that are useful in the context of <a href="https://sasapps.io">Application Development</a> on the SAS platform (eg <a href="https://datacontroller.io">https://datacontroller.io</a>). <a href="https://github.com/sasjs/core/blob/main/CONTRIBUTING.md">Contributions</a> are welcomed.</p>
+<div class="textblock"><p><a class="anchor" id="md_README"></a><a href="http://npmjs.org/package/@sasjs/core"><img src="https://img.shields.io/npm/v/@sasjs/core.svg" alt="npm package" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/sasjs/core/blob/main/.github/workflows/main.yml"><img src="https://github.com/sasjs/core/actions/workflows/main.yml/badge.svg" alt="Github Workflow" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/sasjs/core/blob/main/package.json"><img src="https://david-dm.org/sasjs/core.svg" alt="Dependency Status" style="pointer-events: none;" class="inline"/></a> [<img src="https://img.shields.io/npm/dt/@sasjs/core" alt="npm" class="inline"/>]() <img src="https://img.shields.io/snyk/vulnerabilities/npm/@sasjs/core" alt="Snyk Vulnerabilities for npm package" class="inline"/> <a href="/LICENSE"><img src="https://img.shields.io/apm/l/atomic-design-ui.svg" alt="License" style="pointer-events: none;" class="inline"/></a> <img src="https://img.shields.io/github/languages/top/sasjs/core" alt="GitHub top language" class="inline"/> <img src="https://tokei.rs/b1/github/sasjs/core" alt="total lines" class="inline"/> <a href="https://gitpod.io/#https://github.com/sasjs/core"><img src="https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod" alt="Gitpod ready-to-code" class="inline"/></a></p>
+<p>Much quality. Many standards. The <b>Macro Core</b> library exists to save time and development effort! Herein ye shall find a veritable host of MIT-licenced, production quality SAS macros. These are a mix of tools, utilities, functions and code generators that are useful in the context of <a href="https://sasapps.io">Application Development</a> on the SAS platform (eg <a href="https://datacontroller.io">https://datacontroller.io</a>). <a href="https://github.com/sasjs/core/blob/main/CONTRIBUTING.md">Contributions</a> are welcomed.</p>
 <p>You can download and compile them all in just two lines of SAS code:</p>
 <div class="fragment"><div class="line">filename mc url <span class="stringliteral">&quot;https://raw.githubusercontent.com/sasjs/core/main/all.sas&quot;</span>;</div>
 <div class="line">%inc mc;</div>
@@ -231,8 +232,12 @@ Coding Standards</h2>
 <h1><a class="anchor" id="autotoc_md8"></a>
 General Notes</h1>
 <ul>
-<li>All macros should be compatible with SAS versions from support level B and above (so currently 9.2 and later). If an earlier version is not supported, then the macro should say as such in the header documentation, and exit gracefully (eg <code>if sysevalf(&amp;sysver&lt;9.3) then return</code>). </li>
+<li>All macros should be compatible with SAS versions from support level B and above (so currently 9.2 and later). If an earlier version is not supported, then the macro should say as such in the header documentation, and exit gracefully (eg <code>if sysevalf(&amp;sysver&lt;9.3) then return</code>).</li>
 </ul>
+<h2><a class="anchor" id="autotoc_md9"></a>
+Star Gazing</h2>
+<p>If you find this library useful, help us grow our star graph!</p>
+<p><img src="https://starchart.cc/sasjs/core.svg" alt="" style="pointer-events: none;" class="inline"/> </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->

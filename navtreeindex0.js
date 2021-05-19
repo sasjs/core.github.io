@@ -229,6 +229,8 @@ var NAVTREEINDEX0 =
 "mp__assertdsobs_8sas.html":[1,0,40],
 "mp__assertdsobs_8sas.html#a0258a4de4bb9eb2eefb79287323e77cd":[1,0,40,0],
 "mp__assertdsobs_8sas_source.html":[1,0,40],
+"mp__assertdsobs_8test_8sas.html":[1,4,0,3],
+"mp__assertdsobs_8test_8sas_source.html":[1,4,0,3],
 "mp__binarycopy_8sas.html":[1,0,41],
 "mp__binarycopy_8sas.html#aecb4d615073f2785c0458814440e244e":[1,0,41,0],
 "mp__binarycopy_8sas_source.html":[1,0,41],
@@ -247,7 +249,5 @@ var NAVTREEINDEX0 =
 "mp__dirlist_8sas_source.html":[1,0,47],
 "mp__distinctfmtvalues_8sas.html":[1,0,48],
 "mp__distinctfmtvalues_8sas_source.html":[1,0,48],
-"mp__dropmembers_8sas.html":[1,0,49],
-"mp__dropmembers_8sas_source.html":[1,0,49],
-"mp__ds2cards_8sas.html":[1,0,50]
+"mp__dropmembers_8sas.html":[1,0,49]
 };
