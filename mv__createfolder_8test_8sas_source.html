@@ -122,21 +122,22 @@ $(document).ready(function(){initNavTree('mv__createfolder_8test_8sas_source.htm
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;%let folder=%mf_uid();</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/* create a service */</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;%mv_createfolder(path=&amp;mcTestAppLoc/temp/&amp;folder)</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/* create a folder */</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;%mv_createfolder(path=&amp;mcTestAppLoc/temp/&amp;folder/&amp;folder)</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;%mv_getfoldermembers(root=&amp;mcTestAppLoc/temp, outds=work.folders)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;%mv_getfoldermembers(root=&amp;mcTestAppLoc/temp/&amp;folder, outds=work.folders)</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;%let test=0;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;data _null_;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keyword">set</span> work.folders;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  putlog (_all_)(=);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;run;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;%mp_assert(</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  iftrue=(&amp;syscc=0),</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  desc=Check <span class="keywordflow">if</span> folder can be successfully created</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;)</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordflow">if</span> name=<span class="stringliteral">&quot;&amp;folder&quot;</span> then call symputx(<span class="stringliteral">&#39;test&#39;</span>,1);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;run;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;%mp_assert(</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  iftrue=(&amp;test=1),</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  desc=Check <span class="keywordflow">if</span> temp folder can be successfully created</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;)</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
