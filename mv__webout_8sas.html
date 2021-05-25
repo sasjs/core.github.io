@@ -126,9 +126,10 @@ run;
     <tr><td class="paramname">action</td><td>Either OPEN, ARR, OBJ or CLOSE </td></tr>
     <tr><td class="paramname">ds</td><td>The dataset to send back to the frontend </td></tr>
     <tr><td class="paramname">_webout=</td><td>fileref for returning the json </td></tr>
-    <tr><td class="paramname">fref=</td><td>temp fref </td></tr>
+    <tr><td class="paramname">fref=(_mvwtemp)</td><td>Temp fileref to which to write the output </td></tr>
     <tr><td class="paramname">dslabel=</td><td>value to use instead of the real name for sending to JSON </td></tr>
-    <tr><td class="paramname">fmt=</td><td>change to N to strip formats from output</td></tr>
+    <tr><td class="paramname">fmt=(Y)</td><td>change to N to strip formats from output </td></tr>
+    <tr><td class="paramname">stream=(Y)</td><td>Change to N if not streaming to _webout</td></tr>
   </table>
   </dd>
 </dl>

@@ -255,7 +255,7 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas_source.html',''); ini
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;      run;</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;      %let ds=&amp;fmtds;</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    %end; <span class="comment">/* &amp;fmt=Y */</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    data _null_;file &amp;jref mod ;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    data _null_;file &amp;jref mod encoding=<span class="stringliteral">&#39;utf-8&#39;</span>;</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;      put <span class="stringliteral">&quot;[&quot;</span>; call symputx(<span class="stringliteral">&#39;cols&#39;</span>,0,<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    proc sort</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;      data=sashelp.vcolumn(where=(libname=<span class="stringliteral">&#39;WORK&#39;</span> &amp; memname=<span class="stringliteral">&quot;%upcase(&amp;ds)&quot;</span>))</div>

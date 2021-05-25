@@ -186,31 +186,32 @@ $(document).ready(function(){initNavTree('mp__filtervalidate_8sas_source.html','
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;data &amp;outds;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keywordflow">if</span> &amp;sqlrc or &amp;syscc or &amp;syserr then <span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    REASON_CD=coalescec(symget(<span class="stringliteral">&#39;SYSERRORTEXT&#39;</span>),symget(<span class="stringliteral">&#39;SYSWARNINGTEXT&#39;</span>));</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    output;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  end;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keywordflow">else</span> stop;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;run;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;filename &amp;fref1 clear;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;%<span class="keywordflow">if</span> %mf_nobs(&amp;outds)&gt;0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  %<span class="keywordflow">if</span> &amp;abort=YES %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    data _null_;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      <span class="keyword">set</span> &amp;outds;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      call symputx(<span class="stringliteral">&#39;REASON_CD&#39;</span>,reason_cd,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      stop;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    run;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    %mp_abort(</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      mac=&amp;sysmacroname,</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;      msg=%str(Filter validation issues. ERR=%superq(SYSERRORTEXT)</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        , WARN=%superq(SYSWARNINGTEXT) )</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    )</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  %end;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  %let syscc=1008;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;%end;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;%mend;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    REASON_CD=<span class="stringliteral">&#39;VALIDATION_ERROR: &#39;</span>!!</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      coalescec(symget(<span class="stringliteral">&#39;SYSERRORTEXT&#39;</span>),symget(<span class="stringliteral">&#39;SYSWARNINGTEXT&#39;</span>));</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    output;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  end;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keywordflow">else</span> stop;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;run;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;filename &amp;fref1 clear;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;%<span class="keywordflow">if</span> %mf_nobs(&amp;outds)&gt;0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  %<span class="keywordflow">if</span> &amp;abort=YES %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    data _null_;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      <span class="keyword">set</span> &amp;outds;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      call symputx(<span class="stringliteral">&#39;REASON_CD&#39;</span>,reason_cd,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      stop;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    run;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    %mp_abort(</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;      mac=&amp;sysmacroname,</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      msg=%str(Filter validation issues. ERR=%superq(SYSERRORTEXT)</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        , WARN=%superq(SYSWARNINGTEXT) )</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    )</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  %end;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  %let syscc=1008;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;%end;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;%mend mp_filtervalidate;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

@@ -83,7 +83,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('mv__getfoldermembers_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mv__createfolder_8test_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,43 +103,25 @@ $(document).ready(function(){initNavTree('mv__getfoldermembers_8sas.html',''); i
 
 <div class="header">
   <div class="headertitle">
-<div class="title">mv_getfoldermembers.sas File Reference</div>  </div>
+<div class="title">mv_createfolder.test.sas File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Gets a list of folders (and ids) for a given root.  
+<p>Testing mv_createfolder macro.  
 <a href="#details">More...</a></p>
 
-<p><a href="mv__getfoldermembers_8sas_source.html">Go to the source code of this file.</a></p>
+<p><a href="mv__createfolder_8test_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Works for both root level and below, oauth or password. Default is oauth, and the token is expected in a global ACCESS_TOKEN variable. </p><pre class="fragment">%mv_getfoldermembers(root=/Public)
-</pre><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">root=</td><td>The path for which to return the list of folders </td></tr>
-    <tr><td class="paramname">outds=</td><td>The output dataset to create (default is work.mv_getfolders). Format: <table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">ordinal_root   </th><th class="markdownTableHeadNone">ordinal_items   </th><th class="markdownTableHeadNone">creationTimeStamp   </th><th class="markdownTableHeadNone">modifiedTimeStamp   </th><th class="markdownTableHeadNone">createdBy   </th><th class="markdownTableHeadNone">modifiedBy   </th><th class="markdownTableHeadNone">id   </th><th class="markdownTableHeadNone">uri   </th><th class="markdownTableHeadNone">added   </th><th class="markdownTableHeadNone">type   </th><th class="markdownTableHeadNone">name   </th><th class="markdownTableHeadNone">description=    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">2021-05-25T11:15:04.204Z   </td><td class="markdownTableBodyNone">2021-05-25T11:15:04.204Z   </td><td class="markdownTableBodyNone">allbow   </td><td class="markdownTableBodyNone">allbow   </td><td class="markdownTableBodyNone">4f1e3945-9655-462b-90f2-c31534b3ca47   </td><td class="markdownTableBodyNone">/folders/folders/ed701ff3-77e8-468d-a4f5-8c43dec0fd9e   </td><td class="markdownTableBodyNone">2021-05-25T11:15:04.212Z   </td><td class="markdownTableBodyNone">child   </td><td class="markdownTableBodyNone">my_folder_name   </td><td class="markdownTableBodyNone">My folder Description   </td></tr>
-</table>
-</td></tr>
-    <tr><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
-    <tr><td class="paramname">grant_type=</td><td>valid values are "password" or "authorization_code" (unquoted). The default is authorization_code.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section version"><dt>Version</dt><dd>VIYA V.03.04 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe, source: <a href="https://github.com/sasjs/core">https://github.com/sasjs/core</a></dd></dl>
-<h4>SAS Macros </h4>
+<div class="textblock"><h4>SAS Macros </h4>
 <ul>
-<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
-<li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
-<li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
-<li><a class="el" href="mf__getuniquelibref_8sas.html" title="Returns an unused libref.">mf_getuniquelibref.sas</a> </li>
-<li><a class="el" href="mf__isblank_8sas.html" title="Checks whether a macro variable is empty (blank)">mf_isblank.sas</a> </li>
+<li><a class="el" href="mf__uid_8sas.html" title="Creates a unique ID based on system time in friendly format.">mf_uid.sas</a> </li>
+<li><a class="el" href="mp__assert_8sas.html" title="Generic assertion.">mp_assert.sas</a> </li>
+<li><a class="el" href="mv__createfolder_8sas.html" title="Creates a viya folder if that folder does not already exist.">mv_createfolder.sas</a> </li>
+<li><a class="el" href="mv__deleteviyafolder_8sas.html" title="Creates a viya folder if that folder does not already exist.">mv_deleteviyafolder.sas</a> </li>
+<li><a class="el" href="mv__getfoldermembers_8sas.html" title="Gets a list of folders (and ids) for a given root.">mv_getfoldermembers.sas</a> </li>
 </ul>
 
-<p class="definition">Definition in file <a class="el" href="mv__getfoldermembers_8sas_source.html">mv_getfoldermembers.sas</a>.</p>
+<p class="definition">Definition in file <a class="el" href="mv__createfolder_8test_8sas_source.html">mv_createfolder.test.sas</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
@@ -147,7 +129,7 @@ $(document).ready(function(){initNavTree('mv__getfoldermembers_8sas.html',''); i
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_f3c9615c6d389fd64e9075885fcd8e6e.html">viya</a></li><li class="navelem"><a class="el" href="mv__getfoldermembers_8sas.html">mv_getfoldermembers.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_59425e443f801f1f2fd8bbe4959a3ccf.html">tests</a></li><li class="navelem"><a class="el" href="dir_777587a74d586a96adaaaed8120dd0b3.html">viya</a></li><li class="navelem"><a class="el" href="mv__createfolder_8test_8sas.html">mv_createfolder.test.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">
