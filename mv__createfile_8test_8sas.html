@@ -83,7 +83,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('mm__createwebservice_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mv__createfile_8test_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,58 +103,24 @@ $(document).ready(function(){initNavTree('mm__createwebservice_8sas.html',''); i
 
 <div class="header">
   <div class="headertitle">
-<div class="title">mm_createwebservice.sas File Reference</div>  </div>
+<div class="title">mv_createfile.test.sas File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Create a Web Ready Stored Process.  
+<p>Testing mv_createfile macro.  
 <a href="#details">More...</a></p>
 
-<p><a href="mm__createwebservice_8sas_source.html">Go to the source code of this file.</a></p>
+<p><a href="mv__createfile_8test_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This macro creates a Type 2 Stored Process with the mm_webout macro included as pre-code. Usage: </p><pre class="fragment">%* compile macros ;
-filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
-%inc mc;
-
-%* parmcards lets us write to a text file from open code ;
-filename ft15f001 temp;
-parmcards4;
-    %* do some sas, any inputs are now already WORK tables;
-    data example1 example2;
-      set sashelp.class;
-    run;
-    %* send data back;
-    %webout(OPEN)
-    %webout(ARR,example1) * Array format, fast, suitable for large tables ;
-    %webout(OBJ,example2) * Object format, easier to work with ;
-    %webout(CLOSE)
-;;;;
-%mm_createwebservice(path=/Public/app/common,name=appInit,code=ft15f001)
-</pre> <h4>SAS Macros </h4>
+<div class="textblock"><h4>SAS Macros </h4>
 <ul>
-<li><a class="el" href="mm__createstp_8sas.html" title="Create a type 1 Stored Process (9.2 compatible)">mm_createstp.sas</a> </li>
-<li><a class="el" href="mf__getuser_8sas.html" title="Returns a userid according to session context.">mf_getuser.sas</a> </li>
-<li><a class="el" href="mm__createfolder_8sas.html" title="Recursively create a metadata folder.">mm_createfolder.sas</a> </li>
-<li><a class="el" href="mm__deletestp_8sas.html" title="Deletes a Stored Process using path as reference.">mm_deletestp.sas</a></li>
+<li><a class="el" href="mf__uid_8sas.html" title="Creates a unique ID based on system time in friendly format.">mf_uid.sas</a> </li>
+<li><a class="el" href="mfv__existfile_8sas.html" title="Checks whether a file exists in SAS Drive.">mfv_existfile.sas</a> </li>
+<li><a class="el" href="mp__assert_8sas.html" title="Generic assertion.">mp_assert.sas</a> </li>
+<li><a class="el" href="mv__createfile_8sas.html" title="Creates a file in SAS Drive.">mv_createfile.sas</a> </li>
 </ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">path=</td><td>The full path (in SAS Metadata) where the service will be created </td></tr>
-    <tr><td class="paramname">name=</td><td>Stored Process name. Avoid spaces - testing has shown that the check to avoid creating multiple STPs in the same folder with the same name does not work when the name contains spaces. </td></tr>
-    <tr><td class="paramname">desc=</td><td>The description of the service (optional) </td></tr>
-    <tr><td class="paramname">precode=</td><td>Space separated list of filerefs, pointing to the code that needs to be attached to the beginning of the service (optional) </td></tr>
-    <tr><td class="paramname">code=(ft15f001)</td><td>Space seperated fileref(s) of the actual code to be added </td></tr>
-    <tr><td class="paramname">server=(SASApp)</td><td>The server which will run the STP. Server name or uri is fine. </td></tr>
-    <tr><td class="paramname">mDebug=(0)</td><td>set to 1 to show debug messages in the log </td></tr>
-    <tr><td class="paramname">replace=(YES)</td><td>select NO to avoid replacing an existing service in that location </td></tr>
-    <tr><td class="paramname">adapter=(sasjs)</td><td>the macro uses the sasjs adapter by default. To use another adapter, add a (different) fileref here.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="mm__createwebservice_8sas_source.html">mm_createwebservice.sas</a>.</p>
+<p class="definition">Definition in file <a class="el" href="mv__createfile_8test_8sas_source.html">mv_createfile.test.sas</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
@@ -162,7 +128,7 @@ parmcards4;
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_0d92069d5a23b1d3125c326d74f1a07c.html">meta</a></li><li class="navelem"><a class="el" href="mm__createwebservice_8sas.html">mm_createwebservice.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_59425e443f801f1f2fd8bbe4959a3ccf.html">tests</a></li><li class="navelem"><a class="el" href="dir_777587a74d586a96adaaaed8120dd0b3.html">viya</a></li><li class="navelem"><a class="el" href="mv__createfile_8test_8sas.html">mv_createfile.test.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">

@@ -112,12 +112,18 @@ $(document).ready(function(){initNavTree('mv__createfolder_8sas.html',''); initR
 
 <p><a href="mv__createfolder_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Expects oauth token in a global macro variable (default ACCESS_TOKEN). </p><pre class="fragment">%mv_createfolder(path=/Public)
+<div class="textblock"><p>Creates a viya folder by checking if each parent folder exists, and recursively creating children if needed. Usage: </p><pre class="fragment">%mv_createfolder(path=/Public)
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path=</td><td>The full path of the folder to be created </td></tr>
-    <tr><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
-    <tr><td class="paramname">grant_type=</td><td>(authorization_code) Valid values are "password" or "authorization_code" (unquoted).</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">path=</td><td>The full path of the folder to be created </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token, if using authorization_code grant type. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>(sas_services) Valid values are: <ul>
+<li>password </li>
+<li>authorization_code </li>
+<li>sas_services</li>
+</ul>
+</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=(0)</td><td>set to 1 to enable DEBUG messages</td></tr>
   </table>
   </dd>
 </dl>
@@ -130,6 +136,7 @@ $(document).ready(function(){initNavTree('mv__createfolder_8sas.html',''); initR
 <li><a class="el" href="mf__getuniquelibref_8sas.html" title="Returns an unused libref.">mf_getuniquelibref.sas</a> </li>
 <li><a class="el" href="mf__isblank_8sas.html" title="Checks whether a macro variable is empty (blank)">mf_isblank.sas</a> </li>
 <li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
+<li><a class="el" href="mfv__existfolder_8sas.html" title="Checks whether a folder exists in SAS Drive.">mfv_existfolder.sas</a> </li>
 </ul>
 
 <p class="definition">Definition in file <a class="el" href="mv__createfolder_8sas_source.html">mv_createfolder.sas</a>.</p>

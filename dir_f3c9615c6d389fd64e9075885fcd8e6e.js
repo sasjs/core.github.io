@@ -1,5 +1,8 @@
 var dir_f3c9615c6d389fd64e9075885fcd8e6e =
 [
+    [ "mfv_existfile.sas", "mfv__existfile_8sas.html", null ],
+    [ "mfv_existfolder.sas", "mfv__existfolder_8sas.html", null ],
+    [ "mv_createfile.sas", "mv__createfile_8sas.html", "mv__createfile_8sas" ],
     [ "mv_createfolder.sas", "mv__createfolder_8sas.html", "mv__createfolder_8sas" ],
     [ "mv_createjob.sas", "mv__createjob_8sas.html", "mv__createjob_8sas" ],
     [ "mv_createwebservice.sas", "mv__createwebservice_8sas.html", "mv__createwebservice_8sas" ],
