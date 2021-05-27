@@ -113,9 +113,9 @@ $(document).ready(function(){initNavTree('mfv__existfile_8sas.html',''); initRes
 <p><a href="mfv__existfile_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Returns 1 if the file exists, and 0 if it doesn't. Works by attempting to assign a fileref with the filesrvc engine. If not found, the syscc is automatically set to a non zero value - so in this case it is reset. To avoid hiding issues, there is therefore a test at the start to ensure the syscc is zero.</p>
-<p>Usage:</p>
-<p>put mfv_existfile(/does/exist.txt); put mfv_existfile(/does/not/exist.txt);</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Usage: </p><pre class="fragment">%put %mfv_existfile(/does/exist.txt);
+%put %mfv_existfile(/does/not/exist.txt);
+</pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">filepath</td><td>The full path to the file on SAS drive (eg /Public/myfile.txt)</td></tr>
   </table>
@@ -125,6 +125,10 @@ $(document).ready(function(){initNavTree('mfv__existfile_8sas.html',''); initRes
 <ul>
 <li><a class="el" href="mf__abort_8sas.html" title="Abort, ungracefully.">mf_abort.sas</a> </li>
 <li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a></li>
+</ul>
+<h4>Related Macros </h4>
+<ul>
+<li><a class="el" href="mfv__existfolder_8sas.html" title="Checks whether a folder exists in SAS Drive.">mfv_existfolder.sas</a></li>
 </ul>
 <dl class="section version"><dt>Version</dt><dd>3.5 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd><a href="https://www.linkedin.com/in/allanbowe/">Allan Bowe</a> </dd></dl>
