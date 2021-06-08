@@ -174,11 +174,12 @@ $(document).ready(function(){initNavTree('mf__getvarlist_8sas_source.html',''); 
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    %let rc=%sysfunc(close(&amp;dsid));</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  %end;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    %put unable to open &amp;libds (rc=&amp;dsid);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    %let rc=%sysfunc(close(&amp;dsid));</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  %end;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  &amp;outvar</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;%mend mf_getvarlist;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    %put &amp;sysmacroname: Unable to open &amp;libds (rc=&amp;dsid);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    %put &amp;sysmacroname: SYSMSG= %sysfunc(sysmsg());</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    %let rc=%sysfunc(close(&amp;dsid));</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  %end;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  &amp;outvar</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;%mend mf_getvarlist;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

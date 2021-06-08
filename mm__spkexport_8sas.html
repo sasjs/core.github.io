@@ -127,13 +127,15 @@ data _null_;
   put '%let mmxpass="Mars321";';
 run;
 
-filename myref "%sysfunc(pathname(work))/mmxexport.sh";
+filename myref "%sysfunc(pathname(work))/mmxexport.sh"
+  permission='A::u::rwx,A::g::r-x,A::o::---';
 %mm_spkexport(metaloc=%str(/my/meta/loc)
     ,outref=myref
     ,secureref=tmp
     ,cmdoutloc=%str(/tmp)
 )
-</pre><p> Alternatively, call without inputs to create a function style output </p><pre class="fragment">filename myref "/tmp/mmscript.sh";
+</pre><p> Alternatively, call without inputs to create a function style output </p><pre class="fragment">filename myref "/tmp/mmscript.sh"
+  permission='A::u::rwx,A::g::r-x,A::o::---';
 %mm_spkexport(metaloc=%str(/my/meta/loc)
     outref=myref
     ,cmdoutloc=%str(/tmp)
