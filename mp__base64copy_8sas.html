@@ -112,7 +112,8 @@ $(document).ready(function(){initNavTree('mp__base64copy_8sas.html',''); initRes
 
 <p><a href="mp__base64copy_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Creates a new version of a file either encoded or decoded using Base64. Inspired by this post by Michael Dixon: <a href="https://support.selerity.com.au/hc/en-us/articles/223345708-Tip-SAS-and-Base64">https://support.selerity.com.au/hc/en-us/articles/223345708-Tip-SAS-and-Base64</a> Usage: </p><pre class="fragment">  filename tmp temp;
+<div class="textblock"><p>Creates a new version of a file either encoded or decoded using Base64. Inspired by this post by Michael Dixon: <a href="https://support.selerity.com.au/hc/en-us/articles/223345708-Tip-SAS-and-Base64">https://support.selerity.com.au/hc/en-us/articles/223345708-Tip-SAS-and-Base64</a></p>
+<p>Usage: </p><pre class="fragment">  filename tmp temp;
   data _null_;
     file tmp;
     put 'base ik ally';
@@ -134,21 +135,22 @@ $(document).ready(function(){initNavTree('mp__base64copy_8sas.html',''); initRes
   run;
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">inref=</td><td>Fileref of the input file (should exist) </td></tr>
-    <tr><td class="paramname">outref=</td><td>Output filref. If it does not exist, it is created. </td></tr>
-    <tr><td class="paramname">action=</td><td>(ENCODE) The action to take. Valid values: <ul>
+    <tr><td class="paramdir">[in]</td><td class="paramname">inref=</td><td>Fileref of the input file (should exist) </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">outref=</td><td>Output filref. If it does not exist, it is created. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">action=</td><td>(ENCODE) The action to take. Valid values: <ul>
 <li>ENCODE Convert the file to base64 format </li>
 <li>DECODE Decode the file from base64 format</li>
 </ul>
-<h4>SAS Macros </h4>
 </td></tr>
   </table>
   </dd>
 </dl>
-<ul>
-<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a></li>
-</ul>
 <dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Allan Bowe, source: <a href="https://github.com/sasjs/core">https://github.com/sasjs/core</a></dd></dl>
+<h4>SAS Macros </h4>
+<ul>
+<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
+</ul>
 
 <p class="definition">Definition in file <a class="el" href="mp__base64copy_8sas_source.html">mp_base64copy.sas</a>.</p>
 </div></div><!-- contents -->
