@@ -729,7 +729,7 @@ $(document).ready(function(){initNavTree('mv__createwebservice_8sas_source.html'
 <div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;<span class="stringliteral">  put &#39;</span> <span class="stringliteral">&#39;;</span></div>
 <div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;<span class="stringliteral">  put &#39;</span>  %quote(&amp;user) <span class="stringliteral">&#39;;</span></div>
 <div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;<span class="stringliteral">  put &#39;</span> <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;<span class="stringliteral">  put &#39;</span>%mend; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;<span class="stringliteral">  put &#39;</span>%mend mf_getuser; <span class="stringliteral">&#39;;</span></div>
 <div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;<span class="stringliteral">/* WEBOUT END */</span></div>
 <div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;<span class="stringliteral">  put &#39;</span><span class="comment">/* if calling viya service with _job param, _program will conflict */</span><span class="stringliteral">&#39;;</span></div>
 <div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;<span class="stringliteral">  put &#39;</span><span class="comment">/* so it is provided by SASjs instead as __program */</span><span class="stringliteral">&#39;;</span></div>
@@ -783,89 +783,105 @@ $(document).ready(function(){initNavTree('mv__createwebservice_8sas_source.html'
 <div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>0<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
 <div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>1<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
 <div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;<span class="stringliteral">      end;</span></div>
-<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;<span class="stringliteral">      else do;</span></div>
-<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;<span class="stringliteral">        rc =fput(fileid,rec);</span></div>
-<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;<span class="stringliteral">        rc =fwrite(fileid);</span></div>
-<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;<span class="stringliteral">      end;</span></div>
-<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;<span class="stringliteral">    end;</span></div>
-<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;<span class="stringliteral">    rc=fclose(filein);</span></div>
-<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;<span class="stringliteral">    rc=fclose(fileid);</span></div>
-<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;<span class="stringliteral">  run;</span></div>
-<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;<span class="stringliteral">%end;</span></div>
-<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;<span class="stringliteral">/* finish off the body of the code file loaded to JES */</span></div>
-<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;<span class="stringliteral">data _null_;</span></div>
-<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;<span class="stringliteral">  file &amp;fname3 mod TERMSTR=&#39;</span> <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;<span class="stringliteral">  put &#39;</span><span class="stringliteral">&quot;}&#39;;</span></div>
-<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;<span class="stringliteral">run;</span></div>
-<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;<span class="stringliteral">%if &amp;mdebug=1 and &amp;SYS_PROCHTTP_STATUS_CODE ne 201 %then %do;</span></div>
-<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;<span class="stringliteral">  %put &amp;sysmacroname: input about to be POSTed;</span></div>
-<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;<span class="stringliteral">  data _null_;infile &amp;fname3;input;putlog _infile_;run;</span></div>
-<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;<span class="stringliteral">%end;</span></div>
-<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;<span class="stringliteral">%&amp;dbg.put &amp;sysmacroname: Creating the actual service!;</span></div>
-<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;<span class="stringliteral">%local fname4;</span></div>
-<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;<span class="stringliteral">%let fname4=%mf_getuniquefileref();</span></div>
-<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;<span class="stringliteral">proc http method=&#39;POST&#39;</span></div>
-<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;<span class="stringliteral">    in=&amp;fname3</span></div>
-<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;<span class="stringliteral">    out=&amp;fname4</span></div>
-<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;<span class="stringliteral">    &amp;oauth_bearer</span></div>
-<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;<span class="stringliteral">    url=&quot;</span>&amp;base_uri/jobDefinitions/definitions?parentFolderUri=&amp;parentFolderUri<span class="stringliteral">&quot;;</span></div>
-<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;<span class="stringliteral">    headers &#39;Content-Type&#39;=&#39;application/vnd.sas.job.definition+json&#39;</span></div>
-<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;<span class="stringliteral">  %if &amp;grant_type=authorization_code %then %do;</span></div>
-<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;<span class="stringliteral">            &quot;</span>Authorization<span class="stringliteral">&quot;=&quot;</span>Bearer &amp;&amp;&amp;access_token_var<span class="stringliteral">&quot;</span></div>
-<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;<span class="stringliteral">  %end;</span></div>
-<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;<span class="stringliteral">            &quot;</span>Accept<span class="stringliteral">&quot;=&quot;</span>application/vnd.sas.job.definition+json<span class="stringliteral">&quot;;</span></div>
-<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;<span class="stringliteral">%if &amp;mdebug=1 %then %do;</span></div>
-<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;<span class="stringliteral">    debug level = 3;</span></div>
-<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;<span class="stringliteral">%end;</span></div>
-<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;<span class="stringliteral">run;</span></div>
-<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;<span class="stringliteral">%if &amp;mdebug=1 and &amp;SYS_PROCHTTP_STATUS_CODE ne 201 %then %do;</span></div>
-<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;<span class="stringliteral">  %put &amp;sysmacroname: output from POSTing job definition;</span></div>
-<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;<span class="stringliteral">  data _null_;infile &amp;fname4;input;putlog _infile_;run;</span></div>
-<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;<span class="stringliteral">%end;</span></div>
-<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;<span class="stringliteral">%mp_abort(iftrue=(&amp;SYS_PROCHTTP_STATUS_CODE ne 201)</span></div>
-<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;<span class="stringliteral">  ,mac=&amp;sysmacroname</span></div>
-<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;<span class="stringliteral">  ,msg=%str(&amp;SYS_PROCHTTP_STATUS_CODE &amp;SYS_PROCHTTP_STATUS_PHRASE)</span></div>
-<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;<span class="stringliteral">)</span></div>
-<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;<span class="stringliteral">/* get the url so we can give a helpful log message */</span></div>
-<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;<span class="stringliteral">%local url;</span></div>
-<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;<span class="stringliteral">data _null_;</span></div>
-<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;<span class="stringliteral">  if symexist(&#39;_baseurl&#39;) then do;</span></div>
-<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;<span class="stringliteral">    url=symget(&#39;_baseurl&#39;);</span></div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;<span class="stringliteral">    if subpad(url,length(url)-9,9)=&#39;SASStudio&#39;</span></div>
-<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;<span class="stringliteral">      then url=substr(url,1,length(url)-11);</span></div>
-<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;<span class="stringliteral">    else url=&quot;</span>&amp;systcpiphostname<span class="stringliteral">&quot;;</span></div>
-<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;<span class="stringliteral">  end;</span></div>
-<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;<span class="stringliteral">  else url=&quot;</span>&amp;systcpiphostname<span class="stringliteral">&quot;;</span></div>
-<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;<span class="stringliteral">  call symputx(&#39;url&#39;,url);</span></div>
-<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;<span class="stringliteral">run;</span></div>
-<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;<span class="stringliteral">%if &amp;mdebug=1 %then %do;</span></div>
-<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;<span class="stringliteral">  %put &amp;sysmacroname exit vars:;</span></div>
-<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;<span class="stringliteral">  %put _local_;</span></div>
-<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;<span class="stringliteral">%end;</span></div>
-<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;<span class="stringliteral">%else %do;</span></div>
-<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;<span class="stringliteral">  /* clear refs */</span></div>
-<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;<span class="stringliteral">  filename &amp;fname1 clear;</span></div>
-<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;<span class="stringliteral">  filename &amp;fname2 clear;</span></div>
-<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;<span class="stringliteral">  filename &amp;fname3 clear;</span></div>
-<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;<span class="stringliteral">  filename &amp;fname4 clear;</span></div>
-<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;<span class="stringliteral">  filename &amp;adapter clear;</span></div>
-<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;<span class="stringliteral">  libname &amp;libref1 clear;</span></div>
-<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;<span class="stringliteral">%end;</span></div>
-<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;<span class="stringliteral">%put &amp;sysmacroname: Job &amp;name successfully created in &amp;path;</span></div>
-<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;<span class="stringliteral">%put &amp;sysmacroname:;</span></div>
-<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;<span class="stringliteral">%put &amp;sysmacroname: Check it out here:;</span></div>
-<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;<span class="stringliteral">%put &amp;sysmacroname:;%put;</span></div>
-<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;<span class="stringliteral">%put    &amp;url/SASJobExecution?_PROGRAM=&amp;path/&amp;name;%put;</span></div>
-<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;<span class="stringliteral">%put &amp;sysmacroname:;</span></div>
-<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;<span class="stringliteral">%put &amp;sysmacroname:;</span></div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;<span class="stringliteral">%mend mv_createwebservice;</span></div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;<span class="stringliteral">      else if rec=&#39;</span>07<span class="stringliteral">&#39;x then do; /* Bell Char */</span></div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>\<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>u<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>0<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>0<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>0<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>7<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;<span class="stringliteral">      end;</span></div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;<span class="stringliteral">      else if rec=&#39;</span>1B<span class="stringliteral">&#39;x then do; /* escape char */</span></div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>\<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>u<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>0<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>0<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>1<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;<span class="stringliteral">        rc =fput(fileid,&#39;</span>B<span class="stringliteral">&#39;);rc =fwrite(fileid);</span></div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;<span class="stringliteral">      end;</span></div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;<span class="stringliteral">      else do;</span></div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;<span class="stringliteral">        rc =fput(fileid,rec);</span></div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;<span class="stringliteral">        rc =fwrite(fileid);</span></div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;<span class="stringliteral">      end;</span></div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;<span class="stringliteral">    end;</span></div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;<span class="stringliteral">    rc=fclose(filein);</span></div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;<span class="stringliteral">    rc=fclose(fileid);</span></div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;<span class="stringliteral">  run;</span></div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;<span class="stringliteral">%end;</span></div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;<span class="stringliteral">/* finish off the body of the code file loaded to JES */</span></div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;<span class="stringliteral">data _null_;</span></div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;<span class="stringliteral">  file &amp;fname3 mod TERMSTR=&#39;</span> <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;<span class="stringliteral">  put &#39;</span><span class="stringliteral">&quot;}&#39;;</span></div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;<span class="stringliteral">run;</span></div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;<span class="stringliteral">%if &amp;mdebug=1 and &amp;SYS_PROCHTTP_STATUS_CODE ne 201 %then %do;</span></div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;<span class="stringliteral">  %put &amp;sysmacroname: input about to be POSTed;</span></div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;<span class="stringliteral">  data _null_;infile &amp;fname3;input;putlog _infile_;run;</span></div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;<span class="stringliteral">%end;</span></div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;<span class="stringliteral">%&amp;dbg.put &amp;sysmacroname: Creating the actual service!;</span></div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;<span class="stringliteral">%local fname4;</span></div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;<span class="stringliteral">%let fname4=%mf_getuniquefileref();</span></div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;<span class="stringliteral">proc http method=&#39;POST&#39;</span></div>
+<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;<span class="stringliteral">    in=&amp;fname3</span></div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;<span class="stringliteral">    out=&amp;fname4</span></div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;<span class="stringliteral">    &amp;oauth_bearer</span></div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;<span class="stringliteral">    url=&quot;</span>&amp;base_uri/jobDefinitions/definitions?parentFolderUri=&amp;parentFolderUri<span class="stringliteral">&quot;;</span></div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;<span class="stringliteral">    headers &#39;Content-Type&#39;=&#39;application/vnd.sas.job.definition+json&#39;</span></div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;<span class="stringliteral">  %if &amp;grant_type=authorization_code %then %do;</span></div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;<span class="stringliteral">            &quot;</span>Authorization<span class="stringliteral">&quot;=&quot;</span>Bearer &amp;&amp;&amp;access_token_var<span class="stringliteral">&quot;</span></div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;<span class="stringliteral">  %end;</span></div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;<span class="stringliteral">            &quot;</span>Accept<span class="stringliteral">&quot;=&quot;</span>application/vnd.sas.job.definition+json<span class="stringliteral">&quot;;</span></div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;<span class="stringliteral">%if &amp;mdebug=1 %then %do;</span></div>
+<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;<span class="stringliteral">    debug level = 3;</span></div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;<span class="stringliteral">%end;</span></div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;<span class="stringliteral">run;</span></div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;<span class="stringliteral">%if &amp;mdebug=1 and &amp;SYS_PROCHTTP_STATUS_CODE ne 201 %then %do;</span></div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;<span class="stringliteral">  %put &amp;sysmacroname: output from POSTing job definition;</span></div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;<span class="stringliteral">  data _null_;infile &amp;fname4;input;putlog _infile_;run;</span></div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;<span class="stringliteral">%end;</span></div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;<span class="stringliteral">%mp_abort(iftrue=(&amp;SYS_PROCHTTP_STATUS_CODE ne 201)</span></div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;<span class="stringliteral">  ,mac=&amp;sysmacroname</span></div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;<span class="stringliteral">  ,msg=%str(&amp;SYS_PROCHTTP_STATUS_CODE &amp;SYS_PROCHTTP_STATUS_PHRASE)</span></div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;<span class="stringliteral">)</span></div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;<span class="stringliteral">/* get the url so we can give a helpful log message */</span></div>
+<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;<span class="stringliteral">%local url;</span></div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;<span class="stringliteral">data _null_;</span></div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;<span class="stringliteral">  if symexist(&#39;_baseurl&#39;) then do;</span></div>
+<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;<span class="stringliteral">    url=symget(&#39;_baseurl&#39;);</span></div>
+<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;<span class="stringliteral">    if subpad(url,length(url)-9,9)=&#39;SASStudio&#39;</span></div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;<span class="stringliteral">      then url=substr(url,1,length(url)-11);</span></div>
+<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;<span class="stringliteral">    else url=&quot;</span>&amp;systcpiphostname<span class="stringliteral">&quot;;</span></div>
+<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;<span class="stringliteral">  end;</span></div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;<span class="stringliteral">  else url=&quot;</span>&amp;systcpiphostname<span class="stringliteral">&quot;;</span></div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;<span class="stringliteral">  call symputx(&#39;url&#39;,url);</span></div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;<span class="stringliteral">run;</span></div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;<span class="stringliteral">%if &amp;mdebug=1 %then %do;</span></div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;<span class="stringliteral">  %put &amp;sysmacroname exit vars:;</span></div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;<span class="stringliteral">  %put _local_;</span></div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;<span class="stringliteral">%end;</span></div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;<span class="stringliteral">%else %do;</span></div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;<span class="stringliteral">  /* clear refs */</span></div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;<span class="stringliteral">  filename &amp;fname1 clear;</span></div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;<span class="stringliteral">  filename &amp;fname2 clear;</span></div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;<span class="stringliteral">  filename &amp;fname3 clear;</span></div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;<span class="stringliteral">  filename &amp;fname4 clear;</span></div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;<span class="stringliteral">  filename &amp;adapter clear;</span></div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;<span class="stringliteral">  libname &amp;libref1 clear;</span></div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;<span class="stringliteral">%end;</span></div>
+<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;<span class="stringliteral">%put &amp;sysmacroname: Job &amp;name successfully created in &amp;path;</span></div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;<span class="stringliteral">%put &amp;sysmacroname:;</span></div>
+<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;<span class="stringliteral">%put &amp;sysmacroname: Check it out here:;</span></div>
+<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;<span class="stringliteral">%put &amp;sysmacroname:;%put;</span></div>
+<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;<span class="stringliteral">%put    &amp;url/SASJobExecution?_PROGRAM=&amp;path/&amp;name;%put;</span></div>
+<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;<span class="stringliteral">%put &amp;sysmacroname:;</span></div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;<span class="stringliteral">%put &amp;sysmacroname:;</span></div>
+<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;<span class="stringliteral">%mend mv_createwebservice;</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

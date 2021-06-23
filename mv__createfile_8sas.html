@@ -124,6 +124,11 @@ run;
     <tr><td class="paramdir">[in]</td><td class="paramname">path=</td><td>The parent folder in which to create the file </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">name=</td><td>The name of the file to be created </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">inref=</td><td>The fileref pointing to the file to be uploaded </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">intype=</td><td>(BINARY) The type of the input data. Valid values: <ul>
+<li>BINARY File is copied byte for byte using the <a class="el" href="mp__binarycopy_8sas.html" title="Copy any file using binary input / output streams.">mp_binarycopy.sas</a> macro. </li>
+<li>BASE64 File will be first decoded using the mp_base64.sas macro, then loaded byte by byte to SAS Drive. </li>
+</ul>
+</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">contentdisp=</td><td>(inline) Content Disposition. Example values: <ul>
 <li>inline </li>
 <li>attachment</li>
@@ -147,6 +152,7 @@ run;
 <li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
 <li><a class="el" href="mf__isblank_8sas.html" title="Checks whether a macro variable is empty (blank)">mf_isblank.sas</a> </li>
 <li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
+<li><a class="el" href="mp__base64copy_8sas.html" title="Convert a file to/from base64 format.">mp_base64copy.sas</a> </li>
 <li><a class="el" href="mp__binarycopy_8sas.html" title="Copy any file using binary input / output streams.">mp_binarycopy.sas</a> </li>
 <li><a class="el" href="mv__createfolder_8sas.html" title="Creates a viya folder if that folder does not already exist.">mv_createfolder.sas</a> </li>
 </ul>

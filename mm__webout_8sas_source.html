@@ -147,7 +147,7 @@ $(document).ready(function(){initNavTree('mm__webout_8sas_source.html',''); init
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;%local i tempds jsonengine;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/* see https://github.com/sasjs/core/issues/41 */</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;%<span class="keywordflow">if</span> <span class="stringliteral">&quot;%upcase(&amp;SYSENCODING)&quot;</span>=<span class="stringliteral">&quot;WLATIN1&quot;</span> %then %let jsonengine=PROCJSON;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;%<span class="keywordflow">if</span> <span class="stringliteral">&quot;%upcase(&amp;SYSENCODING)&quot;</span> ne <span class="stringliteral">&quot;UTF-8&quot;</span> %then %let jsonengine=PROCJSON;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;%<span class="keywordflow">else</span> %let jsonengine=DATASTEP;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
