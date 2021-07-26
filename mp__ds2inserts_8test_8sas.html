@@ -83,7 +83,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('mv__getjobstate_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mp__ds2inserts_8test_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,84 +103,22 @@ $(document).ready(function(){initNavTree('mv__getjobstate_8sas.html',''); initRe
 
 <div class="header">
   <div class="headertitle">
-<div class="title">mv_getjobstate.sas File Reference</div>  </div>
+<div class="title">mp_ds2inserts.test.sas File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Extract the status from a running SAS Viya job.  
+<p>Testing <a class="el" href="mp__ds2inserts_8sas.html" title="Export a dataset to SQL insert statements.">mp_ds2inserts.sas</a> macro.  
 <a href="#details">More...</a></p>
 
-<p><a href="mv__getjobstate_8sas_source.html">Go to the source code of this file.</a></p>
+<p><a href="mp__ds2inserts_8test_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Extracts the status from a running job and appends it to an output dataset with the following structure: </p><pre class="fragment">| uri                                                           | state   | timestamp          |
-|---------------------------------------------------------------|---------|--------------------|
-| /jobExecution/jobs/5cebd840-2063-42c1-be0c-421ec3e1c175/state | running | 15JAN2021:12:35:08 |
-</pre><p> To query the running job, you need the URI. Sample code for achieving this is provided below.</p>
-<h2><a class="anchor" id="autotoc_md17"></a>
-Example</h2>
-<p>First, compile the macros: </p><pre class="fragment">filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
-%inc mc;
-</pre><p> Next, create a long running job (in this case, a web service): </p><pre class="fragment">filename ft15f001 temp;
-parmcards4;
-  data ;
-    rand=ranuni(0)*1000;
-    do x=1 to rand;
-      y=rand*4;
-      output;
-    end;
-  run;
-  data _null_;
-    call sleep(5,1);
-  run;
-;;;;
-%mv_createwebservice(path=/Public/temp,name=demo)
-</pre><p> Execute it, grab the uri, and finally, check the job status: </p><pre class="fragment">%mv_jobexecute(path=/Public/temp
-  ,name=demo
-  ,outds=work.info
-)
-
-data _null_;
-  set work.info;
-  if method='GET' and rel='state';
-  call symputx('uri',uri);
-run;
-
-%mv_getjobstate(uri=&amp;uri,outds=results)
-</pre><p> You can run this macro as part of a loop to await the final 'completed' status. The full list of status values is:</p>
+<div class="textblock"><h4>SAS Macros </h4>
 <ul>
-<li>idle </li>
-<li>pending </li>
-<li>running </li>
-<li>canceled </li>
-<li>completed </li>
-<li>failed</li>
-</ul>
-<p>If you have one or more jobs that you'd like to wait for completion you can also use the <a href="/mv__jobwaitfor_8sas.html">mv_jobwaitfor</a> macro.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>valid values: <ul>
-<li>password </li>
-<li>authorization_code </li>
-<li>detect - will check if access_token exists, if not will use sas_services if a SASStudioV session else authorization_code. Default option. </li>
-<li>sas_services - will use oauth_bearer=sas_services. </li>
-</ul>
-</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">uri=</td><td>The uri of the running job for which to fetch the status, in the format <code>/jobExecution/jobs/$UUID/state</code> (unquoted). </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>The output dataset in which to APPEND the status. Three fields are appended: <code>CHECK_TM</code>, <code>URI</code> and <code>STATE</code>. If the dataset does not exist, it is created.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section version"><dt>Version</dt><dd>VIYA V.03.04 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe, source: <a href="https://github.com/sasjs/core">https://github.com/sasjs/core</a></dd></dl>
-<h4>SAS Macros </h4>
-<ul>
-<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
-<li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
-<li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
+<li><a class="el" href="mp__ds2inserts_8sas.html" title="Export a dataset to SQL insert statements.">mp_ds2inserts.sas</a> </li>
+<li><a class="el" href="mp__assert_8sas.html" title="Generic assertion.">mp_assert.sas</a> </li>
 </ul>
 
-<p class="definition">Definition in file <a class="el" href="mv__getjobstate_8sas_source.html">mv_getjobstate.sas</a>.</p>
+<p class="definition">Definition in file <a class="el" href="mp__ds2inserts_8test_8sas_source.html">mp_ds2inserts.test.sas</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
@@ -188,7 +126,7 @@ run;
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_f3c9615c6d389fd64e9075885fcd8e6e.html">viya</a></li><li class="navelem"><a class="el" href="mv__getjobstate_8sas.html">mv_getjobstate.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_59425e443f801f1f2fd8bbe4959a3ccf.html">tests</a></li><li class="navelem"><a class="el" href="dir_a49f9b051925a4cbbe82ac92a0123656.html">base</a></li><li class="navelem"><a class="el" href="mp__ds2inserts_8test_8sas.html">mp_ds2inserts.test.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">

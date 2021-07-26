@@ -130,7 +130,9 @@ $(document).ready(function(){initNavTree('mp__testservice_8sas.html',''); initRe
 </table>
 </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">debug=</td><td>(log) Provide the _debug value </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">viyaresult=(WEBOUT_JSON)</td><td>The Viya result type to return. For more info, see <a class="el" href="mv__getjobresult_8sas.html" title="Extract the result from a completed SAS Viya Job.">mv_getjobresult.sas</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>(0) Set to 1 to provide macro debugging </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">viyaresult=</td><td>(WEBOUT_JSON) The Viya result type to return. For more info, see <a class="el" href="mv__getjobresult_8sas.html" title="Extract the result from a completed SAS Viya Job.">mv_getjobresult.sas</a> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">viyacontext=</td><td>(SAS Job Execution compute context) The Viya compute context on which to run the service </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outlib=</td><td>(0) Output libref to contain the final tables. Set to 0 if the service output is not in JSON format. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>(0) Output fileref to create, to contain the full _webout response.</td></tr>
   </table>

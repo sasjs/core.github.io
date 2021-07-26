@@ -54,6 +54,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_ds2cards.sas", "mp__ds2cards_8sas.html", "mp__ds2cards_8sas" ],
     [ "mp_ds2csv.sas", "mp__ds2csv_8sas.html", null ],
     [ "mp_ds2fmtds.sas", "mp__ds2fmtds_8sas.html", null ],
+    [ "mp_ds2inserts.sas", "mp__ds2inserts_8sas.html", null ],
     [ "mp_filtercheck.sas", "mp__filtercheck_8sas.html", "mp__filtercheck_8sas" ],
     [ "mp_filtergenerate.sas", "mp__filtergenerate_8sas.html", null ],
     [ "mp_filtervalidate.sas", "mp__filtervalidate_8sas.html", "mp__filtervalidate_8sas" ],
