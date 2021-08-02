@@ -83,7 +83,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('mp__ds2inserts_8test_8sas_source.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mp__lib2inserts_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,48 +103,51 @@ $(document).ready(function(){initNavTree('mp__ds2inserts_8test_8sas_source.html'
 
 <div class="header">
   <div class="headertitle">
-<div class="title">mp_ds2inserts.test.sas</div>  </div>
+<div class="title">mp_lib2inserts.sas File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="mp__ds2inserts_8test_8sas.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  @file</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  @brief Testing mp_ds2inserts.sas macro</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">  @li mp_ds2inserts.sas</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">  @li mp_assert.sas</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">  * test 1 - rebuild an existing dataset</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">  * Cars is a great dataset - it contains leading spaces, and formatted numerics</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">  */</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;%mp_ds2inserts(sashelp.cars,outref=testref,schema=work,outds=test)</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;data work.test;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keyword">set</span> sashelp.cars;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  stop;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;proc sql;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;%inc testref;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;proc compare base=sashelp.cars compare=work.test;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;quit;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;%mp_assert(</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  iftrue=(&amp;sysinfo=1),</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  desc=sashelp.cars is identical except <span class="keywordflow">for</span> ds label,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  outds=work.test_results</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;)</div>
-</div><!-- fragment --></div><!-- contents -->
+
+<p>Convert all data in a library to SQL insert statements.  
+<a href="#details">More...</a></p>
+
+<p><a href="mp__lib2inserts_8sas_source.html">Go to the source code of this file.</a></p>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Gets list of members then calls the <code>mp_ds2inserts()</code> macro. Usage: </p><pre class="fragment">%mp_getddl(sashelp, schema=work, fref=tempref)
+
+%mp_lib2inserts(sashelp, schema=work, outref=tempref)
+
+%inc tempref;
+</pre><p>The output will be one file in the outref fileref.</p>
+<h4>SAS Macros </h4>
+<ul>
+<li><a class="el" href="mp__ds2inserts_8sas.html" title="Export a dataset to SQL insert statements.">mp_ds2inserts.sas</a></li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">lib</td><td>Library in which to convert all datasets to inserts </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">flavour=</td><td>(SAS) The SQL flavour to be applied to the output. Valid options: <ul>
+<li>SAS (default) - suitable for regular proc sql </li>
+<li>PGSQL - Used for Postgres databases </li>
+</ul>
+</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">maxobs=</td><td>(max) The max number of observations (per table) to create </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>Output fileref in which to create the insert statements. If it exists, it will be appended to, otherwise it will be created. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">schema=</td><td>(0) The schema of the target database, or the libref.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="mp__lib2inserts_8sas_source.html">mp_lib2inserts.sas</a>.</p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_59425e443f801f1f2fd8bbe4959a3ccf.html">tests</a></li><li class="navelem"><a class="el" href="dir_a49f9b051925a4cbbe82ac92a0123656.html">base</a></li><li class="navelem"><a class="el" href="mp__ds2inserts_8test_8sas.html">mp_ds2inserts.test.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_e914ee4d4a44400f1fdb170cb4ead18a.html">base</a></li><li class="navelem"><a class="el" href="mp__lib2inserts_8sas.html">mp_lib2inserts.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">

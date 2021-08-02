@@ -112,14 +112,13 @@ $(document).ready(function(){initNavTree('mm__gettables_8sas.html',''); initResi
 
 <p><a href="mm__gettables_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Will only show the tables to which a user has the requisite metadata access.</p>
-<p>usage:</p>
-<p>mm_gettables(uri=A5X8AHW1.B40001S5)</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<div class="textblock"><p>Will only show the tables for which the executing user has the requisite metadata access.</p>
+<p>usage: </p><pre class="fragment">%mm_gettables(uri=A5X8AHW1.B40001S5)
+</pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">outds</td><td>the dataset to create that contains the list of tables </td></tr>
-    <tr><td class="paramname">uri</td><td>the uri of the library for which to return tables </td></tr>
-    <tr><td class="paramname">getauth=</td><td>YES|NO - fetch the authdomain used in database connections. Set to NO to improve runtimes in larger environments, as there can be a performance hit on the <code>metadata_getattr(domainuri, "Name", AuthDomain)</code> call.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">uri=</td><td>the uri of the library for which to return tables </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mm_gettables) the dataset to contain the list of tables </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">getauth=</td><td>(YES) Fetch the authdomain used in database connections. Set to NO to improve runtimes in larger environments, as there can be a performance hit on the <code>metadata_getattr(domainuri, "Name", AuthDomain)</code> call.</td></tr>
   </table>
   </dd>
 </dl>

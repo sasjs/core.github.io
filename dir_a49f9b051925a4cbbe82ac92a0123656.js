@@ -10,7 +10,9 @@ var dir_a49f9b051925a4cbbe82ac92a0123656 =
     [ "mp_filtercheck.test.sas", "mp__filtercheck_8test_8sas.html", null ],
     [ "mp_filtergenerate.test.sas", "mp__filtergenerate_8test_8sas.html", null ],
     [ "mp_filtervalidate.test.sas", "mp__filtervalidate_8test_8sas.html", null ],
+    [ "mp_getddl.test.sas", "mp__getddl_8test_8sas.html", null ],
     [ "mp_jsonout.test.sas", "mp__jsonout_8test_8sas.html", null ],
+    [ "mp_lib2inserts.test.sas", "mp__lib2inserts_8test_8sas.html", null ],
     [ "mp_searchcols.test.sas", "mp__searchcols_8test_8sas.html", "mp__searchcols_8test_8sas" ],
     [ "mp_validatecol.test.sas", "mp__validatecol_8test_8sas.html", "mp__validatecol_8test_8sas" ]
 ];

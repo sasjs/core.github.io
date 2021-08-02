@@ -122,13 +122,19 @@ proc sql;
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">ds</td><td>The dataset to be exported </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">maxobs=</td><td>(max) The max number of inserts to create </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>(0) The output fileref. If it does not exist, it is created. If it does exist, new records are APPENDED. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outlib=</td><td>(0) The library (or schema) in which the target table is located. If not provided, is ignored. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(0) The output table to load. If not provided, will default to the table in the &amp;ds parameter.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">schema=</td><td>(0) The library (or schema) in which the target table is located. If not provided, is ignored. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(0) The output table to load. If not provided, will default to the table in the &amp;ds parameter. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">flavour=</td><td>(SAS) The SQL flavour to be applied to the output. Valid options: <ul>
+<li>SAS (default) - suitable for regular proc sql </li>
+<li>PGSQL - Used for Postgres databases</li>
+</ul>
+<h4>SAS Macros </h4>
+</td></tr>
   </table>
   </dd>
 </dl>
-<h4>SAS Macros </h4>
 <ul>
 <li><a class="el" href="mf__existfileref_8sas.html" title="Checks whether a fileref exists.">mf_existfileref.sas</a> </li>
 <li><a class="el" href="mf__getvarcount_8sas.html" title="Returns number of variables in a dataset.">mf_getvarcount.sas</a> </li>
