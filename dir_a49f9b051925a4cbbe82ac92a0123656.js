@@ -1,6 +1,7 @@
 var dir_a49f9b051925a4cbbe82ac92a0123656 =
 [
     [ "mf_existfileref.test.sas", "mf__existfileref_8test_8sas.html", null ],
+    [ "mf_getapploc.test.sas", "mf__getapploc_8test_8sas.html", null ],
     [ "mf_getvarlist.test.sas", "mf__getvarlist_8test_8sas.html", null ],
     [ "mp_abort.test.nofix.sas", "mp__abort_8test_8nofix_8sas.html", "mp__abort_8test_8nofix_8sas" ],
     [ "mp_assertcolvals.test.sas", "mp__assertcolvals_8test_8sas.html", null ],
