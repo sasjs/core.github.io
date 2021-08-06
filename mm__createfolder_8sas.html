@@ -115,12 +115,11 @@ $(document).ready(function(){initNavTree('mm__createfolder_8sas.html',''); initR
 <div class="textblock"><p>This macro was inspired by Paul Homes who wrote an early version (mkdirmd.sas) in 2010. The original is described here: <a href="https://platformadmin.com/blogs/paul/2010/07/mkdirmd/">https://platformadmin.com/blogs/paul/2010/07/mkdirmd/</a></p>
 <p>The macro will NOT create a new ROOT folder - not because it can't, but more because that is generally not something your administrator would like you to do!</p>
 <p>The macro is idempotent - if you run it twice, it will only create a folder once.</p>
-<p>usage:</p>
-<p>mm_createfolder(path=/some/meta/folder)</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>usage: </p><pre class="fragment">%mm_createfolder(path=/some/meta/folder)
+</pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path=</td><td>Name of the folder to create. </td></tr>
-    <tr><td class="paramname">mdebug=</td><td>set DBG to 1 to disable DEBUG messages</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">path=</td><td>Name of the folder to create. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>set DBG to 1 to disable DEBUG messages</td></tr>
   </table>
   </dd>
 </dl>
