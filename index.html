@@ -121,6 +121,11 @@ Components</h1>
 <li>No X command</li>
 <li>Prefixes: <em>mf</em>, <em>mp</em></li>
 </ul>
+<p><b>fcmp</b> library (SAS9/Viya)</p><ul>
+<li>Function and macro names are identical, except for special cases</li>
+<li>Prefixes: <em>mcf</em></li>
+</ul>
+<p>The fcmp macros are used to generate fcmp functions, and can be used with or without the <code>proc fcmp</code> wrapper. See <a href="https://core.sasjs.io">documentation</a>.</p>
 <p><b>meta</b> library (SAS9 only)</p>
 <ul>
 <li>OS independent</li>
@@ -159,7 +164,7 @@ Components</h1>
 </ul>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Installation</h1>
-<p>First, download the repo to a location your SAS system can access. Then update your sasautos path to include the components you wish to have available,eg:</p>
+<p>First, download the repo to a location your SAS system can access. Then update your sasautos path to include the components you wish to have available, eg:</p>
 <div class="fragment"><div class="line">options insert=(sasautos=<span class="stringliteral">&quot;/your/path/macrocore/base&quot;</span>);</div>
 <div class="line">options insert=(sasautos=<span class="stringliteral">&quot;/your/path/macrocore/meta&quot;</span>);</div>
 </div><!-- fragment --><p>The above can be done directly in your sas program, via an autoexec, or an initialisation program.</p>
