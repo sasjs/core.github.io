@@ -111,35 +111,38 @@ $(document).ready(function(){initNavTree('mf__existfunction_8sas_source.html',''
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  @brief Checks if a function exists</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  @details Returns 1 if the function exists, else 0.  Note that this function</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  can be slow as it needs to open the sashelp.vfuncs table.</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">  Usage:</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">      %put %mf_existfunction(CAT);</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">      %put %mf_existfunction(DOG);</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">  Full credit to [Bart](https://sasensei.com/user/305) for the vfunc pointer</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">  and the tidy approach for pure macro data set filtering.</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">  Check out his [SAS Packages](https://github.com/yabwon/SAS_PACKAGES)</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">  framework!</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">  @param [in] name (positional) - function name</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">  @author Allan Bowe</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">**/</span><span class="comment"></span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">/** @cond */</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;%macro mf_existfunction(name</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  %local dsid rc exist;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  %let dsid=%sysfunc(open(sashelp.vfunc(where=(fncname=<span class="stringliteral">&quot;%upcase(&amp;name)&quot;</span>))));</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  %let exist = %sysfunc(fetch(&amp;dsid, NOSET));</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  %let rc = %sysfunc(close(&amp;dsid));</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  %sysevalf(0 = &amp;exist)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;%mend mf_existfunction;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/** @endcond */</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">  Usage:</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">      %put %mf_existfunction(CAT);</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">      %put %mf_existfunction(DOG);</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">  Full credit to [Bart](https://sasensei.com/user/305) for the vfunc pointer</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">  and the tidy approach for pure macro data set filtering.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">  Check out his [SAS Packages](https://github.com/yabwon/SAS_PACKAGES)</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">  framework!  Where you can find the same [function](</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">https://github.com/yabwon/SAS_PACKAGES/blob/main/packages/baseplus.md#functionexists-macro</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">  ).</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">  @param [in] name (positional) - function name</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">  @author Allan Bowe</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">**/</span><span class="comment"></span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/** @cond */</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;%macro mf_existfunction(name</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  %local dsid rc exist;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  %let dsid=%sysfunc(open(sashelp.vfunc(where=(fncname=<span class="stringliteral">&quot;%upcase(&amp;name)&quot;</span>))));</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  %let exist=1;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  %let exist=%sysfunc(fetch(&amp;dsid, NOSET));</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  %let rc=%sysfunc(close(&amp;dsid));</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  %sysevalf(0 = &amp;exist)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;%mend mf_existfunction;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">/** @endcond */</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

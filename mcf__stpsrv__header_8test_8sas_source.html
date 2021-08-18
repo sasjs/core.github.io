@@ -129,7 +129,7 @@ $(document).ready(function(){initNavTree('mcf__stpsrv__header_8test_8sas_source.
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;%let test2=FAIL;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;data _null_;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  infile <span class="stringliteral">&quot;%sysfunc(pathname(work))/newfile.txt&quot;</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  infile <span class="stringliteral">&quot;&amp;sasjs_stpsrv_header_loc&quot;</span>;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  input;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keywordflow">if</span> _n_=1 and _infile_=<span class="stringliteral">&#39;Content-type: application/text&#39;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  then call symputx(<span class="stringliteral">&#39;test1&#39;</span>,<span class="stringliteral">&#39;PASS&#39;</span>);</div>
