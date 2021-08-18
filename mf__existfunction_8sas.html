@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('mf__existfunction_8sas.html',''); init
 
 <p><a href="mf__existfunction_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Returns 1 if the function exists, else 0 Usage: </p><pre class="fragment">%put %mf_existfunction(CAT);
+<div class="textblock"><p>Returns 1 if the function exists, else 0. Note that this function can be slow as it needs to open the sashelp.vfuncs table. Usage: </p><pre class="fragment">%put %mf_existfunction(CAT);
 %put %mf_existfunction(DOG);
 </pre><p> Full credit to <a href="https://sasensei.com/user/305">Bart</a> for the vfunc pointer and the tidy approach for pure macro data set filtering. Check out his <a href="https://github.com/yabwon/SAS_PACKAGES">SAS Packages</a> framework!</p>
 <dl class="params"><dt>Parameters</dt><dd>
