@@ -4,6 +4,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mf_existds.sas", "mf__existds_8sas.html", null ],
     [ "mf_existfeature.sas", "mf__existfeature_8sas.html", null ],
     [ "mf_existfileref.sas", "mf__existfileref_8sas.html", null ],
+    [ "mf_existfunction.sas", "mf__existfunction_8sas.html", null ],
     [ "mf_existvar.sas", "mf__existvar_8sas.html", null ],
     [ "mf_existvarlist.sas", "mf__existvarlist_8sas.html", null ],
     [ "mf_getapploc.sas", "mf__getapploc_8sas.html", "mf__getapploc_8sas" ],

@@ -1,7 +1,9 @@
 var dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef =
 [
+    [ "mcf_stpsrv_header.test.sas", "mcf__stpsrv__header_8test_8sas.html", null ],
     [ "mcf_string2file.test.sas", "mcf__string2file_8test_8sas.html", null ],
     [ "mf_existfileref.test.sas", "mf__existfileref_8test_8sas.html", null ],
+    [ "mf_existfunction.test.sas", "mf__existfunction_8test_8sas.html", null ],
     [ "mf_getapploc.test.sas", "mf__getapploc_8test_8sas.html", null ],
     [ "mf_getvarlist.test.sas", "mf__getvarlist_8test_8sas.html", null ],
     [ "mp_abort.test.nofix.sas", "mp__abort_8test_8nofix_8sas.html", "mp__abort_8test_8nofix_8sas" ],
