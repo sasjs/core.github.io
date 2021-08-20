@@ -107,128 +107,141 @@ $(document).ready(function(){initNavTree('mv__getfoldermembers_8sas_source.html'
 </div><!--header-->
 <div class="contents">
 <a href="mv__getfoldermembers_8sas.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  @file mv_getfoldermembers.sas</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  @brief Gets a list of folders (and ids) for a given root</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  @details Works for both root level and below, oauth or password. Default is</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    oauth, and the token is expected in a global ACCESS_TOKEN variable.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  @file</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  @brief Gets a list of folder members (and ids) for a given root</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  @details Returns all members for a particular Viya folder.  Works at both root</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  level and below, and results are created in an output dataset.</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">        %mv_getfoldermembers(root=/Public)</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">        %mv_getfoldermembers(root=/Public, outds=work.mymembers)</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">  @param root= The path for which to return the list of folders</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">  @param outds= The output dataset to create (default is work.mv_getfolders).  Format:</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">  @param [in] root= (/) The path for which to return the list of folders</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">  @param [out] outds= (work.mv_getfolders) The output dataset to create. Format:</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">  |ordinal_root|ordinal_items|creationTimeStamp| modifiedTimeStamp|createdBy|modifiedBy|id| uri|added| type|name|description|</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">  |---|---|---|---|---|---|---|---|---|---|---|---|</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">  |1|1|2021-05-25T11:15:04.204Z|2021-05-25T11:15:04.204Z|allbow|allbow|4f1e3945-9655-462b-90f2-c31534b3ca47|/folders/folders/ed701ff3-77e8-468d-a4f5-8c43dec0fd9e|2021-05-25T11:15:04.212Z|child|my_folder_name|My folder Description|</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">  @param access_token_var= The global macro variable to contain the access token</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">  @param grant_type= valid values are &quot;password&quot; or &quot;authorization_code&quot; (unquoted).</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">    The default is authorization_code.</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">  @version VIYA V.03.04</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">  @author Allan Bowe, source: https://github.com/sasjs/core</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">  @param [in] access_token_var= (ACCESS_TOKEN) The global macro variable to</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">    contain the access token</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">  @param [in] grant_type= (sas_services) Valid values are:</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">    @li password</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">    @li authorization_code</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    @li detect</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">    @li sas_services</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">  @li mp_abort.sas</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">  @li mf_getplatform.sas</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">  @li mf_getuniquefileref.sas</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">  @li mf_getuniquelibref.sas</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">  @li mf_isblank.sas</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;%macro mv_getfoldermembers(root=/</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    ,access_token_var=ACCESS_TOKEN</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    ,grant_type=sas_services</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    ,outds=mv_getfolders</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  );</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;%local oauth_bearer;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;%<span class="keywordflow">if</span> &amp;grant_type=detect %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  %<span class="keywordflow">if</span> %symexist(&amp;access_token_var) %then %let grant_type=authorization_code;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  %<span class="keywordflow">else</span> %let grant_type=sas_services;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;%end;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;%<span class="keywordflow">if</span> &amp;grant_type=sas_services %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    %let oauth_bearer=oauth_bearer=sas_services;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    %let &amp;access_token_var=;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;%end;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;%mp_abort(iftrue=(&amp;grant_type ne authorization_code and &amp;grant_type ne password</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    and &amp;grant_type ne sas_services</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  )</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  ,mac=&amp;sysmacroname</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  ,msg=%str(Invalid value <span class="keywordflow">for</span> grant_type: &amp;grant_type)</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;)</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;%<span class="keywordflow">if</span> %mf_isblank(&amp;root)=1 %then %let root=/;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">  @version VIYA V.03.04</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">  @author Allan Bowe, source: https://github.com/sasjs/core</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">  @li mp_abort.sas</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">  @li mf_getplatform.sas</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">  @li mf_getuniquefileref.sas</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">  @li mf_getuniquelibref.sas</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">  @li mf_isblank.sas</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">  &lt;h4&gt; Related Macros &lt;/h4&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">  @li mv_createfolder.sas</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">  @li mv_deletefoldermember.sas</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">  @li mv_deleteviyafolder.sas</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">  @li mv_getfoldermembers.test.sas</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;%macro mv_getfoldermembers(root=/</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    ,access_token_var=ACCESS_TOKEN</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    ,grant_type=sas_services</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    ,outds=mv_getfolders</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  );</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;%local oauth_bearer;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;%<span class="keywordflow">if</span> &amp;grant_type=detect %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  %<span class="keywordflow">if</span> %symexist(&amp;access_token_var) %then %let grant_type=authorization_code;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  %<span class="keywordflow">else</span> %let grant_type=sas_services;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;%end;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;%<span class="keywordflow">if</span> &amp;grant_type=sas_services %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    %let oauth_bearer=oauth_bearer=sas_services;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    %let &amp;access_token_var=;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;%end;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;options noquotelenmax;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">/* request the client details */</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;%local fname1 libref1;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;%let fname1=%mf_getuniquefileref();</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;%let libref1=%mf_getuniquelibref();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;%mp_abort(iftrue=(&amp;grant_type ne authorization_code and &amp;grant_type ne password</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    and &amp;grant_type ne sas_services</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  )</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  ,mac=&amp;sysmacroname</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  ,msg=%str(Invalid value <span class="keywordflow">for</span> grant_type: &amp;grant_type)</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;)</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;%local base_uri; <span class="comment">/* location of rest apis */</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;%let base_uri=%mf_getplatform(VIYARESTAPI);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;%<span class="keywordflow">if</span> <span class="stringliteral">&quot;&amp;root&quot;</span>=<span class="stringliteral">&quot;/&quot;</span> %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="comment">/* if root just list root folders */</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  proc http method=<span class="stringliteral">&#39;GET&#39;</span> out=&amp;fname1 &amp;oauth_bearer</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      url=<span class="stringliteral">&quot;&amp;base_uri/folders/rootFolders&quot;</span>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  %<span class="keywordflow">if</span> &amp;grant_type=authorization_code %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      headers <span class="stringliteral">&quot;Authorization&quot;</span>=<span class="stringliteral">&quot;Bearer &amp;&amp;&amp;access_token_var&quot;</span>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  %end;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  run;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  libname &amp;libref1 JSON fileref=&amp;fname1;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  data &amp;outds;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">set</span> &amp;libref1..items;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  run;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;%end;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;%<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="comment">/* first get parent folder id */</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  proc http method=<span class="stringliteral">&#39;GET&#39;</span> out=&amp;fname1 &amp;oauth_bearer</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      url=<span class="stringliteral">&quot;&amp;base_uri/folders/folders/@item?path=&amp;root&quot;</span>;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  %<span class="keywordflow">if</span> &amp;grant_type=authorization_code %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      headers <span class="stringliteral">&quot;Authorization&quot;</span>=<span class="stringliteral">&quot;Bearer &amp;&amp;&amp;access_token_var&quot;</span>;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  %end;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;%<span class="keywordflow">if</span> %mf_isblank(&amp;root)=1 %then %let root=/;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;options noquotelenmax;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">/* request the client details */</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;%local fname1 libref1;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;%let fname1=%mf_getuniquefileref();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;%let libref1=%mf_getuniquelibref();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;%local base_uri; <span class="comment">/* location of rest apis */</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;%let base_uri=%mf_getplatform(VIYARESTAPI);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;%<span class="keywordflow">if</span> <span class="stringliteral">&quot;&amp;root&quot;</span>=<span class="stringliteral">&quot;/&quot;</span> %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="comment">/* if root just list root folders */</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  proc http method=<span class="stringliteral">&#39;GET&#39;</span> out=&amp;fname1 &amp;oauth_bearer</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      url=<span class="stringliteral">&quot;&amp;base_uri/folders/rootFolders?limit=1000&quot;</span>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  %<span class="keywordflow">if</span> &amp;grant_type=authorization_code %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      headers <span class="stringliteral">&quot;Authorization&quot;</span>=<span class="stringliteral">&quot;Bearer &amp;&amp;&amp;access_token_var&quot;</span>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  %end;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  run;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  libname &amp;libref1 JSON fileref=&amp;fname1;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  data &amp;outds;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">set</span> &amp;libref1..items;</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  run;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="comment">/*data _null_;infile &amp;fname1;input;putlog _infile_;run;*/</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  libname &amp;libref1 JSON fileref=&amp;fname1;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="comment">/* now get the followon link to list members */</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  %local href;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  %let href=0;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  data _null_;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keyword">set</span> &amp;libref1..links;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">if</span> rel=<span class="stringliteral">&#39;members&#39;</span> then call symputx(<span class="stringliteral">&#39;href&#39;</span>,quote(<span class="stringliteral">&quot;&amp;base_uri&quot;</span>!!trim(href)),<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;%end;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;%<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="comment">/* first get parent folder id */</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  proc http method=<span class="stringliteral">&#39;GET&#39;</span> out=&amp;fname1 &amp;oauth_bearer</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      url=<span class="stringliteral">&quot;&amp;base_uri/folders/folders/@item?path=&amp;root&quot;</span>;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  %<span class="keywordflow">if</span> &amp;grant_type=authorization_code %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      headers <span class="stringliteral">&quot;Authorization&quot;</span>=<span class="stringliteral">&quot;Bearer &amp;&amp;&amp;access_token_var&quot;</span>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  %end;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  run;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  %<span class="keywordflow">if</span> &amp;href=0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    %put NOTE:;%put NOTE-  No members found in &amp;root!!;%put NOTE-;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    %<span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  %end;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  %local fname2 libref2;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  %let fname2=%mf_getuniquefileref();</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  %let libref2=%mf_getuniquelibref();</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  proc http method=<span class="stringliteral">&#39;GET&#39;</span> out=&amp;fname2 &amp;oauth_bearer</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;      url=%unquote(%superq(href));</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  %<span class="keywordflow">if</span> &amp;grant_type=authorization_code %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      headers <span class="stringliteral">&quot;Authorization&quot;</span>=<span class="stringliteral">&quot;Bearer &amp;&amp;&amp;access_token_var&quot;</span>;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  %end;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="comment">/*data _null_;infile &amp;fname1;input;putlog _infile_;run;*/</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  libname &amp;libref1 JSON fileref=&amp;fname1;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="comment">/* now get the followon link to list members */</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  %local href cnt;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  %let cnt=0;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  data _null_;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keyword">set</span> &amp;libref1..links;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">if</span> rel=<span class="stringliteral">&#39;members&#39;</span> then <span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;      url=cats(<span class="stringliteral">&quot;&#39;&quot;</span>,<span class="stringliteral">&quot;&amp;base_uri&quot;</span>,href,<span class="stringliteral">&quot;?limit=10000&#39;&quot;</span>);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;      call symputx(<span class="stringliteral">&#39;href&#39;</span>,url,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      call symputx(<span class="stringliteral">&#39;cnt&#39;</span>,1,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    end;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  run;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  libname &amp;libref2 JSON fileref=&amp;fname2;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  data &amp;outds;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keyword">set</span> &amp;libref2..items;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  run;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  filename &amp;fname2 clear;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  libname &amp;libref2 clear;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;%end;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">/* clear refs */</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;filename &amp;fname1 clear;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;libname &amp;libref1 clear;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;%mend mv_getfoldermembers;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  %<span class="keywordflow">if</span> &amp;cnt=0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    %put NOTE:;%put NOTE-  No members found in &amp;root!!;%put NOTE-;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    %<span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  %end;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  %local fname2 libref2;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  %let fname2=%mf_getuniquefileref();</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  %let libref2=%mf_getuniquelibref();</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  proc http method=<span class="stringliteral">&#39;GET&#39;</span> out=&amp;fname2 &amp;oauth_bearer</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;      url=%unquote(%superq(href));</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  %<span class="keywordflow">if</span> &amp;grant_type=authorization_code %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;      headers <span class="stringliteral">&quot;Authorization&quot;</span>=<span class="stringliteral">&quot;Bearer &amp;&amp;&amp;access_token_var&quot;</span>;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  %end;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  run;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  libname &amp;libref2 JSON fileref=&amp;fname2;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  data &amp;outds;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keyword">set</span> &amp;libref2..items;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  run;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  filename &amp;fname2 clear;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  libname &amp;libref2 clear;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;%end;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">/* clear refs */</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;filename &amp;fname1 clear;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;libname &amp;libref1 clear;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;%mend mv_getfoldermembers;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
