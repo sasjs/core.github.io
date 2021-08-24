@@ -10,6 +10,7 @@ var dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef =
     [ "mp_assertcolvals.test.sas", "mp__assertcolvals_8test_8sas.html", null ],
     [ "mp_assertdsobs.test.sas", "mp__assertdsobs_8test_8sas.html", null ],
     [ "mp_base64copy.test.sas", "mp__base64copy_8test_8sas.html", null ],
+    [ "mp_binarycopy.test.sas", "mp__binarycopy_8test_8sas.html", null ],
     [ "mp_ds2fmtds.test.sas", "mp__ds2fmtds_8test_8sas.html", null ],
     [ "mp_ds2inserts.test.sas", "mp__ds2inserts_8test_8sas.html", "mp__ds2inserts_8test_8sas" ],
     [ "mp_filtercheck.test.sas", "mp__filtercheck_8test_8sas.html", null ],
