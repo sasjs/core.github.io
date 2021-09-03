@@ -132,7 +132,8 @@ $(document).ready(function(){initNavTree('mp__lib2inserts_8sas.html',''); initRe
 </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">maxobs=</td><td>(max) The max number of observations (per table) to create </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>Output fileref in which to create the insert statements. If it exists, it will be appended to, otherwise it will be created. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">schema=</td><td>(0) The schema of the target database, or the libref.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">schema=</td><td>(0) The schema of the target database, or the libref. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">applydttm=</td><td>(YES) If YES, any columns using datetime formats will be converted to native DB datetime literals</td></tr>
   </table>
   </dd>
 </dl>

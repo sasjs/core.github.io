@@ -66,6 +66,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_getmaxvarlengths.sas", "mp__getmaxvarlengths_8sas.html", null ],
     [ "mp_guesspk.sas", "mp__guesspk_8sas.html", null ],
     [ "mp_hashdataset.sas", "mp__hashdataset_8sas.html", null ],
+    [ "mp_include.sas", "mp__include_8sas.html", null ],
     [ "mp_jsonout.sas", "mp__jsonout_8sas.html", null ],
     [ "mp_lib2cards.sas", "mp__lib2cards_8sas.html", null ],
     [ "mp_lib2inserts.sas", "mp__lib2inserts_8sas.html", null ],

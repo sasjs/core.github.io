@@ -83,7 +83,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('mp__jsonout_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mp__include_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,63 +103,59 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas.html',''); initResiza
 
 <div class="header">
   <div class="headertitle">
-<div class="title">mp_jsonout.sas File Reference</div>  </div>
+<div class="title">mp_include.sas File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Writes JSON in SASjs format to a fileref.  
+<p>Performs a include.  
 <a href="#details">More...</a></p>
 
-<p><a href="mp__jsonout_8sas_source.html">Go to the source code of this file.</a></p>
+<p><a href="mp__include_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>PROC JSON is faster but will produce errs like the ones below if special chars are encountered.</p>
-<blockquote class="doxtable">
-<p>(ERR)OR: Some code points did not transcode. </p>
-</blockquote>
-<blockquote class="doxtable">
-<p>An object or array close is not valid at this point in the JSON text. </p>
-</blockquote>
-<blockquote class="doxtable">
-<p>Date value out of range </p>
-</blockquote>
-<p>If this happens, try running with ENGINE=DATASTEP.</p>
-<p>Usage: </p><pre class="fragment">  filename tmp temp;
-  data class; set sashelp.class;run;
-
-  %mp_jsonout(OPEN,jref=tmp)
-  %mp_jsonout(OBJ,class,jref=tmp)
-  %mp_jsonout(CLOSE,jref=tmp)
-
-  data _null_;
-  infile tmp;
-  input;list;
-  run;
-</pre><p> If you are building web apps with SAS then you are strongly encouraged to use the mX_createwebservice macros in combination with the <a href="https://github.com/sasjs/adapter">sasjs adapter</a>. For more information see <a href="https://sasjs.io">https://sasjs.io</a></p>
-<dl class="params"><dt>Parameters</dt><dd>
+<div class="textblock"><p>This macro wrapper is necessary if you need your included code to know that it is being included.</p>
+<p>If you are using include in a regular program, you could make use of the following macro variables:</p>
+<ul>
+<li>SYSINCLUDEFILEDEVICE </li>
+<li>SYSINCLUDEFILEDIR </li>
+<li>SYSINCLUDEFILEFILEREF </li>
+<li>SYSINCLUDEFILENAME</li>
+</ul>
+<p>However these variables are NOT available inside a macro, as documented here: <a href="https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/mcrolref/n1j5tcc0n2xczyn1kg1o0606gsv9.htm">https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/mcrolref/n1j5tcc0n2xczyn1kg1o0606gsv9.htm</a></p>
+<p>This macro can be used in place of the include statement, and will insert the following (equivalent) global variables:</p>
+<ul>
+<li>_SYSINCLUDEFILEDEVICE </li>
+<li>_SYSINCLUDEFILEDIR </li>
+<li>_SYSINCLUDEFILEFILEREF </li>
+<li>_SYSINCLUDEFILENAME</li>
+</ul>
+<p>These can be used whenever testing <em>within a macro</em>. Outside of the macro, the regular automatic variables will still be available (thanks to a concatenated file list in the include statement).</p>
+<p>Example usage: </p><pre class="fragment">filename example temp;
+data _null_;
+  file example;
+  put '%macro test();';
+  put '%put &amp;=_SYSINCLUDEFILEFILEREF;';
+  put '%put &amp;=SYSINCLUDEFILEFILEREF;';
+  put '%mend; %test()';
+  put '%put &amp;=SYSINCLUDEFILEFILEREF;';
+run;
+%mp_include(example)
+</pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">action</td><td>Valid values: <ul>
-<li>OPEN - opens the JSON </li>
-<li>OBJ - sends a table with each row as an object </li>
-<li>ARR - sends a table with each row in an array </li>
-<li>CLOSE - closes the JSON</li>
-</ul>
-</td></tr>
-    <tr><td class="paramname">ds</td><td>the dataset to send. Must be a work table. </td></tr>
-    <tr><td class="paramname">jref=</td><td>the fileref to which to send the JSON </td></tr>
-    <tr><td class="paramname">dslabel=</td><td>the name to give the table in the exported JSON </td></tr>
-    <tr><td class="paramname">fmt=</td><td>Whether to keep or strip formats from the table </td></tr>
-    <tr><td class="paramname">engine=</td><td>Which engine to use to send the JSON, valid options are: <ul>
-<li>PROCJSON (default) </li>
-<li>DATASTEP (more reliable when data has non standard characters)</li>
-</ul>
-</td></tr>
-    <tr><td class="paramname">dbg=</td><td>DEPRECATED - was used to conditionally add PRETTY to proc json but this can cause line truncation in large files.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fileref</td><td>The fileref of the file to be included. Must be provided. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">prefix=</td><td>(_) The prefix to apply to the global variables. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">opts=</td><td>(SOURCE2) The options to apply to the inc statement </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">errds=</td><td>(work.mp_abort_errds) There is no clean way to end a process within a include called within a macro. Furthermore, there is no way to test if a macro is called within a include. To handle this particular scenario, the mp_abort() macro ill test for the existence of the _SYSINCLUDEFILEDEVICE variable and return the outputs (msg,mac) inside this dataset. It will then run an abort cancel FILE to stop the include running, and pass the dataset back. NOTE - it is NOT possible to read this dataset as part of this macro - when running abort cancel FILE, ALL macros are closed, so instead it is necessary to run the following line in the source program, immediately after any macro that contains (or contains a macro that contains) this mp_include macro, eg as follows:<code>macro x(); mp_include(someref) mend; x() mp_abort(mode=INCLUDE) </code></td></tr>
   </table>
   </dd>
 </dl>
-<h4>Related Macros  @li <a class="el" href="mp__ds2fmtds_8sas.html" title="Converts every value in a dataset to it&#39;s formatted value.">mp_ds2fmtds.sas</a> @version 9.2 @author Allan Bowe @source <a href="https://github.com/sasjs/core">https://github.com/sasjs/core</a> </h4>
+<dl class="section version"><dt>Version</dt><dd>9.4 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Allan Bowe</dd></dl>
+<h4>SAS Macros </h4>
+<ul>
+<li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
+</ul>
 
-<p class="definition">Definition in file <a class="el" href="mp__jsonout_8sas_source.html">mp_jsonout.sas</a>.</p>
+<p class="definition">Definition in file <a class="el" href="mp__include_8sas_source.html">mp_include.sas</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
@@ -167,7 +163,7 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas.html',''); initResiza
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e914ee4d4a44400f1fdb170cb4ead18a.html">base</a></li><li class="navelem"><a class="el" href="mp__jsonout_8sas.html">mp_jsonout.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_e914ee4d4a44400f1fdb170cb4ead18a.html">base</a></li><li class="navelem"><a class="el" href="mp__include_8sas.html">mp_include.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">

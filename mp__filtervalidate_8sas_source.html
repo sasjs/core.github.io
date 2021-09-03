@@ -186,7 +186,7 @@ $(document).ready(function(){initNavTree('mp__filtervalidate_8sas_source.html','
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;data &amp;outds;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keywordflow">if</span> &amp;sqlrc or &amp;syscc or &amp;syserr then <span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    REASON_CD=<span class="stringliteral">&#39;VALIDATION_ERROR: &#39;</span>!!</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    REASON_CD=<span class="stringliteral">&#39;VALIDATION_ERR&#39;</span>!!<span class="stringliteral">&#39;OR: &#39;</span>!!</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      coalescec(symget(<span class="stringliteral">&#39;SYSERRORTEXT&#39;</span>),symget(<span class="stringliteral">&#39;SYSWARNINGTEXT&#39;</span>));</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    output;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  end;</div>

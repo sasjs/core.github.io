@@ -123,11 +123,26 @@ $(document).ready(function(){initNavTree('mp__abort_8sas.html',''); initResizabl
   <table class="params">
     <tr><td class="paramname">mac=</td><td>to contain the name of the calling macro </td></tr>
     <tr><td class="paramname">msg=</td><td>message to be returned </td></tr>
-    <tr><td class="paramname">iftrue=</td><td>supply a condition under which the macro should be executed.</td></tr>
+    <tr><td class="paramname">iftrue=</td><td>supply a condition under which the macro should be executed. </td></tr>
+    <tr><td class="paramname">errds=</td><td>(work.mp_abort_errds) There is no clean way to end a process within a include called within a macro. Furthermore, there is no way to test if a macro is called within a include. To handle this particular scenario, the include should be switched for the <a class="el" href="mp__include_8sas.html" title="Performs a include.">mp_include.sas</a> macro. This provides an indicator that we are running a macro within a include (_SYSINCLUDEFILEDEVICE) and allows us to provide a dataset with the abort values (msg, mac). We can then run an abort cancel FILE to stop the include running, and pass the dataset back to the calling program to run a regular mp_abort(). The dataset will contain the following fields: <ul>
+<li>iftrue (1=1) </li>
+<li>msg (the message) </li>
+<li>mac (the mac param) </li>
+</ul>
+</td></tr>
+    <tr><td class="paramname">mode=</td><td>(REGULAR) If mode=INCLUDE then the &amp;errds dataset is checked for an abort status. Valid values: <ul>
+<li>REGULAR (default) </li>
+<li>INCLUDE</li>
+</ul>
+<h4>Related Macros </h4>
+</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section version"><dt>Version</dt><dd>9.4M3 </dd></dl>
+<ul>
+<li><a class="el" href="mp__include_8sas.html" title="Performs a include.">mp_include.sas</a></li>
+</ul>
+<dl class="section version"><dt>Version</dt><dd>9.4 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="mp__abort_8sas_source.html">mp_abort.sas</a>.</p>

@@ -128,16 +128,18 @@ proc sql;
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(0) The output table to load. If not provided, will default to the table in the &amp;ds parameter. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">flavour=</td><td>(SAS) The SQL flavour to be applied to the output. Valid options: <ul>
 <li>SAS (default) - suitable for regular proc sql </li>
-<li>PGSQL - Used for Postgres databases</li>
+<li>PGSQL - Used for Postgres databases </li>
 </ul>
-<h4>SAS Macros </h4>
 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">applydttm=</td><td>(YES) If YES, any columns using datetime formats will be converted to native DB datetime literals</td></tr>
   </table>
   </dd>
 </dl>
+<h4>SAS Macros </h4>
 <ul>
 <li><a class="el" href="mf__existfileref_8sas.html" title="Checks whether a fileref exists.">mf_existfileref.sas</a> </li>
 <li><a class="el" href="mf__getvarcount_8sas.html" title="Returns number of variables in a dataset.">mf_getvarcount.sas</a> </li>
+<li><a class="el" href="mf__getvarformat_8sas.html" title="Returns the format of a variable.">mf_getvarformat.sas</a> </li>
 <li><a class="el" href="mf__getvarlist_8sas.html" title="Returns dataset variable list direct from header.">mf_getvarlist.sas</a> </li>
 <li><a class="el" href="mf__getvartype_8sas.html" title="Returns variable type - Character (C) or Numeric (N)">mf_getvartype.sas</a></li>
 </ul>
