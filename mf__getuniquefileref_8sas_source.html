@@ -109,40 +109,61 @@ $(document).ready(function(){initNavTree('mf__getuniquefileref_8sas_source.html'
 <a href="mf__getuniquefileref_8sas.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  @file</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  @brief Assigns and returns an unused fileref</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  @details</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  Use as follows:</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">      %let fileref1=%mf_getuniquefileref();</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">      %let fileref2=%mf_getuniquefileref();</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">      %put &amp;fileref1 &amp;fileref2;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">  which returns:</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  @details  Using the native approach for assigning filerefs fails as some</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  procedures (such as proc http) do not recognise the temporary names (starting</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">  with a hash), returning a message such as:</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">  &gt; ERROR 22-322: Expecting a name.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">  This macro works by attempting a random fileref (with a prefix), seeing if it</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">  is already assigned, and if not - returning the fileref.</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">&gt; mcref0 mcref1</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">  @param prefix= first part of fileref. Remember that filerefs can only be 8</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">    characters, so a 7 letter prefix would mean that `maxtries` should be 10.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">  @param maxtries= the last part of the libref.  Provide an integer value.</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">  If your process can accept filerefs with the hash (#) prefix, then set</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">  `prefix=0` to revert to the native approach - which is significantly faster</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">  when there are a lot of filerefs in a session.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">  Use as follows:</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">  @version 9.2</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">  @author Allan Bowe</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;%macro mf_getuniquefileref(prefix=mcref,maxtries=1000);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  %local x fname;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  %let x=0;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  %<span class="keywordflow">do</span> x=0 %to &amp;maxtries;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  %<span class="keywordflow">if</span> %sysfunc(fileref(&amp;prefix&amp;x)) &gt; 0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    %let fname=&amp;prefix&amp;x;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    %let rc=%sysfunc(filename(fname,,temp));</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    %<span class="keywordflow">if</span> &amp;rc %then %put %sysfunc(sysmsg());</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    &amp;prefix&amp;x</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    %*put &amp;sysmacroname: Fileref &amp;prefix&amp;x was assigned and returned;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    %<span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  %end;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  %end;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  %put unable to find available fileref in range &amp;prefix.0-&amp;maxtries;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;%mend mf_getuniquefileref;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">      %let fileref1=%mf_getuniquefileref();</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">      %let fileref2=%mf_getuniquefileref(prefix=0);</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">      %put &amp;fileref1 &amp;fileref2;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">  which returns filerefs similar to:</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">&gt; _7432233 #LN00070</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">  @param [in] prefix= (_) first part of fileref. Remember that filerefs can only</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">    be 8 characters, so a 7 letter prefix would mean `maxtries` should be 10.</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    if using zero (0) as the prefix, a native assignment is used.</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">  @param [in] maxtries= (1000) the last part of the libref. Must be an integer.</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">  @version 9.2</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">  @author Allan Bowe</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;%macro mf_getuniquefileref(prefix=_,maxtries=1000);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  %local rc fname;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  %<span class="keywordflow">if</span> &amp;prefix=0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    %let rc=%sysfunc(filename(fname,,temp));</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    %<span class="keywordflow">if</span> &amp;rc %then %put %sysfunc(sysmsg());</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    &amp;fname</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  %end;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    %local x len;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    %let len=%eval(8-%length(&amp;prefix));</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    %let x=0;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    %<span class="keywordflow">do</span> x=0 %to &amp;maxtries;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      %let fname=&amp;prefix%substr(%sysfunc(ranuni(0)),3,&amp;len);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      %<span class="keywordflow">if</span> %sysfunc(fileref(&amp;fname)) &gt; 0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        %let rc=%sysfunc(filename(fname,,temp));</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        %<span class="keywordflow">if</span> &amp;rc %then %put %sysfunc(sysmsg());</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        &amp;fname</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        %<span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      %end;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    %end;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    %put unable to find available fileref after &amp;maxtries attempts;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  %end;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;%mend mf_getuniquefileref;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

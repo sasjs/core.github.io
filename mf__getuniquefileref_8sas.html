@@ -112,17 +112,23 @@ $(document).ready(function(){initNavTree('mf__getuniquefileref_8sas.html',''); i
 
 <p><a href="mf__getuniquefileref_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Use as follows: </p><pre class="fragment">%let fileref1=%mf_getuniquefileref();
-%let fileref2=%mf_getuniquefileref();
-%put &amp;fileref1 &amp;fileref2;
-</pre><p> which returns:</p>
+<div class="textblock"><p>Using the native approach for assigning filerefs fails as some procedures (such as proc http) do not recognise the temporary names (starting with a hash), returning a message such as:</p>
 <blockquote class="doxtable">
-<p>mcref0 mcref1 </p>
+<p>ERROR 22-322: Expecting a name. </p>
+</blockquote>
+<p>This macro works by attempting a random fileref (with a prefix), seeing if it is already assigned, and if not - returning the fileref.</p>
+<p>If your process can accept filerefs with the hash (#) prefix, then set <code>prefix=0</code> to revert to the native approach - which is significantly faster when there are a lot of filerefs in a session.</p>
+<p>Use as follows: </p><pre class="fragment">%let fileref1=%mf_getuniquefileref();
+%let fileref2=%mf_getuniquefileref(prefix=0);
+%put &amp;fileref1 &amp;fileref2;
+</pre><p> which returns filerefs similar to:</p>
+<blockquote class="doxtable">
+<p>_7432233 #LN00070 </p>
 </blockquote>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">prefix=</td><td>first part of fileref. Remember that filerefs can only be 8 characters, so a 7 letter prefix would mean that <code>maxtries</code> should be 10. </td></tr>
-    <tr><td class="paramname">maxtries=</td><td>the last part of the libref. Provide an integer value.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">prefix=</td><td>(_) first part of fileref. Remember that filerefs can only be 8 characters, so a 7 letter prefix would mean <code>maxtries</code> should be 10. if using zero (0) as the prefix, a native assignment is used. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">maxtries=</td><td>(1000) the last part of the libref. Must be an integer.</td></tr>
   </table>
   </dd>
 </dl>

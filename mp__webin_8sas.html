@@ -83,7 +83,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('mp__abort_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mp__webin_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,34 +103,32 @@ $(document).ready(function(){initNavTree('mp__abort_8sas.html',''); initResizabl
 
 <div class="header">
   <div class="headertitle">
-<div class="title">mp_abort.sas File Reference</div>  </div>
+<div class="title">mp_webin.sas File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>abort gracefully according to context  
+<p>Fix the <code>_WEBIN</code> variables provided to SAS web services.  
 <a href="#details">More...</a></p>
 
-<p><a href="mp__abort_8sas_source.html">Go to the source code of this file.</a></p>
+<p><a href="mp__webin_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Configures an abort mechanism according to site specific policies or the particulars of an environment. For instance, can stream custom results back to the client in an STP Web App context, or completely stop in the case of a batch run. For STP sessions</p>
-<p>The method used varies according to the context. Important points:</p>
-<ul>
-<li>should not use endsas or abort cancel in 9.4m3 environments as this can cause hung multibridge sessions and result in a frozen STP server </li>
-<li>should not use endsas in viya 3.5 as this destroys the session and cannot fetch results (although both <a class="el" href="mv__getjoblog_8sas.html" title="Extract the log from a completed SAS Viya Job.">mv_getjoblog.sas</a> and the @sasjs/adapter will recognise this and fetch the log of the parent session instead) </li>
-<li>STP environments must finish cleanly to avoid the log being sent to _webout. To assist with this, we also run stpsrvset('program error', 0) and set SYSCC=0. For 9.4m3 we take a unique approach - we open a macro but don't close it! This provides a graceful abort, EXCEPT when called called within a include within a macro (and that macro contains additional logic). See <a class="el" href="mp__abort_8test_8nofix_8sas.html" title="Testing mp_abort macro.">mp_abort.test.nofix.sas</a> for the example case. If you know of another way to gracefully abort a 9.4m3 STP session, we'd love to hear about it!</li>
+<div class="textblock"><p>When uploading files to SAS Stored Processes or Viya Jobs a number of global macro variables are automatically created - however there are some differences in behaviour both between SAS 9 and Viya, and also between a single file upload and a multi-file upload.</p>
+<p>This macro "straightens" up the global macro variables to make it easier / simpler to write code that works in both environments and with a variable number of file inputs.</p>
+<p>After running this macro, the following global variables will <em>always</em> exist: </p><ul>
+<li><code>_WEBIN_FILE_COUNT</code> </li>
+<li><code>_WEBIN_FILENAME1</code> </li>
+<li><code>_WEBIN_FILEREF1</code> </li>
+<li><code>_WEBIN_NAME1</code></li>
 </ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">mac=</td><td>to contain the name of the calling macro </td></tr>
-    <tr><td class="paramname">msg=</td><td>message to be returned </td></tr>
-    <tr><td class="paramname">iftrue=</td><td>supply a condition under which the macro should be executed.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section version"><dt>Version</dt><dd>9.4M3 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
+<p>Usage:</p>
+<p>mp_webin()</p>
+<p>This was created as a macro procedure (over a macro function) as it will also use the filename statement in Viya environments (where <code>_webin_fileuri</code> is provided).</p>
+<h4>SAS Macros </h4>
+<ul>
+<li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
+</ul>
 
-<p class="definition">Definition in file <a class="el" href="mp__abort_8sas_source.html">mp_abort.sas</a>.</p>
+<p class="definition">Definition in file <a class="el" href="mp__webin_8sas_source.html">mp_webin.sas</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
@@ -138,7 +136,7 @@ $(document).ready(function(){initNavTree('mp__abort_8sas.html',''); initResizabl
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e914ee4d4a44400f1fdb170cb4ead18a.html">base</a></li><li class="navelem"><a class="el" href="mp__abort_8sas.html">mp_abort.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_e914ee4d4a44400f1fdb170cb4ead18a.html">base</a></li><li class="navelem"><a class="el" href="mp__webin_8sas.html">mp_webin.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">
