@@ -83,7 +83,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('mp__abort_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mp__include_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,49 +103,60 @@ $(document).ready(function(){initNavTree('mp__abort_8sas.html',''); initResizabl
 
 <div class="header">
   <div class="headertitle">
-<div class="title">mp_abort.sas File Reference</div>  </div>
+<div class="title">mp_include.sas File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>abort gracefully according to context  
+<p>Performs a wrapped %include.  
 <a href="#details">More...</a></p>
 
-<p><a href="mp__abort_8sas_source.html">Go to the source code of this file.</a></p>
+<p><a href="mp__include_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Configures an abort mechanism according to site specific policies or the particulars of an environment. For instance, can stream custom results back to the client in an STP Web App context, or completely stop in the case of a batch run. For STP sessions</p>
-<p>The method used varies according to the context. Important points:</p>
+<div class="textblock"><p>This macro wrapper is necessary if you need your included code to know that it is being %included.</p>
+<p>If you are using include in a regular program, you could make use of the following macro variables:</p>
 <ul>
-<li>should not use endsas or abort cancel in 9.4m3 environments as this can cause hung multibridge sessions and result in a frozen STP server </li>
-<li>should not use endsas in viya 3.5 as this destroys the session and cannot fetch results (although both <a class="el" href="mv__getjoblog_8sas.html" title="Extract the log from a completed SAS Viya Job.">mv_getjoblog.sas</a> and the @sasjs/adapter will recognise this and fetch the log of the parent session instead) </li>
-<li>STP environments must finish cleanly to avoid the log being sent to _webout. To assist with this, we also run stpsrvset('program error', 0) and set SYSCC=0. We take a unique "soft abort" approach - we open a macro but don't close it! This works everywhere EXCEPT inside a %include inside a macro. For that, we recommend you use <a class="el" href="mp__include_8sas.html" title="Performs a wrapped %include.">mp_include.sas</a> to perform the include, and then call %mp_abort(mode=INCLUDE) from the source program (ie, OUTSIDE of the top-parent macro).</li>
+<li>SYSINCLUDEFILEDEVICE </li>
+<li>SYSINCLUDEFILEDIR </li>
+<li>SYSINCLUDEFILEFILEREF </li>
+<li>SYSINCLUDEFILENAME</li>
 </ul>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>However these variables are NOT available inside a macro, as documented here: <a href="https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/mcrolref/n1j5tcc0n2xczyn1kg1o0606gsv9.htm">https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/mcrolref/n1j5tcc0n2xczyn1kg1o0606gsv9.htm</a></p>
+<p>This macro can be used in place of the include statement, and will insert the following (equivalent) global variables:</p>
+<ul>
+<li>_SYSINCLUDEFILEDEVICE </li>
+<li>_SYSINCLUDEFILEDIR </li>
+<li>_SYSINCLUDEFILEFILEREF </li>
+<li>_SYSINCLUDEFILENAME</li>
+</ul>
+<p>These can be used whenever testing <em>within a macro</em>. Outside of the macro, the regular automatic variables will still be available (thanks to a concatenated file list in the include statement).</p>
+<p>Example usage: </p><pre class="fragment">filename example temp;
+data _null_;
+  file example;
+  put '%macro test();';
+  put '%put &amp;=_SYSINCLUDEFILEFILEREF;';
+  put '%put &amp;=SYSINCLUDEFILEFILEREF;';
+  put '%mend; %test()';
+  put '%put &amp;=SYSINCLUDEFILEFILEREF;';
+run;
+%mp_include(example)
+</pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mac=</td><td>to contain the name of the calling macro </td></tr>
-    <tr><td class="paramname">msg=</td><td>message to be returned </td></tr>
-    <tr><td class="paramname">iftrue=</td><td>supply a condition under which the macro should be executed. </td></tr>
-    <tr><td class="paramname">errds=</td><td>(work.mp_abort_errds) There is no clean way to end a process within a include called within a macro. Furthermore, there is no way to test if a macro is called within a include. To handle this particular scenario, the include should be switched for the <a class="el" href="mp__include_8sas.html" title="Performs a wrapped %include.">mp_include.sas</a> macro. This provides an indicator that we are running a macro within a %include (<code>_SYSINCLUDEFILEDEVICE</code>) and allows us to provide a dataset with the abort values (msg, mac). We can then run an abort cancel FILE to stop the include running, and pass the dataset back to the calling program to run a regular %mp_abort(). The dataset will contain the following fields: <ul>
-<li>iftrue (1=1) </li>
-<li>msg (the message) </li>
-<li>mac (the mac param)</li>
-</ul>
-</td></tr>
-    <tr><td class="paramname">mode=</td><td>(REGULAR) If mode=INCLUDE then the &amp;errds dataset is checked for an abort status. Valid values: <ul>
-<li>REGULAR (default) </li>
-<li>INCLUDE</li>
-</ul>
-<h4>Related Macros </h4>
-</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fileref</td><td>The fileref of the file to be included. Must be provided. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">prefix=</td><td>(_) The prefix to apply to the global variables. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">opts=</td><td>(SOURCE2) The options to apply to the inc statement </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">errds=</td><td>(work.mp_abort_errds) There is no clean way to end a process within a include called within a macro. Furthermore, there is no way to test if a macro is called within a include. To handle this particular scenario, the mp_abort() macro will test for the existence of the <code>_SYSINCLUDEFILEDEVICE</code> variable and return the outputs (msg,mac) inside this dataset. It will then run an abort cancel FILE to stop the include running, and pass the dataset back. NOTE - it is NOT possible to read this dataset as part of <em>this</em> macro - when running abort cancel FILE, ALL macros are closed, so instead it is necessary to invoke "%mp_abort(mode=INCLUDE)" OUTSIDE of any macro wrappers.</td></tr>
   </table>
   </dd>
 </dl>
-<ul>
-<li><a class="el" href="mp__include_8sas.html" title="Performs a wrapped %include.">mp_include.sas</a></li>
-</ul>
 <dl class="section version"><dt>Version</dt><dd>9.4 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Allan Bowe</dd></dl>
+<h4>SAS Macros </h4>
+<ul>
+<li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
+<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
+</ul>
 
-<p class="definition">Definition in file <a class="el" href="mp__abort_8sas_source.html">mp_abort.sas</a>.</p>
+<p class="definition">Definition in file <a class="el" href="mp__include_8sas_source.html">mp_include.sas</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
@@ -153,7 +164,7 @@ $(document).ready(function(){initNavTree('mp__abort_8sas.html',''); initResizabl
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e914ee4d4a44400f1fdb170cb4ead18a.html">base</a></li><li class="navelem"><a class="el" href="mp__abort_8sas.html">mp_abort.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_e914ee4d4a44400f1fdb170cb4ead18a.html">base</a></li><li class="navelem"><a class="el" href="mp__include_8sas.html">mp_include.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">

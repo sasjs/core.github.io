@@ -34,7 +34,7 @@ var NAVTREEINDEX =
 [
 "dir_0d92069d5a23b1d3125c326d74f1a07c.html",
 "mp__assertcols_8sas.html",
-"mv__tokenauth_8sas.html#a4c650bb64b3954cae77ec4042aed1255"
+"mv__tokenauth_8sas.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

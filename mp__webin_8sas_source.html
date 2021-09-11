@@ -158,7 +158,7 @@ $(document).ready(function(){initNavTree('mp__webin_8sas_source.html',''); initR
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">/* If Viya, create temporary fileref(s) */</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;%local i;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;%<span class="keywordflow">if</span> %mf_getplatform()=SASVIYA %then %<span class="keywordflow">do</span> i=1 %to &amp;_webin_file_count;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  %let _webin_fileref&amp;i=%mf_getuniquefileref(prefix=0);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  %let _webin_fileref&amp;i=%mf_getuniquefileref();</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  filename &amp;&amp;_webin_fileref&amp;i filesrvc <span class="stringliteral">&quot;&amp;&amp;_webin_fileuri&amp;i&quot;</span>;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;%end;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
