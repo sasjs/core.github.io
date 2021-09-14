@@ -1,5 +1,12 @@
 var NAVTREEINDEX2 =
 {
+"mv__registerclient_8test_81_8sas.html":[1,5,2,11],
+"mv__registerclient_8test_81_8sas.html#acf2488b95c97e0378c9bf49de3b50f28":[1,5,2,11,0],
+"mv__registerclient_8test_81_8sas_source.html":[1,5,2,11],
+"mv__registerclient_8test_82_8sas.html":[1,5,2,12],
+"mv__registerclient_8test_82_8sas.html#a0cba203541de999a02cdc285c2869032":[1,5,2,12,1],
+"mv__registerclient_8test_82_8sas.html#a2e2f103508748655145511efeb7b0f13":[1,5,2,12,0],
+"mv__registerclient_8test_82_8sas_source.html":[1,5,2,12],
 "mv__tokenauth_8sas.html":[1,6,26],
 "mv__tokenauth_8sas.html#a130626d9725e0a7273af0325ac58e95d":[1,6,26,1],
 "mv__tokenauth_8sas.html#a4c650bb64b3954cae77ec4042aed1255":[1,6,26,2],

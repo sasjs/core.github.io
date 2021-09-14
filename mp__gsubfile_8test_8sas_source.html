@@ -83,7 +83,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('mp__webin_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mp__gsubfile_8test_8sas_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,41 +103,50 @@ $(document).ready(function(){initNavTree('mp__webin_8sas.html',''); initResizabl
 
 <div class="header">
   <div class="headertitle">
-<div class="title">mp_webin.sas File Reference</div>  </div>
+<div class="title">mp_gsubfile.test.sas</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Fix the <code>_WEBIN</code> variables provided to SAS web services.  
-<a href="#details">More...</a></p>
-
-<p><a href="mp__webin_8sas_source.html">Go to the source code of this file.</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>When uploading files to SAS Stored Processes or Viya Jobs a number of global macro variables are automatically created - however there are some differences in behaviour both between SAS 9 and Viya, and also between a single file upload and a multi-file upload.</p>
-<p>This macro "straightens" up the global macro variables to make it easier / simpler to write code that works in both environments and with a variable number of file inputs.</p>
-<p>After running this macro, the following global variables will <em>always</em> exist: </p><ul>
-<li><code>_WEBIN_FILE_COUNT</code> </li>
-<li><code>_WEBIN_FILENAME1</code> </li>
-<li><code>_WEBIN_FILEREF1</code> </li>
-<li><code>_WEBIN_NAME1</code></li>
-</ul>
-<p>Usage:</p>
-<p>mp_webin()</p>
-<p>This was created as a macro procedure (over a macro function) as it will also use the filename statement in Viya environments (where <code>_webin_fileuri</code> is provided).</p>
-<h4>SAS Macros </h4>
-<ul>
-<li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
-<li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
-</ul>
-
-<p class="definition">Definition in file <a class="el" href="mp__webin_8sas_source.html">mp_webin.sas</a>.</p>
-</div></div><!-- contents -->
+<a href="mp__gsubfile_8test_8sas.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  @file</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  @brief Testing mp_gsubfile.sas macro</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">  @li mp_gsubfile.sas</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">  @li mp_assert.sas</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">  * test 1 - simple replace</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">  */</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;%global str1;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;%let file=%sysfunc(pathname(work))/file.txt;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;%let pat=replace/me;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;%let str=with/<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;data _null_;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  file <span class="stringliteral">&quot;&amp;file&quot;</span>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  put <span class="stringliteral">&quot;&amp;pat&quot;</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;run;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;%mp_gsubfile(file=&amp;file, patternvar=pat, replacevar=str)</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;data _null_;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  infile <span class="stringliteral">&quot;&amp;file&quot;</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  input;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  call symputx(<span class="stringliteral">&#39;str1&#39;</span>,_infile_);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;run;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;%mp_assert(</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  iftrue=(<span class="stringliteral">&quot;&amp;str1&quot;</span>=<span class="stringliteral">&quot;&amp;str&quot;</span>),</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  desc=Check that simple replacement was successful,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  outds=work.test_results</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;)</div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e914ee4d4a44400f1fdb170cb4ead18a.html">base</a></li><li class="navelem"><a class="el" href="mp__webin_8sas.html">mp_webin.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_59425e443f801f1f2fd8bbe4959a3ccf.html">tests</a></li><li class="navelem"><a class="el" href="dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef.html">crossplatform</a></li><li class="navelem"><a class="el" href="mp__gsubfile_8test_8sas.html">mp_gsubfile.test.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">
