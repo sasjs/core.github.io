@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('ml__gsubfile_8sas_source.html',''); in
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  put <span class="charliteral">&#39; &#39;</span>;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  put <span class="stringliteral">&#39;-- open file and perform the substitution &#39;</span>;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  put <span class="stringliteral">&#39;file = io.open(fpath,&quot;r&quot;) &#39;</span>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  put <span class="stringliteral">&#39;fcontent = file:read() &#39;</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  put <span class="stringliteral">&#39;fcontent = file:read(&quot;*all&quot;) &#39;</span>;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  put <span class="stringliteral">&#39;file:close() &#39;</span>;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  put <span class="stringliteral">&#39;fcontent = string.gsub( &#39;</span>;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  put <span class="stringliteral">&#39;  fcontent, &#39;</span>;</div>
@@ -147,7 +147,7 @@ $(document).ready(function(){initNavTree('ml__gsubfile_8sas_source.html',''); in
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  put <span class="stringliteral">&#39;io.close(file) &#39;</span>;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;run;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;%inc <span class="stringliteral">&quot;%sysfunc(pathname(work))/ml_gsubfile.lua&quot;</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;%inc <span class="stringliteral">&quot;%sysfunc(pathname(work))/ml_gsubfile.lua&quot;</span> /source2;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;%mend ml_gsubfile;</div>
 </div><!-- fragment --></div><!-- contents -->

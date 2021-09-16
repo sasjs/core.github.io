@@ -120,7 +120,7 @@ data _null_;
   file "&amp;file";
   put "&amp;str";
 run;
-%mp_gsubfile(file=&amp;file, pattern=str, replacement=rep)
+%mp_gsubfile(file=&amp;file, patternvar=str, replacevar=rep)
 data _null_;
   infile "&amp;file";
   input;

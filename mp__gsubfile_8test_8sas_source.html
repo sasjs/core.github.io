@@ -139,6 +139,39 @@ $(document).ready(function(){initNavTree('mp__gsubfile_8test_8sas_source.html','
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  desc=Check that simple replacement was successful,</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  outds=work.test_results</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">  * test 2 - replace from additional line</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">  */</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;%global str2 strcheck2 strcheck2b;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;%let file2=%sysfunc(pathname(work))/file2.txt;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;%let pat2=replace/me;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;%let str2=with/<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;data _null_;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  file <span class="stringliteral">&quot;&amp;file2&quot;</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  put <span class="stringliteral">&#39;line1&#39;</span>;output;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  put <span class="stringliteral">&quot;&amp;pat2&quot;</span>;output;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  put <span class="stringliteral">&quot;&amp;pat2&quot;</span>;output;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;run;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;%mp_gsubfile(file=&amp;file2, patternvar=pat2, replacevar=str2)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;data _null_;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  infile <span class="stringliteral">&quot;&amp;file2&quot;</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  input;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordflow">if</span> _n_=2 then call symputx(<span class="stringliteral">&#39;strcheck2&#39;</span>,_infile_);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordflow">if</span> _n_=3 then call symputx(<span class="stringliteral">&#39;strcheck2b&#39;</span>,_infile_);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  putlog _infile_;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;run;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;%mp_assert(</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  iftrue=(<span class="stringliteral">&quot;&amp;strcheck2&quot;</span>=<span class="stringliteral">&quot;&amp;str2&quot;</span>),</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  desc=Check that multi line replacement was successful (line2),</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  outds=work.test_results</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;)</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;%mp_assert(</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  iftrue=(<span class="stringliteral">&quot;&amp;strcheck2b&quot;</span>=<span class="stringliteral">&quot;&amp;str2&quot;</span>),</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  desc=Check that multi line replacement was successful (line3),</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  outds=work.test_results</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;)</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
