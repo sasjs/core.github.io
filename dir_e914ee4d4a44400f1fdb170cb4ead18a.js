@@ -60,6 +60,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_filtercheck.sas", "mp__filtercheck_8sas.html", "mp__filtercheck_8sas" ],
     [ "mp_filtergenerate.sas", "mp__filtergenerate_8sas.html", null ],
     [ "mp_filtervalidate.sas", "mp__filtervalidate_8sas.html", "mp__filtervalidate_8sas" ],
+    [ "mp_getcols.sas", "mp__getcols_8sas.html", null ],
     [ "mp_getconstraints.sas", "mp__getconstraints_8sas.html", null ],
     [ "mp_getdbml.sas", "mp__getdbml_8sas.html", null ],
     [ "mp_getddl.sas", "mp__getddl_8sas.html", null ],
