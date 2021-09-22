@@ -115,14 +115,14 @@ $(document).ready(function(){initNavTree('mp__mdtablewrite_8sas.html',''); initR
 <div class="textblock"><p>A markdown table is a simple table representation for use in documents written in markdown format.</p>
 <p>An online generator is available here: <a href="https://www.tablesgenerator.com/markdown_tables">https://www.tablesgenerator.com/markdown_tables</a></p>
 <p>This structure is also used by the Macro Core library for documenting input/ output datasets, as well as the sasjs/cli tool for documenting inputs/outputs for web services.</p>
-<p>We take the standard definition one step further by embedding the informat in the table header row, like so: </p><pre class="fragment">|var1:$|var2:best.|var3:date9.|
+<p>We take the standard definition one step further by embedding the informat in the table header row, like so: </p><pre class="fragment">|var1:$32|var2:best.|var3:date9.|
 |---|---|---|
 |some text|42|01JAN1960|
 |blah|1|31DEC1999|
 </pre><p> Which resolves to:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">var1:$   </th><th class="markdownTableHeadNone">var2:best.   </th><th class="markdownTableHeadNone">var3:date9.    </th></tr>
+<th class="markdownTableHeadNone">var1:$32   </th><th class="markdownTableHeadNone">var2:best.   </th><th class="markdownTableHeadNone">var3:date9.    </th></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">some text   </td><td class="markdownTableBodyNone">42   </td><td class="markdownTableBodyNone">01JAN1960    </td></tr>
 <tr class="markdownTableRowEven">
