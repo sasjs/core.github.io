@@ -166,8 +166,8 @@ $(document).ready(function(){initNavTree('mp__ds2cards_8sas_source.html',''); in
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;%let nvars=0;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;proc sql noprint;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;select count(*) into: nvars from dictionary.columns</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  where libname=&quot;%scan(%upcase(&amp;base_ds),1)&quot;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    and memname=&quot;%scan(%upcase(&amp;base_ds),2)&quot;;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  where upcase(libname)=&quot;%scan(%upcase(&amp;base_ds),1)&quot;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    and upcase(memname)=&quot;%scan(%upcase(&amp;base_ds),2)&quot;;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;%if &amp;nvars=0 %then %do;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  %put %str(WARN)ING: Dataset &amp;base_ds has no variables, will not be converted.;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  %return;</div>
@@ -223,8 +223,8 @@ $(document).ready(function(){initNavTree('mp__ds2cards_8sas_source.html',''); in
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;reset outobs=max;</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;create table datalines1 as</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  select name,type,length,varnum,format,label from dictionary.columns</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  where libname=&quot;%upcase(%scan(&amp;base_ds,1))&quot;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    and memname=&quot;%upcase(%scan(&amp;base_ds,2))&quot;;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  where upcase(libname)=&quot;%upcase(%scan(&amp;base_ds,1))&quot;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    and upcase(memname)=&quot;%upcase(%scan(&amp;base_ds,2))&quot;;</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">  Due to long decimals cannot use best. format</span></div>
