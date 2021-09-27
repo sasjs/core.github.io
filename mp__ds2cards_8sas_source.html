@@ -268,124 +268,129 @@ $(document).ready(function(){initNavTree('mp__ds2cards_8sas_source.html',''); in
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">    * by the presence of the $HEX keyword in the format.</span></div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">    */</span></div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  else if upcase(format)=:&#39;$HEX&#39; then</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    dataline=cats(&#39;put(trim(&#39;,name,&#39;),&#39;,format,&#39;)&#39;);</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  else dataline=name;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;run;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;proc sql noprint;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;select dataline into: datalines separated by &#39;,&#39; from datalines_2;</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;%local</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  process_dttm_flg</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  valid_from_dttm_flg</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  valid_to_dttm_flg</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;;</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;%let process_dttm_flg = N;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;%let valid_from_dttm_flg = N;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;%let valid_to_dttm_flg = N;</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;data _null_;</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  set datalines1 ;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment">/* build attrib statement */</span></div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  if type=&#39;<span class="keywordtype">char</span>&#39; then type2=&#39;$&#39;;</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  if strip(format) ne &#39;&#39; then format2=cats(&#39;format=&#39;,format);</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  if strip(label) ne &#39;&#39; then label2=cats(&#39;label=&#39;,quote(trim(label)));</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  str1=catx(&#39; &#39;,(put(name,$33.)||&#39;length=&#39;)</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        ,put(cats(type2,length),$7.)||format2,label2);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">/* Build input statement */</span></div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  if upcase(format)=:&#39;$HEX&#39; then type3=&#39;:&#39;!!format;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  else if type=&#39;<span class="keywordtype">char</span>&#39; then type3=&#39;:$char.&#39;;</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  str2=put(name,$33.)||type3;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    dataline=cats(&#39;put(trim(&#39;,name,&#39;),&#39;,format,&#39;)&#39;);<span class="comment"></span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">  /**</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">    * There is no easy way to store line breaks in a cards file.</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">    * To discuss this, use: https://github.com/sasjs/core/issues/80</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">    * Removing all nonprintables with kw (keep writeable)</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">    */</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  else dataline=cats(&#39;compress(&#39;,name,&#39;, ,&quot;kw&quot;)&#39;);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;run;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;proc sql noprint;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;select dataline into: datalines separated by &#39;,&#39; from datalines_2;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;%local</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  process_dttm_flg</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  valid_from_dttm_flg</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  valid_to_dttm_flg</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;%let process_dttm_flg = N;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;%let valid_from_dttm_flg = N;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;%let valid_to_dttm_flg = N;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;data _null_;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  set datalines1 ;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment">/* build attrib statement */</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  if type=&#39;<span class="keywordtype">char</span>&#39; then type2=&#39;$&#39;;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  if strip(format) ne &#39;&#39; then format2=cats(&#39;format=&#39;,format);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  if strip(label) ne &#39;&#39; then label2=cats(&#39;label=&#39;,quote(trim(label)));</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  str1=catx(&#39; &#39;,(put(name,$33.)||&#39;length=&#39;)</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        ,put(cats(type2,length),$7.)||format2,label2);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  if(upcase(name) = &quot;PROCESSED_DTTM&quot;) then</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    call symputx(&quot;process_dttm_flg&quot;, &quot;Y&quot;, &quot;L&quot;);</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  if(upcase(name) = &quot;VALID_FROM_DTTM&quot;) then</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    call symputx(&quot;valid_from_dttm_flg&quot;, &quot;Y&quot;, &quot;L&quot;);</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  if(upcase(name) = &quot;VALID_TO_DTTM&quot;) then</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    call symputx(&quot;valid_to_dttm_flg&quot;, &quot;Y&quot;, &quot;L&quot;);</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  call symputx(cats(&quot;attrib_stmt_&quot;, put(_N_, 8.)), str1, &quot;L&quot;);</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  call symputx(cats(&quot;input_stmt_&quot;, put(_N_, 8.))</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    , ifc(upcase(name) not in</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;      (&#39;PROCESSED_DTTM&#39;,&#39;VALID_FROM_DTTM&#39;,&#39;VALID_TO_DTTM&#39;), str2, &quot;&quot;), &quot;L&quot;);</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;run;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;data _null_;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  file &amp;cards_file. &amp;outencoding lrecl=32767 termstr=nl &amp;append;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  length __attrib $32767;</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  if _n_=1 then do;</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    put &#39;<span class="comment">/**&#39;;</span></div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="comment">    put &#39;  @file&#39;;</span></div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">    put &quot;  @brief Datalines for %upcase(%scan(&amp;base_ds,2)) dataset&quot;;</span></div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">    put &quot;  @details Generated by %nrstr(%%)mp_ds2cards()&quot;;</span></div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">    put &quot;  Available on github.com/sasjs/core&quot;;</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">    put &#39;**/</span>&#39;;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    put &quot;data &amp;tgt_ds &amp;indexes;&quot;;</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    put &quot;attrib &quot;;</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    %do i = 1 %to &amp;nvars;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;      __attrib=symget(&quot;attrib_stmt_&amp;i&quot;);</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;      put __attrib;</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    %end;</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    put &quot;;&quot;;</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    %if &amp;process_dttm_flg. eq Y %then %do;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;      put &#39;retain PROCESSED_DTTM %sysfunc(datetime());&#39;;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">/* Build input statement */</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  if upcase(format)=:&#39;$HEX&#39; then type3=&#39;:&#39;!!format;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  else if type=&#39;<span class="keywordtype">char</span>&#39; then type3=&#39;:$char.&#39;;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  str2=put(name,$33.)||type3;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  if(upcase(name) = &quot;PROCESSED_DTTM&quot;) then</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    call symputx(&quot;process_dttm_flg&quot;, &quot;Y&quot;, &quot;L&quot;);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  if(upcase(name) = &quot;VALID_FROM_DTTM&quot;) then</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    call symputx(&quot;valid_from_dttm_flg&quot;, &quot;Y&quot;, &quot;L&quot;);</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  if(upcase(name) = &quot;VALID_TO_DTTM&quot;) then</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    call symputx(&quot;valid_to_dttm_flg&quot;, &quot;Y&quot;, &quot;L&quot;);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  call symputx(cats(&quot;attrib_stmt_&quot;, put(_N_, 8.)), str1, &quot;L&quot;);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  call symputx(cats(&quot;input_stmt_&quot;, put(_N_, 8.))</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    , ifc(upcase(name) not in</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;      (&#39;PROCESSED_DTTM&#39;,&#39;VALID_FROM_DTTM&#39;,&#39;VALID_TO_DTTM&#39;), str2, &quot;&quot;), &quot;L&quot;);</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;run;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;data _null_;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  file &amp;cards_file. &amp;outencoding lrecl=32767 termstr=nl &amp;append;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  length __attrib $32767;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;  if _n_=1 then do;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    put &#39;<span class="comment">/**&#39;;</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="comment">    put &#39;  @file&#39;;</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">    put &quot;  @brief Datalines for %upcase(%scan(&amp;base_ds,2)) dataset&quot;;</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment">    put &quot;  @details Generated by %nrstr(%%)mp_ds2cards()&quot;;</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">    put &quot;  Available on github.com/sasjs/core&quot;;</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">    put &#39;**/</span>&#39;;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    put &quot;data &amp;tgt_ds &amp;indexes;&quot;;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    put &quot;attrib &quot;;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    %do i = 1 %to &amp;nvars;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;      __attrib=symget(&quot;attrib_stmt_&amp;i&quot;);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;      put __attrib;</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    %end;</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    %if &amp;valid_from_dttm_flg. eq Y %then %do;</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;      put &#39;retain VALID_FROM_DTTM &amp;low_date;&#39;;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    %end;</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    %if &amp;valid_to_dttm_flg. eq Y %then %do;</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;      put &#39;retain VALID_TO_DTTM &amp;high_date;&#39;;</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    %end;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    if __nobs=0 then do;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;      put &#39;call missing(of _all_);<span class="comment">/* avoid uninitialised notes */</span>&#39;;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;      put &#39;stop;&#39;;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;      put &#39;run;&#39;;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    end;</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    else do;</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;      put &quot;infile cards dsd delimiter=&#39;,&#39;;&quot;;</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;      put &quot;input &quot;;</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;      %do i = 1 %to &amp;nvars.;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        %if(%length(&amp;&amp;input_stmt_&amp;i..)) %then</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;          put &quot;  &amp;&amp;input_stmt_&amp;i..&quot;;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        ;</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;      %end;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;      put &quot;;&quot;;</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;      put &quot;datalines4;&quot;;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    end;</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;  end;</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;  set &amp;setds end=__lastobs nobs=__nobs;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">/* remove all formats for write purposes - some have long underlying decimals */</span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;  format _numeric_ best30.29;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;  length __dataline $32767;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;  __dataline=catq(&#39;cqtmb&#39;,&amp;datalines);</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;  put __dataline;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;  if __lastobs then do;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    put &#39;;;;;&#39;;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    put &#39;run;&#39;;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    stop;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;  end;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;run;</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;proc sql;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;  drop table &amp;setds;</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;quit;</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;%if &amp;showlog=YES %then %do;</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;  data _null_;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    infile &amp;cards_file lrecl=32767;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    input;</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    put _infile_;</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;  run;</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;%end;</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;%put NOTE: CARDS FILE SAVED IN:;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;%put NOTE-;%put NOTE-;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;%put NOTE- %sysfunc(dequote(&amp;cards_file.));</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;%put NOTE-;%put NOTE-;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;%mend mp_ds2cards;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    put &quot;;&quot;;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    %if &amp;process_dttm_flg. eq Y %then %do;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;      put &#39;retain PROCESSED_DTTM %sysfunc(datetime());&#39;;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    %end;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    %if &amp;valid_from_dttm_flg. eq Y %then %do;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;      put &#39;retain VALID_FROM_DTTM &amp;low_date;&#39;;</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    %end;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    %if &amp;valid_to_dttm_flg. eq Y %then %do;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;      put &#39;retain VALID_TO_DTTM &amp;high_date;&#39;;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    %end;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    if __nobs=0 then do;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;      put &#39;call missing(of _all_);<span class="comment">/* avoid uninitialised notes */</span>&#39;;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;      put &#39;stop;&#39;;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;      put &#39;run;&#39;;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    end;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    else do;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;      put &quot;infile cards dsd;&quot;;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;      put &quot;input &quot;;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;      %do i = 1 %to &amp;nvars.;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        %if(%length(&amp;&amp;input_stmt_&amp;i..)) %then</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;          put &quot;  &amp;&amp;input_stmt_&amp;i..&quot;;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        ;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;      %end;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;      put &quot;;&quot;;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;      put &quot;datalines4;&quot;;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    end;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;  end;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;  set &amp;setds end=__lastobs nobs=__nobs;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">/* remove all formats for write purposes - some have long underlying decimals */</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;  format _numeric_ best30.29;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;  length __dataline $32767;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;  __dataline=catq(&#39;cqtmb&#39;,&amp;datalines);</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;  put __dataline;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;  if __lastobs then do;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    put &#39;;;;;&#39;;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    put &#39;run;&#39;;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    stop;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;  end;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;run;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;proc sql;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;  drop table &amp;setds;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;quit;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;%if &amp;showlog=YES %then %do;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;  data _null_;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    infile &amp;cards_file lrecl=32767;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    input;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    put _infile_;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;  run;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;%end;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;%put NOTE: CARDS FILE SAVED IN:;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;%put NOTE-;%put NOTE-;</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;%put NOTE- %sysfunc(dequote(&amp;cards_file.));</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;%put NOTE-;%put NOTE-;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;%mend mp_ds2cards;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
