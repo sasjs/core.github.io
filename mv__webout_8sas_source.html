@@ -323,20 +323,21 @@ $(document).ready(function(){initNavTree('mv__webout_8sas_source.html',''); init
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSCC&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syscc&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
 <div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSERRORTEXT&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syserrortext&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSHOSTNAME&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syshostname&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSSITE&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syssite&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    sysvlong=quote(trim(symget(<span class="stringliteral">&#39;sysvlong&#39;</span>)));</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    put <span class="stringliteral">&#39;,&quot;SYSVLONG&quot; : &#39;</span> sysvlong;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSWARNINGTEXT&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syswarningtext&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    put <span class="stringliteral">&#39;,&quot;END_DTTM&quot; : &quot;&#39;</span> <span class="stringliteral">&quot;%sysfunc(datetime(),datetime20.3)&quot;</span> <span class="stringliteral">&#39;&quot; &#39;</span>;</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    put <span class="stringliteral">&quot;}&quot;</span>;</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;  %<span class="keywordflow">if</span> %upcase(&amp;fref) ne _WEBOUT and &amp;stream=Y %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    data _null_; rc=fcopy(<span class="stringliteral">&quot;&amp;fref&quot;</span>,<span class="stringliteral">&quot;_webout&quot;</span>);run;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  %end;</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;%end;</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;%mend mv_webout;</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSSCPL&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;sysscpl&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSSITE&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syssite&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    sysvlong=quote(trim(symget(<span class="stringliteral">&#39;sysvlong&#39;</span>)));</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    put <span class="stringliteral">&#39;,&quot;SYSVLONG&quot; : &#39;</span> sysvlong;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSWARNINGTEXT&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syswarningtext&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    put <span class="stringliteral">&#39;,&quot;END_DTTM&quot; : &quot;&#39;</span> <span class="stringliteral">&quot;%sysfunc(datetime(),datetime20.3)&quot;</span> <span class="stringliteral">&#39;&quot; &#39;</span>;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    put <span class="stringliteral">&quot;}&quot;</span>;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;  %<span class="keywordflow">if</span> %upcase(&amp;fref) ne _WEBOUT and &amp;stream=Y %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    data _null_; rc=fcopy(<span class="stringliteral">&quot;&amp;fref&quot;</span>,<span class="stringliteral">&quot;_webout&quot;</span>);run;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  %end;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;%end;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;%mend mv_webout;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

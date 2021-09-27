@@ -39,6 +39,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mf_verifymacvars.sas", "mf__verifymacvars_8sas.html", null ],
     [ "mf_wordsinstr1butnotstr2.sas", "mf__wordsinstr1butnotstr2_8sas.html", null ],
     [ "mp_abort.sas", "mp__abort_8sas.html", null ],
+    [ "mp_appendfile.sas", "mp__appendfile_8sas.html", "mp__appendfile_8sas" ],
     [ "mp_assert.sas", "mp__assert_8sas.html", "mp__assert_8sas" ],
     [ "mp_assertcols.sas", "mp__assertcols_8sas.html", "mp__assertcols_8sas" ],
     [ "mp_assertcolvals.sas", "mp__assertcolvals_8sas.html", "mp__assertcolvals_8sas" ],

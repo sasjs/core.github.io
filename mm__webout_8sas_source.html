@@ -263,19 +263,20 @@ $(document).ready(function(){initNavTree('mm__webout_8sas_source.html',''); init
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSERRORTEXT&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syserrortext&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSHOSTNAME&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syshostname&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSJOBID&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;sysjobid&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSSITE&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syssite&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    sysvlong=quote(trim(symget(<span class="stringliteral">&#39;sysvlong&#39;</span>)));</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    put <span class="stringliteral">&#39;,&quot;SYSVLONG&quot; : &#39;</span> sysvlong;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSWARNINGTEXT&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syswarningtext&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    put <span class="stringliteral">&#39;,&quot;END_DTTM&quot; : &quot;&#39;</span> <span class="stringliteral">&quot;%sysfunc(datetime(),datetime20.3)&quot;</span> <span class="stringliteral">&#39;&quot; &#39;</span>;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    put <span class="stringliteral">&quot;}&quot;</span> @;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  %<span class="keywordflow">if</span> %str(&amp;_debug) ge 131 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    put <span class="stringliteral">&#39;&gt;&gt;weboutEND&lt;&lt;&#39;</span>;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  %end;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  run;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;%end;</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;%mend mm_webout;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSSCPL&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;sysscpl&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSSITE&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syssite&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    sysvlong=quote(trim(symget(<span class="stringliteral">&#39;sysvlong&#39;</span>)));</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    put <span class="stringliteral">&#39;,&quot;SYSVLONG&quot; : &#39;</span> sysvlong;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSWARNINGTEXT&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syswarningtext&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    put <span class="stringliteral">&#39;,&quot;END_DTTM&quot; : &quot;&#39;</span> <span class="stringliteral">&quot;%sysfunc(datetime(),datetime20.3)&quot;</span> <span class="stringliteral">&#39;&quot; &#39;</span>;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    put <span class="stringliteral">&quot;}&quot;</span> @;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  %<span class="keywordflow">if</span> %str(&amp;_debug) ge 131 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    put <span class="stringliteral">&#39;&gt;&gt;weboutEND&lt;&lt;&#39;</span>;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  %end;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  run;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;%end;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;%mend mm_webout;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

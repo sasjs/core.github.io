@@ -493,98 +493,99 @@ $(document).ready(function(){initNavTree('mm__createwebservice_8sas_source.html'
 <div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="stringliteral">  put &#39;</span>    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSERRORTEXT&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syserrortext&quot;</span><span class="stringliteral">&quot; &quot;</span>; <span class="stringliteral">&#39;;</span></div>
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="stringliteral">  put &#39;</span>    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSHOSTNAME&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syshostname&quot;</span><span class="stringliteral">&quot; &quot;</span>; <span class="stringliteral">&#39;;</span></div>
 <div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="stringliteral">  put &#39;</span>    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSJOBID&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;sysjobid&quot;</span><span class="stringliteral">&quot; &quot;</span>; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="stringliteral">  put &#39;</span>    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSSITE&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syssite&quot;</span><span class="stringliteral">&quot; &quot;</span>; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="stringliteral">  put &#39;</span>    sysvlong=quote(trim(symget(<span class="stringliteral">&#39;&#39;</span>sysvlong<span class="stringliteral">&#39;&#39;</span>))); <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="stringliteral">  put &#39;</span>    put <span class="stringliteral">&#39;&#39;</span>,<span class="stringliteral">&quot;SYSVLONG&quot;</span> : <span class="stringliteral">&#39;&#39;</span> sysvlong; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="stringliteral">  put &#39;</span>    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSWARNINGTEXT&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syswarningtext&quot;</span><span class="stringliteral">&quot; &quot;</span>; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="stringliteral">  put &#39;</span>    put <span class="stringliteral">&#39;&#39;</span>,<span class="stringliteral">&quot;END_DTTM&quot;</span> : <span class="stringliteral">&quot;&#39;&#39; &quot;</span>%sysfunc(datetime(),datetime20.3)<span class="stringliteral">&quot; &#39;&#39;&quot;</span> <span class="stringliteral">&#39;&#39;</span>; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="stringliteral">  put &#39;</span>    put <span class="stringliteral">&quot;}&quot;</span> @; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="stringliteral">  put &#39;</span>  %<span class="keywordflow">if</span> %str(&amp;_debug) ge 131 %then %<span class="keywordflow">do</span>; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="stringliteral">  put &#39;</span>    put <span class="stringliteral">&#39;&#39;</span>&gt;&gt;weboutEND&lt;&lt;<span class="stringliteral">&#39;&#39;</span>; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="stringliteral">  put &#39;</span>  %end; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="stringliteral">  put &#39;</span>  run; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="stringliteral">  put &#39;</span>%end; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="stringliteral">  put &#39;</span> <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="stringliteral">  put &#39;</span>%mend mm_webout; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="stringliteral">  put &#39;</span> <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="stringliteral">  put &#39;</span>%macro mf_getuser(type=META <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="stringliteral">  put &#39;</span>)<span class="comment">/*/STORE SOURCE*/</span>; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="stringliteral">  put &#39;</span>  %local user metavar; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="stringliteral">  put &#39;</span>  %<span class="keywordflow">if</span> &amp;type=OS %then %let metavar=_secureusername; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="stringliteral">  put &#39;</span>  %<span class="keywordflow">else</span> %let metavar=_metaperson; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="stringliteral">  put &#39;</span> <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="stringliteral">  put &#39;</span>  %<span class="keywordflow">if</span> %symexist(SYS_COMPUTE_SESSION_OWNER) %then %let user=&amp;SYS_COMPUTE_SESSION_OWNER; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="stringliteral">  put &#39;</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">if</span> %symexist(&amp;metavar) %then %<span class="keywordflow">do</span>; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="stringliteral">  put &#39;</span>    %<span class="keywordflow">if</span> %length(&amp;&amp;&amp;metavar)=0 %then %let user=&amp;sysuserid; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="stringliteral">  put &#39;</span>    <span class="comment">/* sometimes SAS will add @domain extension - remove for consistency */</span> <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="stringliteral">  put &#39;</span>    %<span class="keywordflow">else</span> %let user=%scan(&amp;&amp;&amp;metavar,1,@); <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="stringliteral">  put &#39;</span>  %end; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="stringliteral">  put &#39;</span>  %<span class="keywordflow">else</span> %let user=&amp;sysuserid; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="stringliteral">  put &#39;</span> <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="stringliteral">  put &#39;</span>  %quote(&amp;user) <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="stringliteral">  put &#39;</span> <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="stringliteral">  put &#39;</span>%mend mf_getuser; <span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="stringliteral">/* WEBOUT END */</span></div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="stringliteral">  put &#39;</span>%macro webout(action,ds,dslabel=,fmt=);<span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="stringliteral">  put &#39;</span>  %mm_webout(&amp;action,ds=&amp;ds,dslabel=&amp;dslabel,fmt=&amp;fmt)<span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="stringliteral">  put &#39;</span>%mend;<span class="stringliteral">&#39;;</span></div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="stringliteral">run;</span></div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="stringliteral">/* add precode and code */</span></div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="stringliteral">%local work tmpfile;</span></div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="stringliteral">%let work=%sysfunc(pathname(work));</span></div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="stringliteral">%let tmpfile=__mm_createwebservice.temp;</span></div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="stringliteral">%local x fref freflist mod;</span></div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="stringliteral">%let freflist= &amp;adapter &amp;precode &amp;code ;</span></div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="stringliteral">%do x=1 %to %sysfunc(countw(&amp;freflist));</span></div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="stringliteral">  %if &amp;x&gt;1 %then %let mod=mod;</span></div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="stringliteral">  %let fref=%scan(&amp;freflist,&amp;x);</span></div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="stringliteral">  %put &amp;sysmacroname: adding &amp;fref;</span></div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="stringliteral">  data _null_;</span></div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="stringliteral">    file &quot;&amp;work/&amp;tmpfile&quot; lrecl=3000 &amp;mod;</span></div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="stringliteral">    infile &amp;fref;</span></div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="stringliteral">    input;</span></div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="stringliteral">    put _infile_;</span></div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="stringliteral">  run;</span></div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="stringliteral">%end;</span></div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="stringliteral">/* create the metadata folder if not already there */</span></div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="stringliteral">%mm_createfolder(path=&amp;path)</span></div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="stringliteral">%if &amp;syscc ge 4 %then %return;</span></div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="stringliteral">%if %upcase(&amp;replace)=YES %then %do;</span></div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="stringliteral">  %mm_deletestp(target=&amp;path/&amp;name)</span></div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="stringliteral">%end;</span></div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="stringliteral">/* create the web service */</span></div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="stringliteral">%mm_createstp(stpname=&amp;name</span></div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="stringliteral">  ,filename=&amp;tmpfile</span></div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="stringliteral">  ,directory=&amp;work</span></div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="stringliteral">  ,tree=&amp;path</span></div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="stringliteral">  ,stpdesc=&amp;desc</span></div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="stringliteral">  ,mDebug=&amp;mdebug</span></div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="stringliteral">  ,server=&amp;server</span></div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="stringliteral">  ,stptype=2)</span></div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;<span class="stringliteral">/* find the web app url */</span></div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="stringliteral">%local url;</span></div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;<span class="stringliteral">%let url=localhost/SASStoredProcess;</span></div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;<span class="stringliteral">data _null_;</span></div>
-<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;<span class="stringliteral">  length url $128;</span></div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;<span class="stringliteral">  rc=METADATA_GETURI(&quot;Stored Process Web App&quot;,url);</span></div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;<span class="stringliteral">  if rc=0 then call symputx(&#39;</span>url<span class="stringliteral">&#39;,url,&#39;</span>l<span class="stringliteral">&#39;);</span></div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;<span class="stringliteral">run;</span></div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;<span class="stringliteral">%put ;%put ;%put ;%put ;%put ;%put ;</span></div>
-<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;<span class="stringliteral">%put &amp;sysmacroname: STP &amp;name successfully created in &amp;path;</span></div>
-<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;<span class="stringliteral">%put ;%put ;%put ;</span></div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;<span class="stringliteral">%put Check it out here:;</span></div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;<span class="stringliteral">%put ;%put ;%put ;</span></div>
-<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;<span class="stringliteral">%put &amp;url?_PROGRAM=&amp;path/&amp;name;</span></div>
-<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;<span class="stringliteral">%put ;%put ;%put ;%put ;%put ;%put ;</span></div>
-<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;<span class="stringliteral">%mend mm_createwebservice;</span></div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="stringliteral">  put &#39;</span>    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSSCPL&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;sysscpl&quot;</span><span class="stringliteral">&quot; &quot;</span>; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="stringliteral">  put &#39;</span>    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSSITE&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syssite&quot;</span><span class="stringliteral">&quot; &quot;</span>; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="stringliteral">  put &#39;</span>    sysvlong=quote(trim(symget(<span class="stringliteral">&#39;&#39;</span>sysvlong<span class="stringliteral">&#39;&#39;</span>))); <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="stringliteral">  put &#39;</span>    put <span class="stringliteral">&#39;&#39;</span>,<span class="stringliteral">&quot;SYSVLONG&quot;</span> : <span class="stringliteral">&#39;&#39;</span> sysvlong; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="stringliteral">  put &#39;</span>    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSWARNINGTEXT&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syswarningtext&quot;</span><span class="stringliteral">&quot; &quot;</span>; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="stringliteral">  put &#39;</span>    put <span class="stringliteral">&#39;&#39;</span>,<span class="stringliteral">&quot;END_DTTM&quot;</span> : <span class="stringliteral">&quot;&#39;&#39; &quot;</span>%sysfunc(datetime(),datetime20.3)<span class="stringliteral">&quot; &#39;&#39;&quot;</span> <span class="stringliteral">&#39;&#39;</span>; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="stringliteral">  put &#39;</span>    put <span class="stringliteral">&quot;}&quot;</span> @; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;<span class="stringliteral">  put &#39;</span>  %<span class="keywordflow">if</span> %str(&amp;_debug) ge 131 %then %<span class="keywordflow">do</span>; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;<span class="stringliteral">  put &#39;</span>    put <span class="stringliteral">&#39;&#39;</span>&gt;&gt;weboutEND&lt;&lt;<span class="stringliteral">&#39;&#39;</span>; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="stringliteral">  put &#39;</span>  %end; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;<span class="stringliteral">  put &#39;</span>  run; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="stringliteral">  put &#39;</span>%end; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;<span class="stringliteral">  put &#39;</span> <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="stringliteral">  put &#39;</span>%mend mm_webout; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;<span class="stringliteral">  put &#39;</span> <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="stringliteral">  put &#39;</span>%macro mf_getuser(type=META <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="stringliteral">  put &#39;</span>)<span class="comment">/*/STORE SOURCE*/</span>; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="stringliteral">  put &#39;</span>  %local user metavar; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="stringliteral">  put &#39;</span>  %<span class="keywordflow">if</span> &amp;type=OS %then %let metavar=_secureusername; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="stringliteral">  put &#39;</span>  %<span class="keywordflow">else</span> %let metavar=_metaperson; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="stringliteral">  put &#39;</span> <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="stringliteral">  put &#39;</span>  %<span class="keywordflow">if</span> %symexist(SYS_COMPUTE_SESSION_OWNER) %then %let user=&amp;SYS_COMPUTE_SESSION_OWNER; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="stringliteral">  put &#39;</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">if</span> %symexist(&amp;metavar) %then %<span class="keywordflow">do</span>; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="stringliteral">  put &#39;</span>    %<span class="keywordflow">if</span> %length(&amp;&amp;&amp;metavar)=0 %then %let user=&amp;sysuserid; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="stringliteral">  put &#39;</span>    <span class="comment">/* sometimes SAS will add @domain extension - remove for consistency */</span> <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="stringliteral">  put &#39;</span>    %<span class="keywordflow">else</span> %let user=%scan(&amp;&amp;&amp;metavar,1,@); <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="stringliteral">  put &#39;</span>  %end; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="stringliteral">  put &#39;</span>  %<span class="keywordflow">else</span> %let user=&amp;sysuserid; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;<span class="stringliteral">  put &#39;</span> <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="stringliteral">  put &#39;</span>  %quote(&amp;user) <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="stringliteral">  put &#39;</span> <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="stringliteral">  put &#39;</span>%mend mf_getuser; <span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="stringliteral">/* WEBOUT END */</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="stringliteral">  put &#39;</span>%macro webout(action,ds,dslabel=,fmt=);<span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="stringliteral">  put &#39;</span>  %mm_webout(&amp;action,ds=&amp;ds,dslabel=&amp;dslabel,fmt=&amp;fmt)<span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="stringliteral">  put &#39;</span>%mend;<span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="stringliteral">run;</span></div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="stringliteral">/* add precode and code */</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="stringliteral">%local work tmpfile;</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="stringliteral">%let work=%sysfunc(pathname(work));</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="stringliteral">%let tmpfile=__mm_createwebservice.temp;</span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="stringliteral">%local x fref freflist mod;</span></div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="stringliteral">%let freflist= &amp;adapter &amp;precode &amp;code ;</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="stringliteral">%do x=1 %to %sysfunc(countw(&amp;freflist));</span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="stringliteral">  %if &amp;x&gt;1 %then %let mod=mod;</span></div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="stringliteral">  %let fref=%scan(&amp;freflist,&amp;x);</span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="stringliteral">  %put &amp;sysmacroname: adding &amp;fref;</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="stringliteral">  data _null_;</span></div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="stringliteral">    file &quot;&amp;work/&amp;tmpfile&quot; lrecl=3000 &amp;mod;</span></div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="stringliteral">    infile &amp;fref;</span></div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="stringliteral">    input;</span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="stringliteral">    put _infile_;</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="stringliteral">  run;</span></div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="stringliteral">%end;</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="stringliteral">/* create the metadata folder if not already there */</span></div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="stringliteral">%mm_createfolder(path=&amp;path)</span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="stringliteral">%if &amp;syscc ge 4 %then %return;</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="stringliteral">%if %upcase(&amp;replace)=YES %then %do;</span></div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;<span class="stringliteral">  %mm_deletestp(target=&amp;path/&amp;name)</span></div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;<span class="stringliteral">%end;</span></div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;<span class="stringliteral">/* create the web service */</span></div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;<span class="stringliteral">%mm_createstp(stpname=&amp;name</span></div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;<span class="stringliteral">  ,filename=&amp;tmpfile</span></div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="stringliteral">  ,directory=&amp;work</span></div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="stringliteral">  ,tree=&amp;path</span></div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="stringliteral">  ,stpdesc=&amp;desc</span></div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="stringliteral">  ,mDebug=&amp;mdebug</span></div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="stringliteral">  ,server=&amp;server</span></div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;<span class="stringliteral">  ,stptype=2)</span></div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="stringliteral">/* find the web app url */</span></div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;<span class="stringliteral">%local url;</span></div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;<span class="stringliteral">%let url=localhost/SASStoredProcess;</span></div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;<span class="stringliteral">data _null_;</span></div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;<span class="stringliteral">  length url $128;</span></div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;<span class="stringliteral">  rc=METADATA_GETURI(&quot;Stored Process Web App&quot;,url);</span></div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;<span class="stringliteral">  if rc=0 then call symputx(&#39;</span>url<span class="stringliteral">&#39;,url,&#39;</span>l<span class="stringliteral">&#39;);</span></div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;<span class="stringliteral">run;</span></div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;<span class="stringliteral">%put ;%put ;%put ;%put ;%put ;%put ;</span></div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;<span class="stringliteral">%put &amp;sysmacroname: STP &amp;name successfully created in &amp;path;</span></div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;<span class="stringliteral">%put ;%put ;%put ;</span></div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;<span class="stringliteral">%put Check it out here:;</span></div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;<span class="stringliteral">%put ;%put ;%put ;</span></div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;<span class="stringliteral">%put &amp;url?_PROGRAM=&amp;path/&amp;name;</span></div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;<span class="stringliteral">%put ;%put ;%put ;%put ;%put ;%put ;</span></div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;<span class="stringliteral">%mend mm_createwebservice;</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
