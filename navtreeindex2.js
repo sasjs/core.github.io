@@ -1,5 +1,7 @@
 var NAVTREEINDEX2 =
 {
+"mv__getusergroups_8sas.html#ad2af7681b4aac4303775d276585ad293":[1,6,20,0],
+"mv__getusergroups_8sas_source.html":[1,6,20],
 "mv__getusers_8sas.html":[1,6,21],
 "mv__getusers_8sas.html#ad2af7681b4aac4303775d276585ad293":[1,6,21,0],
 "mv__getusers_8sas_source.html":[1,6,21],

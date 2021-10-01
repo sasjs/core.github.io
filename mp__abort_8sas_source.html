@@ -277,7 +277,7 @@ $(document).ready(function(){initNavTree('mp__abort_8sas_source.html',''); initR
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;      msg=cats(<span class="charliteral">&#39;&quot;&#39;</span>,msg,<span class="charliteral">&#39;&quot;&#39;</span>);</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;      <span class="keywordflow">if</span> symexist(<span class="stringliteral">&#39;_debug&#39;</span>) then debug=quote(trim(symget(&#39;_debug&#39;)));</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;      else debug=&#39;&quot;&quot;&#39;;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;      if debug ge &#39;&quot;131&quot;&#39; then put &#39;&gt;&gt;weboutBEGIN&lt;&lt;&#39;;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;      put &#39;&gt;&gt;weboutBEGIN&lt;&lt;&#39;;</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;      put &#39;{<span class="stringliteral">&quot;START_DTTM&quot;</span> : <span class="stringliteral">&quot;&#39; &quot;</span>%sysfunc(datetime(),datetime20.3)<span class="stringliteral">&quot; &#39;&quot;</span><span class="stringliteral">&#39;;</span></div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="stringliteral">      put &#39;</span>,<span class="stringliteral">&quot;sasjsAbort&quot;</span> : [{<span class="stringliteral">&#39;;</span></div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="stringliteral">      put &#39;</span> <span class="stringliteral">&quot;MSG&quot;</span>:<span class="stringliteral">&#39; msg ;</span></div>
@@ -309,7 +309,7 @@ $(document).ready(function(){initNavTree('mp__abort_8sas_source.html',''); initR
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="stringliteral">      put &quot;,&quot;&quot;SYSWARNINGTEXT&quot;&quot; : &quot; syswarningtext;</span></div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="stringliteral">      put &#39;</span>,<span class="stringliteral">&quot;END_DTTM&quot;</span> : <span class="stringliteral">&quot;&#39; &quot;</span>%sysfunc(datetime(),datetime20.3)<span class="stringliteral">&quot; &#39;&quot;</span> <span class="stringliteral">&#39;;</span></div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="stringliteral">      put &quot;}&quot; @;</span></div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="stringliteral">      if debug ge &#39;</span><span class="stringliteral">&quot;131&quot;</span><span class="stringliteral">&#39; then put &#39;</span>&gt;&gt;weboutEND&lt;&lt;<span class="stringliteral">&#39;;</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="stringliteral">      put &#39;</span>&gt;&gt;weboutEND&lt;&lt;<span class="stringliteral">&#39;;</span></div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="stringliteral">    run;</span></div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="stringliteral"></span> </div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="stringliteral">    %put _all_;</span></div>

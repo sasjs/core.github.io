@@ -156,16 +156,19 @@ $(document).ready(function(){initNavTree('mp__getconstraints_8sas_source.html','
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  left join dictionary.constraint_column_usage  b</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  on upcase(a.TABLE_CATALOG)=upcase(b.TABLE_CATALOG)</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    and upcase(a.TABLE_NAME)=upcase(b.TABLE_NAME)</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    and a.constraint_name=b.constraint_name</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  where upcase(a.TABLE_CATALOG)=&quot;&amp;lib&quot;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    and upcase(b.TABLE_CATALOG)=&quot;&amp;lib&quot;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  %if &quot;&amp;ds&quot; ne &quot;&quot; %then %do;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    and upcase(a.TABLE_NAME)=&quot;&amp;ds&quot;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    and upcase(b.TABLE_NAME)=&quot;&amp;ds&quot;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  %end;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  ;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;%mend mp_getconstraints;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    and a.constraint_name=b.constraint_name<span class="comment"></span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">  * We cannot apply this clause to the underlying dictionary table.  See:</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">  * https://communities.sas.com/t5/SAS-Programming/Unexpected-Where-Clause-behaviour-in-dictionary-TABLE/m-p/771554#M244867</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">  */</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  where calculated libref=&quot;&amp;lib&quot;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  %if &quot;&amp;ds&quot; ne &quot;&quot; %then %do;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    and upcase(a.TABLE_NAME)=&quot;&amp;ds&quot;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    and upcase(b.TABLE_NAME)=&quot;&amp;ds&quot;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  %end;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  ;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;%mend mp_getconstraints;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
