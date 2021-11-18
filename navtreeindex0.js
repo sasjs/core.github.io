@@ -1,5 +1,6 @@
 var NAVTREEINDEX0 =
 {
+"_2_users_2munja_2git_2core_2base_2mp_wait4file_8sas-example.html":[2,0],
 "dir_0d92069d5a23b1d3125c326d74f1a07c.html":[1,3],
 "dir_1d77ce7c9f7e81c3be5142cf18682616.html":[1,2],
 "dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef.html":[1,5,0],
@@ -10,6 +11,7 @@ var NAVTREEINDEX0 =
 "dir_7745ead704f7eb9eda9998037fbe6296.html":[1,1],
 "dir_e914ee4d4a44400f1fdb170cb4ead18a.html":[1,0],
 "dir_f3c9615c6d389fd64e9075885fcd8e6e.html":[1,6],
+"examples.html":[2],
 "files.html":[1],
 "index.html":[],
 "index.html":[0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX0 =
 "mp__createconstraints_8sas_source.html":[1,0,47],
 "mp__createwebservice_8sas.html":[1,0,48],
 "mp__createwebservice_8sas_source.html":[1,0,48],
-"mp__csv2ds_8sas.html":[1,0,49],
-"mp__csv2ds_8sas_source.html":[1,0,49],
-"mp__deleteconstraints_8sas.html":[1,0,50]
+"mp__csv2ds_8sas.html":[1,0,49]
 };

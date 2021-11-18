@@ -27,5 +27,6 @@ var dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef =
     [ "mp_lib2inserts.test.sas", "mp__lib2inserts_8test_8sas.html", null ],
     [ "mp_searchcols.test.sas", "mp__searchcols_8test_8sas.html", null ],
     [ "mp_validatecol.test.sas", "mp__validatecol_8test_8sas.html", null ],
-    [ "mp_webin.test.sas", "mp__webin_8test_8sas.html", null ]
+    [ "mp_webin.test.sas", "mp__webin_8test_8sas.html", null ],
+    [ "mp_zip.test.sas", "mp__zip_8test_8sas.html", null ]
 ];

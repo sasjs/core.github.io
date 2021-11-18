@@ -26,14 +26,15 @@ var NAVTREE =
 [
   [ "@sasjs/core", "index.html", [
     [ "Macro Core", "index.html", null ],
-    [ "File List", "files.html", "files" ]
+    [ "File List", "files.html", "files" ],
+    [ "Examples", "examples.html", "examples" ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"dir_0d92069d5a23b1d3125c326d74f1a07c.html",
-"mp__deleteconstraints_8sas_source.html"
+"_2_users_2munja_2git_2core_2base_2mp_wait4file_8sas-example.html",
+"mp__csv2ds_8sas_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -91,6 +91,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_unzip.sas", "mp__unzip_8sas.html", null ],
     [ "mp_updatevarlength.sas", "mp__updatevarlength_8sas.html", null ],
     [ "mp_validatecol.sas", "mp__validatecol_8sas.html", null ],
+    [ "mp_wait4file.sas", "mp__wait4file_8sas.html", null ],
     [ "mp_webin.sas", "mp__webin_8sas.html", null ],
     [ "mp_zip.sas", "mp__zip_8sas.html", null ]
 ];
