@@ -33,8 +33,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "dir_0d92069d5a23b1d3125c326d74f1a07c.html",
-"mp__abort_8sas_source.html",
-"mv__getusergroups_8sas.html#ad2af7681b4aac4303775d276585ad293"
+"mp__deleteconstraints_8sas_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
