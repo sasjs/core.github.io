@@ -107,14 +107,15 @@ $(document).ready(function(){initNavTree('mp__lockfilecheck_8sas.html',''); init
 </div><!--header-->
 <div class="contents">
 
-<p>Aborts if a SAS lock file is in place, or if it cannot be applied.  
+<p>Aborts if a SAS lock file is in place, or if one cannot be applied.  
 <a href="#details">More...</a></p>
 
 <p><a href="mp__lockfilecheck_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Used in conjuction with the mp_lockanytable macro. More info here: <a href="https://sasensei.com/flash/24">https://sasensei.com/flash/24</a> Usage:</p>
-<p >data work.test; a=1;run; mp_lockfilecheck(work.test)</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<div class="textblock"><p >Used in conjuction with the mp_lockanytable macro. More info here: <a href="https://sasensei.com/flash/24">https://sasensei.com/flash/24</a></p>
+<p >Usage: </p><pre class="fragment">data work.test; a=1;run;
+%mp_lockfilecheck(work.test)
+</pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">libds</td><td>The libref.dataset for which to check the lock status</td></tr>
   </table>
