@@ -84,7 +84,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('mp__dirlist_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mp__lockanytable_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,56 +103,47 @@ $(document).ready(function(){initNavTree('mp__dirlist_8sas.html',''); initResiza
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">mp_dirlist.sas File Reference</div></div>
+  <div class="headertitle"><div class="title">mp_lockanytable.sas File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Returns all files and subdirectories within a specified parent.  
+<p>Mechanism for locking tables to prevent parallel modifications.  
 <a href="#details">More...</a></p>
 
-<p><a href="mp__dirlist_8sas_source.html">Go to the source code of this file.</a></p>
+<p><a href="mp__lockanytable_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >When used with getattrs=NO, is not OS specific (uses dopen / dread).</p>
-<p >Credit for the rename approach: <a href="https://communities.sas.com/t5/SAS-Programming/SAS-Function-to-convert-string-to-Legal-SAS-Name/m-p/27375/highlight/true#M5003">https://communities.sas.com/t5/SAS-Programming/SAS-Function-to-convert-string-to-Legal-SAS-Name/m-p/27375/highlight/true#M5003</a></p>
-<p >usage: </p><pre class="fragment">%mp_dirlist(path=/some/location, outds=myTable, maxdepth=MAX)
-
-%mp_dirlist(outds=cwdfileprops, getattrs=YES)
-
-%mp_dirlist(fref=MYFREF)
-</pre> <dl class="section warning"><dt>Warning</dt><dd>In a Unix environment, the existence of a named pipe will cause this macro to hang. Therefore this tool should be used with caution in a SAS 9 web application, as it can use up all available multibridge sessions if requests are resubmitted. If anyone finds a way to positively identify a named pipe using SAS (without X CMD) do please raise an issue!</dd></dl>
+<div class="textblock"><p >Uses a control table to enable ANY table to be locked for updates. Only useful if every update uses the macro! Used heavily within <a href="https://datacontroller.io">Data Controller for SAS</a>.</p>
+<p >The underlying table is structured as per the MAKETABLE action.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">path=</td><td>for which to return contents </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">fref=</td><td>Provide a DISK engine fileref as an alternative to PATH </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">maxdepth=</td><td>(0) Set to a positive integer to indicate the level of subdirectory scan recursion - eg 3, to go <code>./3/levels/deep</code>. For unlimited recursion, set to MAX. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>the output dataset to create </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">getattrs=</td><td>(NO) If getattrs=YES then the doptname / foptname functions are used to scan all properties - any characters that are not valid in a SAS name (v7) are simply stripped, and the table is transposed so theat each property is a column and there is one file per row. An attempt is made to get all properties whether a file or folder, but some files/folders cannot be accessed, and so not all properties can / will be populated.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">action</td><td>The action to be performed. Valid values: <ul>
+<li>LOCK - Sets the lock flag, also confirms if a SAS lock is available </li>
+<li>UNLOCK - Unlocks the table </li>
+<li>MAKETABLE - creates the control table (ctl_ds) </li>
+</ul>
+</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lib=</td><td>(WORK) The libref of the table to lock. Should already be assigned. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ds=</td><td>The dataset to lock </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ref=</td><td>A meaningful reference to enable the lock to be traced. Max length is 200 characters. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ctl_ds=</td><td>(0) The control table which controls the actual locking. Should already be assigned and available. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">loops=</td><td>(25) Number of times to check for a lock. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">loop_secs=</td><td>(1) Seconds to wait between each lock attempt</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>outds contains the following variables:<ul>
-<li>directory (containing folder)</li>
-<li>file_or_folder (file / folder)</li>
-<li>filepath (path/to/file.name)</li>
-<li>filename (just the file name)</li>
-<li>ext (.extension)</li>
-<li>msg (system message if any issues)</li>
-<li>level (depth of folder)</li>
-<li>OS SPECIFIC variables, if <code>getattrs=</code> is used.</li>
-</ul>
-</dd></dl>
 <h4>SAS Macros </h4>
 <ul>
-<li><a class="el" href="mp__dropmembers_8sas.html" title="Drops tables / views (if they exist) without warnings in the log.">mp_dropmembers.sas</a></li>
+<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
+<li><a class="el" href="mp__lockfilecheck_8sas.html" title="Aborts if a SAS lock file is in place, or if one cannot be applied.">mp_lockfilecheck.sas</a> </li>
+<li><a class="el" href="mf__getuser_8sas.html" title="Returns a userid according to session context.">mf_getuser.sas</a></li>
 </ul>
 <h4>Related Macros </h4>
 <ul>
-<li><a class="el" href="mp__dirlist_8test_8sas.html" title="Testing mp_dirlist.sas macro.">mp_dirlist.test.sas</a></li>
+<li><a class="el" href="mp__lockanytable_8test_8sas.html" title="Testing mp_lockfilecheck macro.">mp_lockanytable.test.sas</a></li>
 </ul>
 <dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="mp__dirlist_8sas_source.html">mp_dirlist.sas</a>.</p>
+<p class="definition">Definition in file <a class="el" href="mp__lockanytable_8sas_source.html">mp_lockanytable.sas</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
@@ -160,7 +151,7 @@ $(document).ready(function(){initNavTree('mp__dirlist_8sas.html',''); initResiza
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e914ee4d4a44400f1fdb170cb4ead18a.html">base</a></li><li class="navelem"><a class="el" href="mp__dirlist_8sas.html">mp_dirlist.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_e914ee4d4a44400f1fdb170cb4ead18a.html">base</a></li><li class="navelem"><a class="el" href="mp__lockanytable_8sas.html">mp_lockanytable.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">

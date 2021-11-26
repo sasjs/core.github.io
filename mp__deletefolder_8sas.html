@@ -113,7 +113,15 @@ $(document).ready(function(){initNavTree('mp__deletefolder_8sas.html',''); initR
 <p><a href="mp__deletefolder_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Will delete all folder content (including subfolder content) and finally, the folder itself.</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p >Usage: </p><pre class="fragment">%let rootdir=%sysfunc(pathname(work))/demo;
+%mf_mkdir(&amp;rootdir)
+%mf_mkdir(&amp;rootdir/subdir)
+%mf_mkdir(&amp;rootdir/subdir/subsubdir)
+data "&amp;rootdir/subdir/example.sas7bdat";
+run;
+
+%mp_deletefolder(&amp;rootdir)
+</pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td>Unquoted path to the folder to delete.</td></tr>
   </table>
@@ -121,8 +129,13 @@ $(document).ready(function(){initNavTree('mp__deletefolder_8sas.html',''); initR
 </dl>
 <h4>SAS Macros </h4>
 <ul>
+<li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
 <li><a class="el" href="mf__isdir_8sas.html" title="Checks whether a path is a valid directory.">mf_isdir.sas</a> </li>
-<li><a class="el" href="mp__dirlist_8sas.html" title="Returns all files and subdirectories within a specified parent.">mp_dirlist.sas</a> </li>
+<li><a class="el" href="mp__dirlist_8sas.html" title="Returns all files and subdirectories within a specified parent.">mp_dirlist.sas</a></li>
+</ul>
+<h4>Related Macros </h4>
+<ul>
+<li><a class="el" href="mp__deletefolder_8test_8sas.html" title="Testing mp_deletefolder.sas macro.">mp_deletefolder.test.sas</a> </li>
 </ul>
 
 <p class="definition">Definition in file <a class="el" href="mp__deletefolder_8sas_source.html">mp_deletefolder.sas</a>.</p>
