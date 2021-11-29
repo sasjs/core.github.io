@@ -13,6 +13,7 @@ var dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef =
     [ "mp_assertdsobs.test.sas", "mp__assertdsobs_8test_8sas.html", null ],
     [ "mp_base64copy.test.sas", "mp__base64copy_8test_8sas.html", null ],
     [ "mp_binarycopy.test.sas", "mp__binarycopy_8test_8sas.html", null ],
+    [ "mp_copyfolder.test.sas", "mp__copyfolder_8test_8sas.html", null ],
     [ "mp_deletefolder.test.sas", "mp__deletefolder_8test_8sas.html", null ],
     [ "mp_dirlist.test.sas", "mp__dirlist_8test_8sas.html", null ],
     [ "mp_ds2cards.test.sas", "mp__ds2cards_8test_8sas.html", null ],

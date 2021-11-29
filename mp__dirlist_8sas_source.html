@@ -310,18 +310,19 @@ $(document).ready(function(){initNavTree('mp__dirlist_8sas_source.html',''); ini
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="stringliteral">  data _null_;</span></div>
 <div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="stringliteral">    set &amp;out_ds;</span></div>
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="stringliteral">    where file_or_folder=&#39;</span>folder<span class="stringliteral">&#39;;</span></div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="stringliteral">    code=cats(&#39;</span>%nrstr(%mp_dirlist(path=<span class="stringliteral">&#39;,filepath,&quot;,outds=&amp;outds&quot;</span></div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="stringliteral">      ,&quot;,getattrs=&amp;getattrs,level=%eval(&amp;level+1),maxdepth=&amp;maxdepth))&quot;);</span></div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="stringliteral">    put code=;</span></div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="stringliteral">    call execute(code);</span></div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="stringliteral">  run;</span></div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="stringliteral">%end;</span></div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="stringliteral"></span> </div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="stringliteral">/* tidy up */</span></div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="stringliteral">proc sql;</span></div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="stringliteral">drop table &amp;out_ds;</span></div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="stringliteral"></span> </div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="stringliteral">%mend mp_dirlist;</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="stringliteral">    length code $10000;</span></div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="stringliteral">    code=cats(&#39;</span>%nrstr(%mp_dirlist(path=<span class="stringliteral">&#39;,filepath,&quot;,outds=&amp;outds&quot;</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="stringliteral">      ,&quot;,getattrs=&amp;getattrs,level=%eval(&amp;level+1),maxdepth=&amp;maxdepth))&quot;);</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="stringliteral">    put code=;</span></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="stringliteral">    call execute(code);</span></div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="stringliteral">  run;</span></div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="stringliteral">%end;</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="stringliteral"></span> </div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="stringliteral">/* tidy up */</span></div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="stringliteral">proc sql;</span></div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="stringliteral">drop table &amp;out_ds;</span></div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="stringliteral"></span> </div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span><span class="stringliteral">%mend mp_dirlist;</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

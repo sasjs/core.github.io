@@ -47,6 +47,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_base64copy.sas", "mp__base64copy_8sas.html", null ],
     [ "mp_binarycopy.sas", "mp__binarycopy_8sas.html", null ],
     [ "mp_cleancsv.sas", "mp__cleancsv_8sas.html", null ],
+    [ "mp_copyfolder.sas", "mp__copyfolder_8sas.html", null ],
     [ "mp_createconstraints.sas", "mp__createconstraints_8sas.html", null ],
     [ "mp_createwebservice.sas", "mp__createwebservice_8sas.html", null ],
     [ "mp_csv2ds.sas", "mp__csv2ds_8sas.html", null ],
