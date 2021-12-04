@@ -139,18 +139,18 @@ $(document).ready(function(){initNavTree('mp__unzip_8sas_source.html',''); initR
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  ,outdir=%sysfunc(pathname(work))</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>%local fname1 fname2 fname3;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>%let fname1=%mf_getuniquefileref();</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>%let fname2=%mf_getuniquefileref();</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>%let fname3=%mf_getuniquefileref();</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>%local f1 f2 f3;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>%let f1=%mf_getuniquefileref();</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>%let f2=%mf_getuniquefileref();</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>%let f3=%mf_getuniquefileref();</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">/* Macro variable &amp;datazip would be read from the file */</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>filename &amp;fname1 ZIP &amp;ziploc;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>filename &amp;f1 ZIP &amp;ziploc;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">/* Read the &quot;members&quot; (files) from the ZIP file */</span></div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>data _data_(keep=memname isFolder);</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  length memname $200 isFolder 8;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  fid=dopen(<span class="stringliteral">&quot;&amp;fname1&quot;</span>);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  fid=dopen(<span class="stringliteral">&quot;&amp;f1&quot;</span>);</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keywordflow">if</span> fid=0 then stop;</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  memcount=dnum(fid);</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="keywordflow">do</span> i=1 to memcount;</div>
@@ -161,19 +161,24 @@ $(document).ready(function(){initNavTree('mp__unzip_8sas_source.html',''); initR
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  end;</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  rc=dclose(fid);</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>run;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>filename &amp;fname1 clear;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>filename &amp;f1 clear;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">/* loop through each entry and either create the subfolder or extract member */</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>data _null_;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keyword">set</span> &amp;syslast;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="keywordflow">if</span> isFolder then call execute(<span class="stringliteral">&#39;%mf_mkdir(&amp;outdir/&#39;</span>!!memname!!<span class="charliteral">&#39;)&#39;</span>);</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keywordflow">else</span> call execute(<span class="stringliteral">&#39;filename &amp;fname2 zip &amp;ziploc member=&#39;</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    !!quote(trim(memname))!!<span class="stringliteral">&#39;;filename &amp;fname3 &quot;&amp;outdir/&#39;</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    !!trim(memname)!!<span class="stringliteral">&#39;&quot; recfm=n;data _null_; rc=fcopy(&quot;&amp;fname2&quot;,&quot;&amp;fname3&quot;);run;&#39;</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    !!<span class="stringliteral">&#39;filename &amp;fname2 clear; filename &amp;fname3 clear;&#39;</span>);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>run;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>%mend mp_unzip;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>%mf_mkdir(&amp;outdir)</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>data _null_;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="keyword">set</span> &amp;syslast;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keywordflow">if</span> isFolder then call execute(<span class="stringliteral">&#39;%mf_mkdir(&amp;outdir/&#39;</span>!!memname!!<span class="charliteral">&#39;)&#39;</span>);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keywordflow">else</span> <span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    call execute(</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>      cats(<span class="stringliteral">&#39;filename &amp;f2 zip &amp;ziploc member=&quot;&#39;</span>,memname,<span class="stringliteral">&#39;&quot; recfm=n;&#39;</span>)</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    );</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    call execute(<span class="stringliteral">&#39;filename &amp;f3 &quot;&amp;outdir/&#39;</span>!!trim(memname)!!<span class="stringliteral">&#39;&quot; recfm=n;&#39;</span>);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    call execute(<span class="stringliteral">&#39;data _null_; rc=fcopy(&quot;&amp;f2&quot;,&quot;&amp;f3&quot;);run;&#39;</span>);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    call execute(<span class="stringliteral">&#39;filename &amp;f2 clear; filename &amp;f3 clear;&#39;</span>);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  end;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>run;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>%mend mp_unzip;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

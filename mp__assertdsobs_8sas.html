@@ -114,6 +114,10 @@ $(document).ready(function(){initNavTree('mp__assertdsobs_8sas.html',''); initRe
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Useful in the context of writing sasjs tests. The results of the test are <em>appended</em> to the &amp;outds. table.</p>
 <p >Example usage: </p><pre class="fragment">%mp_assertdsobs(sashelp.class) %* tests if any observations are present;
+
+%mp_assertdsobs(sashelp.class,test=ATLEAST 10) %* pass if &gt;9 obs present;
+
+%mp_assertdsobs(sashelp.class,test=ATMOST 20) %* pass if &lt;21 obs present;
 </pre> <h4>SAS Macros </h4>
 <ul>
 <li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a> </li>
@@ -126,7 +130,9 @@ $(document).ready(function(){initNavTree('mp__assertdsobs_8sas.html',''); initRe
     <tr><td class="paramdir">[in]</td><td class="paramname">test=</td><td>(HASOBS) The test to apply. Valid values are: <ul>
 <li>HASOBS - Test is a PASS if the input dataset has any observations </li>
 <li>EMPTY - Test is a PASS if input dataset is empty </li>
-<li>EQUALS [integer] - Test passes if row count matches the provided integer @LI ATLEAST [integer] - Test passes if row count is more than or equal to the provided integer @LI ATMOST [integer] - Test passes if row count is less than or equal to the provided integer </li>
+<li>EQUALS [integer] - Test passes if row count matches the provided integer </li>
+<li>ATLEAST [integer] - Test passes if row count is more than or equal to the provided integer </li>
+<li>ATMOST [integer] - Test passes if row count is less than or equal to the provided integer </li>
 </ul>
 </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.test_results) The output dataset to contain the results. If it does not exist, it will be created, with the following format: <table class="markdownTable">

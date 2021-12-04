@@ -125,29 +125,33 @@ $(document).ready(function(){initNavTree('mp__dropmembers_8sas_source.html','');
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">  @li mf_isblank.sas</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"></span> </div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"></span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">  @param list space separated list of datasets / views, WITHOUT libref</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">  @param libref= (WORK) Note - you can only drop from a single library at a time</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"></span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">  @version 9.2</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">  @author Allan Bowe</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"></span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>%macro mp_dropmembers(</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    list <span class="comment">/* space separated list of datasets / views */</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    ,libref=WORK  <span class="comment">/* can only drop from a single library at a time */</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  %<span class="keywordflow">if</span> %mf_isblank(&amp;list) %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    %put NOTE: nothing to drop!;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    %<span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  %end;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  proc datasets lib=&amp;libref nolist;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">delete</span> &amp;list;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">delete</span> &amp;list /mtype=view;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  run;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>%mend mp_dropmembers;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">  @param [in] list space separated list of datasets / views, WITHOUT libref</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">  @param [in] libref= (WORK) Note - you can only drop from one library at a time</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">  @param [in] iftrue= (1=1) Conditionally drop tables, eg if &amp;debug=N</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"></span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">  @version 9.2</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">  @author Allan Bowe</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"></span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>%macro mp_dropmembers(</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    list <span class="comment">/* space separated list of datasets / views */</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    ,libref=WORK  <span class="comment">/* can only drop from a single library at a time */</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    ,iftrue=%str(1=1)</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  %<span class="keywordflow">if</span> not(%eval(%unquote(&amp;iftrue))) %then %<span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  %<span class="keywordflow">if</span> %mf_isblank(&amp;list) %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    %put NOTE: nothing to drop!;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    %<span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  %end;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  proc datasets lib=&amp;libref nolist;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">delete</span> &amp;list;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">delete</span> &amp;list /mtype=view;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  run;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>%mend mp_dropmembers;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

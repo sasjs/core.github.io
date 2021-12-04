@@ -117,47 +117,50 @@ $(document).ready(function(){initNavTree('mp__setkeyvalue_8sas_source.html','');
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">  @li mf_existds.sas</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"></span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">  @param key Provide a key on which to perform the lookup</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">  @param value Provide a value</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">  @param type= either C or N will populate valc and valn respectively.  C is</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">              default.</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">  @param libds= define the target table to hold the parameters</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"></span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">  @version 9.2</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">  @author Allan Bowe</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">  @source https://github.com/sasjs/core</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"></span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>%macro mp_setkeyvalue(key,value,type=C,libds=work.mp_setkeyvalue</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">  &lt;h4&gt; Related Macros &lt;/h4&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">  @li mf_getvalue.sas</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">  @param [in] key Provide a key on which to perform the lookup</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">  @param [in] value Provide a value</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">  @param [in] type= either C or N will populate valc and valn respectively.</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">    C is default.</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">  @param [out] libds= define the target table to hold the parameters</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"></span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">  @version 9.2</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">  @author Allan Bowe</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">  @source https://github.com/sasjs/core</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"></span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">**/</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  %<span class="keywordflow">if</span> not (%mf_existds(&amp;libds)) %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    data &amp;libds (index=(key/unique));</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>      length key $64 valc $2048 valn 8 type $1;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>      call missing(of _all_);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>      stop;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    run;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  %end;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  proc sql;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">delete</span> from &amp;libds</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>      where key=symget(<span class="stringliteral">&#39;key&#39;</span>);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    insert into &amp;libds</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>      <span class="keyword">set</span> key=symget(<span class="stringliteral">&#39;key&#39;</span>)</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  %<span class="keywordflow">if</span> &amp;type=C %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        ,valc=symget(<span class="stringliteral">&#39;value&#39;</span>)</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        ,type=<span class="charliteral">&#39;C&#39;</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  %end;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        ,valn=symgetn(<span class="stringliteral">&#39;value&#39;</span>)</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        ,type=<span class="charliteral">&#39;N&#39;</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  %end;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  ;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  quit;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>%mend mp_setkeyvalue;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>%macro mp_setkeyvalue(key,value,type=C,libds=work.mp_setkeyvalue</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  %<span class="keywordflow">if</span> not (%mf_existds(&amp;libds)) %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    data &amp;libds (index=(key/unique));</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>      length key $64 valc $2048 valn 8 type $1;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>      call missing(of _all_);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>      stop;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    run;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  %end;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  proc sql;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">delete</span> from &amp;libds</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>      where key=symget(<span class="stringliteral">&#39;key&#39;</span>);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    insert into &amp;libds</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      <span class="keyword">set</span> key=symget(<span class="stringliteral">&#39;key&#39;</span>)</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  %<span class="keywordflow">if</span> &amp;type=C %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        ,valc=symget(<span class="stringliteral">&#39;value&#39;</span>)</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        ,type=<span class="charliteral">&#39;C&#39;</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  %end;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        ,valn=symgetn(<span class="stringliteral">&#39;value&#39;</span>)</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        ,type=<span class="charliteral">&#39;N&#39;</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  %end;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  ;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  quit;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>%mend mp_setkeyvalue;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

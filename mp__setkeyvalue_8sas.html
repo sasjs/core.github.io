@@ -118,12 +118,16 @@ $(document).ready(function(){initNavTree('mp__setkeyvalue_8sas.html',''); initRe
 <ul>
 <li><a class="el" href="mf__existds_8sas.html" title="Checks whether a dataset OR a view exists.">mf_existds.sas</a></li>
 </ul>
+<h4>Related Macros </h4>
+<ul>
+<li><a class="el" href="mf__getvalue_8sas.html" title="Retrieves a value from a dataset. If no filter supplied, then first record is used.">mf_getvalue.sas</a></li>
+</ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">key</td><td>Provide a key on which to perform the lookup </td></tr>
-    <tr><td class="paramname">value</td><td>Provide a value </td></tr>
-    <tr><td class="paramname">type=</td><td>either C or N will populate valc and valn respectively. C is default. </td></tr>
-    <tr><td class="paramname">libds=</td><td>define the target table to hold the parameters</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">key</td><td>Provide a key on which to perform the lookup </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>Provide a value </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">type=</td><td>either C or N will populate valc and valn respectively. C is default. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">libds=</td><td>define the target table to hold the parameters</td></tr>
   </table>
   </dd>
 </dl>

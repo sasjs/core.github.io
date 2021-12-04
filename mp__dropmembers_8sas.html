@@ -123,8 +123,9 @@ create view view2 as select * from sashelp.class;
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">list</td><td>space separated list of datasets / views, WITHOUT libref </td></tr>
-    <tr><td class="paramname">libref=</td><td>(WORK) Note - you can only drop from a single library at a time</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">list</td><td>space separated list of datasets / views, WITHOUT libref </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">libref=</td><td>(WORK) Note - you can only drop from one library at a time </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">iftrue=</td><td>(1=1) Conditionally drop tables, eg if &amp;debug=N</td></tr>
   </table>
   </dd>
 </dl>

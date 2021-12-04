@@ -1,7 +1,5 @@
 var dir_e914ee4d4a44400f1fdb170cb4ead18a =
 [
-    [ "demo.sas", "demo_8sas.html", null ],
-    [ "demo.test.sas", "demo_8test_8sas.html", null ],
     [ "mf_abort.sas", "mf__abort_8sas.html", null ],
     [ "mf_existds.sas", "mf__existds_8sas.html", null ],
     [ "mf_existfeature.sas", "mf__existfeature_8sas.html", null ],
@@ -70,6 +68,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_getdbml.sas", "mp__getdbml_8sas.html", null ],
     [ "mp_getddl.sas", "mp__getddl_8sas.html", null ],
     [ "mp_getmaxvarlengths.sas", "mp__getmaxvarlengths_8sas.html", null ],
+    [ "mp_getpk.sas", "mp__getpk_8sas.html", null ],
     [ "mp_gsubfile.sas", "mp__gsubfile_8sas.html", null ],
     [ "mp_guesspk.sas", "mp__guesspk_8sas.html", null ],
     [ "mp_hashdataset.sas", "mp__hashdataset_8sas.html", null ],
@@ -88,6 +87,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_searchcols.sas", "mp__searchcols_8sas.html", null ],
     [ "mp_searchdata.sas", "mp__searchdata_8sas.html", null ],
     [ "mp_setkeyvalue.sas", "mp__setkeyvalue_8sas.html", null ],
+    [ "mp_sortinplace.sas", "mp__sortinplace_8sas.html", null ],
     [ "mp_stprequests.sas", "mp__stprequests_8sas.html", null ],
     [ "mp_streamfile.sas", "mp__streamfile_8sas.html", null ],
     [ "mp_testjob.sas", "mp__testjob_8sas.html", null ],

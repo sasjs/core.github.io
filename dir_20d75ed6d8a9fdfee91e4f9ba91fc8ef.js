@@ -25,6 +25,7 @@ var dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef =
     [ "mp_getcols.test.sas", "mp__getcols_8test_8sas.html", null ],
     [ "mp_getconstraints.test.sas", "mp__getconstraints_8test_8sas.html", null ],
     [ "mp_getddl.test.sas", "mp__getddl_8test_8sas.html", null ],
+    [ "mp_getpk.test.sas", "mp__getpk_8test_8sas.html", null ],
     [ "mp_gsubfile.test.sas", "mp__gsubfile_8test_8sas.html", null ],
     [ "mp_jsonout.test.sas", "mp__jsonout_8test_8sas.html", null ],
     [ "mp_lib2inserts.test.sas", "mp__lib2inserts_8test_8sas.html", null ],
