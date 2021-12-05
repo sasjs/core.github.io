@@ -2,6 +2,7 @@ var dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef =
 [
     [ "mcf_stpsrv_header.test.sas", "mcf__stpsrv__header_8test_8sas.html", null ],
     [ "mcf_string2file.test.sas", "mcf__string2file_8test_8sas.html", null ],
+    [ "mf_existds.test.sas", "mf__existds_8test_8sas.html", null ],
     [ "mf_existfileref.test.sas", "mf__existfileref_8test_8sas.html", null ],
     [ "mf_existfunction.test.sas", "mf__existfunction_8test_8sas.html", null ],
     [ "mf_getapploc.test.sas", "mf__getapploc_8test_8sas.html", null ],
@@ -32,6 +33,7 @@ var dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef =
     [ "mp_lockanytable.test.sas", "mp__lockanytable_8test_8sas.html", null ],
     [ "mp_lockfilecheck.test.sas", "mp__lockfilecheck_8test_8sas.html", null ],
     [ "mp_searchcols.test.sas", "mp__searchcols_8test_8sas.html", null ],
+    [ "mp_sortinplace.test.sas", "mp__sortinplace_8test_8sas.html", null ],
     [ "mp_validatecol.test.sas", "mp__validatecol_8test_8sas.html", null ],
     [ "mp_webin.test.sas", "mp__webin_8test_8sas.html", null ],
     [ "mp_zip.test.sas", "mp__zip_8test_8sas.html", null ]
