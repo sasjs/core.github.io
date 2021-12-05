@@ -84,7 +84,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('mp__lockfilecheck_8test_8sas_source.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mp__reseterror_8sas_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -103,48 +103,36 @@ $(document).ready(function(){initNavTree('mp__lockfilecheck_8test_8sas_source.ht
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">mp_lockfilecheck.test.sas</div></div>
+  <div class="headertitle"><div class="title">mp_reseterror.sas</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="mp__lockfilecheck_8test_8sas.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
+<a href="mp__reseterror_8sas.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">  @file</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">  @brief Testing mp_lockfilecheck macro</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"></span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">  @li mp_lockfilecheck.sas</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">  @li mp_assert.sas</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">  @li mp_reseterror.sas</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">  @brief Reset when an err condition occurs</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">  @details When building apps, sometimes an operation must be attempted that</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">  can cause an err condition.  There is no try catch in SAS! So the err state</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">  must be caught and reset.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"></span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">  This macro attempts to do that reset.</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"></span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">/* check for regular lock */</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>data work.test; a=1;run;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>%mp_lockfilecheck(work.test)</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>%mp_assert(</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  iftrue=(&amp;syscc=0),</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  desc=Checking regular table can be locked,</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  outds=work.test_results</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>)</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">/* check for unsuccessful lock */</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>%global success abortme;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>%let success=0;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>%macro mp_abort(iftrue=,mac=,msg=);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  %<span class="keywordflow">if</span> &amp;abortme=1 %then %let success=1;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>%mend mp_abort;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>%mp_lockfilecheck(sashelp.class)</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>%mp_reseterror()</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>%mp_assert(</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  iftrue=(&amp;success=1),</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  desc=Checking sashelp table cannot be locked,</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  outds=work.test_results</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>)</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">  @version 9.2</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">  @author Allan Bowe</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"></span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>%macro mp_reseterror(</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>options obs=max replace nosyntaxcheck;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>%let syscc=0;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>%<span class="keywordflow">if</span> <span class="stringliteral">&quot;&amp;sysprocessmode &quot;</span> = <span class="stringliteral">&quot;SAS Stored Process Server &quot;</span> %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  data _null_;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    rc=stpsrvset(<span class="stringliteral">&#39;program error&#39;</span>, 0);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  run;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>%end;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>%mend mp_reseterror;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
@@ -152,7 +140,7 @@ $(document).ready(function(){initNavTree('mp__lockfilecheck_8test_8sas_source.ht
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_59425e443f801f1f2fd8bbe4959a3ccf.html">tests</a></li><li class="navelem"><a class="el" href="dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef.html">crossplatform</a></li><li class="navelem"><a class="el" href="mp__lockfilecheck_8test_8sas.html">mp_lockfilecheck.test.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_e914ee4d4a44400f1fdb170cb4ead18a.html">base</a></li><li class="navelem"><a class="el" href="mp__reseterror_8sas.html">mp_reseterror.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">
