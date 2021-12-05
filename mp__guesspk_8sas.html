@@ -114,17 +114,18 @@ $(document).ready(function(){initNavTree('mp__guesspk_8sas.html',''); initResiza
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Tries to guess the primary key of a table based on the following logic: </p><pre class="fragment">  Columns with nulls are ignored
   Return only column combinations that provide unique results
-  Start from one column, then move out to include composite keys of 2 to 6 columns
+  Start from one column, then move out to composite keys of 2 to 6 columns
 </pre><p> The library of the target should be assigned before using this macro.</p>
-<p >Usage: </p><pre class="fragment">filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
+<p >Usage: </p><pre class="fragment">filename mc url
+  "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %inc mc;
 %mp_guesspk(sashelp.class,outds=classpks)
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">baseds</td><td>The dataset to analyse </td></tr>
     <tr><td class="paramname">outds=</td><td>The output dataset to contain the possible PKs </td></tr>
-    <tr><td class="paramname">max_guesses=</td><td>The total number of possible primary keys to generate. A table is likely to have multiple unlikely PKs, so no need to list them all. Default=3. </td></tr>
-    <tr><td class="paramname">min_rows=</td><td>The minimum number of rows a table should have in order to try and guess the PK. Default=5.</td></tr>
+    <tr><td class="paramname">max_guesses=</td><td>(3) The total number of possible primary keys to generate. A table may have multiple unlikely PKs, so no need to list them all. </td></tr>
+    <tr><td class="paramname">min_rows=</td><td>(5) The minimum number of rows a table should have in order to try and guess the PK.</td></tr>
   </table>
   </dd>
 </dl>
@@ -133,6 +134,10 @@ $(document).ready(function(){initNavTree('mp__guesspk_8sas.html',''); initResiza
 <li><a class="el" href="mf__getvarlist_8sas.html" title="Returns dataset variable list direct from header.">mf_getvarlist.sas</a> </li>
 <li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
 <li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a></li>
+</ul>
+<h4>Related Macros </h4>
+<ul>
+<li><a class="el" href="mp__getpk_8sas.html" title="Extract the primary key fields from a table or library.">mp_getpk.sas</a></li>
 </ul>
 <dl class="section version"><dt>Version</dt><dd>9.3 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>

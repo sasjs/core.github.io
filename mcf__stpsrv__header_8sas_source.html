@@ -162,44 +162,49 @@ $(document).ready(function(){initNavTree('mcf__stpsrv__header_8sas_source.html',
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">  @param [out] pkg= (utils) The output package in which to create the function.</span></div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">    Uses a 3 part format:  libref.catalog.package</span></div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"></span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>%macro mcf_stpsrv_header(wrap=NO</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  ,insert_cmplib=NO</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  ,lib=WORK</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  ,cat=SASJS</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  ,pkg=UTILS</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>%<span class="keywordflow">if</span> &amp;wrap=YES  %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  proc fcmp outcat=&amp;lib..&amp;cat..&amp;pkg;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>%end;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="keyword">function</span> stpsrv_header(name $, value $);</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  length loc $128 val $512;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  loc=symget(<span class="stringliteral">&#39;sasjs_stpsrv_header_loc&#39;</span>);</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  val=trim(name)!!<span class="stringliteral">&#39;: &#39;</span>!!value;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  length fref $8;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  rc=filename(fref,loc);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <span class="keywordflow">if</span> (rc ne 0) then <span class="keywordflow">return</span>( -1 );</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  fid = fopen(fref,<span class="charliteral">&#39;a&#39;</span>);</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <span class="keywordflow">if</span> (fid = 0) then <span class="keywordflow">return</span>( -1 );</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  rc=fput(fid, val);</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  rc=fwrite(fid);</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  rc=fclose(fid);</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  rc=filename(fref);</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  <span class="keywordflow">return</span>(0);</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>endsub;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>%<span class="keywordflow">if</span> &amp;wrap=YES %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  quit;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>%end;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>%<span class="keywordflow">if</span> &amp;insert_cmplib=YES %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  options insert=(CMPLIB=(&amp;lib..&amp;cat));</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>%end;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>%mend mcf_stpsrv_header;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">  @li mf_existfunction.sas</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment"></span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>%macro mcf_stpsrv_header(wrap=NO</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  ,insert_cmplib=NO</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  ,lib=WORK</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  ,cat=SASJS</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  ,pkg=UTILS</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>%<span class="keywordflow">if</span> %mf_existfunction(stpsrv_header)=1 %then %<span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>%<span class="keywordflow">if</span> &amp;wrap=YES  %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  proc fcmp outcat=&amp;lib..&amp;cat..&amp;pkg;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>%end;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keyword">function</span> stpsrv_header(name $, value $);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  length loc $128 val $512;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  loc=symget(<span class="stringliteral">&#39;sasjs_stpsrv_header_loc&#39;</span>);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  val=trim(name)!!<span class="stringliteral">&#39;: &#39;</span>!!value;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  length fref $8;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  rc=filename(fref,loc);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <span class="keywordflow">if</span> (rc ne 0) then <span class="keywordflow">return</span>( -1 );</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  fid = fopen(fref,<span class="charliteral">&#39;a&#39;</span>);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  <span class="keywordflow">if</span> (fid = 0) then <span class="keywordflow">return</span>( -1 );</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  rc=fput(fid, val);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  rc=fwrite(fid);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  rc=fclose(fid);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  rc=filename(fref);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <span class="keywordflow">return</span>(0);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>endsub;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>%<span class="keywordflow">if</span> &amp;wrap=YES %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  quit;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>%end;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>%<span class="keywordflow">if</span> &amp;insert_cmplib=YES %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  options insert=(CMPLIB=(&amp;lib..&amp;cat));</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>%end;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>%mend mcf_stpsrv_header;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

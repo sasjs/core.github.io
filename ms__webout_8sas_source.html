@@ -199,7 +199,7 @@ $(document).ready(function(){initNavTree('ms__webout_8sas_source.html',''); init
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>%<span class="keywordflow">else</span> %<span class="keywordflow">if</span> &amp;action=ARR or &amp;action=OBJ %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  %mp_jsonout(&amp;action,&amp;ds,dslabel=&amp;dslabel,fmt=&amp;fmt,jref=&amp;fref</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    ,engine=&amp;jsonengine,dbg=%str(&amp;_debug)</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    ,engine=DATASTEP,dbg=%str(&amp;_debug)</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  )</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>%end;</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>%<span class="keywordflow">else</span> %<span class="keywordflow">if</span> &amp;action=CLOSE %then %<span class="keywordflow">do</span>;</div>
@@ -232,8 +232,8 @@ $(document).ready(function(){initNavTree('ms__webout_8sas_source.html',''); init
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        put <span class="stringliteral">&quot; &quot;</span><span class="stringliteral">&quot;&amp;wt&quot;</span><span class="stringliteral">&quot; : {&quot;</span>;</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        put <span class="stringliteral">&#39;&quot;nlobs&quot;:&#39;</span> nlobs;</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        put <span class="stringliteral">&#39;,&quot;nvars&quot;:&#39;</span> nvars;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>      %mp_jsonout(OBJ,&amp;tempds,jref=&amp;fref,dslabel=colattrs,engine=&amp;jsonengine)</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>      %mp_jsonout(OBJ,&amp;wt,jref=&amp;fref,dslabel=first10rows,engine=&amp;jsonengine)</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>      %mp_jsonout(OBJ,&amp;tempds,jref=&amp;fref,dslabel=colattrs,engine=DATASTEP)</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>      %mp_jsonout(OBJ,&amp;wt,jref=&amp;fref,dslabel=first10rows,engine=DATASTEP)</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>      data _null_; file &amp;fref mod encoding=<span class="stringliteral">&#39;utf-8&#39;</span>;</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        put <span class="stringliteral">&quot;}&quot;</span>;</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    %end;</div>
@@ -267,15 +267,16 @@ $(document).ready(function(){initNavTree('ms__webout_8sas_source.html',''); init
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    autoexec=quote(trim(getoption(<span class="stringliteral">&#39;autoexec&#39;</span>)));</div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    put <span class="stringliteral">&#39;,&quot;AUTOEXEC&quot; : &#39;</span> autoexec;</div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    memsize=<span class="stringliteral">&quot;%sysfunc(INPUTN(%sysfunc(getoption(memsize)), best.),sizekmg.)&quot;</span>;</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    put <span class="stringliteral">&#39;,&quot;MEMSIZE&quot; : &#39;</span> memsize;</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    put <span class="stringliteral">&quot;}&quot;</span> @;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  %<span class="keywordflow">if</span> %str(&amp;_debug) ge 131 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    put <span class="stringliteral">&#39;&gt;&gt;weboutEND&lt;&lt;&#39;</span>;</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>  %end;</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  run;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>%end;</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>%mend ms_webout;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    memsize=quote(cats(memsize));</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    put <span class="stringliteral">&#39;,&quot;MEMSIZE&quot; : &#39;</span> memsize;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    put <span class="stringliteral">&quot;}&quot;</span> @;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  %<span class="keywordflow">if</span> %str(&amp;_debug) ge 131 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    put <span class="stringliteral">&#39;&gt;&gt;weboutEND&lt;&lt;&#39;</span>;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  %end;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  run;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>%end;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>%mend ms_webout;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
