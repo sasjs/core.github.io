@@ -114,8 +114,12 @@ $(document).ready(function(){initNavTree('mp__makedata_8sas.html',''); initResiz
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Many SAS projects involve sensitive datasets. One way to <em>ensure</em> the data is anonymised, is never to receive it in the first place! Often consultants are provided with empty tables, and expected to create complex ETL flows.</p>
 <p >This macro can help by taking an empty table, and populating it with data according to the variable types and formats.</p>
-<p >The primary key is respected, as well as any NOT NULL constraints.</p>
-<p >Usage: </p><pre class="fragment">proc sql;
+<p >TODO: </p><ul>
+<li>Respect PKs </li>
+<li>Respect NOT NULLs </li>
+<li>Consider dates, datetimes, times, integers etc</li>
+</ul>
+<p>Usage: </p><pre class="fragment">proc sql;
 create table work.example(
   TX_FROM float format=datetime19.,
   DD_TYPE char(16),
@@ -134,6 +138,8 @@ create table work.example(
 </dl>
 <h4>SAS Macros </h4>
 <ul>
+<li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
+<li><a class="el" href="mf__getvarlen_8sas.html" title="Returns the length of a variable.">mf_getvarlen.sas</a> </li>
 <li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a> </li>
 <li><a class="el" href="mp__getcols_8sas.html" title="Creates a dataset with column metadata.">mp_getcols.sas</a> </li>
 <li><a class="el" href="mp__getpk_8sas.html" title="Extract the primary key fields from a table or library.">mp_getpk.sas</a></li>

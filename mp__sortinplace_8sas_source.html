@@ -197,7 +197,7 @@ $(document).ready(function(){initNavTree('mp__sortinplace_8sas_source.html','');
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>%let tempvw=%mf_getuniquename(prefix=&amp;sysmacroname);</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>proc sql;</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>create view work.&amp;tempvw as select * from &amp;lib..&amp;ds</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>order by %mf_getquotedstr(&amp;sortkey,quote=%str());</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>order by %mf_getquotedstr(&amp;sortkey,quote=N);</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">/* append sorted data */</span></div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>proc append base=&amp;lib..&amp;tempds2 data=work.&amp;tempvw;</div>
