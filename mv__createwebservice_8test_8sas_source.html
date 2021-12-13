@@ -141,16 +141,17 @@ $(document).ready(function(){initNavTree('mv__createwebservice_8test_8sas_source
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>%put TEST1: checking web service code;</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>data work.test_results;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  length test_description $256 test_result $4 test_comments $256;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  infile compare end=eof;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  input;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keywordflow">if</span> eof then <span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordflow">if</span> _infile_=<span class="stringliteral">&#39;01&#39;</span>x then test_result=<span class="stringliteral">&#39;PASS&#39;</span>;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">else</span> test_result=<span class="stringliteral">&#39;FAIL&#39;</span>;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    test_description=<span class="stringliteral">&quot;Creating web service with invisible character&quot;</span>;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    output;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    stop;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  end;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>run;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keywordflow">if</span> _n_=1 then call missing (of _all_);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  infile compare end=eof;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  input;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="keywordflow">if</span> eof then <span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">if</span> _infile_=<span class="stringliteral">&#39;01&#39;</span>x then test_result=<span class="stringliteral">&#39;PASS&#39;</span>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">else</span> test_result=<span class="stringliteral">&#39;FAIL&#39;</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    test_description=<span class="stringliteral">&quot;Creating web service with invisible character&quot;</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    output;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    stop;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  end;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>run;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

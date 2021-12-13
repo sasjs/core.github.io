@@ -112,9 +112,11 @@ $(document).ready(function(){initNavTree('mp__init_8sas.html',''); initResizable
 
 <p><a href="mp__init_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Implements a set of recommended options for general SAS use. This macro is NOT used elsewhere within the core library (other than in tests), but it is used by the SASjs team when building web services for SAS-Powered applications elsewhere.</p>
-<p >If you have a good idea for an option, setting, or useful global variable - feel free to <a href="https://github.com/sasjs/core/issues/new">raise an issue</a>!</p>
-<p >All global variables are prefixed with "SASJS_" (unless modfied with the prefix parameter).</p>
+<div class="textblock"><p >Implements a "strict" set of SAS options for use in defensive programming. Highly recommended, if you want your code to run on some other machine.</p>
+<p >This macro is recommended to be compiled and invoked in the <code>initProgram</code> for SASjs <a href="https://cli.sasjs.io/sasjsconfig.html#jobConfig_initProgram">Jobs</a>, <a href="https://cli.sasjs.io/sasjsconfig.html#serviceConfig_initProgram">Services</a> and <a href="https://cli.sasjs.io/sasjsconfig.html#testConfig_initProgram">Tests</a>.</p>
+<p >For non SASjs projects, you could invoke in the autoexec, or in your own solution initialisation macro.</p>
+<p >If you have a good idea for another useful option, setting, or global variable - feel free to <a href="https://github.com/sasjs/core/issues/new">raise an issue</a>!</p>
+<p >All global variables are prefixed with "SASJS" (unless modified with the prefix parameter).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">prefix=</td><td>(SASJS) The prefix to apply to the global macro variables</td></tr>

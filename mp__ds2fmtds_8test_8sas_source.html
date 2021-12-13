@@ -123,17 +123,19 @@ $(document).ready(function(){initNavTree('mp__ds2fmtds_8test_8sas_source.html','
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>data _null_;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <span class="keyword">set</span> work.test;</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  file inc;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  line=cats(<span class="stringliteral">&#39;%mp_ds2fmtds(sashelp.&#39;</span>,memname,<span class="charliteral">&#39;,&#39;</span>,memname,<span class="charliteral">&#39;)&#39;</span>);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  put line;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>run;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>%inc inc;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>%mp_assert(</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  iftrue=(&amp;syscc=0),</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  desc=Checking tables were created successfully,</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  outds=work.test_results</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>)</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  libds=cats(<span class="stringliteral">&#39;sashelp.&#39;</span>,memname);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <span class="keywordflow">if</span> exist(libds) then line=cats(<span class="stringliteral">&#39;%mp_ds2fmtds(&#39;</span>,libds,<span class="charliteral">&#39;,&#39;</span>,memname,<span class="charliteral">&#39;)&#39;</span>);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  put line;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>run;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>options obs=50;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>%inc inc;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>%mp_assert(</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  iftrue=(&amp;syscc=0),</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  desc=Checking tables were created successfully,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  outds=work.test_results</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>)</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
