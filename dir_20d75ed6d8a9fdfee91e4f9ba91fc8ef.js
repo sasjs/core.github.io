@@ -8,6 +8,7 @@ var dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef =
     [ "mf_getapploc.test.sas", "mf__getapploc_8test_8sas.html", null ],
     [ "mf_getuniquefileref.test.sas", "mf__getuniquefileref_8test_8sas.html", null ],
     [ "mf_getvarlist.test.sas", "mf__getvarlist_8test_8sas.html", null ],
+    [ "mf_isint.test.sas", "mf__isint_8test_8sas.html", null ],
     [ "mp_abort.test.nofix.sas", "mp__abort_8test_8nofix_8sas.html", null ],
     [ "mp_appendfile.test.sas", "mp__appendfile_8test_8sas.html", null ],
     [ "mp_assertcolvals.test.sas", "mp__assertcolvals_8test_8sas.html", null ],

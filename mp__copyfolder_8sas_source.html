@@ -162,9 +162,9 @@ $(document).ready(function(){initNavTree('mp__copyfolder_8sas_source.html',''); 
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="comment">/* create folders and copy content */</span></div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  data _null_;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">set</span> work.&amp;tempds;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    length msg $256;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    call missing(msg);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    length msg $200;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    call missing(msg);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keyword">set</span> work.&amp;tempds;</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">if</span> _n_ = 1 then dpos+sum(length(directory),2);</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    filepath2=<span class="stringliteral">&quot;&amp;target/&quot;</span>!!substr(filepath,dpos);</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">if</span> file_or_folder=<span class="stringliteral">&#39;folder&#39;</span> then call execute(<span class="stringliteral">&#39;%mf_mkdir(&#39;</span>!!filepath2!!<span class="charliteral">&#39;)&#39;</span>);</div>
