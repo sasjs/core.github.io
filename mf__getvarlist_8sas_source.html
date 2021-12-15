@@ -178,7 +178,7 @@ $(document).ready(function(){initNavTree('mf__getvarlist_8sas_source.html',''); 
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    %put &amp;sysmacroname: SYSMSG= %sysfunc(sysmsg());</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    %let rc=%sysfunc(close(&amp;dsid));</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  %end;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  &amp;outvar</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  %<span class="keywordflow">do</span>;%unquote(&amp;outvar)%end;</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>%mend mf_getvarlist;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

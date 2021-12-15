@@ -208,42 +208,44 @@ $(document).ready(function(){initNavTree('mv__getfoldermembers_8sas_source.html'
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  %local href cnt;</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  %let cnt=0;</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  data _null_;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keyword">set</span> &amp;libref1..links;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordflow">if</span> rel=<span class="stringliteral">&#39;members&#39;</span> then <span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>      url=cats(<span class="stringliteral">&quot;&#39;&quot;</span>,<span class="stringliteral">&quot;&amp;base_uri&quot;</span>,href,<span class="stringliteral">&quot;?limit=10000&#39;&quot;</span>);</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>      call symputx(<span class="stringliteral">&#39;href&#39;</span>,url,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>      call symputx(<span class="stringliteral">&#39;cnt&#39;</span>,1,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    end;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  run;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  %<span class="keywordflow">if</span> &amp;cnt=0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    %put NOTE:;%put NOTE-  No members found in &amp;root!!;%put NOTE-;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    %<span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  %end;</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  %local fname2 libref2;</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  %let fname2=%mf_getuniquefileref();</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  %let libref2=%mf_getuniquelibref();</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  proc http method=<span class="stringliteral">&#39;GET&#39;</span> out=&amp;fname2 &amp;oauth_bearer</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>      url=%unquote(%superq(href));</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  %<span class="keywordflow">if</span> &amp;grant_type=authorization_code %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>      headers <span class="stringliteral">&quot;Authorization&quot;</span>=<span class="stringliteral">&quot;Bearer &amp;&amp;&amp;access_token_var&quot;</span>;</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  %end;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  run;</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  libname &amp;libref2 JSON fileref=&amp;fname2;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  data &amp;outds;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    length <span class="keywordtype">id</span> $36 name $128 uri $64 type $32 description $256;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">if</span> _n_=1 then call missing (of _all_);</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keyword">set</span> &amp;libref2..items;</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  run;</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  filename &amp;fname2 clear;</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  libname &amp;libref2 clear;</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>%end;</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">/* clear refs */</span></div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>filename &amp;fname1 clear;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>libname &amp;libref1 clear;</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>%mend mv_getfoldermembers;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    length rel href $512;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    call missing(rel,href);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keyword">set</span> &amp;libref1..links;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordflow">if</span> rel=<span class="stringliteral">&#39;members&#39;</span> then <span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>      url=cats(<span class="stringliteral">&quot;&#39;&quot;</span>,<span class="stringliteral">&quot;&amp;base_uri&quot;</span>,href,<span class="stringliteral">&quot;?limit=10000&#39;&quot;</span>);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      call symputx(<span class="stringliteral">&#39;href&#39;</span>,url,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>      call symputx(<span class="stringliteral">&#39;cnt&#39;</span>,1,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    end;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  run;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  %<span class="keywordflow">if</span> &amp;cnt=0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    %put NOTE:;%put NOTE-  No members found in &amp;root!!;%put NOTE-;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    %<span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  %end;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  %local fname2 libref2;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  %let fname2=%mf_getuniquefileref();</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  %let libref2=%mf_getuniquelibref();</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  proc http method=<span class="stringliteral">&#39;GET&#39;</span> out=&amp;fname2 &amp;oauth_bearer</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>      url=%unquote(%superq(href));</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  %<span class="keywordflow">if</span> &amp;grant_type=authorization_code %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>      headers <span class="stringliteral">&quot;Authorization&quot;</span>=<span class="stringliteral">&quot;Bearer &amp;&amp;&amp;access_token_var&quot;</span>;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  %end;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  run;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  libname &amp;libref2 JSON fileref=&amp;fname2;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  data &amp;outds;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    length <span class="keywordtype">id</span> $36 name $128 uri $64 type $32 description $256;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordflow">if</span> _n_=1 then call missing (of _all_);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="keyword">set</span> &amp;libref2..items;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  run;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  filename &amp;fname2 clear;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  libname &amp;libref2 clear;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>%end;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="comment">/* clear refs */</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>filename &amp;fname1 clear;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>libname &amp;libref1 clear;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>%mend mv_getfoldermembers;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
