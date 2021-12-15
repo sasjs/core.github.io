@@ -146,7 +146,28 @@ run;
     <tr><td class="paramdir">[in]</td><td class="paramname">delds=</td><td>(0) Dataset with deleted records </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">appds=</td><td>(0) Dataset with appended records </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">modds=</td><td>(0) Dataset with modified records </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mp_storediffs) Output table containing stored data. Has the following format: proc sql; create table &amp;outds( load_ref char(36) label='unique load reference', processed_dttm num format=E8601DT26.6 label='Processed at timestamp', libref char(8) label='Library Reference (8 chars)', dsn char(32) label='Dataset Name (32 chars)', key_hash char(32) label= 'MD5 Hash of primary key values (pipe seperated)', move_type char(1) label='Either (A)ppended, (D)eleted or (M)odified', is_pk num label='Is Primary Key Field? (1/0)', is_diff num label= 'Did value change? (1/0/-1). Always -1 for appends and deletes.', tgtvar_type char(1) label='Either (C)haracter or (N)umeric', tgtvar_nm char(32) label='Target variable name (32 chars)', oldval_num num label='Old (numeric) value', newval_num num label='New (numeric) value', oldval_char char(32767) label='Old (character) value', newval_char char(32767) label='New (character) value', constraint pk_mpe_audit primary key(load_ref,libref,dsn,key_hash,tgtvar_nm) );</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mp_storediffs) Output table containing stored data. Has the following format: <pre class="fragment">proc sql;
+create table &amp;outds(
+  load_ref char(36) label='unique load reference',
+  processed_dttm num format=E8601DT26.6 label='Processed at timestamp',
+  libref char(8) label='Library Reference (8 chars)',
+  dsn char(32) label='Dataset Name (32 chars)',
+  key_hash char(32) label=
+    'MD5 Hash of primary key values (pipe seperated)',
+  move_type char(1) label='Either (A)ppended, (D)eleted or (M)odified',
+  is_pk num label='Is Primary Key Field? (1/0)',
+  is_diff num label=
+    'Did value change? (1/0/-1).  Always -1 for appends and deletes.',
+  tgtvar_type char(1) label='Either (C)haracter or (N)umeric',
+  tgtvar_nm char(32) label='Target variable name (32 chars)',
+  oldval_num num label='Old (numeric) value',
+  newval_num num label='New (numeric) value',
+  oldval_char char(32767) label='Old (character) value',
+  newval_char char(32767) label='New (character) value',
+  constraint pk_mpe_audit
+    primary key(load_ref,libref,dsn,key_hash,tgtvar_nm)
+);
+</pre> </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">processed_dttm=</td><td>(0) Provide a datetime constant in relation to the actual load time. If not provided, current timestamp is used. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>set to 1 to enable DEBUG messages and preserve outputs </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">loadref=</td><td>(0) Provide a unique key to reference the load, otherwise a UUID will be generated.</td></tr>
