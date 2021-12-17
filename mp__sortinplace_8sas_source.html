@@ -191,7 +191,7 @@ $(document).ready(function(){initNavTree('mp__sortinplace_8sas_source.html','');
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">/* overlay actual sort key if it exists */</span></div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>data _null_;</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <span class="keyword">set</span> work.&amp;tempds1;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  call symputx(<span class="stringliteral">&#39;sortkey&#39;</span>,pk_fields);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  call symputx(<span class="stringliteral">&#39;sortkey&#39;</span>,coalescec(pk_fields,symget(<span class="stringliteral">&#39;sortkey&#39;</span>)));</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>run;</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
