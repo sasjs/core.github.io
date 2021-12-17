@@ -173,10 +173,10 @@ $(document).ready(function(){initNavTree('mp__storediffs_8sas_source.html',''); 
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">            &#39;Did value change? (1/0/-1).  Always -1 for appends and deletes.&#39;,</span></div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">          tgtvar_type char(1) label=&#39;Either (C)haracter or (N)umeric&#39;,</span></div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">          tgtvar_nm char(32) label=&#39;Target variable name (32 chars)&#39;,</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">          oldval_num num label=&#39;Old (numeric) value&#39;,</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">          newval_num num label=&#39;New (numeric) value&#39;,</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">          oldval_char char(32767) label=&#39;Old (character) value&#39;,</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">          newval_char char(32767) label=&#39;New (character) value&#39;,</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">          oldval_num num format=best32. label=&#39;Old (numeric) value&#39;,</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">          newval_num num format=best32. label=&#39;New (numeric) value&#39;,</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">          oldval_char char(32765) label=&#39;Old (character) value&#39;,</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">          newval_char char(32765) label=&#39;New (character) value&#39;,</span></div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">          constraint pk_mpe_audit</span></div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">            primary key(load_ref,libref,dsn,key_hash,tgtvar_nm)</span></div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">        );</span></div>
@@ -320,18 +320,18 @@ $(document).ready(function(){initNavTree('mp__storediffs_8sas_source.html',''); 
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    ,b.tgtvar_type length=1</div>
 <div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    ,<span class="keywordflow">case</span> when b.move_type=<span class="charliteral">&#39;D&#39;</span> then b.newval_num</div>
 <div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>      <span class="keywordflow">else</span> a.newval_num</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>      end as oldval_num</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>      end as oldval_num format=best32.</div>
 <div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    ,<span class="keywordflow">case</span> when b.move_type=<span class="charliteral">&#39;D&#39;</span> then .</div>
 <div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>      <span class="keywordflow">else</span> b.newval_num</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>      end as newval_num</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>      end as newval_num format=best32.</div>
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    ,<span class="keywordflow">case</span> when b.move_type=<span class="charliteral">&#39;D&#39;</span> then b.newval_char</div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>      <span class="keywordflow">else</span> a.newval_char</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>      end as oldval_char length=32767</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>      end as oldval_char length=32765</div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    ,<span class="keywordflow">case</span> when b.move_type=<span class="charliteral">&#39;D&#39;</span> then <span class="stringliteral">&#39;&#39;</span></div>
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>      <span class="keywordflow">else</span> b.newval_char</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>      end as newval_char length=32767</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>      end as newval_char length=32765</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>  from &amp;ds4(where=(move_type=<span class="charliteral">&#39;O&#39;</span>)) as a</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>  full join &amp;ds4(where=(move_type ne &#39;O&#39;)) as b</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>  right join &amp;ds4(where=(move_type ne &#39;O&#39;)) as b</div>
 <div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  on a.tgtvar_nm=b.tgtvar_nm</div>
 <div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  and a.key_hash=b.key_hash</div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>  order by move_type, key_hash,is_pk desc, tgtvar_nm;</div>

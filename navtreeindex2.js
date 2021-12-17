@@ -1,5 +1,17 @@
 var NAVTREEINDEX2 =
 {
+"mv__jobwaitfor_8sas.html":[1,7,24],
+"mv__jobwaitfor_8sas_source.html":[1,7,24],
+"mv__registerclient_8sas.html":[1,7,25],
+"mv__registerclient_8sas_source.html":[1,7,25],
+"mv__registerclient_8test_81_8sas.html":[1,6,2,11],
+"mv__registerclient_8test_81_8sas_source.html":[1,6,2,11],
+"mv__registerclient_8test_82_8sas.html":[1,6,2,12],
+"mv__registerclient_8test_82_8sas_source.html":[1,6,2,12],
+"mv__tokenauth_8sas.html":[1,7,26],
+"mv__tokenauth_8sas_source.html":[1,7,26],
+"mv__tokenrefresh_8sas.html":[1,7,27],
+"mv__tokenrefresh_8sas_source.html":[1,7,27],
 "mv__webout_8sas.html":[1,7,28],
 "mv__webout_8sas_source.html":[1,7,28],
 "mv__webout_8test_8sas.html":[1,6,2,13],

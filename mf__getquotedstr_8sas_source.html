@@ -124,8 +124,8 @@ $(document).ready(function(){initNavTree('mf__getquotedstr_8sas_source.html','')
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">&gt; &quot;these&quot;,&quot;words&quot;,&quot;are&quot;,&quot;double&quot;,&quot;quoted&quot;</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"></span> </div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">  @param [in] in_str The unquoted, spaced delimited string to transform</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">  @param [in] dlm= The delimeter to be applied to the output (default comma)</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">  @param [in] indlm= (,) The delimeter used for the input (default is space)</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">  @param [in] dlm= (,) The delimeter to be applied to the output (default comma)</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">  @param [in] indlm= ( ) The delimeter used for the input (default is space)</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">  @param [in] quote= (S) The quote mark to apply (S=Single, D=Double, N=None).</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">    If any other value than uppercase S or D is supplied, then that value will</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">    be used as the quoting character.</span></div>
@@ -136,30 +136,33 @@ $(document).ready(function(){initNavTree('mf__getquotedstr_8sas_source.html','')
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">**/</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>%macro mf_getquotedstr(IN_STR,DLM=%str(,),QUOTE=S,indlm=%str( )</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="comment">/* credit Rowland Hale  - byte34 is double quote, 39 is single quote */</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  %<span class="keywordflow">if</span> &amp;quote=S %then %let quote=%qsysfunc(<span class="keywordtype">byte</span>(39));</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">if</span> &amp;quote=D %then %let quote=%qsysfunc(<span class="keywordtype">byte</span>(34));</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">if</span> &amp;quote=N %then %let quote=;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  %local i item buffer;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  %let i=1;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  %<span class="keywordflow">do</span> %<span class="keywordflow">while</span> (%qscan(&amp;IN_STR,&amp;i,%str(&amp;indlm)) ne %str() ) ;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    %let item=%qscan(&amp;IN_STR,&amp;i,%str(&amp;indlm));</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    %<span class="keywordflow">if</span> %bquote(&amp;QUOTE) ne %then %let item=&amp;QUOTE%qtrim(&amp;item)&amp;QUOTE;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    %<span class="keywordflow">else</span> %let item=%qtrim(&amp;item);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    %<span class="keywordflow">if</span> (&amp;i = 1) %then %let buffer =%qtrim(&amp;item);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    %<span class="keywordflow">else</span> %let buffer =&amp;buffer&amp;DLM%qtrim(&amp;item);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>%macro mf_getquotedstr(IN_STR</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  ,DLM=%str(,)</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  ,QUOTE=S</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  ,indlm=%str( )</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="comment">/* credit Rowland Hale  - byte34 is double quote, 39 is single quote */</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  %<span class="keywordflow">if</span> &amp;quote=S %then %let quote=%qsysfunc(<span class="keywordtype">byte</span>(39));</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">if</span> &amp;quote=D %then %let quote=%qsysfunc(<span class="keywordtype">byte</span>(34));</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">if</span> &amp;quote=N %then %let quote=;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  %local i item buffer;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  %let i=1;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  %<span class="keywordflow">do</span> %<span class="keywordflow">while</span> (%qscan(&amp;IN_STR,&amp;i,%str(&amp;indlm)) ne %str() ) ;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    %let item=%qscan(&amp;IN_STR,&amp;i,%str(&amp;indlm));</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    %<span class="keywordflow">if</span> %bquote(&amp;QUOTE) ne %then %let item=&amp;QUOTE%qtrim(&amp;item)&amp;QUOTE;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    %<span class="keywordflow">else</span> %let item=%qtrim(&amp;item);</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    %let i = %eval(&amp;i+1);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  %end;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    %<span class="keywordflow">if</span> (&amp;i = 1) %then %let buffer =%qtrim(&amp;item);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    %<span class="keywordflow">else</span> %let buffer =&amp;buffer&amp;DLM%qtrim(&amp;item);</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  %let buffer=%sysfunc(coalescec(%qtrim(&amp;buffer),&amp;QUOTE&amp;QUOTE));</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  &amp;buffer</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>%mend mf_getquotedstr;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    %let i = %eval(&amp;i+1);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  %end;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  %let buffer=%sysfunc(coalescec(%qtrim(&amp;buffer),&amp;QUOTE&amp;QUOTE));</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  &amp;buffer</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>%mend mf_getquotedstr;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

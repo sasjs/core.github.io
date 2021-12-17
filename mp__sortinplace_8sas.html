@@ -114,11 +114,11 @@ $(document).ready(function(){initNavTree('mp__sortinplace_8sas.html',''); initRe
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Generally if a dataset contains indexes, then it is not necessary to sort it before performing operations such as merges / joins etc. That said, there are a few edge cases where it can be desirable:</p>
 <ul>
-<li>To improve performance for particular scenarios </li>
 <li>To allow adjacent records to be viewed directly in the dataset </li>
-<li>To reduce dataset size (eg when there are deleted records)</li>
+<li>To apply compression, or to remove deleted records </li>
+<li>To improve performance for specific queries</li>
 </ul>
-<p>This macro will only work for BASE (V9) engine libraries. It works by creating a copy of the dataset (without data, WITH constraints) in the same library, appending a sorted view into it, and finally - renaming it.</p>
+<p>This macro will only work for BASE (V9) engine libraries. It works by creating a copy of the dataset (without data, WITH constraints) in the same library, appending a sorted view into it, and finally - renaming it. By default, COMPRESS=CHAR and REUSE=YES will be applied, this behaviour can be adjusted using the <code>dsoptions=</code> parameter.</p>
 <p >Example usage: </p><pre class="fragment">proc sql;
 create table work.example as
   select * from sashelp.class;
@@ -137,6 +137,7 @@ alter table work.example
 <li><a class="el" href="mf__getengine_8sas.html" title="Returns the engine type of a SAS library.">mf_getengine.sas</a> </li>
 <li><a class="el" href="mf__getquotedstr_8sas.html" title="Adds custom quotes / delimiters to a delimited string.">mf_getquotedstr.sas</a> </li>
 <li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
+<li><a class="el" href="mf__getvarlist_8sas.html" title="Returns dataset variable list direct from header.">mf_getvarlist.sas</a> </li>
 <li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a> </li>
 <li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
 <li><a class="el" href="mp__getpk_8sas.html" title="Extract the primary key fields from a table or library.">mp_getpk.sas</a></li>
