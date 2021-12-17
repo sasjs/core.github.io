@@ -173,7 +173,7 @@ $(document).ready(function(){initNavTree('mp__getformats_8test_8sas_source.html'
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>%mp_getformats(fmtlist=WHICHPATH,outsummary=sum,outdetail=detail2)</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>%let tst2=0;</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>data _null_;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  set detail1;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  set detail2;</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  if fmtname=&#39;WHICHPATH&#39; and start=&#39;**OTHER**&#39; then call symputx(&#39;tst2&#39;,label);</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  putlog (_all_)(=);</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>run;</div>
