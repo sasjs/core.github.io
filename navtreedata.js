@@ -35,7 +35,7 @@ var NAVTREEINDEX =
 [
 "_2_users_2munja_2git_2core_2base_2mp_wait4file_8sas-example.html",
 "mp__assertdsobs_8sas.html",
-"mv__jobwaitfor_8sas.html"
+"mv__jobflow_8test_82_8sas.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

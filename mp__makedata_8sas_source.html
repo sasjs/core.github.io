@@ -172,13 +172,13 @@ $(document).ready(function(){initNavTree('mp__makedata_8sas_source.html',''); in
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    &amp;n1=ranuni(1)*5000000;</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    drop &amp;c1 &amp;n1;</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    %let charvars=%mf_getvarlist(&amp;libds,typefilter=C);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    %<span class="keywordflow">do</span> i=1 %to %sysfunc(countw(&amp;charvars));</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    %<span class="keywordflow">if</span> &amp;charvars ^= %then %<span class="keywordflow">do</span> i=1 %to %sysfunc(countw(&amp;charvars));</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>      %let col=%scan(&amp;charvars,&amp;i);</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>      &amp;col=subpad(&amp;c1,1,%mf_getvarlen(&amp;libds,&amp;col));</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    %end;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    %let numvars=%mf_getvarlist(&amp;libds,typefilter=N);</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    %<span class="keywordflow">do</span> i=1 %to %sysfunc(countw(&amp;numvars));</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    %<span class="keywordflow">if</span> &amp;numvars ^= %then %<span class="keywordflow">do</span> i=1 %to %sysfunc(countw(&amp;numvars));</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>      %let col=%scan(&amp;numvars,&amp;i);</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>      &amp;col=&amp;n1;</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    %end;</div>

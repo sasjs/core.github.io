@@ -24,6 +24,7 @@ var dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef =
     [ "mp_ds2cards.test.sas", "mp__ds2cards_8test_8sas.html", null ],
     [ "mp_ds2fmtds.test.sas", "mp__ds2fmtds_8test_8sas.html", null ],
     [ "mp_ds2inserts.test.sas", "mp__ds2inserts_8test_8sas.html", null ],
+    [ "mp_ds2md.test.sas", "mp__ds2md_8test_8sas.html", null ],
     [ "mp_filtercheck.test.sas", "mp__filtercheck_8test_8sas.html", null ],
     [ "mp_filtergenerate.test.sas", "mp__filtergenerate_8test_8sas.html", null ],
     [ "mp_filtervalidate.test.sas", "mp__filtervalidate_8test_8sas.html", null ],
