@@ -118,7 +118,7 @@ $(document).ready(function(){initNavTree('mp__sortinplace_8sas.html',''); initRe
 <li>To apply compression, or to remove deleted records </li>
 <li>To improve performance for specific queries</li>
 </ul>
-<p>This macro will only work for BASE (V9) engine libraries. It works by creating a copy of the dataset (without data, WITH constraints) in the same library, appending a sorted view into it, and finally - renaming it. By default, COMPRESS=CHAR and REUSE=YES will be applied, this behaviour can be adjusted using the <code>dsoptions=</code> parameter.</p>
+<p>This macro will only work for BASE (V9) engine libraries. It works by creating a copy of the dataset (without data, WITH constraints) in the same library, appending a sorted view into it, and finally - renaming it.</p>
 <p >Example usage: </p><pre class="fragment">proc sql;
 create table work.example as
   select * from sashelp.class;
@@ -147,7 +147,7 @@ alter table work.example
 <li><a class="el" href="mp__sortinplace_8test_8sas.html" title="Testing mp_sortinplace.test.sas.">mp_sortinplace.test.sas</a></li>
 </ul>
 <dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe @source <a href="https://github.com/sasjs/core">https://github.com/sasjs/core</a> </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="mp__sortinplace_8sas_source.html">mp_sortinplace.sas</a>.</p>
 </div></div><!-- contents -->
