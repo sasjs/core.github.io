@@ -41,6 +41,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mf_trimstr.sas", "mf__trimstr_8sas.html", null ],
     [ "mf_uid.sas", "mf__uid_8sas.html", null ],
     [ "mf_verifymacvars.sas", "mf__verifymacvars_8sas.html", null ],
+    [ "mf_wordsinstr1andstr2.sas", "mf__wordsinstr1andstr2_8sas.html", null ],
     [ "mf_wordsinstr1butnotstr2.sas", "mf__wordsinstr1butnotstr2_8sas.html", null ],
     [ "mp_abort.sas", "mp__abort_8sas.html", null ],
     [ "mp_appendfile.sas", "mp__appendfile_8sas.html", null ],

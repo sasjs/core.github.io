@@ -170,13 +170,13 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas_source.html',''); ini
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>%put output location=&amp;jref;</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>%<span class="keywordflow">if</span> &amp;action=OPEN %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  options nobomfile;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  data _null_;file &amp;jref encoding=<span class="stringliteral">&#39;utf-8&#39;</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  data _null_;file &amp;jref encoding=<span class="stringliteral">&#39;utf-8&#39;</span> ;</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    put <span class="stringliteral">&#39;{&quot;PROCESSED_DTTM&quot; : &quot;&#39;</span> <span class="stringliteral">&quot;%sysfunc(datetime(),E8601DT26.6)&quot;</span> <span class="charliteral">&#39;&quot;&#39;</span>;</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  run;</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>%end;</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>%<span class="keywordflow">else</span> %<span class="keywordflow">if</span> (&amp;action=ARR or &amp;action=OBJ) %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  options validvarname=upcase;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  data _null_;file &amp;jref mod encoding=<span class="stringliteral">&#39;utf-8&#39;</span>;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  data _null_;file &amp;jref mod encoding=<span class="stringliteral">&#39;utf-8&#39;</span> ;</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    put <span class="stringliteral">&quot;, &quot;</span><span class="stringliteral">&quot;%lowcase(%sysfunc(coalescec(&amp;dslabel,&amp;ds)))&quot;</span><span class="stringliteral">&quot;:&quot;</span>;</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  %<span class="keywordflow">if</span> &amp;engine=PROCJSON %then %<span class="keywordflow">do</span>;</div>
@@ -255,7 +255,7 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas_source.html',''); ini
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>      run;</div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>      %let ds=&amp;fmtds;</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    %end; <span class="comment">/* &amp;fmt=Y */</span></div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    data _null_;file &amp;jref mod encoding=<span class="stringliteral">&#39;utf-8&#39;</span>;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    data _null_;file &amp;jref mod encoding=<span class="stringliteral">&#39;utf-8&#39;</span> ;</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>      put <span class="stringliteral">&quot;[&quot;</span>; call symputx(<span class="stringliteral">&#39;cols&#39;</span>,0,<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    proc sort</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>      data=sashelp.vcolumn(where=(libname=<span class="stringliteral">&#39;WORK&#39;</span> &amp; memname=<span class="stringliteral">&quot;%upcase(&amp;ds)&quot;</span>))</div>
@@ -300,7 +300,7 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas_source.html',''); ini
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="comment">/* write to temp loc to avoid _webout truncation</span></div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment">      - https://support.sas.com/kb/49/325.html */</span></div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    filename _sjs temp lrecl=131068 encoding=<span class="stringliteral">&#39;utf-8&#39;</span>;</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    data _null_; file _sjs lrecl=131068 encoding=<span class="stringliteral">&#39;utf-8&#39;</span> mod;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    data _null_; file _sjs lrecl=131068 encoding=<span class="stringliteral">&#39;utf-8&#39;</span> mod ;</div>
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>      <span class="keyword">set</span> &amp;tempds;</div>
 <div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>      <span class="keywordflow">if</span> _n_&gt;1 then put <span class="stringliteral">&quot;,&quot;</span> @; put</div>
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>      %<span class="keywordflow">if</span> &amp;action=ARR %then <span class="stringliteral">&quot;[&quot;</span> ; %<span class="keywordflow">else</span> <span class="stringliteral">&quot;{&quot;</span> ;</div>
@@ -327,14 +327,14 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas_source.html',''); ini
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>      rc = fclose(fileid);</div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    run;</div>
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    filename _sjs clear;</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    data _null_; file &amp;jref mod encoding=<span class="stringliteral">&#39;utf-8&#39;</span>;</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    data _null_; file &amp;jref mod encoding=<span class="stringliteral">&#39;utf-8&#39;</span> ;</div>
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>      put <span class="stringliteral">&quot;]&quot;</span>;</div>
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    run;</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>  %end;</div>
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>%end;</div>
 <div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
 <div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>%<span class="keywordflow">else</span> %<span class="keywordflow">if</span> &amp;action=CLOSE %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>  data _null_;file &amp;jref encoding=<span class="stringliteral">&#39;utf-8&#39;</span> mod;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>  data _null_;file &amp;jref encoding=<span class="stringliteral">&#39;utf-8&#39;</span> mod ;</div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    put <span class="stringliteral">&quot;}&quot;</span>;</div>
 <div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>  run;</div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>%end;</div>
