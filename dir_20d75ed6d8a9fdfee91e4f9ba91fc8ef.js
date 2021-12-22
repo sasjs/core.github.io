@@ -12,6 +12,7 @@ var dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef =
     [ "mf_getuniquefileref.test.sas", "mf__getuniquefileref_8test_8sas.html", null ],
     [ "mf_getvarlist.test.sas", "mf__getvarlist_8test_8sas.html", null ],
     [ "mf_isint.test.sas", "mf__isint_8test_8sas.html", null ],
+    [ "mf_islibds.test.sas", "mf__islibds_8test_8sas.html", null ],
     [ "mf_wordsinstr1andstr2.test.sas", "mf__wordsinstr1andstr2_8test_8sas.html", null ],
     [ "mf_wordsinstr1butnotstr2.test.sas", "mf__wordsinstr1butnotstr2_8test_8sas.html", null ],
     [ "mp_abort.test.nofix.sas", "mp__abort_8test_8nofix_8sas.html", null ],
