@@ -200,18 +200,19 @@ $(document).ready(function(){initNavTree('mp__makedata_8sas_source.html',''); in
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    %end;</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    output;</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  end;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>run;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>proc sort data=&amp;ds2 nodupkey;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  by &amp;pk_fields;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>run;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>proc append base=&amp;libds data=&amp;ds2;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>run;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>proc sql;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>drop table &amp;ds1, &amp;ds2;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>%mend mp_makedata;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  stop;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>run;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>proc sort data=&amp;ds2 nodupkey;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  by &amp;pk_fields;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>run;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>proc append base=&amp;libds data=&amp;ds2;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>run;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>proc sql;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>drop table &amp;ds1, &amp;ds2;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>%mend mp_makedata;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

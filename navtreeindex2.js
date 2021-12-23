@@ -1,5 +1,11 @@
 var NAVTREEINDEX2 =
 {
+"mv__getjoblog_8sas.html":[1,7,16],
+"mv__getjoblog_8sas_source.html":[1,7,16],
+"mv__getjoblog_8test_8sas.html":[1,6,2,7],
+"mv__getjoblog_8test_8sas_source.html":[1,6,2,7],
+"mv__getjobresult_8sas.html":[1,7,17],
+"mv__getjobresult_8sas_source.html":[1,7,17],
 "mv__getjobresult_8test_8sas.html":[1,6,2,8],
 "mv__getjobresult_8test_8sas_source.html":[1,6,2,8],
 "mv__getjobstate_8sas.html":[1,7,18],

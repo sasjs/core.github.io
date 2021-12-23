@@ -115,32 +115,36 @@ $(document).ready(function(){initNavTree('mf__existvar_8sas_source.html',''); in
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"></span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">        %put %mf_existvar(work.someds, somevar)</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"></span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">  @param libds (positional) - 2 part dataset or view reference</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">  @param var (positional) - variable name</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">  @version 9.2</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">  @author Allan Bowe</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">**/</span><span class="comment"></span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">/** @cond */</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>%macro mf_existvar(libds <span class="comment">/* 2 part dataset name */</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>      , var <span class="comment">/* variable name */</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">  @param [in] libds 2 part dataset or view reference</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">  @param [in] var variable name</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"></span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">  &lt;h4&gt; Related Macros &lt;/h4&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">  @li mf_existvar.test.sas</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"></span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">  @version 9.2</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">  @author Allan Bowe</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">**/</span><span class="comment"></span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">/** @cond */</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  %local dsid rc;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  %let dsid=%sysfunc(open(&amp;libds,is));</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  %<span class="keywordflow">if</span> &amp;dsid=0 or %length(&amp;var)=0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    %put %sysfunc(sysmsg());</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>      0</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  %end;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>      %sysfunc(varnum(&amp;dsid,&amp;var))</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>      %let rc=%sysfunc(close(&amp;dsid));</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>%macro mf_existvar(libds <span class="comment">/* 2 part dataset name */</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>      , var <span class="comment">/* variable name */</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  %local dsid rc;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  %let dsid=%sysfunc(open(&amp;libds,is));</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  %<span class="keywordflow">if</span> &amp;dsid=0 or %length(&amp;var)=0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    %put %sysfunc(sysmsg());</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>      0</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  %end;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>%mend mf_existvar;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"></span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">/** @endcond */</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>      %sysfunc(varnum(&amp;dsid,&amp;var))</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>      %let rc=%sysfunc(close(&amp;dsid));</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  %end;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>%mend mf_existvar;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"></span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">/** @endcond */</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
