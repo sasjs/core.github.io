@@ -201,6 +201,40 @@ $(document).ready(function(){initNavTree('mp__validatecol_8test_8sas_source.html
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  test=EQUALS 5,</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  outds=work.test_results</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>)</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment"></span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">  * Test 4 - ISINT</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">  */</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>data test4;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  infile datalines4 dsd;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  input;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  infile=_infile_;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  %mp_validatecol(infile,ISINT,is_integer)</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  if is_integer=1;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>datalines4;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>1</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>1234</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>-134</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>-1.0</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>1.0</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>0</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>above are good</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>the rest are bad</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>%abort</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>1&amp;somethingverybad.</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>&amp;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>+-1</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>.</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>a.A</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>$format12.1b</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>$format12.1b1</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>;;;;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>run;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>%mp_assertdsobs(work.test4,</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  desc=Test4 - ISFORMAT,</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  test=EQUALS 6,</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  outds=work.test_results</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>)</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
