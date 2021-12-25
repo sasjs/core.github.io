@@ -108,7 +108,7 @@ $(document).ready(function(){initNavTree('mp__retainedkey_8sas_source.html','');
 <div class="contents">
 <a href="mp__retainedkey_8sas.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">  @file</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">  @brief</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">  @brief Generate and apply retained key values to a staging table</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">  @details This macro will populate a staging table with a Retained Key based on</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">  a business key and a base (target) table.</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"></span> </div>
@@ -153,43 +153,43 @@ $(document).ready(function(){initNavTree('mp__retainedkey_8sas_source.html','');
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">  @li mp_abort.sas</span></div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">  @li mp_lockanytable.sas</span></div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"></span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">  @param [in] base_lib= (WORK) Libref of the base (target) table.</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">  @param [in] base_dsn= (BASETABLE) Name of the base (target) table.</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">  @param [in] append_lib= (WORK) Libref of the staging table</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">  @param [in] append_dsn= (APPENDTABLE) Name of the staging table</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">  @param [in] retained_key= (DEFAULT_RK) Name of RK to generate (should exist on</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">  @param [in] base_lib=(WORK) Libref of the base (target) table.</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">  @param [in] base_dsn=(BASETABLE) Name of the base (target) table.</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">  @param [in] append_lib=(WORK) Libref of the staging table</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">  @param [in] append_dsn=(APPENDTABLE) Name of the staging table</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">  @param [in] retained_key=(DEFAULT_RK) Name of RK to generate (should exist on</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">    base table)</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">  @param [in] business_key= (PK1 PK2) Business key against which to generate</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">  @param [in] business_key=(PK1 PK2) Business key against which to generate</span></div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">    RK values.  Should be unique and not null on the staging table.</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">  @param [in] check_uniqueness= (NO) Set to yes to perform a uniqueness check.</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">  @param [in] check_uniqueness=(NO) Set to yes to perform a uniqueness check.</span></div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">    Recommended if there is a chance that the staging data is not unique on the</span></div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">    business key.</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">  @param [in] maxkeytable= (0) Provide a maxkeytable libds reference here, to</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">  @param [in] maxkeytable=(0) Provide a maxkeytable libds reference here, to</span></div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">    store load metadata (maxkey val, load time).  Structure is described above.</span></div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">    See below for sample data.</span></div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">    |KEYTABLE:$32.|KEYCOLUMN:$32.|MAX_KEY:best.|PROCESSED_DTTM:E8601DT26.6|</span></div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">    |---|---|---|---|</span></div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">    |`DC487173.MPE_SELECTBOX `|`SELECTBOX_RK `|`55 `|`1950427787.8 `|</span></div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">    |`DC487173.MPE_FILTERANYTABLE `|`filter_rk `|`14 `|`1951053886.8 `|</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">  @param [in] tx_filter=</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">  @param [out] outds= (WORK.APPEND) Output table (staging table + retained key)</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment"></span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">  @version 9.2</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"></span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>%macro mp_rk(</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>      base_lib=WORK</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>      ,base_dsn=BASETABLE</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>      ,append_lib=WORK</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>      ,append_dsn=APPENDTABLE</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>      ,retained_key=DEFAULT_RK</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>      ,business_key= PK1 PK2</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>      ,check_uniqueness=NO</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>      ,maxkeytable=0</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      ,outds=WORK.APPEND</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>      ,tx_filter=             <span class="comment">/* if TXTEMPORAL or BITEMPORAL provide the</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">                                  date filter in calling macro */</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">  @param [in] filter_str= Apply a filter - useful for SCD2 or BITEMPORAL loads.</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">    Example: `tx_filter=%str( (where=( &amp;now &lt; &amp;tech_to)) )`</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">  @param [out] outds=(WORK.APPEND) Output table (staging table + retained key)</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"></span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">  @version 9.2</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"></span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>%macro mp_rk(</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>      base_lib=WORK</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>      ,base_dsn=BASETABLE</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>      ,append_lib=WORK</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>      ,append_dsn=APPENDTABLE</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>      ,retained_key=DEFAULT_RK</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>      ,business_key= PK1 PK2</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>      ,check_uniqueness=NO</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      ,maxkeytable=0</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>      ,outds=WORK.APPEND</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>      ,filter_str=</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>);</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>%put &amp;sysmacroname entry vars:;</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>%put _local_;</div>

@@ -107,6 +107,9 @@ $(document).ready(function(){initNavTree('mp__retainedkey_8sas.html',''); initRe
 </div><!--header-->
 <div class="contents">
 
+<p>Generate and apply retained key values to a staging table.  
+<a href="#details">More...</a></p>
+
 <p><a href="mp__retainedkey_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >This macro will populate a staging table with a Retained Key based on a business key and a base (target) table.</p>
@@ -142,14 +145,14 @@ create table yourlib.maxkeytable(
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">base_lib=</td><td>(WORK) Libref of the base (target) table. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">base_dsn=</td><td>(BASETABLE) Name of the base (target) table. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">append_lib=</td><td>(WORK) Libref of the staging table </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">append_dsn=</td><td>(APPENDTABLE) Name of the staging table </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">retained_key=</td><td>(DEFAULT_RK) Name of RK to generate (should exist on base table) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">business_key=</td><td>(PK1 PK2) Business key against which to generate RK values. Should be unique and not null on the staging table. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">check_uniqueness=</td><td>(NO) Set to yes to perform a uniqueness check. Recommended if there is a chance that the staging data is not unique on the business key. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">maxkeytable=</td><td>(0) Provide a maxkeytable libds reference here, to store load metadata (maxkey val, load time). Structure is described above. See below for sample data. <table class="markdownTable">
+    <tr><td class="paramdir">[in]</td><td class="paramname">base_lib=(WORK)</td><td>Libref of the base (target) table. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">base_dsn=(BASETABLE)</td><td>Name of the base (target) table. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">append_lib=(WORK)</td><td>Libref of the staging table </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">append_dsn=(APPENDTABLE)</td><td>Name of the staging table </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">retained_key=(DEFAULT_RK)</td><td>Name of RK to generate (should exist on base table) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">business_key=(PK1</td><td>PK2) Business key against which to generate RK values. Should be unique and not null on the staging table. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">check_uniqueness=(NO)</td><td>Set to yes to perform a uniqueness check. Recommended if there is a chance that the staging data is not unique on the business key. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">maxkeytable=(0)</td><td>Provide a maxkeytable libds reference here, to store load metadata (maxkey val, load time). Structure is described above. See below for sample data. <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">KEYTABLE:$32.   </th><th class="markdownTableHeadNone">KEYCOLUMN:$32.   </th><th class="markdownTableHeadNone">MAX_KEY:best.   </th><th class="markdownTableHeadNone">PROCESSED_DTTM:E8601DT26.6    </th></tr>
 <tr class="markdownTableRowOdd">
@@ -158,8 +161,8 @@ create table yourlib.maxkeytable(
 <td class="markdownTableBodyNone"><code>DC487173.MPE_FILTERANYTABLE</code>   </td><td class="markdownTableBodyNone"><code>filter_rk</code>   </td><td class="markdownTableBodyNone"><code>14</code>   </td><td class="markdownTableBodyNone"><code>1951053886.8</code>   </td></tr>
 </table>
 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tx_filter=</td><td></td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(WORK.APPEND) Output table (staging table + retained key)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">filter_str=</td><td>Apply a filter - useful for SCD2 or BITEMPORAL loads. Example: <code>tx_filter=str( (where=( &amp;now &lt; &amp;tech_to)) )</code> </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=(WORK.APPEND)</td><td>Output table (staging table + retained key)</td></tr>
   </table>
   </dd>
 </dl>
