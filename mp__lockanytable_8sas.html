@@ -123,7 +123,18 @@ $(document).ready(function(){initNavTree('mp__lockanytable_8sas.html',''); initR
     <tr><td class="paramdir">[in]</td><td class="paramname">lib=</td><td>(WORK) The libref of the table to lock. Should already be assigned. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ds=</td><td>The dataset to lock </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ref=</td><td>A meaningful reference to enable the lock to be traced. Max length is 200 characters. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">ctl_ds=</td><td>(0) The control table which controls the actual locking. Should already be assigned and available. Definition as follows: proc sql; create table &amp;ctl_ds( lock_lib char(8), lock_ds char(32), lock_status_cd char(10) not null, lock_user_nm char(100) not null , lock_ref char(200), lock_pid char(10), lock_start_dttm num format=E8601DT26.6, lock_end_dttm num format=E8601DT26.6, constraint pk_mp_lockanytable primary key(lock_lib,lock_ds)); </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ctl_ds=</td><td>(0) The control table which controls the actual locking. Should already be assigned and available. Definition as follows: <pre class="fragment">proc sql;
+create table &amp;ctl_ds(
+    lock_lib char(8),
+    lock_ds char(32),
+    lock_status_cd char(10) not null,
+    lock_user_nm char(100) not null ,
+    lock_ref char(200),
+    lock_pid char(10),
+    lock_start_dttm num format=E8601DT26.6,
+    lock_end_dttm num format=E8601DT26.6,
+  constraint pk_mp_lockanytable primary key(lock_lib,lock_ds));
+</pre> </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">loops=</td><td>(25) Number of times to check for a lock. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">loop_secs=</td><td>(1) Seconds to wait between each lock attempt</td></tr>
   </table>
