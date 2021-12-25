@@ -127,7 +127,7 @@ create table yourlib.maxkeytable(
     keytable varchar(41) label='Base table in libref.dataset format',
     keycolumn char(32) format=$32.
       label='The Retained key field containing the key values.',
-    max_key int label=
+    max_key num label=
       'Integer representing current max RK or SK value in the KEYTABLE',
     processed_dttm num format=E8601DT26.6
       label='Datetime this value was last updated',
@@ -152,7 +152,7 @@ create table yourlib.maxkeytable(
 </table>
 </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">locktable=</td><td>(0) If updating the maxkeytable, provide the libds reference to the lock table (per <a class="el" href="mp__lockanytable_8sas.html" title="Mechanism for locking tables to prevent parallel modifications.">mp_lockanytable.sas</a> macro) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">filter_str=</td><td>Apply a filter - useful for SCD2 or BITEMPORAL loads. Example: <code>tx_filter=str( (where=( &amp;now &lt; &amp;tech_to)) )</code> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">filter_str=</td><td>Apply a filter - useful for SCD2 or BITEMPORAL loads. Example: <code>filter_str=str( (where=( &amp;now &lt; &amp;tech_to)) )</code> </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(WORK.APPEND) Output table (staging table + retained key)</td></tr>
   </table>
   </dd>
