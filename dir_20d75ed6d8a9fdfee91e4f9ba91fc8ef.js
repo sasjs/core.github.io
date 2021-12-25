@@ -47,6 +47,7 @@ var dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef =
     [ "mp_lockfilecheck.test.sas", "mp__lockfilecheck_8test_8sas.html", null ],
     [ "mp_makedata.test.sas", "mp__makedata_8test_8sas.html", null ],
     [ "mp_reseterror.test.sas", "mp__reseterror_8test_8sas.html", null ],
+    [ "mp_retainedkey.test.sas", "mp__retainedkey_8test_8sas.html", null ],
     [ "mp_searchcols.test.sas", "mp__searchcols_8test_8sas.html", null ],
     [ "mp_searchdata.test.sas", "mp__searchdata_8test_8sas.html", null ],
     [ "mp_sortinplace.test.sas", "mp__sortinplace_8test_8sas.html", null ],

@@ -133,17 +133,7 @@ create table yourlib.maxkeytable(
       label='Datetime this value was last updated',
   constraint pk_mpe_maxkeyvalues
       primary key(keytable));
-</pre> <h4>SAS Macros </h4>
-</li>
-</ul>
-<ul>
-<li><a class="el" href="mf__existvar_8sas.html" title="Checks if a variable exists in a data set.">mf_existvar.sas</a> </li>
-<li><a class="el" href="mf__getattrn_8sas.html" title="Returns a numeric attribute of a dataset.">mf_getattrn.sas</a> </li>
-<li><a class="el" href="mf__getquotedstr_8sas.html" title="Adds custom quotes / delimiters to a delimited string.">mf_getquotedstr.sas</a> </li>
-<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
-<li><a class="el" href="mp__lockanytable_8sas.html" title="Mechanism for locking tables to prevent parallel modifications.">mp_lockanytable.sas</a></li>
-</ul>
-<dl class="params"><dt>Parameters</dt><dd>
+</pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">base_lib=(WORK)</td><td>Libref of the base (target) table. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">base_dsn=(BASETABLE)</td><td>Name of the base (target) table. </td></tr>
@@ -152,7 +142,7 @@ create table yourlib.maxkeytable(
     <tr><td class="paramdir">[in]</td><td class="paramname">retained_key=(DEFAULT_RK)</td><td>Name of RK to generate (should exist on base table) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">business_key=(PK1</td><td>PK2) Business key against which to generate RK values. Should be unique and not null on the staging table. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">check_uniqueness=(NO)</td><td>Set to yes to perform a uniqueness check. Recommended if there is a chance that the staging data is not unique on the business key. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">maxkeytable=(0)</td><td>Provide a maxkeytable libds reference here, to store load metadata (maxkey val, load time). Structure is described above. See below for sample data. <table class="markdownTable">
+    <tr><td class="paramdir">[in]</td><td class="paramname">maxkeytable=(0)</td><td>Provide a maxkeytable libds reference here, to store load metadata (maxkey val, load time). Set to zero if metadata is not required, eg, when preparing a 'dummy' load. Structure is described above. See below for sample data. <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">KEYTABLE:$32.   </th><th class="markdownTableHeadNone">KEYCOLUMN:$32.   </th><th class="markdownTableHeadNone">MAX_KEY:best.   </th><th class="markdownTableHeadNone">PROCESSED_DTTM:E8601DT26.6    </th></tr>
 <tr class="markdownTableRowOdd">
@@ -161,11 +151,27 @@ create table yourlib.maxkeytable(
 <td class="markdownTableBodyNone"><code>DC487173.MPE_FILTERANYTABLE</code>   </td><td class="markdownTableBodyNone"><code>filter_rk</code>   </td><td class="markdownTableBodyNone"><code>14</code>   </td><td class="markdownTableBodyNone"><code>1951053886.8</code>   </td></tr>
 </table>
 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">locktable=(0)</td><td>If updating the maxkeytable, provide the libds reference to the lock table (per <a class="el" href="mp__lockanytable_8sas.html" title="Mechanism for locking tables to prevent parallel modifications.">mp_lockanytable.sas</a> macro) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">filter_str=</td><td>Apply a filter - useful for SCD2 or BITEMPORAL loads. Example: <code>tx_filter=str( (where=( &amp;now &lt; &amp;tech_to)) )</code> </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=(WORK.APPEND)</td><td>Output table (staging table + retained key)</td></tr>
   </table>
   </dd>
 </dl>
+<h4>SAS Macros </h4>
+</li>
+</ul>
+<ul>
+<li><a class="el" href="mf__existvar_8sas.html" title="Checks if a variable exists in a data set.">mf_existvar.sas</a> </li>
+<li><a class="el" href="mf__getquotedstr_8sas.html" title="Adds custom quotes / delimiters to a delimited string.">mf_getquotedstr.sas</a> </li>
+<li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
+<li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a> </li>
+<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
+<li><a class="el" href="mp__lockanytable_8sas.html" title="Mechanism for locking tables to prevent parallel modifications.">mp_lockanytable.sas</a></li>
+</ul>
+<h4>Related Macros </h4>
+<ul>
+<li><a class="el" href="mp__retainedkey_8test_8sas.html" title="Testing mp_retainedkey macro.">mp_retainedkey.test.sas</a></li>
+</ul>
 <dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="mp__retainedkey_8sas_source.html">mp_retainedkey.sas</a>.</p>
