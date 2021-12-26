@@ -112,11 +112,7 @@ $(document).ready(function(){initNavTree('mp__filterstore_8sas.html',''); initRe
 
 <p><a href="mp__filterstore_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Used to generate a FILTER_RK from an input query dataset. This process requires several permanent tables (names are configurable):</p>
-<ul>
-<li>filterdetail (contains raw values) </li>
-<li>filtersummary (contains summary data about the filter)</li>
-</ul>
+<div class="textblock"><p >Used to generate a FILTER_RK from an input query dataset. This process requires several permanent tables (names are configurable). The benefit of storing query values at backend is to enable stored 'views' of filtered tables at frontend (ie, when building <a href="https://sasapps.io">SAS-Powered Apps</a>). This macro is also used in <a href="https://datacontroller.io">Data Controller for SAS</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">libds=</td><td>The target dataset to be filtered (lib should be assigned) </td></tr>
@@ -129,7 +125,7 @@ $(document).ready(function(){initNavTree('mp__filterstore_8sas.html',''); initRe
 <td class="markdownTableBodyNone">AND   </td><td class="markdownTableBodyNone">AND   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">SOME_TIME   </td><td class="markdownTableBodyNone">=   </td><td class="markdownTableBodyNone">77333   </td></tr>
 </table>
 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">filter_summary=</td><td>(PERM.FILTER_SUMMARY) Permanent table containing summary filter values. Structure: <table class="markdownTable">
+    <tr><td class="paramdir">[in]</td><td class="paramname">filter_summary=</td><td>(PERM.FILTER_SUMMARY) Permanent table containing summary filter values. The definition is available by running <a class="el" href="mp__coretable_8sas.html" title="Create the permanent Core tables.">mp_coretable.sas</a> as follows: <code>mp_coretable(FILTER_SUMMARY)</code>. Example values: <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">FILTER_RK:best.   </th><th class="markdownTableHeadNone">FILTER_HASH:$32.   </th><th class="markdownTableHeadNone">FILTER_TABLE:$41.   </th><th class="markdownTableHeadNone">PROCESSED_DTTM:datetime19.    </th></tr>
 <tr class="markdownTableRowOdd">
@@ -140,7 +136,7 @@ $(document).ready(function(){initNavTree('mp__filterstore_8sas.html',''); initRe
 <td class="markdownTableBodyNone"><code>3</code>   </td><td class="markdownTableBodyNone"><code>8048BD908DBBD83D013560734E90D394</code>   </td><td class="markdownTableBodyNone"><code>VIYA6014.MPE_TABLES</code>   </td><td class="markdownTableBodyNone"><code>1956093620.6</code>   </td></tr>
 </table>
 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">filter_detail=</td><td>(PERM.FILTER_DETAIL) Permanent table containing detailed (raw) filter values. Structure: <table class="markdownTable">
+    <tr><td class="paramdir">[in]</td><td class="paramname">filter_detail=</td><td>(PERM.FILTER_DETAIL) Permanent table containing detailed (raw) filter values. The definition is available by running <a class="el" href="mp__coretable_8sas.html" title="Create the permanent Core tables.">mp_coretable.sas</a> as follows: <code>mp_coretable(FILTER_DETAIL)</code>. Example values: <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">FILTER_HASH:$32.   </th><th class="markdownTableHeadNone">FILTER_LINE:best.   </th><th class="markdownTableHeadNone">GROUP_LOGIC:$3.   </th><th class="markdownTableHeadNone">SUBGROUP_LOGIC:$3.   </th><th class="markdownTableHeadNone">SUBGROUP_ID:best.   </th><th class="markdownTableHeadNone">VARIABLE_NM:$32.   </th><th class="markdownTableHeadNone">OPERATOR_NM:$12.   </th><th class="markdownTableHeadNone">RAW_VALUE:$4000.   </th><th class="markdownTableHeadNone">PROCESSED_DTTM:datetime19.    </th></tr>
 <tr class="markdownTableRowOdd">
@@ -151,7 +147,7 @@ $(document).ready(function(){initNavTree('mp__filterstore_8sas.html',''); initRe
 <td class="markdownTableBodyNone"><code>87737DB9EEE2650F5C89956CEAD0A14F</code>   </td><td class="markdownTableBodyNone"><code>1</code>   </td><td class="markdownTableBodyNone"><code>AND</code>   </td><td class="markdownTableBodyNone"><code>AND</code>   </td><td class="markdownTableBodyNone"><code>1</code>   </td><td class="markdownTableBodyNone"><code>PRIMARY_KEY_FIELD</code>   </td><td class="markdownTableBodyNone"><code>IN</code>   </td><td class="markdownTableBodyNone"><code>(1,2,3)</code>   </td><td class="markdownTableBodyNone"><code>1956084451.9</code>   </td></tr>
 </table>
 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">lock_table=</td><td>(PERM.LOCK_TABLE) Permanent locking table. Used to manage concurrent access. Described in <a class="el" href="mp__lockanytable_8sas.html" title="Mechanism for locking tables to prevent parallel modifications.">mp_lockanytable.sas</a>. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lock_table=</td><td>(PERM.LOCK_TABLE) Permanent locking table. Used to manage concurrent access. The definition is available by running <a class="el" href="mp__coretable_8sas.html" title="Create the permanent Core tables.">mp_coretable.sas</a> as follows: <code>mp_coretable(LOCKTABLE)</code>. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">maxkeytable=</td><td>(0) Optional permanent reference table used for retained key tracking. Described in <a class="el" href="mp__retainedkey_8sas.html" title="Generate and apply retained key values to a staging table.">mp_retainedkey.sas</a>. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>set to 1 to enable DEBUG messages </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outresult=</td><td>The result table with the FILTER_RK </td></tr>
@@ -175,7 +171,7 @@ $(document).ready(function(){initNavTree('mp__filterstore_8sas.html',''); initRe
 <li><a class="el" href="mp__filtercheck_8sas.html" title="Checks an input filter table for validity.">mp_filtercheck.sas</a> </li>
 <li><a class="el" href="mp__filtergenerate_8sas.html" title="Generates a filter clause from an input table, to a fileref.">mp_filtergenerate.sas</a> </li>
 <li><a class="el" href="mp__filtervalidate_8sas.html" title="Checks a generated filter query for validity.">mp_filtervalidate.sas</a> </li>
-<li>mp_filterstore.test.sas</li>
+<li><a class="el" href="mp__filterstore_8test_8sas.html" title="Testing mp_filterstore macro.">mp_filterstore.test.sas</a></li>
 </ul>
 <dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd><a href="https://www.linkedin.com/in/allanbowe">Allan Bowe</a> </dd></dl>

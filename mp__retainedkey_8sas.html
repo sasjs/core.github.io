@@ -122,18 +122,10 @@ $(document).ready(function(){initNavTree('mp__retainedkey_8sas.html',''); initRe
 <ul>
 <li>work.staging_table - the staged data, minus the retained key element </li>
 <li>permlib.base_table - the target table to be loaded (<b>not</b> loaded by this macro) </li>
-<li>permlib.maxkeytable - optional, used to store load metaadata. The structure is as follows: <pre class="fragment">proc sql;
-create table yourlib.maxkeytable(
-    keytable varchar(41) label='Base table in libref.dataset format',
-    keycolumn char(32) format=$32.
-      label='The Retained key field containing the key values.',
-    max_key num label=
-      'Integer representing current max RK or SK value in the KEYTABLE',
-    processed_dttm num format=E8601DT26.6
-      label='Datetime this value was last updated',
-  constraint pk_mpe_maxkeyvalues
-      primary key(keytable));
-</pre> <dl class="params"><dt>Parameters</dt><dd>
+<li>permlib.maxkeytable - optional, used to store load metaadata. The definition is available by running <a class="el" href="mp__coretable_8sas.html" title="Create the permanent Core tables.">mp_coretable.sas</a> as follows: <code>mp_coretable(MAXKEYTABLE)</code>. </li>
+<li>permlib.locktable - Necessary if maxkeytable is being populated. The definition is available by running <a class="el" href="mp__coretable_8sas.html" title="Create the permanent Core tables.">mp_coretable.sas</a> as follows: <code>mp_coretable(LOCKTABLE)</code>.</li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">base_lib=</td><td>(WORK) Libref of the base (target) table. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">base_dsn=</td><td>(BASETABLE) Name of the base (target) table. </td></tr>
@@ -158,8 +150,6 @@ create table yourlib.maxkeytable(
   </dd>
 </dl>
 <h4>SAS Macros </h4>
-</li>
-</ul>
 <ul>
 <li><a class="el" href="mf__existvar_8sas.html" title="Checks if a variable exists in a data set.">mf_existvar.sas</a> </li>
 <li><a class="el" href="mf__getquotedstr_8sas.html" title="Adds custom quotes / delimiters to a delimited string.">mf_getquotedstr.sas</a> </li>
