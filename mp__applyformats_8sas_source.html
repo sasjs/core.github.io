@@ -252,16 +252,16 @@ $(document).ready(function(){initNavTree('mp__applyformats_8sas_source.html','')
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>proc sql noprint;</div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>select distinct lib into: liblist separated by <span class="charliteral">&#39; &#39;</span> from &amp;inds;</div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>%put &amp;=liblist;</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>%<span class="keywordflow">do</span> i=1 %to %sysfunc(countw(&amp;liblist));</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>%<span class="keywordflow">if</span> %length(&amp;liblist)&gt;0 %then %<span class="keywordflow">do</span> i=1 %to %sysfunc(countw(&amp;liblist));</div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  %let lib=%scan(&amp;liblist,1);</div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  %let engine=%mf_getengine(&amp;lib);</div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  %<span class="keywordflow">if</span> &amp;engine ne V9 and &amp;engine ne BASE %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    %let msg=&amp;lib has &amp;engine engine - formats cannot be applied;</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    proc sql;</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    insert into &amp;outds <span class="keyword">set</span> lib=<span class="stringliteral">&quot;&amp;lib&quot;</span>,ds=<span class="stringliteral">&quot;_all_&quot;</span>,var=<span class="stringliteral">&quot;_all&quot;</span>, msg=<span class="stringliteral">&quot;&amp;msg&quot;</span> ;</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    %<span class="keywordflow">if</span> &amp;errds=0 %then %put %str(ERR)OR: &amp;msg;</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  %end;</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>%end;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    insert into &amp;outds <span class="keyword">set</span> lib=<span class="stringliteral">&quot;&amp;lib&quot;</span>,ds=<span class="stringliteral">&quot;_all_&quot;</span>,var=<span class="stringliteral">&quot;_all&quot;</span>, msg=<span class="stringliteral">&quot;&amp;msg&quot;</span> ;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    %<span class="keywordflow">if</span> &amp;errds=0 %then %put %str(ERR)OR: &amp;msg;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  %end;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>%end;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>quit;</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>%<span class="keywordflow">if</span> %mf_nobs(&amp;outds)&gt;0 %then %<span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="comment"></span> </div>
