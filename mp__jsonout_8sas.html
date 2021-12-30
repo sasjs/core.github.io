@@ -150,13 +150,12 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas.html',''); initResiza
     <tr><td class="paramdir">[out]</td><td class="paramname">jref=</td><td>(_webout) The fileref to which to send the JSON </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">dslabel=</td><td>The name to give the table in the exported JSON </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">fmt=</td><td>(Y) Whether to keep (Y) or strip (N) formats from the table </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">engine=</td><td>(DATASTEP) Which engine to use to send the JSON. Options: <ul>
+    <tr><td class="paramdir">[in]</td><td class="paramname">engine=</td><td>(DATASTEP) Which engine to use to send the JSON. Options: <ul>
 <li>PROCJSON (default) </li>
 <li>DATASTEP (more reliable when data has non standard characters) </li>
 </ul>
 </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">missing=</td><td>(NULL) Special numeric missing values can be sent as NULL (eg <code>null</code>) or as STRING values (eg <code>".a"</code> or <code>".b"</code>)</td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">dbg=</td><td>DEPRECATED - was used to conditionally add PRETTY to proc json but this can cause line truncation in large files.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">missing=</td><td>(NULL) Special numeric missing values can be sent as NULL (eg <code>null</code>) or as STRING values (eg <code>".a"</code> or <code>".b"</code>)</td></tr>
   </table>
   </dd>
 </dl>
