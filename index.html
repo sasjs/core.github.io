@@ -261,10 +261,17 @@ General Notes</h1>
 <li>All macros should be compatible with SAS versions from support level B and above (so currently 9.2 and later). If an earlier version is not supported, then the macro should say as such in the header documentation, and exit gracefully (eg <code>if sysevalf(&amp;sysver&lt;9.3) then return</code>).</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md20"></a>
+Breaking Changes</h1>
+<p >We are currently on major release v3. The following changes are planned when the next major (breaking) release becomes necessary:</p>
+<ul>
+<li>Remove <code>dbg</code> parameter from <a class="el" href="mp__jsonout_8sas.html" title="Writes JSON in SASjs format to a fileref.">mp_jsonout.sas</a> (implement mdebug instead)</li>
+<li>Remove <code>END_DTTM</code> and <code>START_DTTM</code> from mx_webout JSON</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md21"></a>
 Star Gazing</h1>
 <p >If you find this library useful, please leave a <a href="https://github.com/sasjs/core/stargazers">star</a> and help us grow our star graph!</p>
 <p ><img src="https://starchart.cc/sasjs/core.svg" alt="" style="pointer-events: none;" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md21"></a>
+<h1><a class="anchor" id="autotoc_md22"></a>
 Contributors ✨</h1>
 <p ><a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square" alt="All Contributors" style="pointer-events: none;" class="inline"/></a></p>
 <p >Thanks goes to these wonderful people (<a href="https://allcontributors.org/docs/en/emoji-key">emoji key</a>):</p>

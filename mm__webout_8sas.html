@@ -125,11 +125,12 @@ run;
 </pre><p> Finally, wrap everything up send some helpful system variables too </p><pre class="fragment">%mm_webout(CLOSE)
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">action</td><td>Either FETCH, OPEN, ARR, OBJ or CLOSE </td></tr>
-    <tr><td class="paramname">ds</td><td>The dataset to send back to the frontend </td></tr>
-    <tr><td class="paramname">dslabel=</td><td>value to use instead of the real name for sending to JSON </td></tr>
-    <tr><td class="paramname">fmt=(Y)</td><td>Set to N to send back unformatted values </td></tr>
-    <tr><td class="paramname">fref=(_webout)</td><td>The fileref to which to write the JSON</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">action</td><td>Either FETCH, OPEN, ARR, OBJ or CLOSE </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ds</td><td>The dataset to send back to the frontend </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">dslabel=</td><td>Value to use instead of table name for sending to JSON </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fmt=(Y)</td><td>Set to N to send back unformatted values </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">fref=</td><td>(_webout) The fileref to which to write the JSON </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">missing=</td><td>(NULL) Special numeric missing values can be sent as NULL (eg <code>null</code>) or as STRING values (eg <code>".a"</code> or <code>".b"</code>)</td></tr>
   </table>
   </dd>
 </dl>

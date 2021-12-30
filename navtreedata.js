@@ -35,7 +35,7 @@ var NAVTREEINDEX =
 [
 "_2_users_2munja_2git_2core_2base_2mp_wait4file_8sas-example.html",
 "mp__abort_8sas.html",
-"mv__getfoldermembers_8sas.html"
+"mv__getclients_8sas.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

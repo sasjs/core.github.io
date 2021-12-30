@@ -125,13 +125,14 @@ run;
 %mv_webout(CLOSE)
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">action</td><td>Either OPEN, ARR, OBJ or CLOSE </td></tr>
-    <tr><td class="paramname">ds</td><td>The dataset to send back to the frontend </td></tr>
-    <tr><td class="paramname">_webout=</td><td>fileref for returning the json </td></tr>
-    <tr><td class="paramname">fref=(_mvwtemp)</td><td>Temp fileref to which to write the output </td></tr>
-    <tr><td class="paramname">dslabel=</td><td>value to use instead of the real name for sending to JSON </td></tr>
-    <tr><td class="paramname">fmt=(Y)</td><td>change to N to strip formats from output </td></tr>
-    <tr><td class="paramname">stream=(Y)</td><td>Change to N if not streaming to _webout</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">action</td><td>Either OPEN, ARR, OBJ or CLOSE </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ds</td><td>The dataset to send back to the frontend </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">_webout=</td><td>fileref for returning the json </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">fref=(_mvwtemp)</td><td>Temp fileref to which to write the output </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">dslabel=</td><td>value to use instead of table name for sending to JSON </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fmt=(Y)</td><td>change to N to strip formats from output </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stream=(Y)</td><td>Change to N if not streaming to _webout </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">missing=</td><td>(NULL) Special numeric missing values can be sent as NULL (eg <code>null</code>) or as STRING values (eg <code>".a"</code> or <code>".b"</code>)</td></tr>
   </table>
   </dd>
 </dl>
