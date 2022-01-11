@@ -130,15 +130,6 @@ $(document).ready(function(){initNavTree('mm__createstp_8sas.html',''); initResi
   putlog (_all_)(=);
 run;
 </pre><p> usage (type 2 STP): mm_createstp(stpname=MyNewType2STP ,filename=mySpecialProgram.sas ,directory=SASEnvironment/SASCode/STPs ,tree=/User Folders/sasdemo ,Server=SASApp ,stptype=2)</p>
-<h4>SAS Macros </h4>
-<ul>
-<li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a> </li>
-<li><a class="el" href="mf__verifymacvars_8sas.html" title="Checks if a set of macro variables exist / contain values.">mf_verifymacvars.sas</a> </li>
-<li><a class="el" href="mm__getdirectories_8sas.html" title="Returns a dataset with the meta directory object for a physical path.">mm_getdirectories.sas</a> </li>
-<li><a class="el" href="mm__updatestpsourcecode_8sas.html" title="Update the source code of a type 2 STP.">mm_updatestpsourcecode.sas</a> </li>
-<li><a class="el" href="mp__dropmembers_8sas.html" title="Drops tables / views (if they exist) without warnings in the log.">mp_dropmembers.sas</a> </li>
-<li><a class="el" href="mm__getservercontexts_8sas.html" title="Creates a dataset with all server contexts in all repos.">mm_getservercontexts.sas</a></li>
-</ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">stpname=</td><td>Stored Process name. Avoid spaces - testing has shown that the check to avoid creating multiple STPs in the same folder with the same name does not work when the name contains spaces. </td></tr>
@@ -164,6 +155,19 @@ run;
 <li>texturi</li>
 </ul>
 </dd></dl>
+<h4>SAS Macros </h4>
+<ul>
+<li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a> </li>
+<li><a class="el" href="mf__verifymacvars_8sas.html" title="Checks if a set of macro variables exist / contain values.">mf_verifymacvars.sas</a> </li>
+<li><a class="el" href="mm__getdirectories_8sas.html" title="Returns a dataset with the meta directory object for a physical path.">mm_getdirectories.sas</a> </li>
+<li><a class="el" href="mm__updatestpsourcecode_8sas.html" title="Update the source code of a type 2 STP.">mm_updatestpsourcecode.sas</a> </li>
+<li><a class="el" href="mp__dropmembers_8sas.html" title="Drops tables / views (if they exist) without warnings in the log.">mp_dropmembers.sas</a> </li>
+<li><a class="el" href="mm__getservercontexts_8sas.html" title="Creates a dataset with all server contexts in all repos.">mm_getservercontexts.sas</a></li>
+</ul>
+<h4>Related Macros </h4>
+<ul>
+<li><a class="el" href="mm__createwebservice_8sas.html" title="Create a Web Ready Stored Process.">mm_createwebservice.sas</a></li>
+</ul>
 <dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 

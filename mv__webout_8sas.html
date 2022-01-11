@@ -132,7 +132,8 @@ run;
     <tr><td class="paramdir">[out]</td><td class="paramname">dslabel=</td><td>value to use instead of table name for sending to JSON </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">fmt=(Y)</td><td>change to N to strip formats from output </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">stream=(Y)</td><td>Change to N if not streaming to _webout </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">missing=</td><td>(NULL) Special numeric missing values can be sent as NULL (eg <code>null</code>) or as STRING values (eg <code>".a"</code> or <code>".b"</code>)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">missing=</td><td>(NULL) Special numeric missing values can be sent as NULL (eg <code>null</code>) or as STRING values (eg <code>".a"</code> or <code>".b"</code>) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">showmeta=</td><td>(NO) Set to YES to output metadata alongside each table, such as the column formats and types. The metadata is contained inside an object with the same name as the table but prefixed with a dollar sign - ie, <code>,"$tablename":{"formats":{"col1":"$CHAR1"},"types":{"COL1":"C"}}</code></td></tr>
   </table>
   </dd>
 </dl>

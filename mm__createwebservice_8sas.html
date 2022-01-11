@@ -121,6 +121,7 @@ filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %* parmcards lets us write to a text file from open code ;
 filename ft15f001 temp;
 parmcards4;
+    %webout(FETCH)
     %* do some sas, any inputs are now already WORK tables;
     data example1 example2;
       set sashelp.class;
@@ -132,27 +133,28 @@ parmcards4;
     %webout(CLOSE)
 ;;;;
 %mm_createwebservice(path=/Public/app/common,name=appInit,code=ft15f001)
-</pre> <h4>SAS Macros </h4>
-<ul>
-<li><a class="el" href="mm__createstp_8sas.html" title="Create a type 1 Stored Process (9.2 compatible)">mm_createstp.sas</a> </li>
-<li><a class="el" href="mf__getuser_8sas.html" title="Returns a userid according to session context.">mf_getuser.sas</a> </li>
-<li><a class="el" href="mm__createfolder_8sas.html" title="Recursively create a metadata folder.">mm_createfolder.sas</a> </li>
-<li><a class="el" href="mm__deletestp_8sas.html" title="Deletes a Stored Process using path as reference.">mm_deletestp.sas</a></li>
-</ul>
+</pre><p> For more examples of using these web services with the SASjs Adapter, see: <a href="https://github.com/sasjs/adapter#readme">https://github.com/sasjs/adapter#readme</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path=</td><td>The full path (in SAS Metadata) where the service will be created </td></tr>
     <tr><td class="paramname">name=</td><td>Stored Process name. Avoid spaces - testing has shown that the check to avoid creating multiple STPs in the same folder with the same name does not work when the name contains spaces. </td></tr>
     <tr><td class="paramname">desc=</td><td>The description of the service (optional) </td></tr>
     <tr><td class="paramname">precode=</td><td>Space separated list of filerefs, pointing to the code that needs to be attached to the beginning of the service (optional) </td></tr>
-    <tr><td class="paramname">code=(ft15f001)</td><td>Space seperated fileref(s) of the actual code to be added </td></tr>
-    <tr><td class="paramname">server=(SASApp)</td><td>The server which will run the STP. Server name or uri is fine. </td></tr>
-    <tr><td class="paramname">mDebug=(0)</td><td>set to 1 to show debug messages in the log </td></tr>
-    <tr><td class="paramname">replace=(YES)</td><td>select NO to avoid replacing an existing service in that location </td></tr>
-    <tr><td class="paramname">adapter=(sasjs)</td><td>the macro uses the sasjs adapter by default. To use another adapter, add a (different) fileref here.</td></tr>
+    <tr><td class="paramname">code=</td><td>(ft15f001) Space seperated fileref(s) of the actual code to be added </td></tr>
+    <tr><td class="paramname">server=</td><td>(SASApp) The server which will run the STP. Server name or uri is fine. </td></tr>
+    <tr><td class="paramname">mDebug=</td><td>(0) set to 1 to show debug messages in the log </td></tr>
+    <tr><td class="paramname">replace=</td><td>(YES) select NO to avoid replacing an existing service in that location </td></tr>
+    <tr><td class="paramname">adapter=</td><td>(sasjs) the macro uses the sasjs adapter by default. To use another adapter, add a (different) fileref here.</td></tr>
   </table>
   </dd>
 </dl>
+<h4>SAS Macros </h4>
+<ul>
+<li><a class="el" href="mm__createstp_8sas.html" title="Create a type 1 Stored Process (9.2 compatible)">mm_createstp.sas</a> </li>
+<li><a class="el" href="mf__getuser_8sas.html" title="Returns a userid according to session context.">mf_getuser.sas</a> </li>
+<li><a class="el" href="mm__createfolder_8sas.html" title="Recursively create a metadata folder.">mm_createfolder.sas</a> </li>
+<li><a class="el" href="mm__deletestp_8sas.html" title="Deletes a Stored Process using path as reference.">mm_deletestp.sas</a></li>
+</ul>
 <dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
