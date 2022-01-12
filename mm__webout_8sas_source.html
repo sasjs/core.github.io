@@ -232,7 +232,7 @@ $(document).ready(function(){initNavTree('mm__webout_8sas_source.html',''); init
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>      <span class="keyword">set</span> &amp;tempds;</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>      <span class="keywordflow">if</span> not (upcase(name) =:<span class="stringliteral">&quot;DATA&quot;</span>); <span class="comment">/* ignore temp datasets */</span></div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>      i+1;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>      call symputx(<span class="stringliteral">&#39;wt&#39;</span>!!left(i),name,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>      call symputx(cats(<span class="stringliteral">&#39;wt&#39;</span>,i),name,<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>      call symputx(<span class="stringliteral">&#39;wtcnt&#39;</span>,i,<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    data _null_; file &amp;fref mod encoding=<span class="stringliteral">&#39;utf-8&#39;</span>;</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>      put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;WORK&quot;</span><span class="stringliteral">&quot;:{&quot;</span>;</div>
@@ -276,17 +276,18 @@ $(document).ready(function(){initNavTree('mm__webout_8sas_source.html',''); init
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    put <span class="stringliteral">&#39;,&quot;SYSVLONG&quot; : &#39;</span> sysvlong;</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSWARNINGTEXT&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syswarningtext&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    put <span class="stringliteral">&#39;,&quot;END_DTTM&quot; : &quot;&#39;</span> <span class="stringliteral">&quot;%sysfunc(datetime(),datetime20.3)&quot;</span> <span class="stringliteral">&#39;&quot; &#39;</span>;</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    memsize=<span class="stringliteral">&quot;%sysfunc(INPUTN(%sysfunc(getoption(memsize)), best.),sizekmg.)&quot;</span>;</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    memsize=quote(cats(memsize));</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    put <span class="stringliteral">&#39;,&quot;MEMSIZE&quot; : &#39;</span> memsize;</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    put <span class="stringliteral">&quot;}&quot;</span> @;</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  %<span class="keywordflow">if</span> %str(&amp;_debug) ge 131 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    put <span class="stringliteral">&#39;&gt;&gt;weboutEND&lt;&lt;&#39;</span>;</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  %end;</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>  run;</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>%end;</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>%mend mm_webout;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    length memsize $32;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    memsize=<span class="stringliteral">&quot;%sysfunc(INPUTN(%sysfunc(getoption(memsize)), best.),sizekmg.)&quot;</span>;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    memsize=quote(cats(memsize));</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    put <span class="stringliteral">&#39;,&quot;MEMSIZE&quot; : &#39;</span> memsize;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    put <span class="stringliteral">&quot;}&quot;</span> @;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  %<span class="keywordflow">if</span> %str(&amp;_debug) ge 131 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    put <span class="stringliteral">&#39;&gt;&gt;weboutEND&lt;&lt;&#39;</span>;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>  %end;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  run;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>%end;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>%mend mm_webout;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

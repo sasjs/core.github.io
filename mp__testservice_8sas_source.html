@@ -186,7 +186,7 @@ $(document).ready(function(){initNavTree('mp__testservice_8sas_source.html','');
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    else do;</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>      x+1;</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>      call symputx(name,quote(cats(value)),&#39;l&#39;);</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>      call symputx(&#39;pval&#39;!!left(x),name,&#39;l&#39;);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>      call symputx(cats(&#39;pval&#39;,x),name,&#39;l&#39;);</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>      call symputx(&#39;pcnt&#39;,x,&#39;l&#39;);</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    end;</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  run;</div>

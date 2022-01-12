@@ -382,7 +382,7 @@ $(document).ready(function(){initNavTree('mv__jobflow_8sas_source.html',''); ini
 <div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>      data _null_;</div>
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        infile &amp;jfref lrecl=32767;</div>
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        input;</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        jparams=&#39;jparams&#39;!!left(symget(&#39;jid&#39;));</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        jparams=cats(&#39;jparams&#39;,symget(&#39;jid&#39;));</div>
 <div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        call symputx(jparams,substr(_infile_,3,length(_infile_)-4));</div>
 <div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>      run;</div>
 <div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>      %local jobuid&amp;jid;</div>

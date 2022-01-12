@@ -145,7 +145,7 @@ $(document).ready(function(){initNavTree('mm__getservercontexts_8sas_source.html
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="keyword">set</span> repos;</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  where repositorytype in(<span class="stringliteral">&#39;CUSTOM&#39;</span>,<span class="stringliteral">&#39;FOUNDATION&#39;</span>);</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  keep <span class="keywordtype">id</span> name ;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  call symputx(<span class="stringliteral">&#39;repo&#39;</span>!!left(_n_),name,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  call symputx(cats(<span class="stringliteral">&#39;repo&#39;</span>,_n_),name,<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  call symputx(<span class="stringliteral">&#39;repocnt&#39;</span>,_n_,<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>run;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
