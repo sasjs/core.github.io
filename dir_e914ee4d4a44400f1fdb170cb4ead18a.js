@@ -103,6 +103,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_searchdata.sas", "mp__searchdata_8sas.html", null ],
     [ "mp_setkeyvalue.sas", "mp__setkeyvalue_8sas.html", null ],
     [ "mp_sortinplace.sas", "mp__sortinplace_8sas.html", null ],
+    [ "mp_stackdiffs.sas", "mp__stackdiffs_8sas.html", null ],
     [ "mp_storediffs.sas", "mp__storediffs_8sas.html", null ],
     [ "mp_stprequests.sas", "mp__stprequests_8sas.html", null ],
     [ "mp_streamfile.sas", "mp__streamfile_8sas.html", null ],

@@ -114,14 +114,17 @@ $(document).ready(function(){initNavTree('mm__getgroupmembers_8sas.html',''); in
 
 <p><a href="mm__getgroupmembers_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >usage:</p>
-<p >mm_getgroupmembers(someGroupName ,outds=work.mm_getgroupmembers ,emails=YES)</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<div class="textblock"><p >This macro will query SAS metadata and return all the members of a particular group.</p>
+<p >Usage: </p><pre class="fragment">%mm_getgroupmembers(someGroupName
+  ,outds=work.mm_getgroupmembers
+  ,emails=YES
+)
+</pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">group</td><td>metadata group for which to bring back members </td></tr>
-    <tr><td class="paramname">outds=</td><td>the dataset to create that contains the list of members </td></tr>
-    <tr><td class="paramname">emails=</td><td>set to YES to bring back email addresses </td></tr>
-    <tr><td class="paramname">id=</td><td>set to yes if passing an ID rather than a group name</td></tr>
+    <tr><td class="paramname">outds=</td><td>(work.mm_getgroupmembers) The dataset to create that contains the list of members </td></tr>
+    <tr><td class="paramname">emails=</td><td>(NO) Set to YES to bring back email addresses </td></tr>
+    <tr><td class="paramname">id=</td><td>(NO) Set to yes if passing an ID rather than a group name</td></tr>
   </table>
   </dd>
 </dl>
