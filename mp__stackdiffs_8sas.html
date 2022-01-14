@@ -183,14 +183,14 @@ $(document).ready(function(){initNavTree('mp__stackdiffs_8sas.html',''); initRes
 <tr>
 <th>Transaction Type</th><th>Behaviour </th></tr>
 <tr>
-<td>Deletes </td><td>For previously deleted rows, the PK is added to the staging table and the <code>&amp;deletecol</code> variable is set to "Yes".<br  />
- If the row no longer exists in the base table, the row is added to the errds table instead.   </td></tr>
+<td>Deletes </td><td>For previously deleted rows, the PK is added to the <code>outDEL</code> table<br  />
+ If the row no longer exists in the base table, the row is added to the <code>errDS</code> table instead.   </td></tr>
 <tr>
-<td>Inserts </td><td>Previously newly added rows are added to the staging table (with <code>&amp;deletecol</code> set to "No") UNLESS they are present in the Base table. <br  />
-In this case they are added to the errds table instead.   </td></tr>
+<td>Inserts </td><td>Previously newly added rows are added to the <code>outADD</code> table UNLESS they are present in the Base table.<br  />
+In this case they are added to the <code>errDS</code> table instead.   </td></tr>
 <tr>
-<td>Updates </td><td>Previously modified rows are merged with base table values such that only the individual cells that were <em>previously</em> changed are re-applied. Where the row contains cells that were not marked as having changed in the prior transaction, the 'blanks' are filled with base table values in the staging table.<br  />
- If the row no longer exists on the base table, then the row is added to the errds table instead.   </td></tr>
+<td>Updates </td><td>Previously modified rows are merged with base table values such that only the individual cells that were <em>previously</em> changed are re-applied. Where the row contains cells that were not marked as having changed in the prior transaction, the 'blanks' are filled with base table values in the <code>outMOD</code> table.<br  />
+ If the row no longer exists on the base table, then the row is added to the <code>errDS</code> table instead.   </td></tr>
 </table>
 <p >To illustrate the above with a diagram:</p>
 <div class="dotgraph">
@@ -202,9 +202,14 @@ In this case they are added to the errds table instead.   </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">baselibds</td><td>Base Table against which the changes will be applied, in libref.dataset format. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">auditlibds</td><td>Dataset with previously applied transactions, to be re-applied. Use libref.dataset format. DDL as follows: mp_coretable(DIFFTABLE) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">key</td><td>Space seperated list of key variables </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>set to 1 to enable DEBUG messages and preserve outputs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>Set to 1 to enable DEBUG messages and preserve outputs </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">processed_dttm_var=</td><td>(0) If a variable is being used to mark the processed datetime, put the name of the variable here. It will NOT be included in the staged dataset (the load process is expected to provide this) </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">errds=</td><td>(work.errds) Output table containing problematic records. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">errds=</td><td>(work.errds) Output table containing problematic records. The columns of this table are: <ul>
+<li>PK_VARS - Space separated list of primary key variable names </li>
+<li>PK_VALS - Slash separted list of PK variable values </li>
+<li>ERR_MSG - Explanation of why this record is problematic </li>
+</ul>
+</td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outmod=</td><td>(work.outmod) Output table containing modified records </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outadd=</td><td>(work.outadd) Output table containing additional records </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outdel=</td><td>(work.outdel) Output table containing deleted records</td></tr>
