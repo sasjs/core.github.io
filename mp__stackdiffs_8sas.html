@@ -109,53 +109,42 @@ $(document).ready(function(){initNavTree('mp__stackdiffs_8sas.html',''); initRes
 </div><!--header-->
 <div class="contents">
 
-<p>Prepares an audit table for stacking (re-applying) the changes.  
+<p>Prepares an audit table for stacking (re-applying) the changes. WORK IN PROGRESS!!  
 <a href="#details">More...</a></p>
 
 <p><a href="mp__stackdiffs_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >When a Base Table is refreshed, it can be helpful to have any subsequent changes re-applied. This macro is used to convert stored changes (tall format) into staged changes (wide format), with base table values incorporated, ready for loading.</p>
-<p >The audit table is assumed to be structured as per the <a class="el" href="mp__storediffs_8sas.html" title="Converts deletes/changes/appends into a single audit table.">mp_storediffs.sas</a> macro.</p>
+<div class="textblock"><p >WORK IN PROGRESS!! When a Base Table is refreshed, it can be helpful to have any subsequent changes re-applied. This macro is used to convert stored changes (tall format) into staged changes (wide format), with base table values incorporated, ready for loading.</p>
+<p >The audit table is assumed to be structured as per the <a class="el" href="mp__storediffs_8sas.html" title="Converts deletes/changes/appends into a single audit table.">mp_storediffs.sas</a> macro (DIFFTABLE entry).</p>
 <p >The macro supports both SCD2 (TXTEMPORAL) and UPDATE loadtypes. If the base table contains a PROCESSED_DTTM column (or similar), this can be ignored by declaring it in the <code>processed_dttm_var</code> parameter.</p>
-<p >Rules for stacking changes are as follows:</p>
-<h3><a class="anchor" id="autotoc_md0"></a>
-Deleted Rows</h3>
-<p >These are marked for deletion once more. This is done by setting &amp;DELETE_COL to "Yes".</p>
-<h3><a class="anchor" id="autotoc_md1"></a>
-Inserted Rows</h3>
-<p >These are re-inserted, or - if the row now exists on the base table - the row is modified (only changed cells are applied)</p>
-<h3><a class="anchor" id="autotoc_md2"></a>
-Modified Rows</h3>
-<p >In this case, where the row exists, only the <em>previously</em> modified cell values are applied. If the row no longer exists in the base table, the row is inserted.</p>
-<h2><a class="anchor" id="autotoc_md3"></a>
-Usage</h2>
-<pre class="fragment">data work.orig work.deleted work.changed work.appended;
-  set sashelp.class;
-  if _n_=1 then do;
-    output work.orig work.deleted;
-  end;
-  else if _n_=2 then do;
-    output work.orig;
-    age=99;
-    output work.changed;
-  end;
-  else do;
-    name='Newbie';
-    output work.appended;
-    stop;
-  end;
-run;
-
-%mp_storediffs(sashelp.class,work.orig,NAME
-  ,delds=work.deleted
-  ,modds=work.changed
-  ,appds=work.appended
-  ,outds=work.final
-  ,mdebug=1
-)
-</pre> <dl class="params"><dt>Parameters</dt><dd>
+<p >If the Base Table has changed in structure, the following rules apply:</p>
+<ul>
+<li>New Columns - Ignored for deletes, set to missing for inserts. For updates, base table values are used. </li>
+<li>Deleted Columns - These are simply removed from the staging table. </li>
+<li>Change in Primary Key - this is not (well, cannot be) supported!!</li>
+</ul>
+<p>Rules for stacking changes are as follows:</p>
+<table class="doxtable">
+<tr>
+<th>Transaction Type</th><th>Behaviour </th></tr>
+<tr>
+<td>Deletes </td><td>For previously deleted rows, the PK is added to the staging table and the <code>&amp;deletecol</code> variable is set to "Yes".<br  />
+ If the row no longer exists in the base table, the row is added to the errds table instead.   </td></tr>
+<tr>
+<td>Inserts </td><td>Previously newly added rows are added to the staging table (with <code>&amp;deletecol</code> set to "No") UNLESS they are present in the Base table. <br  />
+In this case they are added to the errds table instead.   </td></tr>
+<tr>
+<td>Updates </td><td>Previously modified rows are merged with base table values such that only the individual cells that were <em>previously</em> changed are re-applied. Where the row contains cells that were not marked as having changed in the prior transaction, the 'blanks' are filled with base table values in the staging table.<br  />
+ If the row no longer exists on the base table, then the row is added to the errds table instead.   </td></tr>
+</table>
+<p >To illustrate the above with a diagram:</p>
+<div class="dotgraph">
+<img src="dot_inline_dotgraph_1.png" alt="dot_inline_dotgraph_1.png" border="0" usemap="#dot_inline_dotgraph_1.map"/>
+</div>
+<p >For examples of usage, check out the mp_stackdiffs.test.sas program.</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">baselibds</td><td>Target table against which the changes will be applied, in libref.dataset format. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">baselibds</td><td>Base Table against which the changes will be applied, in libref.dataset format. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">auditlibds</td><td>Dataset with previously applied transactions, to be re-applied. Use libref.dataset format. DDL as follows: mp_coretable(DIFFTABLE) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">key</td><td>Space seperated list of key variables </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">delete_col=</td><td>(_____DELETE__THIS__RECORD_____) Variable name used to mark the row as being deleted </td></tr>
