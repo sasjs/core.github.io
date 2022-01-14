@@ -109,15 +109,70 @@ $(document).ready(function(){initNavTree('mp__stackdiffs_8sas.html',''); initRes
 </div><!--header-->
 <div class="contents">
 
-<p>Prepares an audit table for stacking (re-applying) the changes. WORK IN PROGRESS!!  
+<p>Prepares an audit table for stacking (re-applying) the changes.  
 <a href="#details">More...</a></p>
 
 <p><a href="mp__stackdiffs_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >WORK IN PROGRESS!! When a Base Table is refreshed, it can be helpful to have any subsequent changes re-applied. This macro is used to convert stored changes (tall format) into staged changes (wide format), with base table values incorporated, ready for loading.</p>
-<p >The audit table is assumed to be structured as per the <a class="el" href="mp__coretable_8sas.html" title="Create the permanent Core tables.">mp_coretable.sas</a> macro (DIFFTABLE entry).</p>
+<div class="textblock"><p >WORK IN PROGRESS!!</p>
+<p >When a Base Table is refreshed, it can be helpful to have any subsequent changes re-applied. This macro is used to convert stored changes (tall format) into staged changes (wide format), with base table values incorporated, ready for loading.</p>
+<p >The audit table is assumed to be structured as per the <a class="el" href="mp__coretable_8sas.html" title="Create the permanent Core tables.">mp_coretable.sas</a> macro (DIFFTABLE entry). Essentially what this macro does is turn a table like this:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">LIBREF:$8.   </th><th class="markdownTableHeadNone">DSN:$32.   </th><th class="markdownTableHeadNone">MOVE_TYPE:$1.   </th><th class="markdownTableHeadNone">TGTVAR_NM:$32.   </th><th class="markdownTableHeadNone">IS_PK:best.   </th><th class="markdownTableHeadNone">IS_DIFF:best.   </th><th class="markdownTableHeadNone">TGTVAR_TYPE:$1.   </th><th class="markdownTableHeadNone">OLDVAL_NUM:best32.   </th><th class="markdownTableHeadNone">NEWVAL_NUM:best32.   </th><th class="markdownTableHeadNone">OLDVAL_CHAR:$32765.   </th><th class="markdownTableHeadNone">NEWVAL_CHAR:$32765.    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>SASHELP</code>   </td><td class="markdownTableBodyNone"><code>CLASS</code>   </td><td class="markdownTableBodyNone"><code>A</code>   </td><td class="markdownTableBodyNone"><code>NAME</code>   </td><td class="markdownTableBodyNone"><code>1</code>   </td><td class="markdownTableBodyNone"><code>-1</code>   </td><td class="markdownTableBodyNone"><code>C</code>   </td><td class="markdownTableBodyNone"><code>.</code>   </td><td class="markdownTableBodyNone"><code>.</code>   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><code>Newbie</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>SASHELP</code>   </td><td class="markdownTableBodyNone"><code>CLASS</code>   </td><td class="markdownTableBodyNone"><code>A</code>   </td><td class="markdownTableBodyNone"><code>AGE</code>   </td><td class="markdownTableBodyNone"><code>0</code>   </td><td class="markdownTableBodyNone"><code>-1</code>   </td><td class="markdownTableBodyNone"><code>N</code>   </td><td class="markdownTableBodyNone"><code>.</code>   </td><td class="markdownTableBodyNone"><code>13</code>   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>SASHELP</code>   </td><td class="markdownTableBodyNone"><code>CLASS</code>   </td><td class="markdownTableBodyNone"><code>A</code>   </td><td class="markdownTableBodyNone"><code>HEIGHT</code>   </td><td class="markdownTableBodyNone"><code>0</code>   </td><td class="markdownTableBodyNone"><code>-1</code>   </td><td class="markdownTableBodyNone"><code>N</code>   </td><td class="markdownTableBodyNone"><code>.</code>   </td><td class="markdownTableBodyNone"><code>65.3</code>   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>SASHELP</code>   </td><td class="markdownTableBodyNone"><code>CLASS</code>   </td><td class="markdownTableBodyNone"><code>A</code>   </td><td class="markdownTableBodyNone"><code>SEX</code>   </td><td class="markdownTableBodyNone"><code>0</code>   </td><td class="markdownTableBodyNone"><code>-1</code>   </td><td class="markdownTableBodyNone"><code>C</code>   </td><td class="markdownTableBodyNone"><code>.</code>   </td><td class="markdownTableBodyNone"><code>.</code>   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><code>F</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>SASHELP</code>   </td><td class="markdownTableBodyNone"><code>CLASS</code>   </td><td class="markdownTableBodyNone"><code>A</code>   </td><td class="markdownTableBodyNone"><code>WEIGHT</code>   </td><td class="markdownTableBodyNone"><code>0</code>   </td><td class="markdownTableBodyNone"><code>-1</code>   </td><td class="markdownTableBodyNone"><code>N</code>   </td><td class="markdownTableBodyNone"><code>.</code>   </td><td class="markdownTableBodyNone"><code>98</code>   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>SASHELP</code>   </td><td class="markdownTableBodyNone"><code>CLASS</code>   </td><td class="markdownTableBodyNone"><code>D</code>   </td><td class="markdownTableBodyNone"><code>NAME</code>   </td><td class="markdownTableBodyNone"><code>1</code>   </td><td class="markdownTableBodyNone"><code>-1</code>   </td><td class="markdownTableBodyNone"><code>C</code>   </td><td class="markdownTableBodyNone"><code>.</code>   </td><td class="markdownTableBodyNone"><code>.</code>   </td><td class="markdownTableBodyNone"><code>Alfred</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>SASHELP</code>   </td><td class="markdownTableBodyNone"><code>CLASS</code>   </td><td class="markdownTableBodyNone"><code>D</code>   </td><td class="markdownTableBodyNone"><code>AGE</code>   </td><td class="markdownTableBodyNone"><code>0</code>   </td><td class="markdownTableBodyNone"><code>-1</code>   </td><td class="markdownTableBodyNone"><code>N</code>   </td><td class="markdownTableBodyNone"><code>14</code>   </td><td class="markdownTableBodyNone"><code>.</code>   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>SASHELP</code>   </td><td class="markdownTableBodyNone"><code>CLASS</code>   </td><td class="markdownTableBodyNone"><code>D</code>   </td><td class="markdownTableBodyNone"><code>HEIGHT</code>   </td><td class="markdownTableBodyNone"><code>0</code>   </td><td class="markdownTableBodyNone"><code>-1</code>   </td><td class="markdownTableBodyNone"><code>N</code>   </td><td class="markdownTableBodyNone"><code>69</code>   </td><td class="markdownTableBodyNone"><code>.</code>   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>SASHELP</code>   </td><td class="markdownTableBodyNone"><code>CLASS</code>   </td><td class="markdownTableBodyNone"><code>D</code>   </td><td class="markdownTableBodyNone"><code>SEX</code>   </td><td class="markdownTableBodyNone"><code>0</code>   </td><td class="markdownTableBodyNone"><code>-1</code>   </td><td class="markdownTableBodyNone"><code>C</code>   </td><td class="markdownTableBodyNone"><code>.</code>   </td><td class="markdownTableBodyNone"><code>.</code>   </td><td class="markdownTableBodyNone"><code>M</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>SASHELP</code>   </td><td class="markdownTableBodyNone"><code>CLASS</code>   </td><td class="markdownTableBodyNone"><code>D</code>   </td><td class="markdownTableBodyNone"><code>WEIGHT</code>   </td><td class="markdownTableBodyNone"><code>0</code>   </td><td class="markdownTableBodyNone"><code>-1</code>   </td><td class="markdownTableBodyNone"><code>N</code>   </td><td class="markdownTableBodyNone"><code>112.5</code>   </td><td class="markdownTableBodyNone"><code>.</code>   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>SASHELP</code>   </td><td class="markdownTableBodyNone"><code>CLASS</code>   </td><td class="markdownTableBodyNone"><code>M</code>   </td><td class="markdownTableBodyNone"><code>NAME</code>   </td><td class="markdownTableBodyNone"><code>1</code>   </td><td class="markdownTableBodyNone"><code>0</code>   </td><td class="markdownTableBodyNone"><code>C</code>   </td><td class="markdownTableBodyNone"><code>.</code>   </td><td class="markdownTableBodyNone"><code>.</code>   </td><td class="markdownTableBodyNone"><code>Alice</code>   </td><td class="markdownTableBodyNone"><code>Alice</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>SASHELP</code>   </td><td class="markdownTableBodyNone"><code>CLASS</code>   </td><td class="markdownTableBodyNone"><code>M</code>   </td><td class="markdownTableBodyNone"><code>AGE</code>   </td><td class="markdownTableBodyNone"><code>0</code>   </td><td class="markdownTableBodyNone"><code>1</code>   </td><td class="markdownTableBodyNone"><code>N</code>   </td><td class="markdownTableBodyNone"><code>13</code>   </td><td class="markdownTableBodyNone"><code>99</code>   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>SASHELP</code>   </td><td class="markdownTableBodyNone"><code>CLASS</code>   </td><td class="markdownTableBodyNone"><code>M</code>   </td><td class="markdownTableBodyNone"><code>HEIGHT</code>   </td><td class="markdownTableBodyNone"><code>0</code>   </td><td class="markdownTableBodyNone"><code>0</code>   </td><td class="markdownTableBodyNone"><code>N</code>   </td><td class="markdownTableBodyNone"><code>56.5</code>   </td><td class="markdownTableBodyNone"><code>56.5</code>   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>SASHELP</code>   </td><td class="markdownTableBodyNone"><code>CLASS</code>   </td><td class="markdownTableBodyNone"><code>M</code>   </td><td class="markdownTableBodyNone"><code>SEX</code>   </td><td class="markdownTableBodyNone"><code>0</code>   </td><td class="markdownTableBodyNone"><code>0</code>   </td><td class="markdownTableBodyNone"><code>C</code>   </td><td class="markdownTableBodyNone"><code>.</code>   </td><td class="markdownTableBodyNone"><code>.</code>   </td><td class="markdownTableBodyNone"><code>F</code>   </td><td class="markdownTableBodyNone"><code>F</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>SASHELP</code>   </td><td class="markdownTableBodyNone"><code>CLASS</code>   </td><td class="markdownTableBodyNone"><code>M</code>   </td><td class="markdownTableBodyNone"><code>WEIGHT</code>   </td><td class="markdownTableBodyNone"><code>0</code>   </td><td class="markdownTableBodyNone"><code>0</code>   </td><td class="markdownTableBodyNone"><code>N</code>   </td><td class="markdownTableBodyNone"><code>84</code>   </td><td class="markdownTableBodyNone"><code>84</code>   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+</table>
+<p >Into three tables like this:</p>
+<p ><b> <code>work.outmod</code>: </b> </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">NAME:$8.   </th><th class="markdownTableHeadNone">SEX:$1.   </th><th class="markdownTableHeadNone">AGE:best.   </th><th class="markdownTableHeadNone">HEIGHT:best.   </th><th class="markdownTableHeadNone">WEIGHT:best.    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>Alice</code>   </td><td class="markdownTableBodyNone"><code>F</code>   </td><td class="markdownTableBodyNone"><code>99</code>   </td><td class="markdownTableBodyNone"><code>56.5</code>   </td><td class="markdownTableBodyNone"><code>84</code>   </td></tr>
+</table>
+<p ><b> <code>work.outadd</code>: </b> </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">NAME:$8.   </th><th class="markdownTableHeadNone">SEX:$1.   </th><th class="markdownTableHeadNone">AGE:best.   </th><th class="markdownTableHeadNone">HEIGHT:best.   </th><th class="markdownTableHeadNone">WEIGHT:best.    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>Newbie</code>   </td><td class="markdownTableBodyNone"><code>F</code>   </td><td class="markdownTableBodyNone"><code>13</code>   </td><td class="markdownTableBodyNone"><code>65.3</code>   </td><td class="markdownTableBodyNone"><code>98</code>   </td></tr>
+</table>
+<p ><b> <code>work.outdel</code>: </b> </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">NAME:$8.   </th><th class="markdownTableHeadNone">SEX:$1.   </th><th class="markdownTableHeadNone">AGE:best.   </th><th class="markdownTableHeadNone">HEIGHT:best.   </th><th class="markdownTableHeadNone">WEIGHT:best.    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>Alfred</code>   </td><td class="markdownTableBodyNone"><code>M</code>   </td><td class="markdownTableBodyNone"><code>14</code>   </td><td class="markdownTableBodyNone"><code>69</code>   </td><td class="markdownTableBodyNone"><code>112.5</code>   </td></tr>
+</table>
+<p >As you might expect, there are a bunch of extra features and checks.</p>
 <p >The macro supports both SCD2 (TXTEMPORAL) and UPDATE loadtypes. If the base table contains a PROCESSED_DTTM column (or similar), this can be ignored by declaring it in the <code>processed_dttm_var</code> parameter.</p>
-<p >If the Base Table has changed in structure, the following rules apply:</p>
+<p >If the structure of the Base Table has changed, the following rules apply:</p>
 <ul>
 <li>New Columns - Ignored for deletes, set to missing for inserts. For updates, base table values are used. </li>
 <li>Deleted Columns - These are simply removed from the staging table. </li>
@@ -147,11 +202,12 @@ In this case they are added to the errds table instead.   </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">baselibds</td><td>Base Table against which the changes will be applied, in libref.dataset format. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">auditlibds</td><td>Dataset with previously applied transactions, to be re-applied. Use libref.dataset format. DDL as follows: mp_coretable(DIFFTABLE) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">key</td><td>Space seperated list of key variables </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">delete_col=</td><td>(_____DELETE__THIS__RECORD_____) Variable name used to mark the row as being deleted </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>set to 1 to enable DEBUG messages and preserve outputs </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">processed_dttm_var=</td><td>(0) If a variable is being used to mark the processed datetime, put the name of the variable here. It will NOT be included in the staged dataset (the load process is expected to provide this) </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">errds=</td><td>(work.mp_stackdiffs_errds) Output table containing problematic records. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mp_stackdiffs) Output table containing staged data to be re-applied.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">errds=</td><td>(work.errds) Output table containing problematic records. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outmod=</td><td>(work.outmod) Output table containing modified records </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outadd=</td><td>(work.outadd) Output table containing additional records </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outdel=</td><td>(work.outdel) Output table containing deleted records</td></tr>
   </table>
   </dd>
 </dl>
