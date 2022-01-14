@@ -115,8 +115,11 @@ $(document).ready(function(){initNavTree('mp__stackdiffs_8sas.html',''); initRes
 <p><a href="mp__stackdiffs_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >WORK IN PROGRESS!!</p>
-<p >When a Base Table is refreshed, it can be helpful to have any subsequent changes re-applied. This macro is used to convert stored changes (tall format) into staged changes (wide format), with base table values incorporated, ready for loading.</p>
-<p >The audit table is assumed to be structured as per the <a class="el" href="mp__coretable_8sas.html" title="Create the permanent Core tables.">mp_coretable.sas</a> macro (DIFFTABLE entry). Essentially what this macro does is turn a table like this:</p>
+<p >When the underlying data from a Base Table is refreshed, it can be helpful to have any previously-applied changes, re-applied.</p>
+<p >Such situation might arise if you are applying those changes using a tool like <a href="https://datacontroller.io">Data Controller for SAS®</a> - which records all such changes in an audit table. It may also apply if you are preparing a series of specific cell-level transactions, that you would like to apply to multiple sets of (similarly structured) Base Tables.</p>
+<p >In both cases, it is necessary that the transactions are stored using the <a class="el" href="mp__storediffs_8sas.html" title="Converts deletes/changes/appends into a single audit table.">mp_storediffs.sas</a> macro, or at least that the underlying table is structured as per the definition in <a class="el" href="mp__coretable_8sas.html" title="Create the permanent Core tables.">mp_coretable.sas</a> (DIFFTABLE entry)</p>
+<p ><b>This</b> macro is used to convert the stored changes (tall format) into staged changes (wide format), with base table values incorporated (in the case of modified rows), ready for the subsequent load process.</p>
+<p >Essentially then, what this macro does, is turn a table like this:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">LIBREF:$8.   </th><th class="markdownTableHeadNone">DSN:$32.   </th><th class="markdownTableHeadNone">MOVE_TYPE:$1.   </th><th class="markdownTableHeadNone">TGTVAR_NM:$32.   </th><th class="markdownTableHeadNone">IS_PK:best.   </th><th class="markdownTableHeadNone">IS_DIFF:best.   </th><th class="markdownTableHeadNone">TGTVAR_TYPE:$1.   </th><th class="markdownTableHeadNone">OLDVAL_NUM:best32.   </th><th class="markdownTableHeadNone">NEWVAL_NUM:best32.   </th><th class="markdownTableHeadNone">OLDVAL_CHAR:$32765.   </th><th class="markdownTableHeadNone">NEWVAL_CHAR:$32765.    </th></tr>
@@ -174,9 +177,9 @@ $(document).ready(function(){initNavTree('mp__stackdiffs_8sas.html',''); initRes
 <p >The macro supports both SCD2 (TXTEMPORAL) and UPDATE loadtypes. If the base table contains a PROCESSED_DTTM column (or similar), this can be ignored by declaring it in the <code>processed_dttm_var</code> parameter.</p>
 <p >If the structure of the Base Table has changed, the following rules apply:</p>
 <ul>
-<li>New Columns - Ignored for deletes, set to missing for inserts. For updates, base table values are used. </li>
-<li>Deleted Columns - These are simply removed from the staging table. </li>
-<li>Change in Primary Key - this is not (well, cannot be) supported!!</li>
+<li>New Columns - Irrelevant for deletes. For inserts, the new column values are set to missing. For updates, the base table values are used. </li>
+<li>Deleted Columns - These will also be absent in the output tables. </li>
+<li>Change in Primary Key - This is not (well, cannot be) supported!!</li>
 </ul>
 <p>Rules for stacking changes are as follows:</p>
 <table class="doxtable">
