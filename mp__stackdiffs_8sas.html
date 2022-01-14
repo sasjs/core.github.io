@@ -114,10 +114,13 @@ $(document).ready(function(){initNavTree('mp__stackdiffs_8sas.html',''); initRes
 
 <p><a href="mp__stackdiffs_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >When a Base Table is refreshed, it can be helpful to have any subsequent changes re-applied. The rules for stacking changes are as follows:</p>
+<div class="textblock"><p >When a Base Table is refreshed, it can be helpful to have any subsequent changes re-applied. This macro is used to convert stored changes (tall format) into staged changes (wide format), with base table values incorporated, ready for loading.</p>
+<p >The rules for stacking changes are as follows:</p>
 <p >Deleted Rows** These are marked for deletion once more. This is done by setting &amp;DELETE_COL to "Yes".</p>
-<p >This is straightforward for rows that were added or deleted, however rows that were modified should be populated such that only the previously modified CELLS are applied (unmodified cells should contain Base Table values)</p>
+<p >Inserted Rows** These are re-inserted, or - if the row now exists on the base table - the row is modified (only changed cells are applied)</p>
+<p >Modified Rows** In this case, where the row exists, only the <em>previously</em> modified cell values are applied. If the row no longer exists in the base table, the row is inserted.</p>
 <p >The audit table is assumed to be structured as per the <a class="el" href="mp__storediffs_8sas.html" title="Converts deletes/changes/appends into a single audit table.">mp_storediffs.sas</a> macro.</p>
+<p >This macro supports both SCD2 (TXTEMPORAL) and UPDATE loadtypes. If the base table contains a PROCESSED_DTTM column (or similar), this can be ignored by declaring it in the <code>processed_dttm_var</code> parameter.</p>
 <p >Usage: </p><pre class="fragment">data work.orig work.deleted work.changed work.appended;
   set sashelp.class;
   if _n_=1 then do;
@@ -144,17 +147,13 @@ run;
 )
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">auditds</td><td>Dataset with previously applied transactions </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">libds</td><td>Target table against which the changes will be applied </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">delete_col=</td><td>(_____DELETE__THIS__RECORD_____) Variable name used to mark the row as being deleted</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">baselibds</td><td>Target table against which the changes will be applied, in libref.dataset format. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">auditlibds</td><td>Dataset with previously applied transactions, to be re-applied. Use libref.dataset format. DDL as follows: mp_coretable(DIFFTABLE) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">key</td><td>Space seperated list of key variables </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">delds=</td><td>(0) Dataset with deleted records </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">appds=</td><td>(0) Dataset with appended records </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">modds=</td><td>(0) Dataset with modified records </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mp_storediffs) Output table containing stored data. DDL as follows: mp_coretable(DIFFTABLE)</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">processed_dttm=</td><td>(0) Provide a datetime constant in relation to the actual load time. If not provided, current timestamp is used. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>set to 1 to enable DEBUG messages and preserve outputs </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">loadref=</td><td>(0) Provide a unique key to reference the load, otherwise a UUID will be generated.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">delete_col=</td><td>(_____DELETE__THIS__RECORD_____) Variable name used to mark the row as being deleted</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mp_stackdiffs) Output table containing staged data to be re-applied.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">processed_dttm_var=</td><td>(0) If a variable is being used to mark the processed datetime, put the name of the variable here. It will NOT be included in the staged dataset (the load process is expected to provide this) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>set to 1 to enable DEBUG messages and preserve outputs</td></tr>
   </table>
   </dd>
 </dl>
