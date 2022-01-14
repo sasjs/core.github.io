@@ -118,7 +118,7 @@ $(document).ready(function(){initNavTree('mp__stackdiffs_8sas_source.html',''); 
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">    (tall format) into staged changes (wide format), with base table values</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">    incorporated, ready for loading.</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"></span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">    The audit table is assumed to be structured as per the mp_storediffs.sas</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">    The audit table is assumed to be structured as per the mp_coretable.sas</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">    macro (DIFFTABLE entry).</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"></span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">    The macro supports both SCD2 (TXTEMPORAL) and UPDATE loadtypes. If the</span></div>
@@ -210,73 +210,76 @@ $(document).ready(function(){initNavTree('mp__stackdiffs_8sas_source.html',''); 
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">    the processed datetime, put the name of the variable here.  It will NOT</span></div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">    be included in the staged dataset (the load process is expected to</span></div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">    provide this)</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">  @param [out] outds= (work.mp_stackdiffs) Output table containing staged data</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">    to be re-applied.</span></div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment"></span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment"></span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">  @li mf_getuniquename.sas</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">  @li mf_islibds.sas</span></div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">  @li mp_abort.sas</span></div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment"></span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment"></span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment">  &lt;h4&gt; Related Macros &lt;/h4&gt;</span></div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment">  @li mp_coretable.sas</span></div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">  @li mp_storediffs.sas</span></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment"></span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">  @version 9.2</span></div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment">  @author Allan Bowe</span></div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">**/</span><span class="comment"></span></div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment">/** @cond */</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>%macro mp_stackdiffs(baselibds</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  ,auditlibds</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  ,key</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  ,delete_col=_____DELETE__THIS__RECORD_____</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  ,mdebug=0</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  ,processed_dttm_var=0</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  ,outds=work.mp_stackdiffs</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>%local dbg;</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>%<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  %put &amp;sysmacroname entry vars:;</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  %put _local_;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>%end;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>%<span class="keywordflow">else</span> %let dbg=*;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment">/* input parameter validations */</span></div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>%mp_abort(iftrue= (%mf_islibds(&amp;baselibds) ne 1)</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  ,mac=&amp;sysmacroname</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>  ,msg=%str(Invalid baselibds: &amp;baselibds)</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>)</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>%mp_abort(iftrue= (%mf_islibds(&amp;auditlibds) ne 1)</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  ,mac=&amp;sysmacroname</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  ,msg=%str(Invalid auditlibds: &amp;auditlibds)</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>)</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>%mp_abort(iftrue= (%length(&amp;key)=0)</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  ,mac=&amp;sysmacroname</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  ,msg=%str(Missing key variables!)</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>)</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="comment">/* set up unique and temporary vars */</span></div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>%local ds1 ds2 ds3 ds4 hashkey inds_auto inds_keep dslist;</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>%let ds1=%upcase(work.%mf_getuniquename(prefix=mpsd_ds1));</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>%let ds2=%upcase(work.%mf_getuniquename(prefix=mpsd_ds2));</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>%let ds3=%upcase(work.%mf_getuniquename(prefix=mpsd_ds3));</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>%let ds4=%upcase(work.%mf_getuniquename(prefix=mpsd_ds4));</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>%let hashkey=%upcase(%mf_getuniquename(prefix=mpsd_hashkey));</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>%let inds_auto=%upcase(%mf_getuniquename(prefix=mpsd_inds_auto));</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>%let inds_keep=%upcase(%mf_getuniquename(prefix=mpsd_inds_keep));</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>%let key=%upcase(&amp;key);</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>%<span class="keywordflow">if</span> &amp;mdebug=0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  proc sql;</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  drop table &amp;ds1, &amp;ds2, &amp;ds3, &amp;ds4;</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>%end;</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>%mend mp_stackdiffs;<span class="comment"></span></div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment">/** @endcond */</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">  @param [out] errds= (work.mp_stackdiffs_errds) Output table containing</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">    problematic records.</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">  @param [out] outds= (work.mp_stackdiffs) Output table containing staged data</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">    to be re-applied.</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment"></span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment"></span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">  @li mf_getuniquename.sas</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment">  @li mf_islibds.sas</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">  @li mp_abort.sas</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment"></span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment"></span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">  &lt;h4&gt; Related Macros &lt;/h4&gt;</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment">  @li mp_coretable.sas</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">  @li mp_storediffs.sas</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment"></span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">  @version 9.2</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment">  @author Allan Bowe</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment">**/</span><span class="comment"></span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment">/** @cond */</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>%macro mp_stackdiffs(baselibds</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  ,auditlibds</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  ,key</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  ,delete_col=_____DELETE__THIS__RECORD_____</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  ,mdebug=0</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  ,processed_dttm_var=0</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  ,errds=work.mp_stackdiffs_errds</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  ,outds=work.mp_stackdiffs</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>%local dbg;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>%<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  %put &amp;sysmacroname entry vars:;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  %put _local_;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>%end;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>%<span class="keywordflow">else</span> %let dbg=*;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="comment">/* input parameter validations */</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>%mp_abort(iftrue= (%mf_islibds(&amp;baselibds) ne 1)</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  ,mac=&amp;sysmacroname</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  ,msg=%str(Invalid baselibds: &amp;baselibds)</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>)</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>%mp_abort(iftrue= (%mf_islibds(&amp;auditlibds) ne 1)</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  ,mac=&amp;sysmacroname</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  ,msg=%str(Invalid auditlibds: &amp;auditlibds)</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>)</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>%mp_abort(iftrue= (%length(&amp;key)=0)</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  ,mac=&amp;sysmacroname</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  ,msg=%str(Missing key variables!)</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>)</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="comment">/* set up unique and temporary vars */</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>%local ds1 ds2 ds3 ds4 hashkey inds_auto inds_keep dslist;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>%let ds1=%upcase(work.%mf_getuniquename(prefix=mpsd_ds1));</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>%let ds2=%upcase(work.%mf_getuniquename(prefix=mpsd_ds2));</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>%let ds3=%upcase(work.%mf_getuniquename(prefix=mpsd_ds3));</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>%let ds4=%upcase(work.%mf_getuniquename(prefix=mpsd_ds4));</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>%let hashkey=%upcase(%mf_getuniquename(prefix=mpsd_hashkey));</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>%let inds_auto=%upcase(%mf_getuniquename(prefix=mpsd_inds_auto));</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>%let inds_keep=%upcase(%mf_getuniquename(prefix=mpsd_inds_keep));</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>%let key=%upcase(&amp;key);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>%<span class="keywordflow">if</span> &amp;mdebug=0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  proc sql;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  drop table &amp;ds1, &amp;ds2, &amp;ds3, &amp;ds4;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>%end;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>%mend mp_stackdiffs;<span class="comment"></span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="comment">/** @endcond */</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

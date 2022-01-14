@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('mp__stackdiffs_8sas.html',''); initRes
 <p><a href="mp__stackdiffs_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >WORK IN PROGRESS!! When a Base Table is refreshed, it can be helpful to have any subsequent changes re-applied. This macro is used to convert stored changes (tall format) into staged changes (wide format), with base table values incorporated, ready for loading.</p>
-<p >The audit table is assumed to be structured as per the <a class="el" href="mp__storediffs_8sas.html" title="Converts deletes/changes/appends into a single audit table.">mp_storediffs.sas</a> macro (DIFFTABLE entry).</p>
+<p >The audit table is assumed to be structured as per the <a class="el" href="mp__coretable_8sas.html" title="Create the permanent Core tables.">mp_coretable.sas</a> macro (DIFFTABLE entry).</p>
 <p >The macro supports both SCD2 (TXTEMPORAL) and UPDATE loadtypes. If the base table contains a PROCESSED_DTTM column (or similar), this can be ignored by declaring it in the <code>processed_dttm_var</code> parameter.</p>
 <p >If the Base Table has changed in structure, the following rules apply:</p>
 <ul>
@@ -150,6 +150,7 @@ In this case they are added to the errds table instead.   </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">delete_col=</td><td>(_____DELETE__THIS__RECORD_____) Variable name used to mark the row as being deleted </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>set to 1 to enable DEBUG messages and preserve outputs </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">processed_dttm_var=</td><td>(0) If a variable is being used to mark the processed datetime, put the name of the variable here. It will NOT be included in the staged dataset (the load process is expected to provide this) </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">errds=</td><td>(work.mp_stackdiffs_errds) Output table containing problematic records. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mp_stackdiffs) Output table containing staged data to be re-applied.</td></tr>
   </table>
   </dd>
