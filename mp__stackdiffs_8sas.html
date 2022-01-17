@@ -177,13 +177,19 @@ $(document).ready(function(){initNavTree('mp__stackdiffs_8sas.html',''); initRes
 <p >As you might expect, there are a bunch of extra features and checks.</p>
 <p >The macro supports both SCD2 (TXTEMPORAL) and UPDATE loadtypes. If the base table contains a PROCESSED_DTTM column (or similar), this can be ignored by declaring it in the <code>processed_dttm_var</code> parameter.</p>
 <p >The macro is also flexible where columns have been added or removed from the base table UNLESS there is a change to the primary key.</p>
-<p >Changes to the primary key are not supported, and are likely to cause unexpected results.</p>
-<p >Rules for stacking changes are as follows:</p>
+<p >Changes to the primary key are NOT supported, and are likely to cause unexpected results.</p>
+<p >The following pre-flight checks are made:</p>
+<ul>
+<li>All primary key columns exist on the base table </li>
+<li>There is no change in variable TYPE for any of the columns </li>
+<li>There is no reduction in variable LENGTH below the max-length of the supplied values</li>
+</ul>
+<p>Rules for stacking changes are as follows:</p>
 <table class="doxtable">
 <tr>
 <th>Transaction Type</th><th>Key Behaviour</th><th>Column Behaviour  </th></tr>
 <tr>
-<td>Deletes </td><td>The row is added to <code>&amp;outDEL.</code> UNLESS it no longer exists in the base table, in which case it is added to <code>&amp;errDS.</code> instead.  </td><td>Deletes are unaffected by the addition or removal of non primary-key columns.   </td></tr>
+<td>Deletes </td><td>The row is added to <code>&amp;outDEL.</code> UNLESS it no longer exists in the base table, in which case it is added to <code>&amp;errDS.</code> instead.  </td><td>Deletes are unaffected by the addition or removal of non Primary-Key columns.   </td></tr>
 <tr>
 <td>Inserts </td><td>Previously newly added rows are added to the <code>outADD</code> table UNLESS they are present in the Base table.<br  />
 In this case they are added to the <code>&amp;errDS.</code> table instead.  </td><td>Inserts are unaffected by the addition of columns in the Base Table (they are padded with blanks). Deleted columns are only a problem if they appear on the previous insert - in which case the record is added to <code>&amp;errDS.</code>.   </td></tr>
@@ -224,6 +230,7 @@ In this case they are added to the <code>&amp;errDS.</code> table instead.  </td
 <h4>Related Macros </h4>
 <ul>
 <li><a class="el" href="mp__coretable_8sas.html" title="Create the permanent Core tables.">mp_coretable.sas</a> </li>
+<li><a class="el" href="mp__stackdiffs_8test_8sas.html" title="Testing mp_storediffs macro.">mp_stackdiffs.test.sas</a> </li>
 <li><a class="el" href="mp__storediffs_8sas.html" title="Converts deletes/changes/appends into a single audit table.">mp_storediffs.sas</a></li>
 </ul>
 <dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
