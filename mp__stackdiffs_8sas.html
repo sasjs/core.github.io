@@ -176,26 +176,20 @@ $(document).ready(function(){initNavTree('mp__stackdiffs_8sas.html',''); initRes
 </table>
 <p >As you might expect, there are a bunch of extra features and checks.</p>
 <p >The macro supports both SCD2 (TXTEMPORAL) and UPDATE loadtypes. If the base table contains a PROCESSED_DTTM column (or similar), this can be ignored by declaring it in the <code>processed_dttm_var</code> parameter.</p>
-<p >If the structure of the Base Table has changed, the following rules apply:</p>
-<ul>
-<li>New Columns - Irrelevant for deletes. For inserts, the new column values are set to missing. For updates, the base table values are used. </li>
-<li>Deleted Columns - These will also be absent in the output tables. </li>
-<li>Modified Columns - If a modified cell is NOT present in the base table, an error is thrown. </li>
-<li>Change in Primary Key - This is not (well, cannot be) supported!!</li>
-</ul>
-<p>Rules for stacking changes are as follows:</p>
+<p >The macro is also flexible where columns have been added or removed from the base table UNLESS there is a change to the primary key.</p>
+<p >Changes to the primary key are not supported, and are likely to cause unexpected results.</p>
+<p >Rules for stacking changes are as follows:</p>
 <table class="doxtable">
 <tr>
-<th>Transaction Type</th><th>Behaviour </th></tr>
+<th>Transaction Type</th><th>Key Behaviour</th><th>Column Behaviour  </th></tr>
 <tr>
-<td>Deletes </td><td>For previously deleted rows, the PK is added to the <code>outDEL</code> table.<br  />
- If the row no longer exists in the base table, the row is added to the <code>errDS</code> table instead.   </td></tr>
+<td>Deletes </td><td>The row is added to <code>&amp;outDEL.</code> UNLESS it no longer exists in the base table, in which case it is added to <code>&amp;errDS.</code> instead.  </td><td>Deletes are unaffected by the addition or removal of non primary-key columns.   </td></tr>
 <tr>
 <td>Inserts </td><td>Previously newly added rows are added to the <code>outADD</code> table UNLESS they are present in the Base table.<br  />
-In this case they are added to the <code>errDS</code> table instead.   </td></tr>
+In this case they are added to the <code>&amp;errDS.</code> table instead.  </td><td>Inserts are unaffected by the addition of columns in the Base Table (they are padded with blanks). Deleted columns are only a problem if they appear on the previous insert - in which case the record is added to <code>&amp;errDS.</code>.   </td></tr>
 <tr>
 <td>Updates </td><td>Previously modified rows are merged with base table values such that only the individual cells that were <em>previously</em> changed are re-applied. Where the row contains cells that were not marked as having changed in the prior transaction, the 'blanks' are filled with base table values in the <code>outMOD</code> table.<br  />
- If the row no longer exists on the base table, then the row is added to the <code>errDS</code> table instead.   </td></tr>
+ If the row no longer exists on the base table, then the row is added to the <code>errDS</code> table instead.  </td><td>Updates are unaffected by the addition of columns in the Base Table - the new cells are simply populated with Base Table values. Deleted columns are only a problem if they relate to a modified cell (<code>is_diff=1</code>) - in which case the record is added to <code>&amp;errDS.</code>.   </td></tr>
 </table>
 <p >To illustrate the above with a diagram:</p>
 <div class="dotgraph">
