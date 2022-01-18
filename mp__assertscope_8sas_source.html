@@ -112,122 +112,128 @@ $(document).ready(function(){initNavTree('mp__assertscope_8sas_source.html','');
 <a href="mp__assertscope_8sas.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">  @file</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">  @brief Used to capture scope leakage of macro variables</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">  @details A common &#39;difficult to detect&#39; bug in macros is where a nested</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">    macro over-writes variables in a higher level macro.</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"></span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">    This assertion takes a snapshot of the macro variables before and after</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">    a macro invocation.  This makes it easy to detect whether any macro</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">    variables were modified or changed.</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"></span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">    Currently, the macro only checks for global scope variables.  In the future</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">    it may be extended to work at multiple levels of nesting.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">  @details</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"></span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">  A common &#39;difficult to detect&#39; bug in macros is where a nested macro</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">  over-writes variables in a higher level macro.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"></span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">  This assertion takes a snapshot of the macro variables before and after</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">  a macro invocation.  Differences are captured in the `&amp;outds` table. This</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">  makes it easy to detect whether any macro variables were modified or</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">  changed.</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"></span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">    If you would like this feature, feel free to contribute / raise an issue /</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">    engage the SASjs team directly.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">  Currently, the macro only checks for global scope variables.  In the future</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">  it may be extended to work at multiple levels of nesting.</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">  Example usage:</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"></span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">      %mp_assertscope(SNAPSHOT)</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"></span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">      %let oops=I did it again;</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"></span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">      %mp_assertscope(COMPARE,</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">        desc=Checking macro variables against previous snapshot</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">      )</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"></span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">  @param [in] action (SNAPSHOT) The action to take.  Valid values:</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">    @li SNAPSHOT - take a copy of the current macro variables</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">    @li COMPARE - compare the current macro variables against previous values</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">  @param [in] scope= (GLOBAL) The scope of the variables to be checked.  This</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">    corresponds to the values in the SCOPE column in `sashelp.vmacro`.</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">  @param [in] desc= (Testing variable scope) The user provided test description</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">  @param [in,out] scopeds= (work.mp_assertscope) The dataset to contain the</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">    scope snapshot</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">  @param [out] outds= (work.test_results) The output dataset to contain the</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">  results.  If it does not exist, it will be created, with the following format:</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">  |TEST_DESCRIPTION:$256|TEST_RESULT:$4|TEST_COMMENTS:$256|</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">  |---|---|---|</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">  |User Provided description|PASS|No out of scope variables created or modified|</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"></span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">  &lt;h4&gt; Related Macros &lt;/h4&gt;</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">  @li mp_assert.sas</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">  @li mp_assertcols.sas</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">  @li mp_assertcolvals.sas</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">  @li mp_assertdsobs.sas</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">  @li mp_assertscope.test.sas</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"></span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">  @version 9.2</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">  @author Allan Bowe</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment"></span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>%macro mp_assertscope(action,</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  desc=0,</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  scope=GLOBAL,</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  scopeds=work.mp_assertscope,</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  outds=work.test_results</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>%local ds test_result test_comments del add mod;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">/* get current variables */</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>%<span class="keywordflow">if</span> &amp;action=SNAPSHOT %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  proc sql;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  create table &amp;scopeds as</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    select name,offset,value</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    from dictionary.macros</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    where scope=<span class="stringliteral">&quot;&amp;scope&quot;</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    order by name,offset;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>%end;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>%<span class="keywordflow">else</span> %<span class="keywordflow">if</span> &amp;action=COMPARE %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  proc sql;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  create table _data_ as</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    select name,offset,value</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    from dictionary.macros</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    where scope=<span class="stringliteral">&quot;&amp;scope&quot;</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    order by name,offset;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  %let ds=&amp;syslast;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  proc compare base=&amp;scopeds compare=&amp;ds;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  run;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  %<span class="keywordflow">if</span> &amp;sysinfo=0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    %let test_result=PASS;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    %let test_comments=&amp;scope Variables Unmodified;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  %end;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    proc sql noprint undo_policy=none;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    select distinct name into: del separated by <span class="charliteral">&#39; &#39;</span>  from &amp;scopeds</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>      where name not in (select name from &amp;ds);</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    select distinct name into: add separated by <span class="charliteral">&#39; &#39;</span>  from &amp;ds</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>      where name not in (select name from &amp;scopeds);</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    select distinct a.name into: mod separated by <span class="charliteral">&#39; &#39;</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>      from &amp;scopeds a</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>      inner join &amp;ds b</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      on a.name=b.name</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        and a.offset=b.offset</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      where a.value ne b.value;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    %let test_result=FAIL;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    %let test_comments=%str(Mod:(&amp;mod) Add:(&amp;add) Del:(&amp;del));</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  %end;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  data ;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    length test_description $256 test_result $4 test_comments $256;</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    test_description=symget(<span class="stringliteral">&#39;desc&#39;</span>);</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    test_comments=symget(<span class="stringliteral">&#39;test_comments&#39;</span>);</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    test_result=symget(<span class="stringliteral">&#39;test_result&#39;</span>);</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  run;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  %let ds=&amp;syslast;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  proc append base=&amp;outds data=&amp;ds;</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  run;</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  proc sql;</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  drop table &amp;ds;</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>%end;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>%mend mp_assertscope;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">  If you would like this feature, feel free to contribute / raise an issue /</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">  engage the SASjs team directly.</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"></span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">  Example usage:</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"></span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">      %mp_assertscope(SNAPSHOT)</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"></span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">      %let oops=I did it again;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"></span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">      %mp_assertscope(COMPARE,</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">        desc=Checking macro variables against previous snapshot</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">      )</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"></span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">  This macro is designed to work alongside `sasjs test` - for more information</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">  about this facility, visit [cli.sasjs.io/test](https://cli.sasjs.io/test).</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"></span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">  @param [in] action (SNAPSHOT) The action to take.  Valid values:</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">    @li SNAPSHOT - take a copy of the current macro variables</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">    @li COMPARE - compare the current macro variables against previous values</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">  @param [in] scope= (GLOBAL) The scope of the variables to be checked.  This</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">    corresponds to the values in the SCOPE column in `sashelp.vmacro`.</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">  @param [in] desc= (Testing variable scope) The user provided test description</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">  @param [in,out] scopeds= (work.mp_assertscope) The dataset to contain the</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">    scope snapshot</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">  @param [out] outds= (work.test_results) The output dataset to contain the</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">  results.  If it does not exist, it will be created, with the following format:</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">  |TEST_DESCRIPTION:$256|TEST_RESULT:$4|TEST_COMMENTS:$256|</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">  |---|---|---|</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">  |User Provided description|PASS|No out of scope variables created or modified|</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"></span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">  &lt;h4&gt; Related Macros &lt;/h4&gt;</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">  @li mp_assert.sas</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">  @li mp_assertcols.sas</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">  @li mp_assertcolvals.sas</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">  @li mp_assertdsobs.sas</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">  @li mp_assertscope.test.sas</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment"></span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">  @version 9.2</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">  @author Allan Bowe</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"></span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>%macro mp_assertscope(action,</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  desc=0,</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  scope=GLOBAL,</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  scopeds=work.mp_assertscope,</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  outds=work.test_results</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>%local ds test_result test_comments del add mod;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">/* get current variables */</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>%<span class="keywordflow">if</span> &amp;action=SNAPSHOT %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  proc sql;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  create table &amp;scopeds as</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    select name,offset,value</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    from dictionary.macros</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    where scope=<span class="stringliteral">&quot;&amp;scope&quot;</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    order by name,offset;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>%end;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>%<span class="keywordflow">else</span> %<span class="keywordflow">if</span> &amp;action=COMPARE %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  proc sql;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  create table _data_ as</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    select name,offset,value</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    from dictionary.macros</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    where scope=<span class="stringliteral">&quot;&amp;scope&quot;</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    order by name,offset;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  %let ds=&amp;syslast;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  proc compare base=&amp;scopeds compare=&amp;ds;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  run;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  %<span class="keywordflow">if</span> &amp;sysinfo=0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    %let test_result=PASS;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    %let test_comments=&amp;scope Variables Unmodified;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  %end;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    proc sql noprint undo_policy=none;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    select distinct name into: del separated by <span class="charliteral">&#39; &#39;</span>  from &amp;scopeds</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      where name not in (select name from &amp;ds);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    select distinct name into: add separated by <span class="charliteral">&#39; &#39;</span>  from &amp;ds</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      where name not in (select name from &amp;scopeds);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    select distinct a.name into: mod separated by <span class="charliteral">&#39; &#39;</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>      from &amp;scopeds a</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      inner join &amp;ds b</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>      on a.name=b.name</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        and a.offset=b.offset</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>      where a.value ne b.value;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    %let test_result=FAIL;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    %let test_comments=%str(Mod:(&amp;mod) Add:(&amp;add) Del:(&amp;del));</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  %end;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  data ;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    length test_description $256 test_result $4 test_comments $256;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    test_description=symget(<span class="stringliteral">&#39;desc&#39;</span>);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    test_comments=symget(<span class="stringliteral">&#39;test_comments&#39;</span>);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    test_result=symget(<span class="stringliteral">&#39;test_result&#39;</span>);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  run;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  %let ds=&amp;syslast;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  proc append base=&amp;outds data=&amp;ds;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  run;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  proc sql;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  drop table &amp;ds;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>%end;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>%mend mp_assertscope;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
