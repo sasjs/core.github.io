@@ -442,20 +442,30 @@ $(document).ready(function(){initNavTree('mp__stackdiffs_8sas_source.html',''); 
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>  set &amp;ds3m;</div>
 <div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>run;</div>
 <div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span> </div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><span class="comment">/*</span></div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span><span class="comment">LIBREF DSN MOVE_TYPE TGTVAR_NM IS_PK IS_DIFF</span></div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span><span class="comment">      TGTVAR_TYPE OLDVAL_NUM NEWVAL_NUM OLDVAL_CHAR NEWVAL_CHAR</span></div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span><span class="comment">*/</span></div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span> </div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>%let key=%upcase(&amp;key);</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><span class="comment"></span> </div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span><span class="comment">  * Compare with base table.</span></div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span><span class="comment">  * @todo - prepare passthrough with temp tables where base table is vary large</span></div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span><span class="comment">  */</span></div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span> </div>
 <div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>%if &amp;mdebug=0 %then %do;</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>  proc sql;</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>  drop table &amp;ds1, &amp;ds2, &amp;ds3, &amp;ds4;</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>%end;</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span><span class="comment">LIBREF DSN MOVE_TYPE TGTVAR_NM IS_PK IS_DIFF</span></div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span><span class="comment">      TGTVAR_TYPE OLDVAL_NUM NEWVAL_NUM OLDVAL_CHAR NEWVAL_CHAR</span></div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span><span class="comment">*/</span></div>
 <div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span> </div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>%mend mp_stackdiffs;<span class="comment"></span></div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span><span class="comment">/** @endcond */</span></div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>%let key=%upcase(&amp;key);</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span> </div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>%if &amp;mdebug=0 %then %do;</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>  proc sql;</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>  drop table &amp;ds1a, &amp;ds2a, &amp;ds3a</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    ,&amp;ds1d, &amp;ds2d, &amp;ds3d</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    ,&amp;ds1m, &amp;ds2m, &amp;ds3m</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    ,&amp;ds4;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>%end;</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span> </div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>%mend mp_stackdiffs;<span class="comment"></span></div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span><span class="comment">/** @endcond */</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

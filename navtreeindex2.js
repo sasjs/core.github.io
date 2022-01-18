@@ -1,5 +1,11 @@
 var NAVTREEINDEX2 =
 {
+"mv__deletefoldermember_8sas.html":[1,7,6],
+"mv__deletefoldermember_8sas_source.html":[1,7,6],
+"mv__deletejes_8sas.html":[1,7,7],
+"mv__deletejes_8sas_source.html":[1,7,7],
+"mv__deleteviyafolder_8sas.html":[1,7,8],
+"mv__deleteviyafolder_8sas_source.html":[1,7,8],
 "mv__getaccesstoken_8sas.html":[1,7,9],
 "mv__getaccesstoken_8sas_source.html":[1,7,9],
 "mv__getapptoken_8sas.html":[1,7,10],

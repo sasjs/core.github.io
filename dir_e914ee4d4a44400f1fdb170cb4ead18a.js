@@ -52,6 +52,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_assertcols.sas", "mp__assertcols_8sas.html", null ],
     [ "mp_assertcolvals.sas", "mp__assertcolvals_8sas.html", null ],
     [ "mp_assertdsobs.sas", "mp__assertdsobs_8sas.html", null ],
+    [ "mp_assertscope.sas", "mp__assertscope_8sas.html", null ],
     [ "mp_base64copy.sas", "mp__base64copy_8sas.html", null ],
     [ "mp_binarycopy.sas", "mp__binarycopy_8sas.html", null ],
     [ "mp_cleancsv.sas", "mp__cleancsv_8sas.html", null ],
