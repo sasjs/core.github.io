@@ -297,175 +297,241 @@ $(document).ready(function(){initNavTree('mp__stackdiffs_8sas_source.html',''); 
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="comment"></span> </div>
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="comment"></span> </div>
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="comment">  @li mf_getuniquename.sas</span></div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="comment">  @li mf_islibds.sas</span></div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment">  @li mp_abort.sas</span></div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment"></span> </div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment"></span> </div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment">  &lt;h4&gt; Related Macros &lt;/h4&gt;</span></div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="comment">  @li mp_coretable.sas</span></div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="comment">  @li mp_stackdiffs.test.sas</span></div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="comment">  @li mp_storediffs.sas</span></div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="comment"></span> </div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="comment">  @version 9.2</span></div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="comment">  @author Allan Bowe</span></div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="comment">**/</span><span class="comment"></span></div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment">/** @cond */</span></div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>%macro mp_stackdiffs(baselibds</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>  ,auditlibds</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  ,key</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>  ,mdebug=0</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>  ,processed_dttm_var=0</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>  ,errds=work.errds</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  ,outmod=work.outmod</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>  ,outadd=work.outadd</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  ,outdel=work.outdel</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>%local dbg;</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>%<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>  %put &amp;sysmacroname entry vars:;</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  %put _local_;</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>%end;</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>%<span class="keywordflow">else</span> %let dbg=*;</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="comment">/* input parameter validations */</span></div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>%mp_abort(iftrue= (%mf_islibds(&amp;baselibds) ne 1)</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>  ,mac=&amp;sysmacroname</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>  ,msg=%str(Invalid baselibds: &amp;baselibds)</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>)</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>%mp_abort(iftrue= (%mf_islibds(&amp;auditlibds) ne 1)</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  ,mac=&amp;sysmacroname</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  ,msg=%str(Invalid auditlibds: &amp;auditlibds)</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>)</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>%mp_abort(iftrue= (%length(&amp;key)=0)</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>  ,mac=&amp;sysmacroname</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>  ,msg=%str(Missing key variables!)</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>)</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>%mp_abort(iftrue= (</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    %mf_existVarList(&amp;auditlibds,LIBREF DSN MOVE_TYPE TGTVAR_NM IS_PK IS_DIFF</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>      TGTVAR_TYPE OLDVAL_NUM NEWVAL_NUM OLDVAL_CHAR NEWVAL_CHAR)=0</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>  )</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>  ,mac=&amp;sysmacroname</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>  ,msg=%str(Input &amp;auditlibds is missing required columns!)</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>)</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span><span class="comment">/* set up unique and temporary vars */</span></div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>%local ds1d ds2d ds3d ds1a ds2a ds3a ds1m ds2m ds3m ;</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>%let ds1d=%upcase(work.%mf_getuniquename(prefix=mpsd_ds1d));</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>%let ds2d=%upcase(work.%mf_getuniquename(prefix=mpsd_ds2d));</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>%let ds3d=%upcase(work.%mf_getuniquename(prefix=mpsd_ds3d));</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>%let ds1a=%upcase(work.%mf_getuniquename(prefix=mpsd_ds1a));</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>%let ds2a=%upcase(work.%mf_getuniquename(prefix=mpsd_ds2a));</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>%let ds3a=%upcase(work.%mf_getuniquename(prefix=mpsd_ds3a));</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>%let ds1m=%upcase(work.%mf_getuniquename(prefix=mpsd_ds1m));</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>%let ds2m=%upcase(work.%mf_getuniquename(prefix=mpsd_ds2m));</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>%let ds3m=%upcase(work.%mf_getuniquename(prefix=mpsd_ds3m));</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span><span class="comment"></span> </div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span><span class="comment">  * Prepare DELETE table</span></div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span><span class="comment">  * Records are in the OLDVAL_xxx columns</span></div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span><span class="comment">  */</span></div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>proc sort data=&amp;auditlibds(where=(move_type=<span class="charliteral">&#39;D&#39;</span>)</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    keep=MOVE_TYPE TGTVAR_NM TGTVAR_TYPE OLDVAL_NUM OLDVAL_CHAR</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>  ) out=&amp;ds1d;</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>by TGTVAR_NM;</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>run;</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>proc transpose data=&amp;ds1d(where=(tgtvar_type=<span class="charliteral">&#39;N&#39;</span>))</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    out=&amp;ds2d(drop=move_type _name_);</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>  by move_type;</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>  <span class="keywordtype">id</span> TGTVAR_NM;</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>  var OLDVAL_NUM;</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>run;</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>proc transpose data=&amp;ds1d(where=(tgtvar_type=&#39;C&#39;))</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    out=&amp;ds3d(drop=move_type _name_);</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>  by move_type;</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>  <span class="keywordtype">id</span> TGTVAR_NM;</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>  var OLDVAL_CHAR;</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>run;</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>data &amp;outdel;</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>  set &amp;ds2d;</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>  set &amp;ds3d;</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>run;</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span><span class="comment"></span> </div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span><span class="comment">  * Prepare APPEND table</span></div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span><span class="comment">  * Records are in the NEWVAL_xxx columns</span></div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="comment">  */</span></div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>proc sort data=&amp;auditlibds(where=(move_type=&#39;A&#39;)</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    keep=MOVE_TYPE TGTVAR_NM TGTVAR_TYPE NEWVAL_NUM NEWVAL_CHAR</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>  ) out=&amp;ds1a;</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>by TGTVAR_NM;</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>run;</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>proc transpose data=&amp;ds1a(where=(tgtvar_type=&#39;N&#39;))</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    out=&amp;ds2a(drop=move_type _name_);</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>  by move_type;</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>  <span class="keywordtype">id</span> TGTVAR_NM;</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>  var NEWVAL_NUM;</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>run;</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>proc transpose data=&amp;ds1a(where=(tgtvar_type=&#39;C&#39;))</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    out=&amp;ds3a(drop=move_type _name_);</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>  by move_type;</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>  <span class="keywordtype">id</span> TGTVAR_NM;</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>  var NEWVAL_CHAR;</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>run;</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>data &amp;outadd;</div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  set &amp;ds2a;</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  set &amp;ds3a;</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>run;</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><span class="comment"></span> </div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span><span class="comment">  * Prepare MODIFY table</span></div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span><span class="comment">  * Keep only primary key - will add modified values later</span></div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span><span class="comment">  */</span></div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>proc sort data=&amp;auditlibds(where=(move_type=&#39;M&#39; and is_pk=1))</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    keep=MOVE_TYPE TGTVAR_NM TGTVAR_TYPE NEWVAL_NUM NEWVAL_CHAR</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>  ) out=&amp;ds1m;</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>by TGTVAR_NM;</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>run;</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>proc transpose data=&amp;ds1m(where=(tgtvar_type=&#39;N&#39;))</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    out=&amp;ds2m(drop=move_type _name_);</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  by move_type;</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>  <span class="keywordtype">id</span> TGTVAR_NM;</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  var NEWVAL_NUM;</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>run;</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>proc transpose data=&amp;ds1m(where=(tgtvar_type=&#39;C&#39;))</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    out=&amp;ds3m(drop=move_type _name_);</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>  by move_type;</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>  <span class="keywordtype">id</span> TGTVAR_NM;</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>  var NEWVAL_CHAR;</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>run;</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>data &amp;outmod;</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>  set &amp;ds2m;</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>  set &amp;ds3m;</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>run;</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span> </div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><span class="comment"></span> </div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span><span class="comment">  * Compare with base table.</span></div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span><span class="comment">  * @todo - prepare passthrough with temp tables where base table is vary large</span></div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span><span class="comment">  */</span></div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span> </div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span><span class="comment">/*</span></div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span><span class="comment">LIBREF DSN MOVE_TYPE TGTVAR_NM IS_PK IS_DIFF</span></div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span><span class="comment">      TGTVAR_TYPE OLDVAL_NUM NEWVAL_NUM OLDVAL_CHAR NEWVAL_CHAR</span></div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span><span class="comment">*/</span></div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span> </div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>%let key=%upcase(&amp;key);</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span> </div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>%if &amp;mdebug=0 %then %do;</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>  proc sql;</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>  drop table &amp;ds1a, &amp;ds2a, &amp;ds3a</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    ,&amp;ds1d, &amp;ds2d, &amp;ds3d</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    ,&amp;ds1m, &amp;ds2m, &amp;ds3m</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    ,&amp;ds4;</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>%end;</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span> </div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>%mend mp_stackdiffs;<span class="comment"></span></div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span><span class="comment">/** @endcond */</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="comment">  @li mf_existvarlist.sas</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="comment">  @li mf_getquotedstr.sas</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment">  @li mf_getuniquename.sas</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment">  @li mf_islibds.sas</span></div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment">  @li mf_nobs.sas</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment">  @li mp_abort.sas</span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="comment"></span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="comment"></span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="comment">  &lt;h4&gt; Related Macros &lt;/h4&gt;</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="comment">  @li mp_coretable.sas</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="comment">  @li mp_stackdiffs.test.sas</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="comment">  @li mp_storediffs.sas</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="comment"></span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment">  @version 9.2</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="comment">  @author Allan Bowe</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment">**/</span><span class="comment"></span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment">/** @cond */</span></div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>%macro mp_stackdiffs(baselibds</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>  ,auditlibds</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>  ,key</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  ,mdebug=0</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>  ,processed_dttm_var=0</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  ,errds=work.errds</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  ,outmod=work.outmod</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  ,outadd=work.outadd</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  ,outdel=work.outdel</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>%local dbg;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>%<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>  %put &amp;sysmacroname entry vars:;</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>  %put _local_;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>%end;</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>%<span class="keywordflow">else</span> %let dbg=*;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="comment">/* input parameter validations */</span></div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>%mp_abort(iftrue= (%mf_islibds(&amp;baselibds) ne 1)</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>  ,mac=&amp;sysmacroname</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  ,msg=%str(Invalid baselibds: &amp;baselibds)</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>)</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>%mp_abort(iftrue= (%mf_islibds(&amp;auditlibds) ne 1)</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>  ,mac=&amp;sysmacroname</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>  ,msg=%str(Invalid auditlibds: &amp;auditlibds)</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>)</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>%mp_abort(iftrue= (%length(&amp;key)=0)</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>  ,mac=&amp;sysmacroname</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>  ,msg=%str(Missing key variables!)</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>)</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>%mp_abort(iftrue= (</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    %mf_existVarList(&amp;auditlibds,LIBREF DSN MOVE_TYPE KEY_HASH TGTVAR_NM IS_PK</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>      IS_DIFF TGTVAR_TYPE OLDVAL_NUM NEWVAL_NUM OLDVAL_CHAR NEWVAL_CHAR)=0</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>  )</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>  ,mac=&amp;sysmacroname</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>  ,msg=%str(Input &amp;auditlibds is missing required columns!)</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>)</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="comment">/* set up unique and temporary vars */</span></div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>%local prefix dslist x var keyjoin commakey keepvars;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>%let prefix=%substr(%mf_getuniquename(),1,25);</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>%let dslist=ds1d ds2d ds3d ds1a ds2a ds3a ds1m ds2m ds3m pks dups base</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>  delrec delerr;</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>%<span class="keywordflow">do</span> x=1 %to %sysfunc(countw(&amp;dslist));</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>  %let var=%scan(&amp;dslist,&amp;x);</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>  %local &amp;var;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>  %let &amp;var=%upcase(&amp;prefix._&amp;var);</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>%end;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>%let keyjoin=1=1;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>%<span class="keywordflow">do</span> x=1 %to %sysfunc(countw(&amp;key));</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  %let var=%scan(&amp;key,&amp;x);</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>  %let keyjoin=&amp;keyjoin and a.&amp;var=b.&amp;var;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>%end;</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>%let commakey=%mf_getquotedstr(&amp;key,quote=N);</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>data &amp;errds;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>  length pk_vars $256 pk_vals $4098 err_msg $512;</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>  call missing (of _all_);</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>  stop;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>run;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="comment"></span> </div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span><span class="comment">  * Prepare DELETE table</span></div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span><span class="comment">  * Records are in the OLDVAL_xxx columns</span></div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span><span class="comment">  */</span></div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>%let keepvars=MOVE_TYPE KEY_HASH TGTVAR_NM TGTVAR_TYPE IS_PK</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>              OLDVAL_NUM OLDVAL_CHAR</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>              NEWVAL_NUM NEWVAL_CHAR;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>proc sort data=&amp;auditlibds(where=(move_type=<span class="charliteral">&#39;D&#39;</span>) keep=&amp;keepvars)</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>  out=&amp;ds1d(drop=move_type);</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>by KEY_HASH TGTVAR_NM;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>run;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>proc transpose data=&amp;ds1d(where=(tgtvar_type=<span class="charliteral">&#39;N&#39;</span>))</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    out=&amp;ds2d(drop=_name_);</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>  by KEY_HASH;</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>  <span class="keywordtype">id</span> TGTVAR_NM;</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>  var OLDVAL_NUM;</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>run;</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>proc transpose data=&amp;ds1d(where=(tgtvar_type=&#39;C&#39;))</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    out=&amp;ds3d(drop=_name_);</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>  by KEY_HASH;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>  <span class="keywordtype">id</span> TGTVAR_NM;</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>  var OLDVAL_CHAR;</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>run;</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>data &amp;outdel;</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>  set &amp;ds2d;</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>  set &amp;ds3d;</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>run;</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>proc sort;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>  by &amp;key;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>run;</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span><span class="comment"></span> </div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span><span class="comment">  * Prepare APPEND table</span></div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span><span class="comment">  * Records are in the NEWVAL_xxx columns</span></div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span><span class="comment">  */</span></div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>proc sort data=&amp;auditlibds(where=(move_type=&#39;A&#39;) keep=&amp;keepvars)</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    out=&amp;ds1a(drop=move_type);</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>  by KEY_HASH TGTVAR_NM;</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>run;</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>proc transpose data=&amp;ds1a(where=(tgtvar_type=&#39;N&#39;))</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    out=&amp;ds2a(drop=_name_);</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>  by KEY_HASH;</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>  <span class="keywordtype">id</span> TGTVAR_NM;</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>  var NEWVAL_NUM;</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>run;</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>proc transpose data=&amp;ds1a(where=(tgtvar_type=&#39;C&#39;))</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    out=&amp;ds3a(drop=_name_);</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>  by KEY_HASH;</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  <span class="keywordtype">id</span> TGTVAR_NM;</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>  var NEWVAL_CHAR;</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>run;</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>data &amp;outadd;</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>  set &amp;ds2a;</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>  set &amp;ds3a;</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>run;</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span><span class="comment"></span> </div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span><span class="comment">  * Prepare MODIFY table</span></div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span><span class="comment">  * Keep only primary key - will add modified values later</span></div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span><span class="comment">  */</span></div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>proc sort data=&amp;auditlibds(</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>      where=(move_type=&#39;M&#39; and is_pk=1) keep=&amp;keepvars</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    ) out=&amp;ds1m(drop=move_type);</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>  by KEY_HASH TGTVAR_NM;</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>run;</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>proc transpose data=&amp;ds1m(where=(tgtvar_type=&#39;N&#39;))</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    out=&amp;ds2m(drop=_name_);</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>  by KEY_HASH ;</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>  <span class="keywordtype">id</span> TGTVAR_NM;</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>  var NEWVAL_NUM;</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>run;</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>proc transpose data=&amp;ds1m(where=(tgtvar_type=&#39;C&#39;))</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    out=&amp;ds3m(drop=_name_);</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>  by KEY_HASH;</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>  <span class="keywordtype">id</span> TGTVAR_NM;</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>  var NEWVAL_CHAR;</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>run;</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>data &amp;outmod;</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>  set &amp;ds2m;</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>  set &amp;ds3m;</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>run;</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span><span class="comment"></span> </div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span><span class="comment">  * Extract matching records from the base table</span></div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span><span class="comment">  * Do this in one join for efficiency.</span></div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span><span class="comment">  * At a later date, this should be optimised for large database tables by using</span></div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span><span class="comment">  * passthrough and a temporary table.</span></div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span><span class="comment">  */</span></div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>data &amp;pks;</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>  set &amp;outadd &amp;outmod &amp;outdel;</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>  keep &amp;key;</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>run;</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span> </div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>proc sort noduprec dupout=&amp;dups;</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>by &amp;key;</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>run;</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>%mp_abort(iftrue= (%mf_nobs(&amp;dups) ne 0)</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>  ,mac=&amp;sysmacroname</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>  ,msg=%str(duplicates (%mf_nobs(&amp;dups)) found on &amp;auditlibds!)</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>)</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span> </div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>proc sql;</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>create table &amp;base as</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>  select a.*</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>  from &amp;baselibds a, &amp;pks b</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>  where &amp;keyjoin;</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span><span class="comment"></span> </div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span><span class="comment">  * delete check</span></div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span><span class="comment">  * This is straightforward as it relates to records only</span></div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span><span class="comment">  */</span></div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>proc sql;</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>create table &amp;delrec as</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>  select a.*</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>  from &amp;outdel a</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>  left join &amp;base b</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>  on &amp;keyjoin</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>  where a.%scan(&amp;key,1) is null</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>  order by &amp;commakey;</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span> </div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>data &amp;delerr;</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>  if 0 then set &amp;errds;</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>  set &amp;delrec;</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>  PK_VARS=&quot;&amp;key&quot;;</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>  PK_VALS=catx(&#39;/&#39;,&amp;commakey);</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>  ERR_MSG=&quot;Rows cannot be deleted as they do not exist on the Base dataset&quot;;</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>  keep PK_VARS PK_VALS ERR_MSG;</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>run;</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span> </div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>proc append base=&amp;errds data=&amp;delerr;</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>run;</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span> </div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>data &amp;outdel;</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>  merge &amp;outdel (in=a) &amp;delrec (in=b);</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>  by &amp;key;</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>  if not b;</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>run;</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span> </div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span><span class="comment">LIBREF DSN MOVE_TYPE TGTVAR_NM IS_PK IS_DIFF</span></div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span><span class="comment">      TGTVAR_TYPE OLDVAL_NUM NEWVAL_NUM OLDVAL_CHAR NEWVAL_CHAR</span></div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span> </div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>%let key=%upcase(&amp;key);</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span> </div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>%if &amp;mdebug=0 %then %do;</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>  proc datasets lib=work;</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>    delete &amp;prefix:;</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>  run;</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>%end;</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span> </div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>%mend mp_stackdiffs;<span class="comment"></span></div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span><span class="comment">/** @endcond */</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
