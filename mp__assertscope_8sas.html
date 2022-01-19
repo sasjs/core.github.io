@@ -117,7 +117,6 @@ $(document).ready(function(){initNavTree('mp__assertscope_8sas.html',''); initRe
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >A common 'difficult to detect' bug in macros is where a nested macro over-writes variables in a higher level macro.</p>
 <p >This assertion takes a snapshot of the macro variables before and after a macro invocation. Differences are captured in the <code>&amp;outds</code> table. This makes it easy to detect whether any macro variables were modified or changed.</p>
-<p >Currently, the macro only checks for global scope variables. In the future it may be extended to work at multiple levels of nesting.</p>
 <p >If you would like this feature, feel free to contribute / raise an issue / engage the SASjs team directly.</p>
 <p >Example usage: </p><pre class="fragment">%mp_assertscope(SNAPSHOT)
 
