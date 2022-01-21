@@ -364,7 +364,7 @@ $(document).ready(function(){initNavTree('mp__stackdiffs_8sas_source.html',''); 
 <div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>%local prefix dslist x var keyjoin commakey keepvars missvars fref;</div>
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>%let prefix=%substr(%mf_getuniquename(),1,25);</div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>%let dslist=ds1d ds2d ds3d ds1a ds2a ds3a ds1m ds2m ds3m pks dups base</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>  delrec delerr addrec adderr modrec moderr modtmp;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>  delrec delerr addrec adderr modrec moderr;</div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>%<span class="keywordflow">do</span> x=1 %to %sysfunc(countw(&amp;dslist));</div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>  %let var=%scan(&amp;dslist,&amp;x);</div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  %local &amp;var;</div>
@@ -635,29 +635,38 @@ $(document).ready(function(){initNavTree('mp__stackdiffs_8sas_source.html',''); 
 <div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>    if not b;</div>
 <div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>  run;</div>
 <div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>  <span class="comment">/* now - we can prepare the final MOD table (which is currently PK only) */</span></div>
-<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>  proc sql;</div>
-<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>  create table &amp;modtmp as</div>
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>  proc sql(undo_policy=none);</div>
+<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>  create table &amp;outmod as</div>
 <div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>    select a.* <span class="comment">/* includes KEY_HASH from audit ds */</span></div>
 <div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>    from &amp;outmod a</div>
 <div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>    inner join &amp;base b</div>
 <div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>    on &amp;keyjoin</div>
 <div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>    order by &amp;commakey;</div>
-<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>  <span class="comment">/* now - to update modtmp (base values) with modified (is_diff=1) values */</span></div>
+<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>  <span class="comment">/* now - to update outmod with modified (is_diff=1) values */</span></div>
 <div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>  %let fref=%mf_getuniquefileref();</div>
 <div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>  data _null_;</div>
-<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>    set &amp;auditlibds(where=());</div>
-<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>  run;</div>
-<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span> </div>
-<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>%end;</div>
-<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span> </div>
-<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>%if &amp;mdebug=0 %then %do;</div>
-<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>  proc datasets lib=work;</div>
-<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>    delete &amp;prefix:;</div>
-<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>  run;</div>
-<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>%end;</div>
-<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span> </div>
-<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>%mend mp_stackdiffs;<span class="comment"></span></div>
-<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span><span class="comment">/** @endcond */</span>`</div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>    file &amp;fref;</div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>    set &amp;auditlibds(where=(move_type=&#39;D&#39;)) end=lastobs;</div>
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>    by key_hash;</div>
+<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>    if _n_=1 then put &#39;proc sql;&#39;;</div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>    if first.key_hash then put &quot;update &amp;outmod set &quot;;</div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>    comma=ifc(first.key_hash=0,&#39;,&#39;,&#39; &#39;);</div>
+<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>    if tgtvar_type=&#39;C&#39; then put &#39;  &#39; comma TGTVAR_NM &#39;=trim(&quot;&#39; NEWVAL_CHAR &#39;&quot;)&#39;;</div>
+<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>    if last.key_hash then put &#39;  where key_hash=trim(&quot;&#39; key_hash &#39;&quot;);&#39;;</div>
+<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>    if lastobs then put &#39;alter &amp;outmod drop key_hash&#39;;</div>
+<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>  run;</div>
+<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>  %inc &amp;fref/source2;</div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span> </div>
+<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>%end;</div>
+<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span> </div>
+<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>%if &amp;mdebug=0 %then %do;</div>
+<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>  proc datasets lib=work;</div>
+<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>    delete &amp;prefix:;</div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>  run;</div>
+<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>%end;</div>
+<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span> </div>
+<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span>%mend mp_stackdiffs;<span class="comment"></span></div>
+<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span><span class="comment">/** @endcond */</span>`</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
