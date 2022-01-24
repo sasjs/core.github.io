@@ -14,6 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Macros for SAS Application Developers" />
   <meta name="og:description" content="Macros for SAS Application Developers" />
+  <title>base/mp_guesspk.sas File Reference</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="dynsections.js"></script>
@@ -124,10 +125,12 @@ $(document).ready(function(){initNavTree('mp__guesspk_8sas.html',''); initResiza
 %mp_guesspk(sashelp.class,outds=classpks)
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">baseds</td><td>The dataset to analyse </td></tr>
-    <tr><td class="paramname">outds=</td><td>The output dataset to contain the possible PKs </td></tr>
-    <tr><td class="paramname">max_guesses=</td><td>(3) The total number of possible primary keys to generate. A table may have multiple unlikely PKs, so no need to list them all. </td></tr>
-    <tr><td class="paramname">min_rows=</td><td>(5) The minimum number of rows a table should have in order to try and guess the PK.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">baseds</td><td>The dataset to analyse </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>The output dataset to contain the possible PKs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">max_guesses=</td><td>(3) The total number of possible primary keys to generate. A table may have multiple (unlikely) PKs, so no need to list them all. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">min_rows=</td><td>(5) The minimum number of rows a table should have in order to try and guess the PK. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ignore_cols</td><td>(0) Space seperated list of columns which you are sure are not part of the primary key (helps to avoid false positives) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>Set to 1 to enable DEBUG messages and preserve outputs</td></tr>
   </table>
   </dd>
 </dl>
@@ -135,6 +138,7 @@ $(document).ready(function(){initNavTree('mp__guesspk_8sas.html',''); initResiza
 <ul>
 <li><a class="el" href="mf__getvarlist_8sas.html" title="Returns dataset variable list direct from header.">mf_getvarlist.sas</a> </li>
 <li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
+<li><a class="el" href="mf__wordsinstr1butnotstr2_8sas.html" title="Returns words that are in string 1 but not in string 2.">mf_wordsInstr1butnotstr2.sas</a> </li>
 <li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a></li>
 </ul>
 <h4>Related Macros </h4>

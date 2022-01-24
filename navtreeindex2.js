@@ -1,5 +1,9 @@
 var NAVTREEINDEX2 =
 {
+"mv__createfolder_8sas.html":[1,7,3],
+"mv__createfolder_8sas_source.html":[1,7,3],
+"mv__createfolder_8test_8sas.html":[1,6,2,3],
+"mv__createfolder_8test_8sas_source.html":[1,6,2,3],
 "mv__createjob_8sas.html":[1,7,4],
 "mv__createjob_8sas_source.html":[1,7,4],
 "mv__createwebservice_8sas.html":[1,7,5],

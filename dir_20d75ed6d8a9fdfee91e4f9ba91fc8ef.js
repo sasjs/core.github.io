@@ -59,6 +59,7 @@ var dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef =
     [ "mp_searchcols.test.sas", "mp__searchcols_8test_8sas.html", null ],
     [ "mp_searchdata.test.sas", "mp__searchdata_8test_8sas.html", null ],
     [ "mp_sortinplace.test.sas", "mp__sortinplace_8test_8sas.html", null ],
+    [ "mp_stackdiffs.test.sas", "mp__stackdiffs_8test_8sas.html", null ],
     [ "mp_storediffs.test.sas", "mp__storediffs_8test_8sas.html", null ],
     [ "mp_validatecol.test.sas", "mp__validatecol_8test_8sas.html", null ],
     [ "mp_webin.test.sas", "mp__webin_8test_8sas.html", null ],

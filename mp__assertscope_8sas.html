@@ -14,6 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Macros for SAS Application Developers" />
   <meta name="og:description" content="Macros for SAS Application Developers" />
+  <title>base/mp_assertscope.sas File Reference</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="dynsections.js"></script>
@@ -115,8 +116,7 @@ $(document).ready(function(){initNavTree('mp__assertscope_8sas.html',''); initRe
 <p><a href="mp__assertscope_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >A common 'difficult to detect' bug in macros is where a nested macro over-writes variables in a higher level macro.</p>
-<p >This assertion takes a snapshot of the macro variables before and after a macro invocation. This makes it easy to detect whether any macro variables were modified or changed.</p>
-<p >Currently, the macro only checks for global scope variables. In the future it may be extended to work at multiple levels of nesting.</p>
+<p >This assertion takes a snapshot of the macro variables before and after a macro invocation. Differences are captured in the <code>&amp;outds</code> table. This makes it easy to detect whether any macro variables were modified or changed.</p>
 <p >If you would like this feature, feel free to contribute / raise an issue / engage the SASjs team directly.</p>
 <p >Example usage: </p><pre class="fragment">%mp_assertscope(SNAPSHOT)
 
@@ -125,7 +125,8 @@ $(document).ready(function(){initNavTree('mp__assertscope_8sas.html',''); initRe
 %mp_assertscope(COMPARE,
   desc=Checking macro variables against previous snapshot
 )
-</pre> <dl class="params"><dt>Parameters</dt><dd>
+</pre><p> This macro is designed to work alongside <code>sasjs test</code> - for more information about this facility, visit <a href="https://cli.sasjs.io/test">cli.sasjs.io/test</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">action</td><td>(SNAPSHOT) The action to take. Valid values: <ul>
 <li>SNAPSHOT - take a copy of the current macro variables </li>
