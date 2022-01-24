@@ -14,7 +14,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Macros for SAS Application Developers" />
   <meta name="og:description" content="Macros for SAS Application Developers" />
-  <title>base/mf_abort.sas Source File</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="dynsections.js"></script>
@@ -122,7 +121,7 @@ $(document).ready(function(){initNavTree('mf__abort_8sas_source.html',''); initR
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">  @cond</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">**/</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>%macro mf_abort(mac=mf_abort.sas, type=deprecated, msg=, iftrue=%str(1=1)</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>%macro mf_abort(mac=mf_abort.sas, msg=, iftrue=%str(1=1)</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  %<span class="keywordflow">if</span> not(%eval(%unquote(&amp;iftrue))) %then %<span class="keywordflow">return</span>;</div>

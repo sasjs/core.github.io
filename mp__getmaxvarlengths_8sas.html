@@ -14,7 +14,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Macros for SAS Application Developers" />
   <meta name="og:description" content="Macros for SAS Application Developers" />
-  <title>base/mp_getmaxvarlengths.sas File Reference</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="dynsections.js"></script>
@@ -120,23 +119,51 @@ $(document).ready(function(){initNavTree('mp__getmaxvarlengths_8sas.html',''); i
 <li>NAME Name of the base dataset column</li>
 <li>MAXLEN Maximum length of the data contained therein.</li>
 </ul>
-<p >Character fields may be allocated very large widths (eg 32000) of which the maximum value is likely to be much narrower. This macro was designed to enable a HTML table to be appropriately sized however this could be used as part of a data audit to ensure we aren't over-sizing our tables in relation to the data therein.</p>
-<p >Numeric fields are converted using the relevant format to determine the width. Usage: </p><pre class="fragment">%mp_getmaxvarlengths(sashelp.class,outds=work.myds)
+<p >Character fields are often allocated very large widths (eg 32000) of which the maximum value is likely to be much narrower. Identifying such cases can be helpful in the following scenarios:</p>
+<ul>
+<li>Enabling a HTML table to be appropriately sized (<code>num2char=YES</code>) </li>
+<li>Reducing the size of a dataset to save on storage (<a class="el" href="mp__ds2squeeze_8sas.html" title="Create a smaller version of a dataset, without data loss.">mp_ds2squeeze.sas</a>) </li>
+<li>Identifying columns containing nothing but missing values (<code>MAXLEN=0</code> in the output table)</li>
+</ul>
+<p>If the entire column is made up of (non-special) missing values then a value of 0 is returned.</p>
+<p >Usage: </p><pre class="fragment">%mp_getmaxvarlengths(sashelp.class,outds=work.myds)
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">libds</td><td>Two part dataset (or view) reference. </td></tr>
-    <tr><td class="paramname">outds=</td><td>The output dataset to create</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">libds</td><td>Two part dataset (or view) reference. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">num2char=</td><td>(NO) When set to NO, numeric fields are sized according to the number of bytes used (or set to zero in the case of non-special missings). When YES, the numeric field is converted to character (using the format, if available), and that is sized instead, using <code>lengthn()</code>. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>The output dataset to create, eg: <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">NAME:$8.   </th><th class="markdownTableHeadNone">MAXLEN:best.    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>Name</code>   </td><td class="markdownTableBodyNone"><code>7</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>Sex</code>   </td><td class="markdownTableBodyNone"><code>1</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>Age</code>   </td><td class="markdownTableBodyNone"><code>3</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>Height</code>   </td><td class="markdownTableBodyNone"><code>8</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>Weight</code>   </td><td class="markdownTableBodyNone"><code>3</code>   </td></tr>
+</table>
+</td></tr>
   </table>
   </dd>
 </dl>
 <h4>SAS Macros </h4>
 <ul>
+<li><a class="el" href="mcf__length_8sas.html" title="Returns the length of a numeric value.">mcf_length.sas</a> </li>
+<li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
 <li><a class="el" href="mf__getvarlist_8sas.html" title="Returns dataset variable list direct from header.">mf_getvarlist.sas</a> </li>
 <li><a class="el" href="mf__getvartype_8sas.html" title="Returns variable type - Character (C) or Numeric (N)">mf_getvartype.sas</a> </li>
 <li><a class="el" href="mf__getvarformat_8sas.html" title="Returns the format of a variable.">mf_getvarformat.sas</a></li>
 </ul>
 <dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Allan Bowe</dd></dl>
+<h4>Related Macros </h4>
+<ul>
+<li><a class="el" href="mp__ds2squeeze_8sas.html" title="Create a smaller version of a dataset, without data loss.">mp_ds2squeeze.sas</a> </li>
+<li><a class="el" href="mp__getmaxvarlengths_8test_8sas.html" title="Testing mp_getmaxvarlengths macro.">mp_getmaxvarlengths.test.sas</a> </li>
+</ul>
 
 <p class="definition">Definition in file <a class="el" href="mp__getmaxvarlengths_8sas_source.html">mp_getmaxvarlengths.sas</a>.</p>
 </div></div><!-- contents -->

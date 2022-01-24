@@ -14,7 +14,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Macros for SAS Application Developers" />
   <meta name="og:description" content="Macros for SAS Application Developers" />
-  <title>viya/mv_webout.sas Source File</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="dynsections.js"></script>
@@ -336,7 +335,7 @@ $(document).ready(function(){initNavTree('mv__webout_8sas_source.html',''); init
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    sysvlong=quote(trim(symget(<span class="stringliteral">&#39;sysvlong&#39;</span>)));</div>
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    put <span class="stringliteral">&#39;,&quot;SYSVLONG&quot; : &#39;</span> sysvlong;</div>
 <div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSWARNINGTEXT&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syswarningtext&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    put <span class="stringliteral">&#39;,&quot;END_DTTM&quot; : &quot;&#39;</span> <span class="stringliteral">&quot;%sysfunc(datetime(),datetime20.3)&quot;</span> <span class="stringliteral">&#39;&quot; &#39;</span>;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    put <span class="stringliteral">&#39;,&quot;END_DTTM&quot; : &quot;&#39;</span> <span class="stringliteral">&quot;%sysfunc(datetime(),E8601DT26.6)&quot;</span> <span class="stringliteral">&#39;&quot; &#39;</span>;</div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    length memsize $32;</div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    memsize=<span class="stringliteral">&quot;%sysfunc(INPUTN(%sysfunc(getoption(memsize)), best.),sizekmg.)&quot;</span>;</div>
 <div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    memsize=quote(cats(memsize));</div>

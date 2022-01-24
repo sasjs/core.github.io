@@ -14,7 +14,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Macros for SAS Application Developers" />
   <meta name="og:description" content="Macros for SAS Application Developers" />
-  <title>Macro Core</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="dynsections.js"></script>
@@ -202,6 +201,7 @@ File Properties</h2>
 <li>macro names must be lowercase</li>
 <li>one macro per file</li>
 <li>prefixes:<ul>
+<li><em>mcf</em> for macro compiled functions (proc fcmp)</li>
 <li><em>mf</em> for macro functions (can be used in open code).</li>
 <li><em>ml</em> for macros that are used to compile LUA modules</li>
 <li><em>mm</em> for metadata macros (interface with the metadata server).</li>
@@ -240,7 +240,7 @@ Dependencies</h3>
 <div class="line">&lt;h4&gt; SAS Includes &lt;/h4&gt;</div>
 <div class="line">@li somefile.ddl SOMEFREF</div>
 <div class="line">@li someprogram.sas FREFTWO</div>
-</div><!-- fragment --><p >The CLI can then extract all the dependencies and insert as precode (SAS Macros) or in a temp engine fileref (SAS Includes) when creating SAS Jobs and Services.</p>
+</div><!-- fragment --><p >The CLI can then extract all the dependencies and insert as precode (SAS Macros) or in a temp engine fileref (SAS Includes) when creating SAS Jobs and Services (and Tests).</p>
 <p >When contributing to this library, it is therefore important to ensure that all dependencies are listed in the header in this format.</p>
 <h2><a class="anchor" id="autotoc_md18"></a>
 Coding Standards</h2>
@@ -254,7 +254,9 @@ Coding Standards</h2>
 <li>Mandatory parameters should be positional, all optional parameters should be keyword (var=) style.</li>
 <li>All dataset references must be 2 level (eg <code>work.blah</code>, not <code>blah</code>). This is to avoid contention when options <a href="https://support.sas.com/documentation/cdl/en/lrdict/64316/HTML/default/viewer.htm#a000279064.htm">DATASTMTCHK</a>=ALLKEYWORDS is in effect.</li>
 <li>Avoid naming collisions! All macro variables should be local scope. Use system generated work tables where possible - eg <code>data ; set sashelp.class; run; data &amp;output; set &amp;syslast; run;</code></li>
+<li>Where global macro variables are absolutely necessary, they should make use of <code>&amp;sasjs_prefix</code> - see <a class="el" href="mp__init_8sas.html" title="Initialise session with useful settings and variables.">mp_init.sas</a></li>
 <li>The use of <code>quit;</code> for <code>proc sql</code> is optional unless you are looking to benefit from the timing statistics.</li>
+<li>Use <a href="https://github.com/sasjs/lint">sasjs lint</a>!</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md19"></a>
 General Notes</h1>
@@ -263,10 +265,9 @@ General Notes</h1>
 </ul>
 <h1><a class="anchor" id="autotoc_md20"></a>
 Breaking Changes</h1>
-<p >We are currently on major release v3. The following changes are planned when the next major (breaking) release becomes necessary:</p>
+<p >We are currently on major release v4. The following changes are planned when the next major (breaking) release becomes necessary:</p>
 <ul>
-<li>Remove <code>dbg</code> parameter from <a class="el" href="mp__jsonout_8sas.html" title="Writes JSON in SASjs format to a fileref.">mp_jsonout.sas</a> (implement mdebug instead)</li>
-<li>Remove <code>END_DTTM</code> and <code>START_DTTM</code> from mx_webout JSON</li>
+<li>(None as yet)</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md21"></a>
 Star Gazing</h1>

@@ -14,7 +14,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Macros for SAS Application Developers" />
   <meta name="og:description" content="Macros for SAS Application Developers" />
-  <title>server/ms_webout.sas Source File</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="dynsections.js"></script>
@@ -272,7 +271,7 @@ $(document).ready(function(){initNavTree('ms__webout_8sas_source.html',''); init
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    sysvlong=quote(trim(symget(<span class="stringliteral">&#39;sysvlong&#39;</span>)));</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    put <span class="stringliteral">&#39;,&quot;SYSVLONG&quot; : &#39;</span> sysvlong;</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    put <span class="stringliteral">&quot;,&quot;</span><span class="stringliteral">&quot;SYSWARNINGTEXT&quot;</span><span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&quot;&amp;syswarningtext&quot;</span><span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    put <span class="stringliteral">&#39;,&quot;END_DTTM&quot; : &quot;&#39;</span> <span class="stringliteral">&quot;%sysfunc(datetime(),datetime20.3)&quot;</span> <span class="stringliteral">&#39;&quot; &#39;</span>;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    put <span class="stringliteral">&#39;,&quot;END_DTTM&quot; : &quot;&#39;</span> <span class="stringliteral">&quot;%sysfunc(datetime(),E8601DT26.6)&quot;</span> <span class="stringliteral">&#39;&quot; &#39;</span>;</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    length autoexec $512;</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    autoexec=quote(urlencode(trim(getoption(<span class="stringliteral">&#39;autoexec&#39;</span>))));</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    put <span class="stringliteral">&#39;,&quot;AUTOEXEC&quot; : &#39;</span> autoexec;</div>
