@@ -115,8 +115,7 @@ $(document).ready(function(){initNavTree('mp__stackdiffs_8sas.html',''); initRes
 
 <p><a href="mp__stackdiffs_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >WORK IN PROGRESS!!</p>
-<p >When the underlying data from a Base Table is refreshed, it can be helpful to have any previously-applied changes, re-applied.</p>
+<div class="textblock"><p >When the underlying data from a Base Table is refreshed, it can be helpful to have any previously-applied changes, re-applied.</p>
 <p >Such situation might arise if you are applying those changes using a tool like <a href="https://datacontroller.io">Data Controller for SAS®</a> - which records all such changes in an audit table. It may also apply if you are preparing a series of specific cell-level transactions, that you would like to apply to multiple sets of (similarly structured) Base Tables.</p>
 <p >In both cases, it is necessary that the transactions are stored using the <a class="el" href="mp__storediffs_8sas.html" title="Converts deletes/changes/appends into a single audit table.">mp_storediffs.sas</a> macro, or at least that the underlying table is structured as per the definition in <a class="el" href="mp__coretable_8sas.html" title="Create the permanent Core tables.">mp_coretable.sas</a> (DIFFTABLE entry)</p>
 <p ><b>This</b> macro is used to convert the stored changes (tall format) into staged changes (wide format), with base table values incorporated (in the case of modified rows), ready for the subsequent load process.</p>
