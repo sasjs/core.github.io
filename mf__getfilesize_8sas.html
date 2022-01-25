@@ -116,20 +116,17 @@ $(document).ready(function(){initNavTree('mf__getfilesize_8sas.html',''); initRe
 <p><a href="mf__getfilesize_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Provide full path/filename.extension to the file, eg: </p><pre class="fragment">%put %mf_getfilesize(fpath=C:\temp\myfile.txt);
-
-or
-
-data x;do x=1 to 100000;y=x;output;end;run;
+</pre><p> or, provide a libds value as follows: </p><pre class="fragment">data x;do x=1 to 100000;y=x;output;end;run;
 %put %mf_getfilesize(libds=work.x,format=yes);
-
-gives:
-
-2mb
-</pre> <dl class="params"><dt>Parameters</dt><dd>
+</pre><p> Which gives:</p>
+<blockquote class="doxtable">
+<p >2mb </p>
+</blockquote>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">fpath=</td><td>full path and filename. Provide this OR the libds value. </td></tr>
-    <tr><td class="paramname">libds=</td><td>library.dataset value (assumes library is BASE engine) </td></tr>
-    <tr><td class="paramname">format=</td><td>set to yes to apply sizekmg. format </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fpath=</td><td>Full path and filename. Provide this OR the libds value. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">libds=</td><td>(0) Library.dataset value (assumes library is BASE engine) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">format=</td><td>(NO) Set to yes to apply sizekmg. format</td></tr>
   </table>
   </dd>
 </dl>

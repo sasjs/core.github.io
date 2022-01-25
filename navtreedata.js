@@ -34,8 +34,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_2_users_2munja_2git_2core_2base_2mp_wait4file_8sas-example.html",
-"mmx__deletemetafolder_8sas.html",
-"mv__createfolder_8sas.html"
+"mm__updatestpsourcecode_8sas.html",
+"ms__webout_8sas.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

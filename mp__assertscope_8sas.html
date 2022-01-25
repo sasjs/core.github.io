@@ -117,7 +117,11 @@ $(document).ready(function(){initNavTree('mp__assertscope_8sas.html',''); initRe
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >A common 'difficult to detect' bug in macros is where a nested macro over-writes variables in a higher level macro.</p>
 <p >This assertion takes a snapshot of the macro variables before and after a macro invocation. Differences are captured in the <code>&amp;outds</code> table. This makes it easy to detect whether any macro variables were modified or changed.</p>
-<p >If you would like this feature, feel free to contribute / raise an issue / engage the SASjs team directly.</p>
+<p >The following variables are NOT tested (as they are known, global variables used in SASjs):</p>
+<ul>
+<li>&amp;sasjs_prefix._FUNCTIONS</li>
+</ul>
+<p>Global variables are initialised in <a class="el" href="mp__init_8sas.html" title="Initialise session with useful settings and variables.">mp_init.sas</a> - which will also trigger "strict mode" in your SAS session. Whilst this is a default in SASjs produced apps, if you prefer not to use this mode, simply instantiate the following variable to prevent the macro from running: <code>SASJS_PREFIX</code></p>
 <p >Example usage: </p><pre class="fragment">%mp_assertscope(SNAPSHOT)
 
 %let oops=I did it again;
@@ -135,6 +139,7 @@ $(document).ready(function(){initNavTree('mp__assertscope_8sas.html',''); initRe
 </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">scope=</td><td>(GLOBAL) The scope of the variables to be checked. This corresponds to the values in the SCOPE column in <code>sashelp.vmacro</code>. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">desc=</td><td>(Testing scope leakage) The user provided test description </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ignorelist=</td><td>Provide a list of macro variable names to ignore from the comparison </td></tr>
     <tr><td class="paramdir">[in,out]</td><td class="paramname">scopeds=</td><td>(work.mp_assertscope) The dataset to contain the scope snapshot </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.test_results) The output dataset to contain the results. If it does not exist, it will be created, with the following format: <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -146,6 +151,11 @@ $(document).ready(function(){initNavTree('mp__assertscope_8sas.html',''); initRe
   </table>
   </dd>
 </dl>
+<h4>SAS Macros </h4>
+<ul>
+<li><a class="el" href="mf__getquotedstr_8sas.html" title="Adds custom quotes / delimiters to a delimited string.">mf_getquotedstr.sas</a> </li>
+<li><a class="el" href="mp__init_8sas.html" title="Initialise session with useful settings and variables.">mp_init.sas</a></li>
+</ul>
 <h4>Related Macros </h4>
 <ul>
 <li><a class="el" href="mp__assert_8sas.html" title="Generic assertion.">mp_assert.sas</a> </li>

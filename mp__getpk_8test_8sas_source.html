@@ -163,40 +163,43 @@ $(document).ready(function(){initNavTree('mp__getpk_8test_8sas_source.html','');
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>%mp_getpk(work,ds=example2,outds=test2)</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>data _null_;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  set work.test1;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  set work.test2;</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  call symputx(&#39;test2&#39;,pk_fields);</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>run;</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>%mp_assert(</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  iftrue=(&quot;&amp;test2&quot;=&quot;TX_FROM DD_TYPE&quot;),</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  desc=mp_getpk gets unique constraint with NOT NULL in correct order,</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  outds=work.test_results</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>)</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">/* unique key without NOT NULL NOT captured */</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>proc sql;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>create table work.example3(</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  TX_FROM <span class="keywordtype">float</span> format=datetime19.,</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  DD_TYPE <span class="keywordtype">char</span>(16),</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  DD_SOURCE <span class="keywordtype">char</span>(2048),</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  DD_SHORTDESC <span class="keywordtype">char</span>(256),</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  constraint unq1 unique(tx_from, dd_type),</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  constraint unq2 unique(tx_from, dd_type, dd_source),</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  constraint nnn not null(tx_from),</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  constraint nnnn not null(dd_type)</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>);</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>%mp_getpk(work,ds=example3,outds=test3)</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>%mp_assert(</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  iftrue=(%mf_nobs(work.test3)=0),</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  desc=mp_getpk does not capture unique constraint without NOT NULL,</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  outds=work.test_results</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>)</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">/* constraint capture at library level is functional - uses first 2 tests */</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>%mp_getpk(work,outds=test4)</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  desc=mp_getpk gets unique constraint with NOT NULL in correct order</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>)</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">/* unique key without NOT NULL NOT captured */</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>proc sql;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>create table work.example3(</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  TX_FROM <span class="keywordtype">float</span> format=datetime19.,</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  DD_TYPE <span class="keywordtype">char</span>(16),</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  DD_SOURCE <span class="keywordtype">char</span>(2048),</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  DD_SHORTDESC <span class="keywordtype">char</span>(256),</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  constraint unq1 unique(tx_from, dd_type),</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  constraint unq2 unique(tx_from, dd_type, dd_source),</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  constraint nnn not null(tx_from)</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>%mp_getpk(work,ds=example3,outds=test3)</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>data _null_;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  set work.test3;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  call symputx(&#39;test3&#39;,pk_fields);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>run;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>%mp_assert(</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  iftrue=(&quot;&amp;test3 &quot;=&quot; &quot;),</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  desc=mp_getpk does not capture unique constraint without NOT NULL,</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  outds=work.test_results</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>)</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>%mp_assertdsobs(work.test4,test=ATLEAST 2)</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">/* constraint capture at library level is functional - uses first 2 tests */</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>%mp_getpk(work,outds=test4)</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>%mp_assertdsobs(work.test4,test=ATLEAST 2)</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

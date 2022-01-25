@@ -1,5 +1,6 @@
 var dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef =
 [
+    [ "mcf_init.test.sas", "mcf__init_8test_8sas.html", null ],
     [ "mcf_length.test.sas", "mcf__length_8test_8sas.html", null ],
     [ "mcf_stpsrv_header.test.sas", "mcf__stpsrv__header_8test_8sas.html", null ],
     [ "mcf_string2file.test.sas", "mcf__string2file_8test_8sas.html", null ],
@@ -9,6 +10,7 @@ var dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef =
     [ "mf_existfunction.test.sas", "mf__existfunction_8test_8sas.html", null ],
     [ "mf_existvar.test.sas", "mf__existvar_8test_8sas.html", null ],
     [ "mf_getapploc.test.sas", "mf__getapploc_8test_8sas.html", null ],
+    [ "mf_getfilesize.test.sas", "mf__getfilesize_8test_8sas.html", null ],
     [ "mf_getfmtlist.test.sas", "mf__getfmtlist_8test_8sas.html", null ],
     [ "mf_getfmtname.test.sas", "mf__getfmtname_8test_8sas.html", null ],
     [ "mf_getuniquefileref.test.sas", "mf__getuniquefileref_8test_8sas.html", null ],

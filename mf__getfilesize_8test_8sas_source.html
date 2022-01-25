@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Macros for SAS Application Developers" />
   <meta name="og:description" content="Macros for SAS Application Developers" />
-  <title>fcmp/mcf_string2file.sas File Reference</title>
+  <title>tests/crossplatform/mf_getfilesize.test.sas Source File</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="dynsections.js"></script>
@@ -87,7 +87,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('mcf__string2file_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mf__getfilesize_8test_8sas_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -106,71 +106,47 @@ $(document).ready(function(){initNavTree('mcf__string2file_8sas.html',''); initR
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">mcf_string2file.sas File Reference</div></div>
+  <div class="headertitle"><div class="title">mf_getfilesize.test.sas</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Adds a string to a file.  
-<a href="#details">More...</a></p>
-
-<p><a href="mcf__string2file_8sas_source.html">Go to the source code of this file.</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Creates an fcmp function for appending a string to an external file. If the file does not exist, it is created.</p>
-<p >The function itself takes the following (positional) parameters:</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">PARAMETER   </th><th class="markdownTableHeadNone">DESCRIPTION    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">filepath $   </td><td class="markdownTableBodyNone">full path to the file    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">string $   </td><td class="markdownTableBodyNone">string to add to the file    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">mode $   </td><td class="markdownTableBodyNone">mode of the output - either APPEND (default) or CREATE   </td></tr>
-</table>
-<p >It returns 0 if successful, or -1 if an error occured.</p>
-<p >Usage: </p><pre class="fragment">%mcf_string2file(wrap=YES, insert_cmplib=YES)
-
-data _null_;
-  rc=mcf_string2file(
-    "%sysfunc(pathname(work))/newfile.txt"
-    , "This is a test"
-    , "CREATE");
-run;
-
-data _null_;
-  infile "%sysfunc(pathname(work))/newfile.txt";
-  input;
-  putlog _infile_;
-run;
-</pre> <dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">wrap=</td><td>(NO) Choose YES to add the proc fcmp wrapper. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">insert_cmplib=</td><td>(NO) Choose YES to insert the package into the CMPLIB reference. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">lib=</td><td>(work) The output library in which to create the catalog. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">cat=</td><td>(sasjs) The output catalog in which to create the package. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">pkg=</td><td>(utils) The output package in which to create the function. Uses a 3 part format: libref.catalog.package</td></tr>
-  </table>
-  </dd>
-</dl>
-<h4>SAS Macros </h4>
-<ul>
-<li><a class="el" href="mcf__init_8sas.html" title="Sets up the mcf_xx functions.">mcf_init.sas</a></li>
-</ul>
-<h4>Related Programs </h4>
-<ul>
-<li><a class="el" href="mcf__stpsrv__header_8test_8sas.html" title="Testing mcf_stpsrv_header macro.">mcf_stpsrv_header.test.sas</a> </li>
-<li><a class="el" href="mp__init_8sas.html" title="Initialise session with useful settings and variables.">mp_init.sas</a> </li>
-</ul>
-
-<p class="definition">Definition in file <a class="el" href="mcf__string2file_8sas_source.html">mcf_string2file.sas</a>.</p>
-</div></div><!-- contents -->
+<a href="mf__getfilesize_8test_8sas.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">  @file</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">  @brief Testing mf_getfilesize macro</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"></span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">  @li mf_getfilesize.sas</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">  @li mp_assert.sas</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">  @li mp_assertscope.sas</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"></span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>data test;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  x=1;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>run;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>%mp_assertscope(SNAPSHOT)</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>%put %mf_getfilesize(libds=work.test)</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>%mp_assertscope(COMPARE)</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>%mp_assert(</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  iftrue=(&amp;syscc=0),</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  desc=Checking syscc</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>%put %mf_getfilesize(libds=test);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>%mp_assert(</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  iftrue=(&amp;syscc=0),</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  desc=Checking syscc with one level name</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>)</div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_7745ead704f7eb9eda9998037fbe6296.html">fcmp</a></li><li class="navelem"><a class="el" href="mcf__string2file_8sas.html">mcf_string2file.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_59425e443f801f1f2fd8bbe4959a3ccf.html">tests</a></li><li class="navelem"><a class="el" href="dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef.html">crossplatform</a></li><li class="navelem"><a class="el" href="mf__getfilesize_8test_8sas.html">mf_getfilesize.test.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">
