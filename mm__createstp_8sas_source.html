@@ -288,218 +288,219 @@ $(document).ready(function(){initNavTree('mm__createstp_8sas_source.html',''); i
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
 <div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  data &amp;outds (keep=stpuri prompturi fileuri texturi);</div>
 <div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    length stpuri prompturi fileuri texturi serveruri $256 ;</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    set &amp;outds;</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="comment">/* final checks on uris */</span></div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    length <span class="keywordtype">id</span> $20 type $256;</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    __rc=metadata_resolve(&quot;&amp;treeuri&quot;,type,<span class="keywordtype">id</span>);</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    if type ne &#39;Tree&#39; then do;</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>      putlog &quot;%str(WARN)ING:  Invalid tree URI: &amp;treeuri&quot;;</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>      stopme=1;</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    end;</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    __rc=metadata_resolve(directoryuri,type,<span class="keywordtype">id</span>);</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    if type ne &#39;Directory&#39; then do;</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>      putlog &quot;%str(WARN)ING:  Invalid directory URI: &quot; directoryuri;</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>      stopme=1;</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    end;</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>  <span class="comment">/* get server info */</span></div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    __rc=metadata_resolve(&quot;&amp;server&quot;,type,serveruri);</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    if type ne &#39;LogicalServer&#39; then do;</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>      __rc=metadata_getnobj(&quot;omsobj:LogicalServer?@Name=&#39;&amp;server&#39;&quot;,1,serveruri);</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>      if serveruri=&#39;&#39; then do;</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        putlog &quot;%str(WARN)ING:  Invalid server: &amp;server&quot;;</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        stopme=1;</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>      end;</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    end;</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    if stopme=1 then do;</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>      putlog (_all_)(=);</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>      stop;</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    end;</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <span class="comment">/* create empty prompt */</span></div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    rc1=METADATA_NEWOBJ(&#39;PromptGroup&#39;,prompturi,&#39;Parameters&#39;);</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    rc2=METADATA_SETATTR(prompturi, &#39;UsageVersion&#39;, &#39;1000000&#39;);</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    rc3=METADATA_SETATTR(prompturi, &#39;GroupType&#39;,&#39;2&#39;);</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    rc4=METADATA_SETATTR(prompturi, &#39;Name&#39;,&#39;Parameters&#39;);</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    rc5=METADATA_SETATTR(prompturi, &#39;PublicType&#39;,&#39;Embedded:PromptGroup&#39;);</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    GroupInfo=</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>      &quot;&lt;PromptGroup promptId=&#39;PromptGroup_%sysfunc(datetime())_&amp;sysprocessid&#39;&quot;</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>      !!&quot; version=&#39;1.0&#39;&gt;&lt;Label&gt;&lt;Text xml:lang=&#39;en-GB&#39;&gt;Parameters&lt;/Text&gt;&quot;</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>      !!&quot;&lt;/Label&gt;&lt;/PromptGroup&gt;&quot;;</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    rc6 = METADATA_SETATTR(prompturi, &#39;GroupInfo&#39;,groupinfo);</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    if sum(of rc1-rc6) ne 0 then do;</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>      putlog &quot;%str(WARN)ING: Issue creating prompt.&quot;;</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>      if prompturi ne . then do;</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        putlog &#39;  Removing orphan: &#39; prompturi;</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        rc = METADATA_DELOBJ(prompturi);</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        put rc=;</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>      end;</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>      stop;</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    end;</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="comment">/* create a file uri */</span></div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    rc7=METADATA_NEWOBJ(&#39;File&#39;,fileuri,&#39;SP Source File&#39;);</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    rc8=METADATA_SETATTR(fileuri, &#39;FileName&#39;,&quot;&amp;filename&quot;);</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    rc9=METADATA_SETATTR(fileuri, &#39;IsARelativeName&#39;,&#39;1&#39;);</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    rc10=METADATA_SETASSN(fileuri, &#39;Directories&#39;,&#39;MODIFY&#39;,directoryuri);</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    if sum(of rc7-rc10) ne 0 then do;</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>      putlog &quot;%str(WARN)ING: Issue creating file.&quot;;</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>      if fileuri ne . then do;</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        putlog &#39;  Removing orphans:&#39; prompturi fileuri;</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        rc = METADATA_DELOBJ(prompturi);</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        rc = METADATA_DELOBJ(fileuri);</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        put (_all_)(=);</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>      end;</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>      stop;</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    end;</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span> </div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <span class="comment">/* create a TextStore object */</span></div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    rc11= METADATA_NEWOBJ(&#39;TextStore&#39;,texturi,&#39;Stored Process&#39;);</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    rc12= METADATA_SETATTR(texturi, &#39;TextRole&#39;,&#39;StoredProcessConfiguration&#39;);</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    rc13= METADATA_SETATTR(texturi, &#39;TextType&#39;,&#39;XML&#39;);</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    storedtext=&#39;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;StoredProcess&gt;&#39;</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>      !!&quot;&lt;ResultCapabilities Package=&#39;&amp;package&#39; Streaming=&#39;&amp;streaming&#39;/&gt;&quot;</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>      !!&quot;&lt;OutputParameters/&gt;&lt;/StoredProcess&gt;&quot;;</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    rc14= METADATA_SETATTR(texturi, &#39;StoredText&#39;,storedtext);</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    if sum(of rc11-rc14) ne 0 then do;</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>      putlog &quot;%str(WARN)ING: Issue creating TextStore.&quot;;</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>      if texturi ne . then do;</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        putlog &#39;  Removing orphans: &#39; prompturi fileuri texturi;</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        rc = METADATA_DELOBJ(prompturi);</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        rc = METADATA_DELOBJ(fileuri);</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        rc = METADATA_DELOBJ(texturi);</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        put (_all_)(=);</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>      end;</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>      stop;</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    end;</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <span class="comment">/* create meta obj */</span></div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    rc15= METADATA_NEWOBJ(&#39;ClassifierMap&#39;,stpuri,&quot;&amp;stpname&quot;);</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    rc16= METADATA_SETASSN(stpuri, &#39;Trees&#39;,&#39;MODIFY&#39;,treeuri);</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    rc17= METADATA_SETASSN(stpuri, &#39;ComputeLocations&#39;,&#39;MODIFY&#39;,serveruri);</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    rc18= METADATA_SETASSN(stpuri, &#39;SourceCode&#39;,&#39;MODIFY&#39;,fileuri);</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    rc19= METADATA_SETASSN(stpuri, &#39;Prompts&#39;,&#39;MODIFY&#39;,prompturi);</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    rc20= METADATA_SETASSN(stpuri, &#39;Notes&#39;,&#39;MODIFY&#39;,texturi);</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    rc21= METADATA_SETATTR(stpuri, &#39;PublicType&#39;, &#39;StoredProcess&#39;);</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    rc22= METADATA_SETATTR(stpuri, &#39;TransformRole&#39;, &#39;StoredProcess&#39;);</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    rc23= METADATA_SETATTR(stpuri, &#39;UsageVersion&#39;, &#39;1000000&#39;);</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    rc24= METADATA_SETATTR(stpuri, &#39;Desc&#39;, &quot;&amp;stpdesc&quot;);</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span> </div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    <span class="comment">/* tidy up if err */</span></div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    if sum(of rc15-rc24) ne 0 then do;</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>      putlog &quot;%str(WARN)ING: Issue creating STP.&quot;;</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>      if stpuri ne . then do;</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        putlog &#39;  Removing orphans: &#39; prompturi fileuri texturi stpuri;</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        rc = METADATA_DELOBJ(prompturi);</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        rc = METADATA_DELOBJ(fileuri);</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        rc = METADATA_DELOBJ(texturi);</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        rc = METADATA_DELOBJ(stpuri);</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        put (_all_)(=);</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>      end;</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    end;</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    else do;</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>      fullpath=cats(&#39;_program=&#39;,treepath,&quot;/&amp;stpname&quot;);</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>      putlog &quot;NOTE: Stored Process Created!&quot;;</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>      putlog &quot;NOTE- &quot;; putlog &quot;NOTE-&quot;; putlog &quot;NOTE-&quot; fullpath;</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>      putlog &quot;NOTE- &quot;; putlog &quot;NOTE-&quot;;</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    end;</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    output;</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    stop;</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>  run;</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>%end;</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>%else %if &amp;stptype=2 %then %do;</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>  <span class="comment">/* type 2 stp - code is stored in metadata */</span></div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  %if %sysevalf(&amp;sysver lt 9.3) %then %do;</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    %put %str(WARN)ING: SAS version 9.3 or later required to create type2 STPs;</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    %return;</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>  %end;</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>  <span class="comment">/* check we have the correct ServerContext */</span></div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>  %mm_getservercontexts(outds=contexts)</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>  %local serveruri; %let serveruri=NOTFOUND;</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>  data _null_;</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    set contexts;</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    where upcase(servername)=&quot;%upcase(&amp;server)&quot;;</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    call symputx(&#39;serveruri&#39;,serveruri);</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>  run;</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>  %if &amp;serveruri=NOTFOUND %then %do;</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    %put %str(WARN)ING: ServerContext *&amp;server* not found!;</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    %return;</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  %end;</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span><span class="comment"></span> </div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span><span class="comment">    * First, create a Hello World type 2 stored process</span></div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span><span class="comment">    */</span></div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>  filename &amp;frefin temp;</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>  data _null_;</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    file &amp;frefin;</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    treeuri=quote(symget(&#39;treeuri&#39;));</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    serveruri=quote(symget(&#39;serveruri&#39;));</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    stpdesc=quote(symget(&#39;stpdesc&#39;));</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    stpname=quote(symget(&#39;stpname&#39;));</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span> </div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    put &quot;&lt;AddMetadata&gt;&lt;Reposid&gt;$METAREPOSITORY&lt;/Reposid&gt;&lt;Metadata&gt; &quot;/</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    &#39;&lt;ClassifierMap UsageVersion=&quot;2000000&quot; IsHidden=&quot;0&quot; IsUserDefined=&quot;0&quot; &#39;/</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>    &#39; IsActive=&quot;1&quot; PublicType=&quot;StoredProcess&quot; TransformRole=&quot;StoredProcess&quot; &#39;/</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    &#39;  Name=&#39; stpname &#39; Desc=&#39; stpdesc &#39;&gt;&#39;/</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    &quot;  &lt;ComputeLocations&gt;&quot;/</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    &quot;    &lt;ServerContext ObjRef=&quot; serveruri &quot;/&gt;&quot;/</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    &quot;  &lt;/ComputeLocations&gt;&quot;/</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    &quot;&lt;Notes&gt; &quot;/</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    &#39;  &lt;TextStore IsHidden=&quot;0&quot;  Name=&quot;SourceCode&quot; UsageVersion=&quot;0&quot; &#39;/</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>    &#39;    TextRole=&quot;StoredProcessSourceCode&quot; StoredText=&quot;%put hello world!;&quot; /&gt;&#39;/</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    &#39;  &lt;TextStore IsHidden=&quot;0&quot; Name=&quot;Stored Process&quot; UsageVersion=&quot;0&quot; &#39;/</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    &#39;    TextRole=&quot;StoredProcessConfiguration&quot; TextType=&quot;XML&quot; &#39;/</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    &#39;    StoredText=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;qu&#39;@@</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>    &#39;ot;?&amp;gt;&amp;lt;StoredProcess&amp;gt;&amp;lt;ServerContext LogicalServerType=&amp;quot;S&#39;@@</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    &#39;ps&amp;quot; OtherAllowed=&amp;quot;false&amp;quot;/&amp;gt;&amp;lt;ResultCapabilities Packa&#39;@@</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    &#39;ge=&amp;quot;&#39; @@ &quot;&amp;package&quot; @@ &#39;&amp;quot; Streaming=&amp;quot;&#39; @@ &quot;&amp;streaming&quot; @@</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    &#39;&amp;quot;/&amp;gt;&amp;lt;OutputParameters/&amp;gt;&amp;lt;/StoredProcess&amp;gt;&quot; /&gt;&#39; /</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>    &quot;  &lt;/Notes&gt; &quot;/</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    &quot;  &lt;Prompts&gt; &quot;/</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    &#39;   &lt;PromptGroup  Name=&quot;Parameters&quot; GroupType=&quot;2&quot; IsHidden=&quot;0&quot; &#39;/</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    &#39;     PublicType=&quot;Embedded:PromptGroup&quot; UsageVersion=&quot;1000000&quot; &#39;/</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    &#39;     GroupInfo=&quot;&amp;lt;PromptGroup promptId=&amp;quot;PromptGroup_1502797359253&#39;@@</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    &#39;_802080&amp;quot; version=&amp;quot;1.0&amp;quot;&amp;gt;&amp;lt;Label&amp;gt;&amp;lt;Text xml:lang=&#39;@@</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    &#39;&amp;quot;en-US&amp;quot;&amp;gt;Parameters&amp;lt;/Text&amp;gt;&amp;lt;/Label&amp;gt;&amp;lt;/PromptGro&#39;@@</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>    &#39;up&amp;gt;&quot; /&gt;&#39;/</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    &quot;  &lt;/Prompts&gt; &quot;/</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    &quot;&lt;Trees&gt;&lt;Tree ObjRef=&quot; treeuri &quot;/&gt;&lt;/Trees&gt;&quot;/</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>    &quot;&lt;/ClassifierMap&gt;&lt;/Metadata&gt;&lt;NS&gt;SAS&lt;/NS&gt;&quot;/</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>    &quot;&lt;Flags&gt;268435456&lt;/Flags&gt;&lt;/AddMetadata&gt;&quot;;</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>  run;</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span> </div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>  filename &amp;frefout temp;</div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span> </div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>  proc metadata in= &amp;frefin out=&amp;frefout ;</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>  run;</div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span> </div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>  %if &amp;mdebug=1 %then %do;</div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>    <span class="comment">/* write the response to the log for debugging */</span></div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>    data _null_;</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>      infile &amp;frefout lrecl=1048576;</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>      input;</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>      put _infile_;</div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>    run;</div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>  %end;</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span><span class="comment"></span> </div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span><span class="comment">  /**</span></div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span><span class="comment">    * Next, add the source code</span></div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span><span class="comment">    */</span></div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>  %mm_updatestpsourcecode(stp=&amp;tree/&amp;stpname</div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    ,stpcode=&quot;&amp;directory/&amp;filename&quot;</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    ,mdebug=&amp;mdebug</div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>    ,minify=&amp;minify)</div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    if _n_=1 then call missing (of _all_);</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    set &amp;outds;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="comment">/* final checks on uris */</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    length <span class="keywordtype">id</span> $20 type $256;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    __rc=metadata_resolve(&quot;&amp;treeuri&quot;,type,<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    if type ne &#39;Tree&#39; then do;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>      putlog &quot;%str(WARN)ING:  Invalid tree URI: &amp;treeuri&quot;;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>      stopme=1;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    end;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    __rc=metadata_resolve(directoryuri,type,<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    if type ne &#39;Directory&#39; then do;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>      putlog &quot;%str(WARN)ING:  Invalid directory URI: &quot; directoryuri;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>      stopme=1;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    end;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>  <span class="comment">/* get server info */</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    __rc=metadata_resolve(&quot;&amp;server&quot;,type,serveruri);</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    if type ne &#39;LogicalServer&#39; then do;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>      __rc=metadata_getnobj(&quot;omsobj:LogicalServer?@Name=&#39;&amp;server&#39;&quot;,1,serveruri);</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>      if serveruri=&#39;&#39; then do;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        putlog &quot;%str(WARN)ING:  Invalid server: &amp;server&quot;;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        stopme=1;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>      end;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    end;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    if stopme=1 then do;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>      putlog (_all_)(=);</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>      stop;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    end;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="comment">/* create empty prompt */</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    rc1=METADATA_NEWOBJ(&#39;PromptGroup&#39;,prompturi,&#39;Parameters&#39;);</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    rc2=METADATA_SETATTR(prompturi, &#39;UsageVersion&#39;, &#39;1000000&#39;);</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    rc3=METADATA_SETATTR(prompturi, &#39;GroupType&#39;,&#39;2&#39;);</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    rc4=METADATA_SETATTR(prompturi, &#39;Name&#39;,&#39;Parameters&#39;);</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    rc5=METADATA_SETATTR(prompturi, &#39;PublicType&#39;,&#39;Embedded:PromptGroup&#39;);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    GroupInfo=</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>      &quot;&lt;PromptGroup promptId=&#39;PromptGroup_%sysfunc(datetime())_&amp;sysprocessid&#39;&quot;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>      !!&quot; version=&#39;1.0&#39;&gt;&lt;Label&gt;&lt;Text xml:lang=&#39;en-GB&#39;&gt;Parameters&lt;/Text&gt;&quot;</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>      !!&quot;&lt;/Label&gt;&lt;/PromptGroup&gt;&quot;;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    rc6 = METADATA_SETATTR(prompturi, &#39;GroupInfo&#39;,groupinfo);</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    if sum(of rc1-rc6) ne 0 then do;</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>      putlog &quot;%str(WARN)ING: Issue creating prompt.&quot;;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>      if prompturi ne . then do;</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        putlog &#39;  Removing orphan: &#39; prompturi;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        rc = METADATA_DELOBJ(prompturi);</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        put rc=;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>      end;</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>      stop;</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    end;</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="comment">/* create a file uri */</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    rc7=METADATA_NEWOBJ(&#39;File&#39;,fileuri,&#39;SP Source File&#39;);</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    rc8=METADATA_SETATTR(fileuri, &#39;FileName&#39;,&quot;&amp;filename&quot;);</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    rc9=METADATA_SETATTR(fileuri, &#39;IsARelativeName&#39;,&#39;1&#39;);</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    rc10=METADATA_SETASSN(fileuri, &#39;Directories&#39;,&#39;MODIFY&#39;,directoryuri);</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    if sum(of rc7-rc10) ne 0 then do;</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>      putlog &quot;%str(WARN)ING: Issue creating file.&quot;;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>      if fileuri ne . then do;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        putlog &#39;  Removing orphans:&#39; prompturi fileuri;</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        rc = METADATA_DELOBJ(prompturi);</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        rc = METADATA_DELOBJ(fileuri);</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        put (_all_)(=);</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>      end;</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>      stop;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    end;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span> </div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    <span class="comment">/* create a TextStore object */</span></div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    rc11= METADATA_NEWOBJ(&#39;TextStore&#39;,texturi,&#39;Stored Process&#39;);</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    rc12= METADATA_SETATTR(texturi, &#39;TextRole&#39;,&#39;StoredProcessConfiguration&#39;);</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    rc13= METADATA_SETATTR(texturi, &#39;TextType&#39;,&#39;XML&#39;);</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    storedtext=&#39;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;StoredProcess&gt;&#39;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>      !!&quot;&lt;ResultCapabilities Package=&#39;&amp;package&#39; Streaming=&#39;&amp;streaming&#39;/&gt;&quot;</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>      !!&quot;&lt;OutputParameters/&gt;&lt;/StoredProcess&gt;&quot;;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    rc14= METADATA_SETATTR(texturi, &#39;StoredText&#39;,storedtext);</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    if sum(of rc11-rc14) ne 0 then do;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>      putlog &quot;%str(WARN)ING: Issue creating TextStore.&quot;;</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>      if texturi ne . then do;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        putlog &#39;  Removing orphans: &#39; prompturi fileuri texturi;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        rc = METADATA_DELOBJ(prompturi);</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        rc = METADATA_DELOBJ(fileuri);</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        rc = METADATA_DELOBJ(texturi);</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>        put (_all_)(=);</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>      end;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>      stop;</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    end;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> </div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    <span class="comment">/* create meta obj */</span></div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    rc15= METADATA_NEWOBJ(&#39;ClassifierMap&#39;,stpuri,&quot;&amp;stpname&quot;);</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    rc16= METADATA_SETASSN(stpuri, &#39;Trees&#39;,&#39;MODIFY&#39;,treeuri);</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    rc17= METADATA_SETASSN(stpuri, &#39;ComputeLocations&#39;,&#39;MODIFY&#39;,serveruri);</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    rc18= METADATA_SETASSN(stpuri, &#39;SourceCode&#39;,&#39;MODIFY&#39;,fileuri);</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    rc19= METADATA_SETASSN(stpuri, &#39;Prompts&#39;,&#39;MODIFY&#39;,prompturi);</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    rc20= METADATA_SETASSN(stpuri, &#39;Notes&#39;,&#39;MODIFY&#39;,texturi);</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    rc21= METADATA_SETATTR(stpuri, &#39;PublicType&#39;, &#39;StoredProcess&#39;);</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    rc22= METADATA_SETATTR(stpuri, &#39;TransformRole&#39;, &#39;StoredProcess&#39;);</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    rc23= METADATA_SETATTR(stpuri, &#39;UsageVersion&#39;, &#39;1000000&#39;);</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    rc24= METADATA_SETATTR(stpuri, &#39;Desc&#39;, &quot;&amp;stpdesc&quot;);</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span> </div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    <span class="comment">/* tidy up if err */</span></div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    if sum(of rc15-rc24) ne 0 then do;</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>      putlog &quot;%str(WARN)ING: Issue creating STP.&quot;;</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>      if stpuri ne . then do;</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        putlog &#39;  Removing orphans: &#39; prompturi fileuri texturi stpuri;</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        rc = METADATA_DELOBJ(prompturi);</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        rc = METADATA_DELOBJ(fileuri);</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        rc = METADATA_DELOBJ(texturi);</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        rc = METADATA_DELOBJ(stpuri);</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        put (_all_)(=);</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>      end;</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    end;</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    else do;</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>      fullpath=cats(&#39;_program=&#39;,treepath,&quot;/&amp;stpname&quot;);</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>      putlog &quot;NOTE: Stored Process Created!&quot;;</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>      putlog &quot;NOTE- &quot;; putlog &quot;NOTE-&quot;; putlog &quot;NOTE-&quot; fullpath;</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>      putlog &quot;NOTE- &quot;; putlog &quot;NOTE-&quot;;</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    end;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    output;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    stop;</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>  run;</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>%end;</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>%else %if &amp;stptype=2 %then %do;</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  <span class="comment">/* type 2 stp - code is stored in metadata */</span></div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  %if %sysevalf(&amp;sysver lt 9.3) %then %do;</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    %put %str(WARN)ING: SAS version 9.3 or later required to create type2 STPs;</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    %return;</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>  %end;</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>  <span class="comment">/* check we have the correct ServerContext */</span></div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>  %mm_getservercontexts(outds=contexts)</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>  %local serveruri; %let serveruri=NOTFOUND;</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>  data _null_;</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    set contexts;</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    where upcase(servername)=&quot;%upcase(&amp;server)&quot;;</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    call symputx(&#39;serveruri&#39;,serveruri);</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>  run;</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>  %if &amp;serveruri=NOTFOUND %then %do;</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    %put %str(WARN)ING: ServerContext *&amp;server* not found!;</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    %return;</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>  %end;</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span><span class="comment"></span> </div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span><span class="comment">    * First, create a Hello World type 2 stored process</span></div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span><span class="comment">    */</span></div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>  filename &amp;frefin temp;</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>  data _null_;</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    file &amp;frefin;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    treeuri=quote(symget(&#39;treeuri&#39;));</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    serveruri=quote(symget(&#39;serveruri&#39;));</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    stpdesc=quote(symget(&#39;stpdesc&#39;));</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    stpname=quote(symget(&#39;stpname&#39;));</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span> </div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    put &quot;&lt;AddMetadata&gt;&lt;Reposid&gt;$METAREPOSITORY&lt;/Reposid&gt;&lt;Metadata&gt; &quot;/</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>    &#39;&lt;ClassifierMap UsageVersion=&quot;2000000&quot; IsHidden=&quot;0&quot; IsUserDefined=&quot;0&quot; &#39;/</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    &#39; IsActive=&quot;1&quot; PublicType=&quot;StoredProcess&quot; TransformRole=&quot;StoredProcess&quot; &#39;/</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    &#39;  Name=&#39; stpname &#39; Desc=&#39; stpdesc &#39;&gt;&#39;/</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    &quot;  &lt;ComputeLocations&gt;&quot;/</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    &quot;    &lt;ServerContext ObjRef=&quot; serveruri &quot;/&gt;&quot;/</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    &quot;  &lt;/ComputeLocations&gt;&quot;/</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    &quot;&lt;Notes&gt; &quot;/</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>    &#39;  &lt;TextStore IsHidden=&quot;0&quot;  Name=&quot;SourceCode&quot; UsageVersion=&quot;0&quot; &#39;/</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    &#39;    TextRole=&quot;StoredProcessSourceCode&quot; StoredText=&quot;%put hello world!;&quot; /&gt;&#39;/</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    &#39;  &lt;TextStore IsHidden=&quot;0&quot; Name=&quot;Stored Process&quot; UsageVersion=&quot;0&quot; &#39;/</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    &#39;    TextRole=&quot;StoredProcessConfiguration&quot; TextType=&quot;XML&quot; &#39;/</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>    &#39;    StoredText=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;qu&#39;@@</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    &#39;ot;?&amp;gt;&amp;lt;StoredProcess&amp;gt;&amp;lt;ServerContext LogicalServerType=&amp;quot;S&#39;@@</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    &#39;ps&amp;quot; OtherAllowed=&amp;quot;false&amp;quot;/&amp;gt;&amp;lt;ResultCapabilities Packa&#39;@@</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    &#39;ge=&amp;quot;&#39; @@ &quot;&amp;package&quot; @@ &#39;&amp;quot; Streaming=&amp;quot;&#39; @@ &quot;&amp;streaming&quot; @@</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>    &#39;&amp;quot;/&amp;gt;&amp;lt;OutputParameters/&amp;gt;&amp;lt;/StoredProcess&amp;gt;&quot; /&gt;&#39; /</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    &quot;  &lt;/Notes&gt; &quot;/</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    &quot;  &lt;Prompts&gt; &quot;/</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    &#39;   &lt;PromptGroup  Name=&quot;Parameters&quot; GroupType=&quot;2&quot; IsHidden=&quot;0&quot; &#39;/</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    &#39;     PublicType=&quot;Embedded:PromptGroup&quot; UsageVersion=&quot;1000000&quot; &#39;/</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    &#39;     GroupInfo=&quot;&amp;lt;PromptGroup promptId=&amp;quot;PromptGroup_1502797359253&#39;@@</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    &#39;_802080&amp;quot; version=&amp;quot;1.0&amp;quot;&amp;gt;&amp;lt;Label&amp;gt;&amp;lt;Text xml:lang=&#39;@@</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>    &#39;&amp;quot;en-US&amp;quot;&amp;gt;Parameters&amp;lt;/Text&amp;gt;&amp;lt;/Label&amp;gt;&amp;lt;/PromptGro&#39;@@</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    &#39;up&amp;gt;&quot; /&gt;&#39;/</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    &quot;  &lt;/Prompts&gt; &quot;/</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>    &quot;&lt;Trees&gt;&lt;Tree ObjRef=&quot; treeuri &quot;/&gt;&lt;/Trees&gt;&quot;/</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>    &quot;&lt;/ClassifierMap&gt;&lt;/Metadata&gt;&lt;NS&gt;SAS&lt;/NS&gt;&quot;/</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>    &quot;&lt;Flags&gt;268435456&lt;/Flags&gt;&lt;/AddMetadata&gt;&quot;;</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>  run;</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span> </div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>  filename &amp;frefout temp;</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span> </div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>  proc metadata in= &amp;frefin out=&amp;frefout ;</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>  run;</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span> </div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>  %if &amp;mdebug=1 %then %do;</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>    <span class="comment">/* write the response to the log for debugging */</span></div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>    data _null_;</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>      infile &amp;frefout lrecl=1048576;</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>      input;</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>      put _infile_;</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>    run;</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>  %end;</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span><span class="comment"></span> </div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span><span class="comment">  /**</span></div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span><span class="comment">    * Next, add the source code</span></div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span><span class="comment">    */</span></div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>  %mm_updatestpsourcecode(stp=&amp;tree/&amp;stpname</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    ,stpcode=&quot;&amp;directory/&amp;filename&quot;</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>    ,mdebug=&amp;mdebug</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    ,minify=&amp;minify)</div>
 <div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span> </div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>%end;</div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>%else %do;</div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>  %put %str(WARN)ING:  STPTYPE=*&amp;stptype* not recognised!;</div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>%end;</div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span> </div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>%mend mm_createstp;</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span> </div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>%end;</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>%else %do;</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>  %put %str(WARN)ING:  STPTYPE=*&amp;stptype* not recognised!;</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>%end;</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span> </div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>%mend mm_createstp;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

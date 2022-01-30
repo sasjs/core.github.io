@@ -164,25 +164,27 @@ $(document).ready(function(){initNavTree('mp__init_8sas_source.html',''); initRe
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>run;</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>options</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  noautocorrect           <span class="comment">/* disallow misspelled procedure names            */</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  compress=CHAR           <span class="comment">/* default is none so ensure we have something!   */</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  datastmtchk=ALLKEYWORDS <span class="comment">/* protection from overwriting input datasets     */</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  dsoptions=note2err      <span class="comment">/* undocumented - convert bad NOTEs to ERRs       */</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  %str(err)orcheck=STRICT <span class="comment">/* catch errs in libname/filename statements      */</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  fmterr                  <span class="comment">/* ensure err when a format cannot be found       */</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  mergenoby=%str(ERR)OR   <span class="comment">/* throw err when a merge has no BY variables     */</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  missing=.               <span class="comment">/* changing this can cause hard to detect errs    */</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  noquotelenmax           <span class="comment">/* avoid warnings for long strings                */</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  noreplace               <span class="comment">/* avoid overwriting permanent datasets           */</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  ps=max                  <span class="comment">/* reduce log size slightly                       */</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  ls=max                  <span class="comment">/* reduce log even more and avoid word truncation */</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  validmemname=COMPATIBLE <span class="comment">/* avoid special characters etc in table names    */</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  validvarname=V7         <span class="comment">/* avoid special characters etc in variable names */</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  varinitchk=%str(ERR)OR  <span class="comment">/* avoid data mistakes from variable name typos   */</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  varlenchk=%str(ERR)OR   <span class="comment">/* fail hard if truncation (data loss) can result */</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>%mend mp_init;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  compress=CHAR           <span class="comment">/* default is none so ensure we have something!   */</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  datastmtchk=ALLKEYWORDS <span class="comment">/* protection from overwriting input datasets     */</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  errorcheck=STRICT       <span class="comment">/* catch errs in libname/filename statements      */</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  fmterr                  <span class="comment">/* ensure err when a format cannot be found       */</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  mergenoby=%str(ERR)OR   <span class="comment">/* throw err when a merge has no BY variables     */</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  missing=.               <span class="comment">/* changing this can cause hard to detect errs    */</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  noquotelenmax           <span class="comment">/* avoid warnings for long strings                */</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  noreplace               <span class="comment">/* avoid overwriting permanent datasets           */</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  ps=max                  <span class="comment">/* reduce log size slightly                       */</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  ls=max                  <span class="comment">/* reduce log even more and avoid word truncation */</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  validmemname=COMPATIBLE <span class="comment">/* avoid special characters etc in table names    */</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  validvarname=V7         <span class="comment">/* avoid special characters etc in variable names */</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  varinitchk=%str(ERR)OR  <span class="comment">/* avoid data mistakes from variable name typos   */</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  varlenchk=%str(ERR)OR   <span class="comment">/* fail hard if truncation (data loss) can result */</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>%<span class="keywordflow">if</span> %substr(&amp;sysver,1,1) ne 4 %then %do;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  noautocorrect           <span class="comment">/* disallow misspelled procedure names            */</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  dsoptions=note2err      <span class="comment">/* undocumented - convert bad NOTEs to ERRs       */</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>%end;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>%mend mp_init;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

@@ -134,7 +134,7 @@ parmcards4;
     %webout(OBJ,example2) * Object format, easier to work with ;
     %webout(CLOSE)
 ;;;;
-%mp_createwebservice(path=/Public/app/common,name=appInit,code=ft15f001,replace=YES)
+%mp_createwebservice(path=/Public/app/common,name=appInit,replace=YES)
 </pre> <h4>SAS Macros </h4>
 <ul>
 <li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
@@ -143,12 +143,12 @@ parmcards4;
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path=</td><td>The full folder path where the service will be created </td></tr>
-    <tr><td class="paramname">name=</td><td>Service name. Avoid spaces. </td></tr>
-    <tr><td class="paramname">desc=</td><td>The description of the service (optional) </td></tr>
-    <tr><td class="paramname">precode=</td><td>Space separated list of filerefs, pointing to the code that needs to be attached to the beginning of the service (optional) </td></tr>
-    <tr><td class="paramname">code=</td><td>Space seperated fileref(s) of the actual code to be added </td></tr>
-    <tr><td class="paramname">replace=</td><td>select YES to replace any existing service in that location</td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">path=</td><td>The full folder path where the service will be created </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">name=</td><td>Service name. Avoid spaces. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">desc=</td><td>The description of the service (optional) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">precode=</td><td>Space separated list of filerefs, pointing to the code that needs to be attached to the beginning of the service (optional) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">code=</td><td>(ft15f001) Space seperated fileref(s) of the actual code to be added </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">replace=</td><td>(YES) Select YES to replace any existing service in that location</td></tr>
   </table>
   </dd>
 </dl>

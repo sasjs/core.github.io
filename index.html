@@ -253,7 +253,7 @@ Coding Standards</h2>
 <li>The closing <code>mend;</code> should <b>not</b> contain the macro name.</li>
 <li>All macros should be defined with brackets, even if no variables are needed - ie <code>macro x();</code> not <code>macro x;</code></li>
 <li>Mandatory parameters should be positional, all optional parameters should be keyword (var=) style.</li>
-<li>All dataset references must be 2 level (eg <code>work.blah</code>, not <code>blah</code>). This is to avoid contention when options <a href="https://support.sas.com/documentation/cdl/en/lrdict/64316/HTML/default/viewer.htm#a000279064.htm">DATASTMTCHK</a>=ALLKEYWORDS is in effect.</li>
+<li>All dataset references must be 2 level (eg <code>work.blah</code>, not <code>blah</code>). This is to avoid contention when options <a href="https://support.sas.com/documentation/cdl/en/lrdict/64316/HTML/default/viewer.htm#a000279064.htm">DATASTMTCHK</a>=ALLKEYWORDS is in effect, or the <a href="https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/lrcon/n18m1vkqmeo4esn1moikt23zhp8s.htm">USER</a> library is active.</li>
 <li>Avoid naming collisions! All macro variables should be local scope. Use system generated work tables where possible - eg <code>data ; set sashelp.class; run; data &amp;output; set &amp;syslast; run;</code></li>
 <li>Where global macro variables are absolutely necessary, they should make use of <code>&amp;sasjs_prefix</code> - see <a class="el" href="mp__init_8sas.html" title="Initialise session with useful settings and variables.">mp_init.sas</a></li>
 <li>The use of <code>quit;</code> for <code>proc sql</code> is optional unless you are looking to benefit from the timing statistics.</li>
@@ -268,7 +268,7 @@ General Notes</h1>
 Breaking Changes</h1>
 <p >We are currently on major release v4. Breaking changes should be marked with the <a href="https://www.doxygen.nl/manual/commands.html#cmddeprecated">deprecated</a> doxygen tag. The following changes are planned when the next major (breaking) release becomes necessary:</p>
 <ul>
-<li>(None as yet)</li>
+<li><a class="el" href="mp__testservice_8sas.html" title="Will execute a SASjs web service on SAS 9 or Viya.">mp_testservice.sas</a> to be renamed as mp_execute.sas (as it doesn't actually test anything)</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md21"></a>
 Star Gazing</h1>

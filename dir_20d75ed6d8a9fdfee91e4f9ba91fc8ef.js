@@ -34,6 +34,7 @@ var dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef =
     [ "mp_deletefolder.test.sas", "mp__deletefolder_8test_8sas.html", null ],
     [ "mp_dirlist.test.sas", "mp__dirlist_8test_8sas.html", null ],
     [ "mp_ds2cards.test.sas", "mp__ds2cards_8test_8sas.html", null ],
+    [ "mp_ds2csv.test.sas", "mp__ds2csv_8test_8sas.html", null ],
     [ "mp_ds2fmtds.test.sas", "mp__ds2fmtds_8test_8sas.html", null ],
     [ "mp_ds2inserts.test.sas", "mp__ds2inserts_8test_8sas.html", null ],
     [ "mp_ds2md.test.sas", "mp__ds2md_8test_8sas.html", null ],
@@ -63,6 +64,7 @@ var dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef =
     [ "mp_sortinplace.test.sas", "mp__sortinplace_8test_8sas.html", null ],
     [ "mp_stackdiffs.test.sas", "mp__stackdiffs_8test_8sas.html", null ],
     [ "mp_storediffs.test.sas", "mp__storediffs_8test_8sas.html", null ],
+    [ "mp_testservice.test.sas", "mp__testservice_8test_8sas.html", null ],
     [ "mp_validatecol.test.sas", "mp__validatecol_8test_8sas.html", null ],
     [ "mp_webin.test.sas", "mp__webin_8test_8sas.html", null ],
     [ "mp_zip.test.sas", "mp__zip_8test_8sas.html", null ]
