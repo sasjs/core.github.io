@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Macros for SAS Application Developers" />
   <meta name="og:description" content="Macros for SAS Application Developers" />
-  <title>Todo List</title>
+  <title>fcmp/mcf_getfmttype.sas File Reference</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="dynsections.js"></script>
@@ -87,7 +87,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('todo.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mcf__getfmttype_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -105,28 +105,67 @@ $(document).ready(function(){initNavTree('todo.html',''); initResizable(); });
 </iframe>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title">Todo List </div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">mcf_getfmttype.sas File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><dl class="reflist">
-<dt>File <a class="el" href="mcf__getfmttype_8sas.html">mcf_getfmttype.sas</a>  </dt>
-<dd><a class="anchor" id="_todo000004"></a>"Custom Format Lookups" To enable site-specific formats, make use of a set of SASJS_FMTLIST_(DATATYPE) global variables. </dd>
-<dt>File <a class="el" href="mp__filtercheck_8sas.html">mp_filtercheck.sas</a>  </dt>
-<dd><a class="anchor" id="_todo000001"></a>Support date / hex / name literals and exponents in RAW_VALUE field  </dd>
-<dt>File <a class="el" href="mp__getformats_8sas.html">mp_getformats.sas</a>  </dt>
-<dd><a class="anchor" id="_todo000002"></a>Enable exporting of formats for an entire library  </dd>
-<dt>File <a class="el" href="mp__stackdiffs_8sas.html">mp_stackdiffs.sas</a>  </dt>
-<dd><a class="anchor" id="_todo000003"></a>The current approach assumes that a variable called KEY_HASH is not on the base table. This part will need to be refactored (eg using <a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a>) when such a use case arises.</dd>
+
+<p>Returns the type of the format.  
+<a href="#details">More...</a></p>
+
+<p><a href="mcf__getfmttype_8sas_source.html">Go to the source code of this file.</a></p>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Returns the type, eg DATE / DATETIME / TIME (based on hard-coded lookup) else CHAR / NUM.</p>
+<p >This macro may be extended in the future to support custom formats - this would necessitate a call to <code>dosubl()</code> for running a proc format with cntlout.</p>
+<p >The function itself takes the following (positional) parameters:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">PARAMETER   </th><th class="markdownTableHeadNone">DESCRIPTION    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">fmtnm   </td><td class="markdownTableBodyNone">Format name to be tested. Can be with or without the w.d extension.   </td></tr>
+</table>
+<p >Usage: </p><pre class="fragment">%mcf_getfmttype(wrap=YES, insert_cmplib=YES)
+
+data _null_;
+  fmt1=mcf_getfmttype('DATE9.');
+  fmt2=mcf_getfmttype('DATETIME');
+  put (fmt:)(=);
+run;
+%put fmt3=%sysfunc(mcf_getfmttype(TIME9.));
+</pre><p> Returns:</p>
+<blockquote class="doxtable">
+<p >fmt1=DATE fmt2=DATETIME fmt3=TIME </p>
+</blockquote>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">wrap=</td><td>(NO) Choose YES to add the proc fcmp wrapper. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">insert_cmplib=</td><td>(NO) Choose YES to insert the package into the CMPLIB reference. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">lib=</td><td>(work) The output library in which to create the catalog. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cat=</td><td>(sasjs) The output catalog in which to create the package. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">pkg=</td><td>(utils) The output package in which to create the function. Uses a 3 part format: libref.catalog.package</td></tr>
+  </table>
+  </dd>
 </dl>
+<h4>SAS Macros </h4>
+<ul>
+<li><a class="el" href="mcf__init_8sas.html" title="Sets up the mcf_xx functions.">mcf_init.sas</a></li>
+</ul>
+<h4>Related Programs </h4>
+<ul>
+<li><a class="el" href="mcf__getfmttype_8test_8sas.html" title="Testing mcf_getfmttype.sas macro.">mcf_getfmttype.test.sas</a> </li>
+<li><a class="el" href="mp__init_8sas.html" title="Initialise session with useful settings and variables.">mp_init.sas</a></li>
+</ul>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>"Custom Format Lookups" To enable site-specific formats, make use of a set of SASJS_FMTLIST_(DATATYPE) global variables.</dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="mcf__getfmttype_8sas_source.html">mcf_getfmttype.sas</a>.</p>
 </div></div><!-- contents -->
-</div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="dir_7745ead704f7eb9eda9998037fbe6296.html">fcmp</a></li><li class="navelem"><a class="el" href="mcf__getfmttype_8sas.html">mcf_getfmttype.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">
