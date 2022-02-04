@@ -121,21 +121,23 @@ $(document).ready(function(){initNavTree('mp__streamfile_8sas.html',''); initRes
 %inc mc;
 
 %mp_streamfile(contenttype=csv,inloc=/some/where.txt,outname=myfile.txt)
-</pre> <h4>SAS Macros </h4>
+</pre> <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">contenttype=</td><td>(TEXTS) Either TEXT, ZIP, CSV, EXCEL </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">inloc=</td><td>/path/to/file.ext to be sent </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">inref=</td><td>fileref of file to be sent (if provided, overrides <code>inloc</code>) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">iftrue=</td><td>(1=1) Provide a condition under which to execute. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outname=</td><td>the name of the file, as downloaded by the browser </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>(_webout) The destination where the file should be streamed.</td></tr>
+  </table>
+  </dd>
+</dl>
+<h4>SAS Macros </h4>
 <ul>
 <li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
 <li><a class="el" href="mp__binarycopy_8sas.html" title="Copy any file using binary input / output streams.">mp_binarycopy.sas</a></li>
 </ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">contenttype=</td><td>Either TEXT, ZIP, CSV, EXCEL (default TEXT) </td></tr>
-    <tr><td class="paramname">inloc=</td><td>/path/to/file.ext to be sent </td></tr>
-    <tr><td class="paramname">inref=</td><td>fileref of file to be sent (if provided, overrides <code>inloc</code>) </td></tr>
-    <tr><td class="paramname">outname=</td><td>the name of the file, as downloaded by the browser</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe @source <a href="https://github.com/sasjs/core">https://github.com/sasjs/core</a> </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="mp__streamfile_8sas_source.html">mp_streamfile.sas</a>.</p>
 </div></div><!-- contents -->

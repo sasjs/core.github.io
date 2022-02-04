@@ -147,10 +147,11 @@ run;
     <tr><td class="paramdir">[in]</td><td class="paramname">fileref</td><td>The fileref of the file to be included. Must be provided. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">prefix=</td><td>(_) The prefix to apply to the global variables. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">opts=</td><td>(SOURCE2) The options to apply to the inc statement </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">errds=</td><td>(work.mp_abort_errds) There is no clean way to end a process within a include called within a macro. Furthermore, there is no way to test if a macro is called within a include. To handle this particular scenario, the mp_abort() macro will test for the existence of the <code>_SYSINCLUDEFILEDEVICE</code> variable and return the outputs (msg,mac) inside this dataset. It will then run an abort cancel FILE to stop the include running, and pass the dataset back. NOTE - it is NOT possible to read this dataset as part of <em>this</em> macro - when running abort cancel FILE, ALL macros are closed, so instead it is necessary to invoke "%mp_abort(mode=INCLUDE)" OUTSIDE of any macro wrappers.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">errds=</td><td>(work.mp_abort_errds) There is no clean way to end a process within a include called within a macro. Furthermore, there is no way to test if a macro is called within a include. To handle this particular scenario, the mp_abort() macro will test for the existence of the <code>_SYSINCLUDEFILEDEVICE</code> variable and return the outputs (msg,mac) inside this dataset. It will then run an abort cancel FILE to stop the include running, and pass the dataset back.</td></tr>
   </table>
   </dd>
 </dl>
+<p>IMPORTANT NOTE - it is NOT possible to read this dataset as part of <em>this</em> macro! When running abort cancel FILE, ALL macros are closed, so instead it is necessary to invoke "%mp_abort(mode=INCLUDE)" OUTSIDE of macro wrappers.</p>
 <dl class="section version"><dt>Version</dt><dd>9.4 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe</dd></dl>
 <h4>SAS Macros </h4>

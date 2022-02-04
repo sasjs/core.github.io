@@ -142,12 +142,12 @@ $(document).ready(function(){initNavTree('mcf__getfmttype_8sas_source.html','');
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">  &gt; fmt3=TIME</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"></span> </div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">  @param [out] wrap= (NO) Choose YES to add the proc fcmp wrapper.</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">  @param [out] insert_cmplib= (NO) Choose YES to insert the package into the</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">    CMPLIB reference.</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">  @param [out] lib= (work) The output library in which to create the catalog.</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">  @param [out] cat= (sasjs) The output catalog in which to create the package.</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">  @param [out] pkg= (utils) The output package in which to create the function.</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">    Uses a 3 part format:  libref.catalog.package</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">  @param [out] lib= (work) The output library in which to create the catalog.</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">  @param [out] cat= (sasjs) The output catalog in which to create the package.</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">  @param [out] pkg= (utils) The output package in which to create the function.</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">    Uses a 3 part format:  libref.catalog.package</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">  @param [out] insert_cmplib= DEPRECATED - The CMPLIB option is checked and</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">    values inserted only if needed.</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"></span> </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">  @li mcf_init.sas</span></div>
@@ -162,63 +162,71 @@ $(document).ready(function(){initNavTree('mcf__getfmttype_8sas_source.html','');
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">**/</span></div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>%macro mcf_getfmttype(wrap=NO</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  ,insert_cmplib=NO</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  ,insert_cmplib=DEPRECATED</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  ,lib=WORK</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  ,cat=SASJS</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  ,pkg=UTILS</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>%<span class="keywordflow">if</span> %mcf_init(mcf_getfmttype)=1 %then %<span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>%<span class="keywordflow">if</span> &amp;wrap=YES  %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  proc fcmp outlib=&amp;lib..&amp;cat..&amp;pkg;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>%end;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keyword">function</span> mcf_getfmttype(fmtnm $) $8;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keywordflow">if</span> substr(fmtnm,1,1)=<span class="charliteral">&#39;$&#39;</span> then <span class="keywordflow">return</span>(<span class="stringliteral">&#39;CHAR&#39;</span>);</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keywordflow">else</span> <span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="comment">/* extract NAME */</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    length fmt $32;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    fmt=scan(fmtnm,1,<span class="charliteral">&#39;.&#39;</span>);</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordflow">do</span> <span class="keywordflow">while</span> (</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>      substr(fmt,length(fmt),1) in (<span class="charliteral">&#39;1&#39;</span>,<span class="charliteral">&#39;2&#39;</span>,<span class="charliteral">&#39;3&#39;</span>,<span class="charliteral">&#39;4&#39;</span>,<span class="charliteral">&#39;5&#39;</span>,<span class="charliteral">&#39;6&#39;</span>,<span class="charliteral">&#39;7&#39;</span>,<span class="charliteral">&#39;8&#39;</span>,<span class="charliteral">&#39;9&#39;</span>,<span class="charliteral">&#39;0&#39;</span>)</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>      );</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>      <span class="keywordflow">if</span> length(fmt)=1 then fmt=<span class="charliteral">&#39;W&#39;</span>;</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>      <span class="keywordflow">else</span> fmt=substr(fmt,1,length(fmt)-1);</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    end;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="comment">/* apply lookups */</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordflow">if</span> cats(fmt) in (<span class="stringliteral">&#39;DATETIME&#39;</span>,<span class="stringliteral">&#39;B8601DN&#39;</span>,<span class="stringliteral">&#39;B8601DN&#39;</span>,<span class="stringliteral">&#39;B8601DT&#39;</span>,<span class="stringliteral">&#39;B8601DT&#39;</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>      ,<span class="stringliteral">&#39;B8601DZ&#39;</span>,<span class="stringliteral">&#39;B8601DZ&#39;</span>,<span class="stringliteral">&#39;DATEAMPM&#39;</span>,<span class="stringliteral">&#39;DTDATE&#39;</span>,<span class="stringliteral">&#39;DTMONYY&#39;</span>,<span class="stringliteral">&#39;DTWKDATX&#39;</span>,<span class="stringliteral">&#39;DTYEAR&#39;</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      ,<span class="stringliteral">&#39;DTYYQC&#39;</span>,<span class="stringliteral">&#39;E8601DN&#39;</span>,<span class="stringliteral">&#39;E8601DN&#39;</span>,<span class="stringliteral">&#39;E8601DT&#39;</span>,<span class="stringliteral">&#39;E8601DT&#39;</span>,<span class="stringliteral">&#39;E8601DZ&#39;</span>,<span class="stringliteral">&#39;E8601DZ&#39;</span>)</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>      then return(&#39;DATETIME&#39;);</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    else if fmt in (&#39;DATE&#39;,&#39;YYMMDD&#39;,&#39;B8601DA&#39;,&#39;B8601DA&#39;,&#39;DAY&#39;,&#39;DDMMYY&#39;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>      ,&#39;DDMMYYB&#39;,&#39;DDMMYYC&#39;,&#39;DDMMYYD&#39;,&#39;DDMMYYN&#39;,&#39;DDMMYYP&#39;,&#39;DDMMYYS&#39;,&#39;DDMMYYx&#39;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>      ,&#39;DOWNAME&#39;,&#39;E8601DA&#39;,&#39;E8601DA&#39;,&#39;JULDAY&#39;,&#39;JULIAN&#39;,&#39;MMDDYY&#39;,&#39;MMDDYYB&#39;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>      ,&#39;MMDDYYC&#39;,&#39;MMDDYYD&#39;,&#39;MMDDYYN&#39;,&#39;MMDDYYP&#39;,&#39;MMDDYYS&#39;,&#39;MMDDYYx&#39;,&#39;MMYY&#39;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>      ,&#39;MMYYC&#39;,&#39;MMYYD&#39;,&#39;MMYYN&#39;,&#39;MMYYP&#39;,&#39;MMYYS&#39;,&#39;MMYYx&#39;,&#39;MONNAME&#39;,&#39;MONTH&#39;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>      ,&#39;MONYY&#39;,&#39;PDJULG&#39;,&#39;PDJULI&#39;,&#39;QTR&#39;,&#39;QTRR&#39;,&#39;WEEKDATE&#39;,&#39;WEEKDATX&#39;,&#39;WEEKDAY&#39;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>      ,&#39;WEEKU&#39;,&#39;WEEKV&#39;,&#39;WEEKW&#39;,&#39;WORDDATE&#39;,&#39;WORDDATX&#39;,&#39;YEAR&#39;,&#39;YYMM&#39;,&#39;YYMMC&#39;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>      ,&#39;YYMMD&#39;,&#39;YYMMDDB&#39;,&#39;YYMMDDC&#39;,&#39;YYMMDDD&#39;,&#39;YYMMDDN&#39;,&#39;YYMMDDP&#39;,&#39;YYMMDDS&#39;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>      ,&#39;YYMMDDx&#39;,&#39;YYMMN&#39;,&#39;YYMMP&#39;,&#39;YYMMS&#39;,&#39;YYMMx&#39;,&#39;YYMON&#39;,&#39;YYQ&#39;,&#39;YYQC&#39;,&#39;YYQD&#39;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>      ,&#39;YYQN&#39;,&#39;YYQP&#39;,&#39;YYQR&#39;,&#39;YYQRC&#39;,&#39;YYQRD&#39;,&#39;YYQRN&#39;,&#39;YYQRP&#39;,&#39;YYQRS&#39;,&#39;YYQRx&#39;</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>      ,&#39;YYQS&#39;,&#39;YYQx&#39;,&#39;YYQZ&#39;) then return(&#39;DATE&#39;);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    else if fmt in (&#39;TIME&#39;,&#39;B8601LZ&#39;,&#39;B8601LZ&#39;,&#39;B8601TM&#39;,&#39;B8601TM&#39;,&#39;B8601TZ&#39;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>      ,&#39;B8601TZ&#39;,&#39;E8601LZ&#39;,&#39;E8601LZ&#39;,&#39;E8601TM&#39;,&#39;E8601TM&#39;,&#39;E8601TZ&#39;,&#39;E8601TZ&#39;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      ,&#39;HHMM&#39;,&#39;HOUR&#39;,&#39;MMSS&#39;,&#39;TIMEAMPM&#39;,&#39;TOD&#39;) then return(&#39;TIME&#39;);</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    else return(&#39;NUM&#39;);</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  end;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>endsub;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>%if &amp;wrap=YES %then %do;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  quit;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>%end;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>%if &amp;insert_cmplib=YES %then %do;</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  options insert=(CMPLIB=(&amp;lib..&amp;cat));</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>%end;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>%mend mcf_getfmttype;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>%local i var cmpval found;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>%<span class="keywordflow">if</span> %mcf_init(mcf_getfmttype)=1 %then %<span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>%<span class="keywordflow">if</span> &amp;wrap=YES  %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  proc fcmp outlib=&amp;lib..&amp;cat..&amp;pkg;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>%end;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">function</span> mcf_getfmttype(fmtnm $) $8;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keywordflow">if</span> substr(fmtnm,1,1)=<span class="charliteral">&#39;$&#39;</span> then <span class="keywordflow">return</span>(<span class="stringliteral">&#39;CHAR&#39;</span>);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordflow">else</span> <span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="comment">/* extract NAME */</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    length fmt $32;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    fmt=scan(fmtnm,1,<span class="charliteral">&#39;.&#39;</span>);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordflow">do</span> <span class="keywordflow">while</span> (</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>      substr(fmt,length(fmt),1) in (<span class="charliteral">&#39;1&#39;</span>,<span class="charliteral">&#39;2&#39;</span>,<span class="charliteral">&#39;3&#39;</span>,<span class="charliteral">&#39;4&#39;</span>,<span class="charliteral">&#39;5&#39;</span>,<span class="charliteral">&#39;6&#39;</span>,<span class="charliteral">&#39;7&#39;</span>,<span class="charliteral">&#39;8&#39;</span>,<span class="charliteral">&#39;9&#39;</span>,<span class="charliteral">&#39;0&#39;</span>)</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>      );</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>      <span class="keywordflow">if</span> length(fmt)=1 then fmt=<span class="charliteral">&#39;W&#39;</span>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>      <span class="keywordflow">else</span> fmt=substr(fmt,1,length(fmt)-1);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    end;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="comment">/* apply lookups */</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordflow">if</span> cats(fmt) in (<span class="stringliteral">&#39;DATETIME&#39;</span>,<span class="stringliteral">&#39;B8601DN&#39;</span>,<span class="stringliteral">&#39;B8601DN&#39;</span>,<span class="stringliteral">&#39;B8601DT&#39;</span>,<span class="stringliteral">&#39;B8601DT&#39;</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      ,<span class="stringliteral">&#39;B8601DZ&#39;</span>,<span class="stringliteral">&#39;B8601DZ&#39;</span>,<span class="stringliteral">&#39;DATEAMPM&#39;</span>,<span class="stringliteral">&#39;DTDATE&#39;</span>,<span class="stringliteral">&#39;DTMONYY&#39;</span>,<span class="stringliteral">&#39;DTWKDATX&#39;</span>,<span class="stringliteral">&#39;DTYEAR&#39;</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>      ,<span class="stringliteral">&#39;DTYYQC&#39;</span>,<span class="stringliteral">&#39;E8601DN&#39;</span>,<span class="stringliteral">&#39;E8601DN&#39;</span>,<span class="stringliteral">&#39;E8601DT&#39;</span>,<span class="stringliteral">&#39;E8601DT&#39;</span>,<span class="stringliteral">&#39;E8601DZ&#39;</span>,<span class="stringliteral">&#39;E8601DZ&#39;</span>)</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>      then return(&#39;DATETIME&#39;);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    else if fmt in (&#39;DATE&#39;,&#39;YYMMDD&#39;,&#39;B8601DA&#39;,&#39;B8601DA&#39;,&#39;DAY&#39;,&#39;DDMMYY&#39;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>      ,&#39;DDMMYYB&#39;,&#39;DDMMYYC&#39;,&#39;DDMMYYD&#39;,&#39;DDMMYYN&#39;,&#39;DDMMYYP&#39;,&#39;DDMMYYS&#39;,&#39;DDMMYYx&#39;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>      ,&#39;DOWNAME&#39;,&#39;E8601DA&#39;,&#39;E8601DA&#39;,&#39;JULDAY&#39;,&#39;JULIAN&#39;,&#39;MMDDYY&#39;,&#39;MMDDYYB&#39;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>      ,&#39;MMDDYYC&#39;,&#39;MMDDYYD&#39;,&#39;MMDDYYN&#39;,&#39;MMDDYYP&#39;,&#39;MMDDYYS&#39;,&#39;MMDDYYx&#39;,&#39;MMYY&#39;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>      ,&#39;MMYYC&#39;,&#39;MMYYD&#39;,&#39;MMYYN&#39;,&#39;MMYYP&#39;,&#39;MMYYS&#39;,&#39;MMYYx&#39;,&#39;MONNAME&#39;,&#39;MONTH&#39;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>      ,&#39;MONYY&#39;,&#39;PDJULG&#39;,&#39;PDJULI&#39;,&#39;QTR&#39;,&#39;QTRR&#39;,&#39;WEEKDATE&#39;,&#39;WEEKDATX&#39;,&#39;WEEKDAY&#39;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>      ,&#39;WEEKU&#39;,&#39;WEEKV&#39;,&#39;WEEKW&#39;,&#39;WORDDATE&#39;,&#39;WORDDATX&#39;,&#39;YEAR&#39;,&#39;YYMM&#39;,&#39;YYMMC&#39;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>      ,&#39;YYMMD&#39;,&#39;YYMMDDB&#39;,&#39;YYMMDDC&#39;,&#39;YYMMDDD&#39;,&#39;YYMMDDN&#39;,&#39;YYMMDDP&#39;,&#39;YYMMDDS&#39;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>      ,&#39;YYMMDDx&#39;,&#39;YYMMN&#39;,&#39;YYMMP&#39;,&#39;YYMMS&#39;,&#39;YYMMx&#39;,&#39;YYMON&#39;,&#39;YYQ&#39;,&#39;YYQC&#39;,&#39;YYQD&#39;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>      ,&#39;YYQN&#39;,&#39;YYQP&#39;,&#39;YYQR&#39;,&#39;YYQRC&#39;,&#39;YYQRD&#39;,&#39;YYQRN&#39;,&#39;YYQRP&#39;,&#39;YYQRS&#39;,&#39;YYQRx&#39;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>      ,&#39;YYQS&#39;,&#39;YYQx&#39;,&#39;YYQZ&#39;) then return(&#39;DATE&#39;);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    else if fmt in (&#39;TIME&#39;,&#39;B8601LZ&#39;,&#39;B8601LZ&#39;,&#39;B8601TM&#39;,&#39;B8601TM&#39;,&#39;B8601TZ&#39;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      ,&#39;B8601TZ&#39;,&#39;E8601LZ&#39;,&#39;E8601LZ&#39;,&#39;E8601TM&#39;,&#39;E8601TM&#39;,&#39;E8601TZ&#39;,&#39;E8601TZ&#39;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>      ,&#39;HHMM&#39;,&#39;HOUR&#39;,&#39;MMSS&#39;,&#39;TIMEAMPM&#39;,&#39;TOD&#39;) then return(&#39;TIME&#39;);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    else return(&#39;NUM&#39;);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  end;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>endsub;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>%if &amp;wrap=YES %then %do;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  quit;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>%end;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">/* insert the CMPLIB if not already there */</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>%let cmpval=%sysfunc(getoption(cmplib));</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>%let found=0;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>%do i=1 %to %sysfunc(countw(&amp;cmpval,%str( %(%))));</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  %let var=%scan(&amp;cmpval,&amp;i,%str( %(%)));</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  %if &amp;var=&amp;lib..&amp;cat %then %let found=1;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>%end;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>%if &amp;found=0 %then %do;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  options insert=(CMPLIB=(&amp;lib..&amp;cat));</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>%end;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>%mend mcf_getfmttype;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

@@ -230,12 +230,14 @@ var NAVTREEINDEX1 =
 "mp__stprequests_8sas_source.html":[1,0,107],
 "mp__streamfile_8sas.html":[1,0,108],
 "mp__streamfile_8sas_source.html":[1,0,108],
+"mp__streamfile_8test_8sas.html":[1,6,0,65],
+"mp__streamfile_8test_8sas_source.html":[1,6,0,65],
 "mp__testjob_8sas.html":[1,0,109],
 "mp__testjob_8sas_source.html":[1,0,109],
 "mp__testservice_8sas.html":[1,0,110],
 "mp__testservice_8sas_source.html":[1,0,110],
-"mp__testservice_8test_8sas.html":[1,6,0,65],
-"mp__testservice_8test_8sas_source.html":[1,6,0,65],
+"mp__testservice_8test_8sas.html":[1,6,0,66],
+"mp__testservice_8test_8sas_source.html":[1,6,0,66],
 "mp__testwritespeedlibrary_8sas.html":[1,0,111],
 "mp__testwritespeedlibrary_8sas_source.html":[1,0,111],
 "mp__tree_8sas.html":[1,0,112],
@@ -246,8 +248,6 @@ var NAVTREEINDEX1 =
 "mp__updatevarlength_8sas_source.html":[1,0,114],
 "mp__validatecol_8sas.html":[1,0,115],
 "mp__validatecol_8sas_source.html":[1,0,115],
-"mp__validatecol_8test_8sas.html":[1,6,0,66],
-"mp__validatecol_8test_8sas_source.html":[1,6,0,66],
-"mp__wait4file_8sas.html":[1,0,116],
-"mp__wait4file_8sas_source.html":[1,0,116]
+"mp__validatecol_8test_8sas.html":[1,6,0,67],
+"mp__validatecol_8test_8sas_source.html":[1,6,0,67]
 };

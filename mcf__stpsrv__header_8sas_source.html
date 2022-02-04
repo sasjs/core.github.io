@@ -158,12 +158,12 @@ $(document).ready(function(){initNavTree('mcf__stpsrv__header_8sas_source.html',
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"></span> </div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment"></span> </div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">  @param [out] wrap= (NO) Choose YES to add the proc fcmp wrapper.</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">  @param [out] insert_cmplib= (NO) Choose YES to insert the package into the</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">    CMPLIB reference.</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">  @param [out] lib= (work) The output library in which to create the catalog.</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">  @param [out] cat= (sasjs) The output catalog in which to create the package.</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">  @param [out] pkg= (utils) The output package in which to create the function.</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">    Uses a 3 part format:  libref.catalog.package</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">  @param [out] lib= (work) The output library in which to create the catalog.</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">  @param [out] cat= (sasjs) The output catalog in which to create the package.</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">  @param [out] pkg= (utils) The output package in which to create the function.</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">    Uses a 3 part format:  libref.catalog.package</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">  @param [out] insert_cmplib= DEPRECATED - The CMPLIB option is checked and</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">    values inserted only if needed.</span></div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"></span> </div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">  @li mcf_init.sas</span></div>
@@ -175,12 +175,12 @@ $(document).ready(function(){initNavTree('mcf__stpsrv__header_8sas_source.html',
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">**/</span></div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>%macro mcf_stpsrv_header(wrap=NO</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  ,insert_cmplib=NO</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  ,insert_cmplib=DEPRECATED</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  ,lib=WORK</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  ,cat=SASJS</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  ,pkg=UTILS</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>%local i var cmpval found;</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>%<span class="keywordflow">if</span> %mcf_init(stpsrv_header)=1 %then %<span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>%<span class="keywordflow">if</span> &amp;wrap=YES  %then %<span class="keywordflow">do</span>;</div>
@@ -207,11 +207,18 @@ $(document).ready(function(){initNavTree('mcf__stpsrv__header_8sas_source.html',
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  quit;</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>%end;</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>%<span class="keywordflow">if</span> &amp;insert_cmplib=YES %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  options insert=(CMPLIB=(&amp;lib..&amp;cat));</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>%end;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>%mend mcf_stpsrv_header;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">/* insert the CMPLIB if not already there */</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>%let cmpval=%sysfunc(getoption(cmplib));</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>%let found=0;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>%<span class="keywordflow">do</span> i=1 %to %sysfunc(countw(&amp;cmpval,%str( %(%))));</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  %let var=%scan(&amp;cmpval,&amp;i,%str( %(%)));</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  %<span class="keywordflow">if</span> &amp;var=&amp;lib..&amp;cat %then %let found=1;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>%end;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>%<span class="keywordflow">if</span> &amp;found=0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  options insert=(CMPLIB=(&amp;lib..&amp;cat));</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>%end;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>%mend mcf_stpsrv_header;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

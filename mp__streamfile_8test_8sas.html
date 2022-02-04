@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Macros for SAS Application Developers" />
   <meta name="og:description" content="Macros for SAS Application Developers" />
-  <title>fcmp/mcf_string2file.sas File Reference</title>
+  <title>tests/crossplatform/mp_streamfile.test.sas File Reference</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="dynsections.js"></script>
@@ -87,7 +87,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('mcf__string2file_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mp__streamfile_8test_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -106,63 +106,24 @@ $(document).ready(function(){initNavTree('mcf__string2file_8sas.html',''); initR
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">mcf_string2file.sas File Reference</div></div>
+  <div class="headertitle"><div class="title">mp_streamfile.test.sas File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Adds a string to a file.  
+<p>Testing <a class="el" href="mp__streamfile_8sas.html" title="Streams a file to _webout according to content type.">mp_streamfile.sas</a> macro.  
 <a href="#details">More...</a></p>
 
-<p><a href="mcf__string2file_8sas_source.html">Go to the source code of this file.</a></p>
+<p><a href="mp__streamfile_8test_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Creates an fcmp function for appending a string to an external file. If the file does not exist, it is created.</p>
-<p >The function itself takes the following (positional) parameters:</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">PARAMETER   </th><th class="markdownTableHeadNone">DESCRIPTION    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">filepath $   </td><td class="markdownTableBodyNone">full path to the file    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">string $   </td><td class="markdownTableBodyNone">string to add to the file    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">mode $   </td><td class="markdownTableBodyNone">mode of the output - either APPEND (default) or CREATE   </td></tr>
-</table>
-<p >It returns 0 if successful, or -1 if an error occured.</p>
-<p >Usage: </p><pre class="fragment">%mcf_string2file(wrap=YES, insert_cmplib=YES)
-
-data _null_;
-  rc=mcf_string2file(
-    "%sysfunc(pathname(work))/newfile.txt"
-    , "This is a test"
-    , "CREATE");
-run;
-
-data _null_;
-  infile "%sysfunc(pathname(work))/newfile.txt";
-  input;
-  putlog _infile_;
-run;
-</pre> <dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">wrap=</td><td>(NO) Choose YES to add the proc fcmp wrapper. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">lib=</td><td>(work) The output library in which to create the catalog. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">cat=</td><td>(sasjs) The output catalog in which to create the package. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">pkg=</td><td>(utils) The output package in which to create the function. Uses a 3 part format: libref.catalog.package </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">insert_cmplib=</td><td>DEPRECATED - The CMPLIB option is checked and values inserted only if needed.</td></tr>
-  </table>
-  </dd>
-</dl>
+<div class="textblock"><p >This is tricky to test as it streams to webout. For now just check the compilation, and for macro leakage.</p>
 <h4>SAS Macros </h4>
 <ul>
-<li><a class="el" href="mcf__init_8sas.html" title="Sets up the mcf_xx functions.">mcf_init.sas</a></li>
-</ul>
-<h4>Related Programs </h4>
-<ul>
-<li><a class="el" href="mcf__stpsrv__header_8test_8sas.html" title="Testing mcf_stpsrv_header macro.">mcf_stpsrv_header.test.sas</a> </li>
-<li><a class="el" href="mp__init_8sas.html" title="Initialise session with useful settings and variables.">mp_init.sas</a> </li>
+<li><a class="el" href="mp__assert_8sas.html" title="Generic assertion.">mp_assert.sas</a> </li>
+<li><a class="el" href="mp__assertscope_8sas.html" title="Used to capture scope leakage of macro variables.">mp_assertscope.sas</a> </li>
+<li><a class="el" href="mp__streamfile_8sas.html" title="Streams a file to _webout according to content type.">mp_streamfile.sas</a> </li>
 </ul>
 
-<p class="definition">Definition in file <a class="el" href="mcf__string2file_8sas_source.html">mcf_string2file.sas</a>.</p>
+<p class="definition">Definition in file <a class="el" href="mp__streamfile_8test_8sas_source.html">mp_streamfile.test.sas</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
@@ -170,7 +131,7 @@ run;
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_7745ead704f7eb9eda9998037fbe6296.html">fcmp</a></li><li class="navelem"><a class="el" href="mcf__string2file_8sas.html">mcf_string2file.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_59425e443f801f1f2fd8bbe4959a3ccf.html">tests</a></li><li class="navelem"><a class="el" href="dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef.html">crossplatform</a></li><li class="navelem"><a class="el" href="mp__streamfile_8test_8sas.html">mp_streamfile.test.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">

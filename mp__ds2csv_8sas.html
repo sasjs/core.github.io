@@ -116,7 +116,23 @@ $(document).ready(function(){initNavTree('mp__ds2csv_8sas.html',''); initResizab
 <p><a href="mp__ds2csv_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Export a dataset to a file or fileref, retaining leading blanks.</p>
+<p >When using SASJS headerformat, the input statement is provided in the first row of the CSV.</p>
 <p >Usage: </p><pre class="fragment">%mp_ds2csv(sashelp.class,outref="%sysfunc(pathname(work))/file.csv")
+
+filename example temp;
+%mp_ds2csv(sashelp.air,outref=example,headerformat=SASJS)
+data; infile example; input;put _infile_; if _n_&gt;5 then stop;run;
+
+data _null_;
+  infile example;
+  input;
+  call symputx('stmnt',_infile_);
+  stop;
+run;
+data work.want;
+  infile example dsd firstobs=2;
+  input &amp;stmnt;
+run;
 </pre><p> Why use mp_ds2csv over, say, proc export?</p>
 <ol type="1">
 <li>Ability to retain leading blanks (this is a major one)</li>
@@ -134,12 +150,12 @@ $(document).ready(function(){initNavTree('mp__ds2csv_8sas.html',''); initResizab
     <tr><td class="paramdir">[in]</td><td class="paramname">headerformat=</td><td>(LABEL) The format to use for the header section. Valid values: <ul>
 <li>LABEL - Use the variable label (or name, if blank) </li>
 <li>NAME - Use the variable name </li>
-<li>SASJS - Used to create sasjs-formatted input CSVs, eg for use in <a class="el" href="mp__testservice_8sas.html" title="Will execute a SASjs web service on SAS 9 or Viya.">mp_testservice.sas</a> </li>
+<li>SASJS - Used to create sasjs-formatted input CSVs, eg for use in <a class="el" href="mp__testservice_8sas.html" title="Will execute a SASjs web service on SAS 9 or Viya.">mp_testservice.sas</a>. This format will supply an input statement in the first row, making ingestion by datastep a breeze. Special misisng values will be prefixed with a period (eg <code>.A</code>) to enable ingestion on both SAS 9 and Viya. Dates / Datetimes etc are identified by the format type (lookup with <a class="el" href="mcf__getfmttype_8sas.html" title="Returns the type of the format.">mcf_getfmttype.sas</a>) and converted to human readable formats (not numbers). </li>
 </ul>
 </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outfile=</td><td>The output filename - should be quoted. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>(0) The output fileref (takes precedence if provided) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">outencoding=</td><td>(0) The output encoding to use (unquoted) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">outencoding=</td><td>(0) The (quoted) output encoding to use, eg <code>"UTF-8"</code> </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">termstr=</td><td>(CRLF) The line seperator to use. For SASJS, will always be CRLF. Valid values: <ul>
 <li>CRLF </li>
 <li>LF</li>
@@ -150,7 +166,9 @@ $(document).ready(function(){initNavTree('mp__ds2csv_8sas.html',''); initResizab
   </dd>
 </dl>
 <ul>
+<li><a class="el" href="mcf__getfmttype_8sas.html" title="Returns the type of the format.">mcf_getfmttype.sas</a> </li>
 <li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
+<li><a class="el" href="mf__getvarformat_8sas.html" title="Returns the format of a variable.">mf_getvarformat.sas</a> </li>
 <li><a class="el" href="mf__getvarlist_8sas.html" title="Returns dataset variable list direct from header.">mf_getvarlist.sas</a> </li>
 <li><a class="el" href="mf__getvartype_8sas.html" title="Returns variable type - Character (C) or Numeric (N)">mf_getvartype.sas</a></li>
 </ul>
