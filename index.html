@@ -169,7 +169,7 @@ METAX library (SAS9 only)</h2>
 <h2><a class="anchor" id="autotoc_md12"></a>
 LUA library</h2>
 <p >Wait - this is a macro library - what is LUA doing here? Well, it is a little known fact that you CAN run LUA within a SAS Macro. It has to be written to a text file with a <code>.lua</code> extension, from where you can <code>include</code> it. So, without using the <code>proc lua</code> wrapper.</p>
-<p >To contribute, simply write your freeform LUA in the LUA folder. Then run the <code>build.py</code>, which will convert your LUA into a data step with put statements, and create the macro wrapper with a <code>ml_</code> prefix. You can then use your module in any program by running:</p>
+<p >To contribute, simply write your freeform LUA in the LUA folder. Then run the <code>build.py</code>, which will convert all files with a ".lua" extension into a macro wrapper with an <code>ml_</code> prefix (embedding the necessary data step put statements). You can then use your module in any program by running:</p>
 <div class="fragment"><div class="line"><span class="comment">/* compile the lua module */</span></div>
 <div class="line">%ml_yourmodule()</div>
 <div class="line"> </div>
@@ -180,8 +180,7 @@ LUA library</h2>
 <div class="line">endsubmit;</div>
 <div class="line">run;</div>
 </div><!-- fragment --><ul>
-<li>X command enabled</li>
-<li>Prefixes: <em>mmw</em>,<em>mmu</em>,<em>mmx</em></li>
+<li>Prefixes: <em>ml</em></li>
 </ul>
 <h1><a class="anchor" id="autotoc_md13"></a>
 Installation</h1>
@@ -206,11 +205,11 @@ File Properties</h2>
 <li><em>mf</em> for macro functions (can be used in open code).</li>
 <li><em>ml</em> for macros that are used to compile LUA modules</li>
 <li><em>mm</em> for metadata macros (interface with the metadata server).</li>
-<li><em>mmx</em> for macros that use metadata and are XCMD enabled</li>
+<li><em>mmx</em> for macros that use metadata and are XCMD enabled (working on both windows and unix)</li>
 <li><em>mp</em> for macro procedures (which generate sas code)</li>
 <li><em>ms</em> for macro procedures that will only work with <a href="https://github.com/sasjs/server">@sasjs/server</a></li>
 <li><em>mv</em> for macro procedures that will only work in Viya</li>
-<li><em>mx</em> for macros that are XCMD enabled</li>
+<li><em>mx</em> for macros that are XCMD enabled (working on both windows and unix)</li>
 </ul>
 </li>
 <li>follow verb-noun convention</li>
