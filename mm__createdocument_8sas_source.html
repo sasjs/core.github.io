@@ -158,82 +158,85 @@ $(document).ready(function(){initNavTree('mm__createdocument_8sas_source.html','
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>%&amp;mD.put Executing &amp;sysmacroname..sas;</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>%&amp;mD.put _local_;</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>%mf_verifymacvars(tree name)</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">  * check tree exists</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">  */</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>data _null_;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  length type uri $256;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  rc=metadata_pathobj(<span class="stringliteral">&quot;&quot;</span>,<span class="stringliteral">&quot;&amp;tree&quot;</span>,<span class="stringliteral">&quot;Folder&quot;</span>,type,uri);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  call symputx(<span class="stringliteral">&#39;type&#39;</span>,type,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  call symputx(<span class="stringliteral">&#39;treeuri&#39;</span>,uri,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>run;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>%mp_abort(</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  iftrue= (&amp;type ne Tree)</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  ,mac=mm_createdocument.sas</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  ,msg=Tree &amp;tree does not exist!</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>)</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">  * Check object does not exist already</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">  */</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>data _null_;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  length type uri $256;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  rc=metadata_pathobj(&quot;&quot;,&quot;&amp;tree/&amp;name&quot;,&quot;Note&quot;,type,uri);</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  call symputx(&#39;type&#39;,type,&#39;l&#39;);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  call symputx(&#39;docuri&#39;,uri,&#39;l&#39;);</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  putlog (_all_)(=);</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>run;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>%if &amp;type = Document %then %do;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  %put Document &amp;name already exists in &amp;tree!;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  %return;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>%end;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment"></span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">  * Now we can create the document</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">  */</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>filename &amp;frefin temp;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">/* write header XML */</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>data _null_;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  file &amp;frefin;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  name=quote(&quot;&amp;name&quot;);</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  desc=quote(&quot;&amp;desc&quot;);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  textrole=quote(&quot;&amp;textrole&quot;);</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  treeuri=quote(&quot;&amp;treeuri&quot;);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  put &quot;&lt;AddMetadata&gt;&lt;Reposid&gt;$METAREPOSITORY&lt;/Reposid&gt;&quot;/</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    &#39;&lt;Metadata&gt;&lt;Document IsHidden=&quot;0&quot; PublicType=&quot;Note&quot; UsageVersion=&quot;1000000&quot;&#39;/</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    &quot;  Name=&quot; name &quot; desc=&quot; desc &quot; TextRole=&quot; textrole &quot;&gt;&quot;/</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    &quot;&lt;Notes&gt; &quot;/</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    &#39;  &lt;TextStore IsHidden=&quot;0&quot;  Name=&#39; name &#39; UsageVersion=&quot;0&quot; &#39;/</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    &#39;    TextRole=&quot;SourceCode&quot; StoredText=&quot;hello world&quot; /&gt;&#39; /</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    &#39;&lt;/Notes&gt;&#39;/</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="comment">/*URI=&quot;Document for public note&quot; */</span></div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    &quot;&lt;Trees&gt;&lt;Tree ObjRef=&quot; treeuri &quot;/&gt;&lt;/Trees&gt;&quot;/</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    &quot;&lt;/Document&gt;&lt;/Metadata&gt;&lt;NS&gt;SAS&lt;/NS&gt;&quot;/</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    &quot;&lt;Flags&gt;268435456&lt;/Flags&gt;&lt;/AddMetadata&gt;&quot;;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>run;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>filename &amp;frefout temp;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>proc metadata in= &amp;frefin out=&amp;frefout verbose;</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>run;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>%mp_abort(iftrue= (%mf_verifymacvars(tree name)=0)</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  ,mac=&amp;sysmacroname</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  ,msg=%str(Empty inputs: tree name)</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>)</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">  * check tree exists</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">  */</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>data _null_;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  length type uri $256;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  rc=metadata_pathobj(<span class="stringliteral">&quot;&quot;</span>,<span class="stringliteral">&quot;&amp;tree&quot;</span>,<span class="stringliteral">&quot;Folder&quot;</span>,type,uri);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  call symputx(<span class="stringliteral">&#39;type&#39;</span>,type,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  call symputx(<span class="stringliteral">&#39;treeuri&#39;</span>,uri,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>run;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>%mp_abort(</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  iftrue= (&amp;type ne Tree)</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  ,mac=mm_createdocument.sas</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  ,msg=Tree &amp;tree does not exist!</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>)</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">  * Check object does not exist already</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">  */</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>data _null_;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  length type uri $256;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  rc=metadata_pathobj(&quot;&quot;,&quot;&amp;tree/&amp;name&quot;,&quot;Note&quot;,type,uri);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  call symputx(&#39;type&#39;,type,&#39;l&#39;);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  call symputx(&#39;docuri&#39;,uri,&#39;l&#39;);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  putlog (_all_)(=);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>run;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>%if &amp;type = Document %then %do;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  %put Document &amp;name already exists in &amp;tree!;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  %return;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>%end;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment"></span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">  * Now we can create the document</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">  */</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>filename &amp;frefin temp;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">/* write header XML */</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>data _null_;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  file &amp;frefin;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  name=quote(&quot;&amp;name&quot;);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  desc=quote(&quot;&amp;desc&quot;);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  textrole=quote(&quot;&amp;textrole&quot;);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  treeuri=quote(&quot;&amp;treeuri&quot;);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  put &quot;&lt;AddMetadata&gt;&lt;Reposid&gt;$METAREPOSITORY&lt;/Reposid&gt;&quot;/</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    &#39;&lt;Metadata&gt;&lt;Document IsHidden=&quot;0&quot; PublicType=&quot;Note&quot; UsageVersion=&quot;1000000&quot;&#39;/</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    &quot;  Name=&quot; name &quot; desc=&quot; desc &quot; TextRole=&quot; textrole &quot;&gt;&quot;/</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    &quot;&lt;Notes&gt; &quot;/</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    &#39;  &lt;TextStore IsHidden=&quot;0&quot;  Name=&#39; name &#39; UsageVersion=&quot;0&quot; &#39;/</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    &#39;    TextRole=&quot;SourceCode&quot; StoredText=&quot;hello world&quot; /&gt;&#39; /</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    &#39;&lt;/Notes&gt;&#39;/</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="comment">/*URI=&quot;Document for public note&quot; */</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    &quot;&lt;Trees&gt;&lt;Tree ObjRef=&quot; treeuri &quot;/&gt;&lt;/Trees&gt;&quot;/</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    &quot;&lt;/Document&gt;&lt;/Metadata&gt;&lt;NS&gt;SAS&lt;/NS&gt;&quot;/</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    &quot;&lt;Flags&gt;268435456&lt;/Flags&gt;&lt;/AddMetadata&gt;&quot;;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>run;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>filename &amp;frefout temp;</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>%if &amp;mdebug=1 %then %do;</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  <span class="comment">/* write the response to the log for debugging */</span></div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  data _null_;</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    infile &amp;frefout lrecl=1048576;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    input;</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    put _infile_;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  run;</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>%end;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>%mend mm_createdocument;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>proc metadata in= &amp;frefin out=&amp;frefout verbose;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>run;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>%if &amp;mdebug=1 %then %do;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  <span class="comment">/* write the response to the log for debugging */</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  data _null_;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    infile &amp;frefout lrecl=1048576;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    input;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    put _infile_;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  run;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>%end;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>%mend mm_createdocument;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

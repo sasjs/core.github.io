@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('mf__verifymacvars_8sas.html',''); init
 </div><!--header-->
 <div class="contents">
 
-<p>Checks if a set of macro variables exist / contain values.  
+<p>Checks if a set of macro variables exist AND contain values.  
 <a href="#details">More...</a></p>
 
 <p><a href="mf__verifymacvars_8sas_source.html">Go to the source code of this file.</a></p>
@@ -127,9 +127,9 @@ $(document).ready(function(){initNavTree('mf__verifymacvars_8sas.html',''); init
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">verifyvars</td><td>space separated list of macro variable names </td></tr>
-    <tr><td class="paramname">makeupcase=</td><td>set to YES to convert all variable VALUES to uppercase. </td></tr>
-    <tr><td class="paramname">mAbort=</td><td>Abort Type. Default is SOFT (writes err to log). Set to any other value to call mf_abort (which can be configured to abort in various fashions according to context).</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">verifyvars</td><td>Space separated list of macro variable names </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">makeupcase=</td><td>(NO) Set to YES to convert all variable VALUES to uppercase. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mAbort=</td><td>(SOFT) Abort Type. When SOFT, simply writes an err message to the log. Set to any other value to call mf_abort (which can be configured to abort in various fashions according to context).</td></tr>
   </table>
   </dd>
 </dl>

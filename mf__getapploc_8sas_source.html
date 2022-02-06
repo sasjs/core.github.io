@@ -158,31 +158,35 @@ $(document).ready(function(){initNavTree('mf__getapploc_8sas_source.html',''); i
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"></span> </div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">/**</span></div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">  * First check we are not in the tests/macros folder (which has no subfolders)</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">  */</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>%<span class="keywordflow">if</span> %index(&amp;pgm,/tests/macros/) %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  %let root=%substr(&amp;pgm,1,%index(&amp;pgm,/tests/macros)-1);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  &amp;root</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  %<span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>%end;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"></span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">  * Next, move up two levels to avoid matches on subfolder or service name</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">  */</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>%let root=%substr(&amp;pgm,1,%length(&amp;pgm)-%length(%scan(&amp;pgm,-1,/))-1);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>%let root=%substr(&amp;root,1,%length(&amp;root)-%length(%scan(&amp;root,-1,/))-1);</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>%<span class="keywordflow">if</span> %index(&amp;root,/tests/) %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  %let root=%substr(&amp;root,1,%index(&amp;root,/tests/)-1);</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>%end;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>%<span class="keywordflow">else</span> %<span class="keywordflow">if</span> %index(&amp;root,/services) %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  %let root=%substr(&amp;root,1,%index(&amp;root,/services)-1);</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>%end;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>%<span class="keywordflow">else</span> %<span class="keywordflow">if</span> %index(&amp;root,/jobs) %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  %let root=%substr(&amp;root,1,%index(&amp;root,/jobs)-1);</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>%end;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>%<span class="keywordflow">else</span> %put &amp;sysmacroname: Could not find an app location from &amp;pgm;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  &amp;root</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>%mend mf_getapploc ;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">  * or specifically in the testsetup or testteardown services</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">  */</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>%<span class="keywordflow">if</span> %index(&amp;pgm,/tests/macros/)</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>or %index(&amp;pgm,/tests/testsetup)</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>or %index(&amp;pgm,/tests/testteardown)</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>%then %do;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  %let root=%substr(&amp;pgm,1,%index(&amp;pgm,/tests)-1);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  &amp;root</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  %return;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>%end;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment"></span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">  * Next, move up two levels to avoid matches on subfolder or service name</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">  */</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>%let root=%substr(&amp;pgm,1,%length(&amp;pgm)-%length(%scan(&amp;pgm,-1,/))-1);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>%let root=%substr(&amp;root,1,%length(&amp;root)-%length(%scan(&amp;root,-1,/))-1);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>%if %index(&amp;root,/tests/) %then %do;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  %let root=%substr(&amp;root,1,%index(&amp;root,/tests/)-1);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>%end;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>%else %if %index(&amp;root,/services) %then %do;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  %let root=%substr(&amp;root,1,%index(&amp;root,/services)-1);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>%end;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>%else %if %index(&amp;root,/jobs) %then %do;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  %let root=%substr(&amp;root,1,%index(&amp;root,/jobs)-1);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>%end;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>%else %put &amp;sysmacroname: Could not find an app location from &amp;pgm;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  &amp;root</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>%mend mf_getapploc ;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
