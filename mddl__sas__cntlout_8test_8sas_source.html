@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Macros for SAS Application Developers" />
   <meta name="og:description" content="Macros for SAS Application Developers" />
-  <title>viya/mv_getjobresult.sas File Reference</title>
+  <title>tests/ddl/mddl_sas_cntlout.test.sas Source File</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="dynsections.js"></script>
@@ -87,7 +87,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('mv__getjobresult_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mddl__sas__cntlout_8test_8sas_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -106,90 +106,35 @@ $(document).ready(function(){initNavTree('mv__getjobresult_8sas.html',''); initR
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">mv_getjobresult.sas File Reference</div></div>
+  <div class="headertitle"><div class="title">mddl_sas_cntlout.test.sas</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Extract the result from a completed SAS Viya Job.  
-<a href="#details">More...</a></p>
-
-<p><a href="mv__getjobresult_8sas_source.html">Go to the source code of this file.</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Extracts result from a Viya job and writes it out to a fileref and/or a JSON-engine library.</p>
-<p >To query the job, you need the URI. Sample code for achieving this is provided below.</p>
-<h2><a class="anchor" id="autotoc_md25"></a>
-Example</h2>
-<p >First, compile the macros: </p><pre class="fragment">filename mc url
-  "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
-%inc mc;
-</pre><p> Next, create a job (in this case, a web service): </p><pre class="fragment">filename ft15f001 temp;
-parmcards4;
-  data test;
-    rand=ranuni(0)*1000;
-    do x=1 to rand;
-      y=rand*4;
-      output;
-    end;
-  run;
-  proc sort data=&amp;syslast
-    by descending y;
-  run;
-  %webout(OPEN)
-  %webout(OBJ, test)
-  %webout(CLOSE)
-;;;;
-%mv_createwebservice(path=/Public/temp,name=demo)
-</pre><p> Execute it: </p><pre class="fragment">%mv_jobexecute(path=/Public/temp
-  ,name=demo
-  ,outds=work.info
-)
-</pre><p> Wait for it to finish, and grab the uri: </p><pre class="fragment">data _null_;
-  set work.info;
-  if method='GET' and rel='self';
-  call symputx('uri',uri);
-run;
-</pre><p> Finally, fetch the result (In this case, WEBOUT): </p><pre class="fragment">%mv_getjobresult(uri=&amp;uri,result=WEBOUT_JSON,outref=myweb,outlib=myweblib)
-</pre><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>The global macro variable containing the access token </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>set to 1 to enable DEBUG messages </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>valid values: <ul>
-<li>password </li>
-<li>authorization_code </li>
-<li>detect - will check if access_token exists, if not will use sas_services if a SASStudioV session else authorization_code. Default option. </li>
-<li>sas_services - will use oauth_bearer=sas_services. </li>
-</ul>
-</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">uri=</td><td>The uri of the running job for which to fetch the status, in the format <code>/jobExecution/jobs/$UUID</code> (unquoted).</td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">result=</td><td>(WEBOUT_JSON) The result type to capture. Resolves to "_[column name]" from the results table when parsed with the JSON libname engine. Example values: <ul>
-<li>WEBOUT_JSON </li>
-<li>WEBOUT_TXT</li>
-</ul>
-</td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>(0) The output fileref to which to write the results </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outlib=</td><td>(0) The output library to which to assign the results (assumes the data is in JSON format)</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section version"><dt>Version</dt><dd>VIYA V.03.05 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe, source: <a href="https://github.com/sasjs/core">https://github.com/sasjs/core</a></dd></dl>
-<h4>SAS Macros </h4>
-<ul>
-<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
-<li><a class="el" href="mp__binarycopy_8sas.html" title="Copy any file using binary input / output streams.">mp_binarycopy.sas</a> </li>
-<li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
-<li><a class="el" href="mf__existfileref_8sas.html" title="Checks whether a fileref exists.">mf_existfileref.sas</a> </li>
-</ul>
-
-<p class="definition">Definition in file <a class="el" href="mv__getjobresult_8sas_source.html">mv_getjobresult.sas</a>.</p>
-</div></div><!-- contents -->
+<a href="mddl__sas__cntlout_8test_8sas.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">  @file</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">  @brief mddl_sas_cntlout ddl test</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"></span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">  @li mddl_sas_cntlout.sas</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">  @li mf_existds.sas</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">  @li mp_assert.sas</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"></span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>%mddl_sas_cntlout(libds=WORK.TEST)</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>%mp_assert(</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  iftrue=(%mf_existds(WORK.TEST)=1),</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  desc=Checking table was created,</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  outds=work.test_results</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>)</div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_f3c9615c6d389fd64e9075885fcd8e6e.html">viya</a></li><li class="navelem"><a class="el" href="mv__getjobresult_8sas.html">mv_getjobresult.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_59425e443f801f1f2fd8bbe4959a3ccf.html">tests</a></li><li class="navelem"><a class="el" href="dir_22ca8d6bad3a5dfe19746df7b0e3629a.html">ddl</a></li><li class="navelem"><a class="el" href="mddl__sas__cntlout_8test_8sas.html">mddl_sas_cntlout.test.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">

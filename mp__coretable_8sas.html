@@ -116,21 +116,31 @@ $(document).ready(function(){initNavTree('mp__coretable_8sas.html',''); initResi
 <p><a href="mp__coretable_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Several macros in the <a href="https://github.com/sasjs/core">core</a> library make use of permanent tables. To avoid duplication in definitions, this macro provides a central location for managing the corresponding DDL.</p>
+<p >Note - this macro is likely to be deprecated in future in favour of a dedicated "datamodel" folder (prefix mddl)</p>
+<p >Any corresponding data would go in a seperate repo, to avoid this one ballooning in size!</p>
 <p >Example usage: </p><pre class="fragment">%mp_coretable(LOCKTABLE,libds=work.locktable)
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">table_ref</td><td>The type of table to create. Example values: <ul>
-<li>DIFFTABLE - Used to store changes to tables. Used by <a class="el" href="mp__storediffs_8sas.html" title="Converts deletes/changes/appends into a single audit table.">mp_storediffs.sas</a> and <a class="el" href="mp__stackdiffs_8sas.html" title="Prepares an audit table for stacking (re-applying) the changes.">mp_stackdiffs.sas</a> </li>
-<li>FILTER_DETAIL - For storing detailed filter values. Used by <a class="el" href="mp__filterstore_8sas.html" title="Checks &amp; Stores an input filter table and returns the Filter Key.">mp_filterstore.sas</a>. </li>
-<li>FILTER_SUMMARY - For storing summary filter values. Used by <a class="el" href="mp__filterstore_8sas.html" title="Checks &amp; Stores an input filter table and returns the Filter Key.">mp_filterstore.sas</a>. </li>
-<li>LOCKANYTABLE - For "locking" tables prior to multipass loads. Used by <a class="el" href="mp__lockanytable_8sas.html" title="Mechanism for locking tables to prevent parallel modifications.">mp_lockanytable.sas</a> </li>
-<li>MAXKEYTABLE - For storing the maximum retained key information. Used by <a class="el" href="mp__retainedkey_8sas.html" title="Generate and apply retained key values to a staging table.">mp_retainedkey.sas</a> </li>
+<li>DIFFTABLE </li>
+<li>FILTER_DETAIL </li>
+<li>FILTER_SUMMARY </li>
+<li>LOCKANYTABLE </li>
+<li>MAXKEYTABLE </li>
 </ul>
 </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">libds=</td><td>(0) The library.dataset reference used to create the table. If not provided, then the DDL is simply printed to the log.</td></tr>
   </table>
   </dd>
 </dl>
+<h4>SAS Macros </h4>
+<ul>
+<li><a class="el" href="mddl__dc__difftable_8sas.html" title="Difftable DDL.">mddl_dc_difftable.sas</a> </li>
+<li><a class="el" href="mddl__dc__filterdetail_8sas.html" title="Filtertable DDL.">mddl_dc_filterdetail.sas</a> </li>
+<li><a class="el" href="mddl__dc__filtersummary_8sas.html" title="Filtersummary DDL.">mddl_dc_filtersummary.sas</a> </li>
+<li><a class="el" href="mddl__dc__locktable_8sas.html" title="Locktable DDL.">mddl_dc_locktable.sas</a> </li>
+<li><a class="el" href="mddl__dc__maxkeytable_8sas.html" title="Maxkeytable DDL.">mddl_dc_maxkeytable.sas</a></li>
+</ul>
 <h4>Related Macros </h4>
 <ul>
 <li><a class="el" href="mp__filterstore_8sas.html" title="Checks &amp; Stores an input filter table and returns the Filter Key.">mp_filterstore.sas</a> </li>

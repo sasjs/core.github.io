@@ -68,6 +68,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_dropmembers.sas", "mp__dropmembers_8sas.html", null ],
     [ "mp_ds2cards.sas", "mp__ds2cards_8sas.html", null ],
     [ "mp_ds2csv.sas", "mp__ds2csv_8sas.html", null ],
+    [ "mp_ds2ddl.sas", "mp__ds2ddl_8sas.html", null ],
     [ "mp_ds2fmtds.sas", "mp__ds2fmtds_8sas.html", null ],
     [ "mp_ds2inserts.sas", "mp__ds2inserts_8sas.html", null ],
     [ "mp_ds2md.sas", "mp__ds2md_8sas.html", null ],
