@@ -26,15 +26,14 @@ var NAVTREE =
 [
   [ "@sasjs/core", "index.html", [
     [ "Macro Core", "index.html", null ],
-    [ "File List", "files.html", "files" ],
-    [ "Examples", "examples.html", "examples" ]
+    [ "File List", "files.html", "files" ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"_2_users_2munja_2git_2core_2base_2mp_wait4file_8sas-example.html",
-"mm__getrepos_8sas.html",
+"dir_0d92069d5a23b1d3125c326d74f1a07c.html",
+"mm__getroles_8sas.html",
 "mp__stackdiffs_8sas.html"
 ];
 

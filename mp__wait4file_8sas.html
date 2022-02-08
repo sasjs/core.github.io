@@ -115,7 +115,17 @@ $(document).ready(function(){initNavTree('mp__wait4file_8sas.html',''); initResi
 
 <p><a href="mp__wait4file_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Loops with a <code>sleep()</code> command until a file arrives or the max wait period expires. </p>
+<div class="textblock"><p >Loops with a <code>sleep()</code> command until a file arrives or the max wait period expires.</p>
+<p >Example: Wait 3 minutes OR for /tmp/flag.txt to appear</p>
+<p >mp_wait4file(/tmp/flag.txt , maxwait=60*3)</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">file</td><td>The file to wait for. Must be provided. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">maxwait=</td><td>(0) Number of seconds to wait. If set to zero, will loop indefinitely (to a maximum of 46 days, per SAS [documentation]( <a href="https://support.sas.com/documentation/cdl/en/lrdict/64316/HTML/default/viewer.htm#a001418809.htm">https://support.sas.com/documentation/cdl/en/lrdict/64316/HTML/default/viewer.htm#a001418809.htm</a> )). Otherwise, execution will proceed upon sleep expiry. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">interval=</td><td>(1) The wait period between sleeps, in seconds </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition in file <a class="el" href="mp__wait4file_8sas_source.html">mp_wait4file.sas</a>.</p>
 </div></div><!-- contents -->

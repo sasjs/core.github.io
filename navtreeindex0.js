@@ -1,6 +1,5 @@
 var NAVTREEINDEX0 =
 {
-"_2_users_2munja_2git_2core_2base_2mp_wait4file_8sas-example.html":[2,0],
 "dir_0d92069d5a23b1d3125c326d74f1a07c.html":[1,4],
 "dir_1d77ce7c9f7e81c3be5142cf18682616.html":[1,3],
 "dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef.html":[1,7,0],
@@ -14,7 +13,6 @@ var NAVTREEINDEX0 =
 "dir_a2b5100634f283885cc7f2e4191caec5.html":[1,1],
 "dir_e914ee4d4a44400f1fdb170cb4ead18a.html":[1,0],
 "dir_f3c9615c6d389fd64e9075885fcd8e6e.html":[1,8],
-"examples.html":[2],
 "files.html":[1],
 "index.html":[],
 "index.html":[0],
@@ -249,5 +247,7 @@ var NAVTREEINDEX0 =
 "mm__getobjects_8sas.html":[1,4,24],
 "mm__getobjects_8sas_source.html":[1,4,24],
 "mm__getpublictypes_8sas.html":[1,4,25],
-"mm__getpublictypes_8sas_source.html":[1,4,25]
+"mm__getpublictypes_8sas_source.html":[1,4,25],
+"mm__getrepos_8sas.html":[1,4,26],
+"mm__getrepos_8sas_source.html":[1,4,26]
 };
