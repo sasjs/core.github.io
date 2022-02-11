@@ -31,6 +31,7 @@ var dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef =
     [ "mp_assertscope.test.sas", "mp__assertscope_8test_8sas.html", null ],
     [ "mp_base64copy.test.sas", "mp__base64copy_8test_8sas.html", null ],
     [ "mp_binarycopy.test.sas", "mp__binarycopy_8test_8sas.html", null ],
+    [ "mp_cntlout.test.sas", "mp__cntlout_8test_8sas.html", null ],
     [ "mp_copyfolder.test.sas", "mp__copyfolder_8test_8sas.html", null ],
     [ "mp_coretable.test.sas", "mp__coretable_8test_8sas.html", null ],
     [ "mp_deletefolder.test.sas", "mp__deletefolder_8test_8sas.html", null ],

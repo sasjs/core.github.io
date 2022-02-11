@@ -34,7 +34,7 @@ var NAVTREEINDEX =
 [
 "dir_0d92069d5a23b1d3125c326d74f1a07c.html",
 "mm__getroles_8sas.html",
-"mp__setkeyvalue_8sas.html"
+"mp__searchdata_8sas.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
