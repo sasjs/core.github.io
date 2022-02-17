@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"mm__getrepos_8sas.html":[1,4,26],
+"mm__getrepos_8sas_source.html":[1,4,26],
 "mm__getroles_8sas.html":[1,4,27],
 "mm__getroles_8sas_source.html":[1,4,27],
 "mm__getservercontexts_8sas.html":[1,4,28],
@@ -247,7 +249,5 @@ var NAVTREEINDEX1 =
 "mp__runddl_8sas.html":[1,0,104],
 "mp__runddl_8sas_source.html":[1,0,104],
 "mp__searchcols_8sas.html":[1,0,105],
-"mp__searchcols_8sas_source.html":[1,0,105],
-"mp__searchcols_8test_8sas.html":[1,7,0,65],
-"mp__searchcols_8test_8sas_source.html":[1,7,0,65]
+"mp__searchcols_8sas_source.html":[1,0,105]
 };
