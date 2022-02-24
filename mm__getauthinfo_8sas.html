@@ -110,24 +110,25 @@ $(document).ready(function(){initNavTree('mm__getauthinfo_8sas.html',''); initRe
 </div><!--header-->
 <div class="contents">
 
-<p>extracts authentication info  
+<p>Extracts authentication info for each user in metadata.  
 <a href="#details">More...</a></p>
 
 <p><a href="mm__getauthinfo_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >usage:</p>
-<p >mm_getauthinfo(outds=auths)</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<div class="textblock"><p >Usage: </p><pre class="fragment">%mm_getauthinfo(outds=auths)
+</pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">outds=</td><td>the ONE LEVEL work dataset to create</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>(0) Set to 1 to enable DEBUG messages and preserve outputs </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(mm_getauthinfo) The output dataset to create</td></tr>
   </table>
   </dd>
 </dl>
 <h4>SAS Macros </h4>
 <ul>
-<li><a class="el" href="mm__getobjects_8sas.html" title="Creates a dataset with all metadata objects for a particular type.">mm_getobjects.sas</a> </li>
 <li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
-<li><a class="el" href="mm__getdetails_8sas.html" title="extracts metadata attributes and associations for a particular uri">mm_getdetails.sas</a></li>
+<li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
+<li><a class="el" href="mm__getdetails_8sas.html" title="extracts metadata attributes and associations for a particular uri">mm_getdetails.sas</a> </li>
+<li><a class="el" href="mm__getobjects_8sas.html" title="Creates a dataset with all metadata objects for a particular type.">mm_getobjects.sas</a></li>
 </ul>
 <dl class="section version"><dt>Version</dt><dd>9.4 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>

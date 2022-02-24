@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Macros for SAS Application Developers" />
   <meta name="og:description" content="Macros for SAS Application Developers" />
-  <title>meta/mm_createfolder.sas File Reference</title>
+  <title>tests/sas9only/mm_getauthinfo.test.sas Source File</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="dynsections.js"></script>
@@ -87,7 +87,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('mm__createfolder_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mm__getauthinfo_8test_8sas_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -106,38 +106,38 @@ $(document).ready(function(){initNavTree('mm__createfolder_8sas.html',''); initR
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">mm_createfolder.sas File Reference</div></div>
+  <div class="headertitle"><div class="title">mm_getauthinfo.test.sas</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Recursively create a metadata folder.  
-<a href="#details">More...</a></p>
-
-<p><a href="mm__createfolder_8sas_source.html">Go to the source code of this file.</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >This macro was inspired by Paul Homes who wrote an early version (mkdirmd.sas) in 2010. The original is described here: <a href="https://platformadmin.com/blogs/paul/2010/07/mkdirmd/">https://platformadmin.com/blogs/paul/2010/07/mkdirmd/</a></p>
-<p >The macro will NOT create a new ROOT folder - not because it can't, but more because that is generally not something your administrator would like you to do!</p>
-<p >The macro is idempotent - if you run it twice, it will only create a folder once.</p>
-<p >Usage: </p><pre class="fragment">%mm_createfolder(path=/some/meta/folder)
-</pre> <dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">path=</td><td>Name of the folder to create. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>set DBG to 1 to disable DEBUG messages</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section version"><dt>Version</dt><dd>9.4 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
-
-<p class="definition">Definition in file <a class="el" href="mm__createfolder_8sas_source.html">mm_createfolder.sas</a>.</p>
-</div></div><!-- contents -->
+<a href="mm__getauthinfo_8test_8sas.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">  @file</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">  @brief Testing mm_getauthinfo macro</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"></span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">  @li mf_existds.sas</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">  @li mm_getauthinfo.sas</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">  @li mp_assertscope.sas</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"></span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>%mp_assertscope(SNAPSHOT)</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>%mm_getauthinfo(outds=auths)</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>%mp_assertscope(COMPARE)</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>%mp_assert(</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  iftrue=(%mf_existds(work.auths)=1),</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  desc=Check <span class="keywordflow">if</span> the auths dataset was created</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>)</div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_0d92069d5a23b1d3125c326d74f1a07c.html">meta</a></li><li class="navelem"><a class="el" href="mm__createfolder_8sas.html">mm_createfolder.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_59425e443f801f1f2fd8bbe4959a3ccf.html">tests</a></li><li class="navelem"><a class="el" href="dir_4b9cfcf5d726eeff57436759eb7eb2cd.html">sas9only</a></li><li class="navelem"><a class="el" href="mm__getauthinfo_8test_8sas.html">mm_getauthinfo.test.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">

@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"mm__getpublictypes_8sas.html":[1,4,25],
+"mm__getpublictypes_8sas_source.html":[1,4,25],
 "mm__getrepos_8sas.html":[1,4,26],
 "mm__getrepos_8sas_source.html":[1,4,26],
 "mm__getroles_8sas.html":[1,4,27],
@@ -36,8 +38,8 @@ var NAVTREEINDEX1 =
 "mm__updatestpsourcecode_8sas_source.html":[1,4,42],
 "mm__webout_8sas.html":[1,4,43],
 "mm__webout_8sas_source.html":[1,4,43],
-"mm__webout_8test_8sas.html":[1,7,2,0],
-"mm__webout_8test_8sas_source.html":[1,7,2,0],
+"mm__webout_8test_8sas.html":[1,7,2,1],
+"mm__webout_8test_8sas_source.html":[1,7,2,1],
 "mmx__deletemetafolder_8sas.html":[1,5,0],
 "mmx__deletemetafolder_8sas_source.html":[1,5,0],
 "mmx__spkexport_8sas.html":[1,5,1],
@@ -247,7 +249,5 @@ var NAVTREEINDEX1 =
 "mp__retainedkey_8test_8sas.html":[1,7,0,64],
 "mp__retainedkey_8test_8sas_source.html":[1,7,0,64],
 "mp__runddl_8sas.html":[1,0,104],
-"mp__runddl_8sas_source.html":[1,0,104],
-"mp__searchcols_8sas.html":[1,0,105],
-"mp__searchcols_8sas_source.html":[1,0,105]
+"mp__runddl_8sas_source.html":[1,0,104]
 };

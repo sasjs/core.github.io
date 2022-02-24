@@ -226,6 +226,8 @@ var NAVTREEINDEX0 =
 "mm__deletestp_8sas_source.html":[1,4,12],
 "mm__getauthinfo_8sas.html":[1,4,13],
 "mm__getauthinfo_8sas_source.html":[1,4,13],
+"mm__getauthinfo_8test_8sas.html":[1,7,2,0],
+"mm__getauthinfo_8test_8sas_source.html":[1,7,2,0],
 "mm__getcols_8sas.html":[1,4,14],
 "mm__getcols_8sas_source.html":[1,4,14],
 "mm__getdetails_8sas.html":[1,4,15],
@@ -247,7 +249,5 @@ var NAVTREEINDEX0 =
 "mm__getlibs_8sas.html":[1,4,23],
 "mm__getlibs_8sas_source.html":[1,4,23],
 "mm__getobjects_8sas.html":[1,4,24],
-"mm__getobjects_8sas_source.html":[1,4,24],
-"mm__getpublictypes_8sas.html":[1,4,25],
-"mm__getpublictypes_8sas_source.html":[1,4,25]
+"mm__getobjects_8sas_source.html":[1,4,24]
 };

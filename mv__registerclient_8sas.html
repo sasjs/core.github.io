@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('mv__registerclient_8sas.html',''); ini
 
 <p><a href="mv__registerclient_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >When building apps on SAS Viya, an client id and secret are sometimes required. In order to generate them, filesystem access to the Consul Token is needed (it is not enough to be in the SASAdministrator group in SAS Environment Manager).</p>
+<div class="textblock"><p >When building apps on SAS Viya, a client id and secret are usually required. In order to generate them, the Consul Token is required. To access this token, you need to be a system administrator (it is not enough to be in the SASAdministrator group in SAS Environment Manager).</p>
 <p >If you are registering a lot of clients / secrets, you may find it more convenient to use the <a href="https://sasjs.io/apps/#viya-client-token-generator">Viya Token Generator</a> (a SASjs Web App to automate the generation of clients &amp; secrets with various settings).</p>
 <p >For further information on clients / secrets, see; </p><ul>
 <li><a href="https://developer.sas.com/reference/auth/#register">https://developer.sas.com/reference/auth/#register</a> </li>
@@ -128,14 +128,17 @@ filename mc url
   "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %inc mc;
 
+%* generate random client using consul token as input parameter;
+%mv_registerclient(consul_token=12x34sa43v2345n234lasd)
+
+%* generate random client details with all scopes;
+%mv_registerclient(scopes=openid *)
+
 %* specific client with just openid scope;
 %mv_registerclient(client_id=YourClient
   ,client_secret=YourSecret
   ,scopes=openid
 )
-
-%* generate random client details with all scopes;
-%mv_registerclient(scopes=openid *)
 
 %* generate random client with 90/180 second access/refresh token expiry;
 %mv_registerclient(scopes=openid *
@@ -144,18 +147,19 @@ filename mc url
 )
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">client_id=</td><td>The client name. Auto generated if blank. </td></tr>
-    <tr><td class="paramname">client_secret=</td><td>Client secret. Auto generated if client is blank. </td></tr>
-    <tr><td class="paramname">scopes=(openid)</td><td>List of space-seperated unquoted scopes </td></tr>
-    <tr><td class="paramname">grant_type=(authorization_code|refresh_token)</td><td>Valid values are "password" or "authorization_code" (unquoted) </td></tr>
-    <tr><td class="paramname">outds=(mv_registerclient)</td><td>The dataset to contain the registered client id and secret </td></tr>
-    <tr><td class="paramname">access_token_validity=(DEFAULT)</td><td>The duration of validity of the access token in seconds. A value of DEFAULT will omit the entry (and use system default) </td></tr>
-    <tr><td class="paramname">refresh_token_validity=(DEFAULT)</td><td>The duration of validity of the refresh token in seconds. A value of DEFAULT will omit the entry (and use system default) </td></tr>
-    <tr><td class="paramname">name=</td><td>An optional, human readable name for the client </td></tr>
-    <tr><td class="paramname">required_user_groups=</td><td>A list of group names. If a user does not belong to all the required groups, the user will not be authenticated and no tokens are issued to this client for that user. If this field is not specified, authentication and token issuance proceeds normally. </td></tr>
-    <tr><td class="paramname">autoapprove=</td><td>During the auth step the user can choose which scope to apply. Setting this to true will autoapprove all the client scopes. </td></tr>
-    <tr><td class="paramname">use_session=</td><td>If true, access tokens issued to this client will be associated with an HTTP session and revoked upon logout or time-out. </td></tr>
-    <tr><td class="paramname">outjson=</td><td>(<em>null</em>) A dataset containing the lines of JSON submitted. Useful for debugging.</td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">client_id=</td><td>The client name. Auto generated if blank. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">client_secret=</td><td>Client secret. Auto generated if client is blank. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">consul_token=</td><td>(0) Provide the actual consul token value here if using Viya 4 or above. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">scopes=</td><td>(openid) List of space-seperated unquoted scopes </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>(authorization_code|refresh_token) Valid values are "password" or "authorization_code" (unquoted). Pipe seperated. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=(mv_registerclient)</td><td>The dataset to contain the registered client id and secret </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">access_token_validity=</td><td>(DEFAULT) The access token duration in seconds. A value of DEFAULT will omit the entry (and use system default) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">refresh_token_validity=</td><td>(DEFAULT) The duration of validity of the refresh token in seconds. A value of DEFAULT will omit the entry (and use system default) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">client_name=</td><td>(DEFAULT) An optional, human readable name for the client. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">required_user_groups=</td><td>A list of group names. If a user does not belong to all the required groups, the user will not be authenticated and no tokens are issued to this client for that user. If this field is not specified, authentication and token issuance proceeds normally. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">autoapprove=</td><td>During the auth step the user can choose which scope to apply. Setting this to true will autoapprove all the client scopes. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">use_session=</td><td>If true, access tokens issued to this client will be associated with an HTTP session and revoked upon logout or time-out. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outjson=</td><td>(<em>null</em>) A dataset containing the lines of JSON submitted. Useful for debugging.</td></tr>
   </table>
   </dd>
 </dl>
@@ -163,7 +167,6 @@ filename mc url
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe, source: <a href="https://github.com/sasjs/core">https://github.com/sasjs/core</a></dd></dl>
 <h4>SAS Macros </h4>
 <ul>
-<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
 <li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
 <li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
 <li><a class="el" href="mf__getuniquelibref_8sas.html" title="Returns an unused libref.">mf_getuniquelibref.sas</a> </li>

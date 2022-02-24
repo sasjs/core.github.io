@@ -117,7 +117,7 @@ $(document).ready(function(){initNavTree('mm__createstp_8sas.html',''); initResi
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >This macro creates a Type 1 stored process, and also the necessary PromptGroup / File / TextStore objects. It requires the location (or uri) for the App Server / Directory / Folder (Tree) objects. To upgrade this macro to work with type 2 (which can embed SAS code and is compabitible with SAS from 9.3 onwards) then the UsageVersion should change to 2000000 and the TextStore object updated. The ComputeServer reference will also be to ServerContext rather than LogicalServer.</p>
 <p >This macro is idempotent - if you run it twice, it will only create an STP once.</p>
-<p >usage (type 1 STP): </p><pre class="fragment">%mm_createstp(stpname=MyNewSTP
+<p >Usage (type 1 STP): </p><pre class="fragment">%mm_createstp(stpname=MyNewSTP
   ,filename=mySpecialProgram.sas
   ,directory=SASEnvironment/SASCode/STPs
   ,tree=/User Folders/sasdemo
@@ -130,8 +130,13 @@ $(document).ready(function(){initNavTree('mm__createstp_8sas.html',''); initResi
   rc4 = METADATA_DELOBJ(stpuri);
   putlog (_all_)(=);
 run;
-</pre><p> usage (type 2 STP): mm_createstp(stpname=MyNewType2STP ,filename=mySpecialProgram.sas ,directory=SASEnvironment/SASCode/STPs ,tree=/User Folders/sasdemo ,Server=SASApp ,stptype=2)</p>
-<dl class="params"><dt>Parameters</dt><dd>
+</pre><p> Usage (type 2 STP): </p><pre class="fragment">%mm_createstp(stpname=MyNewType2STP
+  ,filename=mySpecialProgram.sas
+  ,directory=SASEnvironment/SASCode/STPs
+  ,tree=/User Folders/sasdemo
+  ,Server=SASApp
+  ,stptype=2)
+</pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">stpname=</td><td>Stored Process name. Avoid spaces - testing has shown that the check to avoid creating multiple STPs in the same folder with the same name does not work when the name contains spaces. </td></tr>
     <tr><td class="paramname">stpdesc=</td><td>Stored Process description (optional) </td></tr>
@@ -162,8 +167,9 @@ run;
 <li><a class="el" href="mf__verifymacvars_8sas.html" title="Checks if a set of macro variables exist AND contain values.">mf_verifymacvars.sas</a> </li>
 <li><a class="el" href="mm__getdirectories_8sas.html" title="Returns a dataset with the meta directory object for a physical path.">mm_getdirectories.sas</a> </li>
 <li><a class="el" href="mm__updatestpsourcecode_8sas.html" title="Update the source code of a type 2 STP.">mm_updatestpsourcecode.sas</a> </li>
-<li><a class="el" href="mp__dropmembers_8sas.html" title="Drops tables / views (if they exist) without warnings in the log.">mp_dropmembers.sas</a> </li>
-<li><a class="el" href="mm__getservercontexts_8sas.html" title="Creates a dataset with all server contexts in all repos.">mm_getservercontexts.sas</a></li>
+<li><a class="el" href="mm__getservercontexts_8sas.html" title="Creates a dataset with all server contexts in all repos.">mm_getservercontexts.sas</a> </li>
+<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
+<li><a class="el" href="mp__dropmembers_8sas.html" title="Drops tables / views (if they exist) without warnings in the log.">mp_dropmembers.sas</a></li>
 </ul>
 <h4>Related Macros </h4>
 <ul>
