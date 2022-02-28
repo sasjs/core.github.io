@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('mp__lockanytable_8sas.html',''); initR
 
 <p><a href="mp__lockanytable_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Uses a control table to enable ANY table to be locked for updates. Only useful if every update uses the macro! Used heavily within <a href="https://datacontroller.io">Data Controller for SAS</a>.</p>
+<div class="textblock"><p >Uses a control table to enable ANY table to be locked for updates (not just SAS datasets). Only useful if every update uses the macro! Used heavily within <a href="https://datacontroller.io">Data Controller for SAS</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">action</td><td>The action to be performed. Valid values: <ul>
@@ -126,7 +126,7 @@ $(document).ready(function(){initNavTree('mp__lockanytable_8sas.html',''); initR
     <tr><td class="paramdir">[in]</td><td class="paramname">lib=</td><td>(WORK) The libref of the table to lock. Should already be assigned. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ds=</td><td>The dataset to lock </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ref=</td><td>A meaningful reference to enable the lock to be traced. Max length is 200 characters. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">ctl_ds=</td><td>(0) The control table which controls the actual locking. Should already be assigned and available. The definition is available by running <a class="el" href="mp__coretable_8sas.html" title="Create the permanent Core tables.">mp_coretable.sas</a> as follows: <code>mp_coretable(LOCKTABLE)</code>.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">ctl_ds=</td><td>(0) The control table which controls the actual locking. Should already be assigned and available. The definition is available by running the <a class="el" href="mddl__dc__locktable_8sas.html" title="Locktable DDL.">mddl_dc_locktable.sas</a> macro.</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">loops=</td><td>(25) Number of times to check for a lock. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">loop_secs=</td><td>(1) Seconds to wait between each lock attempt</td></tr>
   </table>
