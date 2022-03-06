@@ -15,6 +15,7 @@ var dir_20d75ed6d8a9fdfee91e4f9ba91fc8ef =
     [ "mf_getfmtlist.test.sas", "mf__getfmtlist_8test_8sas.html", null ],
     [ "mf_getfmtname.test.sas", "mf__getfmtname_8test_8sas.html", null ],
     [ "mf_getuniquefileref.test.sas", "mf__getuniquefileref_8test_8sas.html", null ],
+    [ "mf_getuniquelibref.test.sas", "mf__getuniquelibref_8test_8sas.html", null ],
     [ "mf_getvarlist.test.sas", "mf__getvarlist_8test_8sas.html", null ],
     [ "mf_isint.test.sas", "mf__isint_8test_8sas.html", null ],
     [ "mf_islibds.test.sas", "mf__islibds_8test_8sas.html", null ],
