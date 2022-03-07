@@ -5,6 +5,7 @@ var dir_650092e11941d85fd99c2002d68de369 =
     [ "mv_createfile.test.sas", "mv__createfile_8test_8sas.html", null ],
     [ "mv_createfolder.test.sas", "mv__createfolder_8test_8sas.html", null ],
     [ "mv_createwebservice.test.sas", "mv__createwebservice_8test_8sas.html", null ],
+    [ "mv_deleteviyafolder.test.sas", "mv__deleteviyafolder_8test_8sas.html", null ],
     [ "mv_getfoldermembers.test.sas", "mv__getfoldermembers_8test_8sas.html", null ],
     [ "mv_getjobcode.test.sas", "mv__getjobcode_8test_8sas.html", null ],
     [ "mv_getjoblog.test.sas", "mv__getjoblog_8test_8sas.html", null ],

@@ -119,9 +119,16 @@ $(document).ready(function(){initNavTree('mv__deleteviyafolder_8sas.html',''); i
 %mv_deleteviyafolder(path=/Public/test)
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path=</td><td>The full path of the folder to be deleted </td></tr>
-    <tr><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
-    <tr><td class="paramname">grant_type=</td><td>valid values are "password" or "authorization_code" (unquoted). The default is authorization_code.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">path=</td><td>The full path of the folder to be deleted </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>(ACCESS_TOKEN) The global macro variable to contain the access token </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>(sas_services) Valid values are: <ul>
+<li>password </li>
+<li>authorization_code </li>
+<li>detect - will check if access_token exists, if not will use sas_services if a SASStudioV session else authorization_code. Default option. </li>
+<li>sas_services - will use oauth_bearer=sas_services. </li>
+</ul>
+</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>(0) Set to 1 to enable DEBUG messages</td></tr>
   </table>
   </dd>
 </dl>
