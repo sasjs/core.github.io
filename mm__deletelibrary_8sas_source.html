@@ -189,18 +189,19 @@ $(document).ready(function(){initNavTree('mm__deletelibrary_8sas_source.html',''
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>%local isgone;</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>data _null_;</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  length type uri $256;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  rc=metadata_resolve(<span class="stringliteral">&quot;omsobj:SASLibrary?@Id=&#39;&amp;liburi&#39;&quot;</span>,type,uri);</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  call symputx(<span class="stringliteral">&#39;isgone&#39;</span>,type,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>run;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>%mp_abort(iftrue=(&amp;isgone = SASLibrary)</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  ,mac=&amp;sysmacroname</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  ,msg=%str(Library (&amp;name) NOT deleted)</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>)</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>%put &amp;sysmacroname: Library &amp;name (&amp;liburi) was successfully deleted;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>%mend mm_deletelibrary;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  call missing (of _all_);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  rc=metadata_resolve(<span class="stringliteral">&quot;omsobj:SASLibrary?@Id=&#39;&amp;liburi&#39;&quot;</span>,type,uri);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  call symputx(<span class="stringliteral">&#39;isgone&#39;</span>,type,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>run;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>%mp_abort(iftrue=(&amp;isgone = SASLibrary)</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  ,mac=&amp;sysmacroname</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  ,msg=%str(Library (&amp;name) NOT deleted)</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>)</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>%put &amp;sysmacroname: Library &amp;name (&amp;liburi) was successfully deleted;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>%mend mm_deletelibrary;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

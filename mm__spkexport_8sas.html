@@ -148,19 +148,21 @@ filename myref "%sysfunc(pathname(work))/mmxexport.sh"
 ./mmscript.sh "myuser" "mypass"
 </pre><h4>SAS Macros </h4>
 <ul>
+<li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
+<li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
+<li><a class="el" href="mf__isblank_8sas.html" title="Checks whether a macro variable is empty (blank)">mf_isblank.sas</a> </li>
 <li><a class="el" href="mf__loc_8sas.html" title="Returns physical location of various SAS items.">mf_loc.sas</a> </li>
 <li><a class="el" href="mm__tree_8sas.html" title="Returns all folders / subfolder content for a particular root.">mm_tree.sas</a> </li>
-<li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
-<li><a class="el" href="mf__isblank_8sas.html" title="Checks whether a macro variable is empty (blank)">mf_isblank.sas</a> </li>
 <li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a></li>
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">metaloc=</td><td>the metadata folder to export </td></tr>
-    <tr><td class="paramname">secureref=</td><td>fileref containing the username / password (should point to a file in a secure location). Leave blank to substitute $bash type vars. </td></tr>
-    <tr><td class="paramname">outref=</td><td>fileref to which to write the command </td></tr>
-    <tr><td class="paramname">cmdoutloc=</td><td>the directory to which the command will write the SPK (default=WORK) </td></tr>
-    <tr><td class="paramname">cmdoutname=</td><td>the name of the spk / log files to create (will be identical just with .spk or .log extension)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">metaloc=</td><td>the metadata folder to export </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">secureref=</td><td>fileref containing the username / password (should point to a file in a secure location). Leave blank to substitute $bash vars. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">excludevars=</td><td>(0) A space seperated list of macro variable names, each of which contains a value that should be used to filter the output objects. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>fileref to which to write the command </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdoutloc=</td><td>(sysfunc(pathname(work))) The directory to which the command will write the SPK </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">cmdoutname=</td><td>(mmxport) The name of the spk / log files to create (will be identical just with .spk or .log extension)</td></tr>
   </table>
   </dd>
 </dl>
