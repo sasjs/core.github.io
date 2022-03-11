@@ -159,6 +159,20 @@ $(document).ready(function(){initNavTree('mp__dirlist_8test_8sas_source.html',''
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  desc=Top level returned,</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  outds=work.test_results</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>)</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>%mp_dirlist(path=&amp;root/b, outds=work.myTable4)</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>%mp_assert(</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  iftrue=(%mf_nobs(work.mytable4)=0),</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  desc=Empty table <span class="keywordflow">for</span> empty directory,</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  outds=work.test_results</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>%mp_dirlist(path=&amp;root/notexisting, outds=work.myTable5)</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>%mp_assert(</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  iftrue=(%mf_nobs(work.mytable5)=0),</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  desc=Empty table <span class="keywordflow">for</span> non-existing directory,</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  outds=work.test_results</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>)</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
