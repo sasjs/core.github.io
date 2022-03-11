@@ -2,6 +2,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
 [
     [ "mf_abort.sas", "mf__abort_8sas.html", null ],
     [ "mf_dedup.sas", "mf__dedup_8sas.html", null ],
+    [ "mf_deletefile.sas", "mf__deletefile_8sas.html", null ],
     [ "mf_existds.sas", "mf__existds_8sas.html", null ],
     [ "mf_existfeature.sas", "mf__existfeature_8sas.html", null ],
     [ "mf_existfileref.sas", "mf__existfileref_8sas.html", null ],
