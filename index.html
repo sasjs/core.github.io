@@ -115,9 +115,9 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="fragment"><div class="line">filename mc url <span class="stringliteral">&quot;https://raw.githubusercontent.com/sasjs/core/main/all.sas&quot;</span>;</div>
 <div class="line">%inc mc;</div>
 </div><!-- fragment --><p >Documentation: <a href="https://core.sasjs.io">https://core.sasjs.io</a></p>
-<h1><a class="anchor" id="autotoc_md5"></a>
+<h1><a class="anchor" id="autotoc_md1"></a>
 Components</h1>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<h2><a class="anchor" id="autotoc_md2"></a>
 BASE library (All Platforms)</h2>
 <ul>
 <li>OS independent</li>
@@ -125,7 +125,7 @@ BASE library (All Platforms)</h2>
 <li>No X command</li>
 <li>Prefixes: <em>mf</em>, <em>mp</em></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md7"></a>
+<h2><a class="anchor" id="autotoc_md3"></a>
 DDL library (All Platforms)</h2>
 <ul>
 <li>OS independent</li>
@@ -134,14 +134,14 @@ DDL library (All Platforms)</h2>
 <li>Prefixes: <em>mddl</em>(lib)_ -&gt; where lib can be "SAS" (in relation to a SAS component) or "DC" (in relation to a Data Controller component)</li>
 </ul>
 <p >This library will not be used for storing data entries (such as formats or datalines). Where this becomes necessary in the future, a new repo will be created, in order to keep the NPM bundle size down (for the benefit of those looking to embed purely macros in their applications).</p>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md4"></a>
 FCMP library (All Platforms)</h2>
 <ul>
 <li>Function and macro names are identical, except for special cases</li>
 <li>Prefixes: <em>mcf</em></li>
 </ul>
 <p >The fcmp macros are used to generate fcmp functions, and can be used with or without the <code>proc fcmp</code> wrapper.</p>
-<h2><a class="anchor" id="autotoc_md9"></a>
+<h2><a class="anchor" id="autotoc_md5"></a>
 META library (SAS9 only)</h2>
 <p >Macros used in SAS EBI, which connect to the metadata server.</p>
 <ul>
@@ -150,7 +150,7 @@ META library (SAS9 only)</h2>
 <li>No X command</li>
 <li>Prefixes: <em>mm</em></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md10"></a>
+<h2><a class="anchor" id="autotoc_md6"></a>
 SERVER library (@sasjs/server only)</h2>
 <p >These macros are used for building applications using <a href="https://server.sasjs.io">@sasjs/server</a> - an open source REST API for Desktop SAS.</p>
 <ul>
@@ -159,7 +159,7 @@ SERVER library (@sasjs/server only)</h2>
 <li>No X command</li>
 <li>Prefixes: <em>ms</em></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md11"></a>
+<h2><a class="anchor" id="autotoc_md7"></a>
 VIYA library (Viya only)</h2>
 <p >Macros used for interfacing with SAS Viya.</p>
 <ul>
@@ -167,7 +167,7 @@ VIYA library (Viya only)</h2>
 <li>No X command</li>
 <li>Prefixes: <em>mv</em>, <em>mvf</em></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md12"></a>
+<h2><a class="anchor" id="autotoc_md8"></a>
 METAX library (SAS9 only)</h2>
 <ul>
 <li>OS specific</li>
@@ -175,7 +175,7 @@ METAX library (SAS9 only)</h2>
 <li>X command enabled</li>
 <li>Prefixes: <em>mmw</em>,<em>mmu</em>,<em>mmx</em></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md13"></a>
+<h2><a class="anchor" id="autotoc_md9"></a>
 LUA library</h2>
 <p >Wait - this is a macro library - what is LUA doing here? Well, it is a little known fact that you CAN run LUA within a SAS Macro. It has to be written to a text file with a <code>.lua</code> extension, from where you can <code>include</code> it. So, without using the <code>proc lua</code> wrapper.</p>
 <p >To contribute, simply write your freeform LUA in the LUA folder. Then run the <code>build.py</code>, which will convert all files with a ".lua" extension into a macro wrapper with an <code>ml_</code> prefix (embedding the necessary data step put statements). You can then use your module in any program by running:</p>
@@ -191,7 +191,7 @@ LUA library</h2>
 </div><!-- fragment --><ul>
 <li>Prefixes: <em>ml</em></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md14"></a>
+<h1><a class="anchor" id="autotoc_md10"></a>
 Installation</h1>
 <p >First, download the repo to a location your SAS system can access. Then update your sasautos path to include the components you wish to have available, eg:</p>
 <div class="fragment"><div class="line">options insert=(sasautos=<span class="stringliteral">&quot;/your/path/macrocore/base&quot;</span>);</div>
@@ -200,9 +200,9 @@ Installation</h1>
 <p >Alternatively - for quick access - simply run the following! This file contains all the macros.</p>
 <div class="fragment"><div class="line">filename mc url <span class="stringliteral">&quot;https://raw.githubusercontent.com/sasjs/core/main/all.sas&quot;</span>;</div>
 <div class="line">%inc mc;</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md15"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md11"></a>
 Standards</h1>
-<h2><a class="anchor" id="autotoc_md16"></a>
+<h2><a class="anchor" id="autotoc_md12"></a>
 File Properties</h2>
 <ul>
 <li>filenames much match macro names</li>
@@ -227,7 +227,7 @@ File Properties</h2>
 <li>individual lines should be no more than 80 characters long</li>
 <li>UTF-8</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md13"></a>
 Header Properties</h2>
 <p >The <b>Macro Core</b> documentation is created using <a href="http://www.doxygen.nl">doxygen</a>. A full list of attributes can be found <a href="http://www.doxygen.nl/manual/commands.html">here</a> but the following are most relevant:</p>
 <ul>
@@ -240,7 +240,7 @@ Header Properties</h2>
 <li>author. Author name, contact details optional</li>
 </ul>
 <p >All macros must be commented in the doxygen format, to enable the <a href="https://core.sasjs.io">online documentation</a>.</p>
-<h3><a class="anchor" id="autotoc_md18"></a>
+<h3><a class="anchor" id="autotoc_md14"></a>
 Dependencies</h3>
 <p >SAS code can contain one of two types of dependency - SAS Macros, and SAS Includes. When compiling projects using the <a href="https://cli.sasjs.io">SASjs CLI</a> the doxygen header is scanned for <code>@li</code> items under the following headers:</p>
 <div class="fragment"><div class="line">&lt;h4&gt; SAS Macros &lt;/h4&gt;</div>
@@ -252,7 +252,7 @@ Dependencies</h3>
 <div class="line">@li someprogram.sas FREFTWO</div>
 </div><!-- fragment --><p >The CLI can then extract all the dependencies and insert as precode (SAS Macros) or in a temp engine fileref (SAS Includes) when creating SAS Jobs and Services (and Tests).</p>
 <p >When contributing to this library, it is therefore important to ensure that all dependencies are listed in the header in this format.</p>
-<h2><a class="anchor" id="autotoc_md19"></a>
+<h2><a class="anchor" id="autotoc_md15"></a>
 Coding Standards</h2>
 <ul>
 <li>Indentation = 2 spaces. No tabs!</li>
@@ -268,12 +268,12 @@ Coding Standards</h2>
 <li>The use of <code>quit;</code> for <code>proc sql</code> is optional unless you are looking to benefit from the timing statistics.</li>
 <li>Use <a href="https://github.com/sasjs/lint">sasjs lint</a>!</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md20"></a>
+<h1><a class="anchor" id="autotoc_md16"></a>
 General Notes</h1>
 <ul>
 <li>All macros should be compatible with SAS versions from support level B and above (so currently 9.2 and later). If an earlier version is not supported, then the macro should say as such in the header documentation, and exit gracefully (eg <code>if sysevalf(&amp;sysver&lt;9.3) then return</code>).</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md21"></a>
+<h1><a class="anchor" id="autotoc_md17"></a>
 Breaking Changes</h1>
 <p >We are currently on major release v4. Breaking changes should be marked with the <a href="https://www.doxygen.nl/manual/commands.html#cmddeprecated">deprecated</a> doxygen tag. The following changes are planned when the next major/breaking release (v5) becomes necessary:</p>
 <ul>
@@ -284,11 +284,21 @@ Breaking Changes</h1>
 <li><a class="el" href="mp__getddl_8sas.html" title="Extract DDL in various formats, by table or library.">mp_getddl.sas</a> to be renamed to <a class="el" href="mp__ds2ddl_8sas.html" title="A wrapper for mp_getddl.sas.">mp_ds2ddl.sas</a> (consistent with other ds2xxx macros). A wrapper macro is already in place, and you are able to use this immediately. The default for SHOWLOG will also be YES instead of NO.</li>
 <li><a class="el" href="mp__coretable_8sas.html" title="Create the permanent Core tables.">mp_coretable.sas</a> will be replaced by the standalone macros in the <code>ddl</code> folder (which are already available)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md22"></a>
+<h1><a class="anchor" id="autotoc_md18"></a>
 Star Gazing</h1>
 <p >If you find this library useful, please leave a <a href="https://github.com/sasjs/core/stargazers">star</a> and help us grow our star graph!</p>
 <p ><img src="https://starchart.cc/sasjs/core.svg" alt="" style="pointer-events: none;" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md23"></a>
+<h1><a class="anchor" id="autotoc_md19"></a>
+Other SAS Repositories</h1>
+<p >The following repositories are also worth checking out:</p>
+<ul>
+<li><a href="https://github.com/chris-swenson/sasmacros">chris-swenson/sasmacros</a></li>
+<li><a href="https://github.com/greg-wootton/sas-programs">greg-wotton/sas-programs</a></li>
+<li><a href="https://github.com/KatjaGlassConsulting/SMILE-SmartSASMacros">KatjaGlassConsulting/SMILE-SmartSASMacros</a></li>
+<li><a href="https://github.com/scottbass/SAS">scottbass/sas</a></li>
+<li><a href="https://github.com/yabwon/SAS_PACKAGES">yabwon/sas_packages</a></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md20"></a>
 Contributors ✨</h1>
 <p ><a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square" alt="All Contributors" style="pointer-events: none;" class="inline"/></a></p>
 <p >Thanks goes to these wonderful people (<a href="https://allcontributors.org/docs/en/emoji-key">emoji key</a>):</p>

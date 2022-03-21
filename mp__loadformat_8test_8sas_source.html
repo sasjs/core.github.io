@@ -193,6 +193,15 @@ $(document).ready(function(){initNavTree('mp__loadformat_8test_8sas_source.html'
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  desc=Test 1 - audit table updated,</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  outds=work.test_results</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>)</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>data work.difftest;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  set perm.audit;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  where is_diff=1;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>run;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>%mp_assert(</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  iftrue=(%mf_nobs(work.difftest)&gt;0),</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  desc=Test 1 - diffs were found,</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  outds=work.test_results</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>)</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
