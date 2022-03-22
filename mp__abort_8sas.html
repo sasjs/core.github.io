@@ -119,7 +119,7 @@ $(document).ready(function(){initNavTree('mp__abort_8sas.html',''); initResizabl
 <p >The method used varies according to the context. Important points:</p>
 <ul>
 <li>should not use endsas or abort cancel in 9.4m3 environments as this can cause hung multibridge sessions and result in a frozen STP server </li>
-<li>should not use endsas in viya 3.5 as this destroys the session and cannot fetch results (although both mv_getjoblog.sas and the @sasjs/adapter will recognise this and fetch the log of the parent session instead) </li>
+<li>should not use endsas in viya 3.5 as this destroys the session and cannot fetch results (although both <a class="el" href="mv__getjoblog_8sas.html" title="Extract the log from a completed SAS Viya Job.">mv_getjoblog.sas</a> and the @sasjs/adapter will recognise this and fetch the log of the parent session instead) </li>
 <li>STP environments must finish cleanly to avoid the log being sent to _webout. To assist with this, we also run stpsrvset('program error', 0) and set SYSCC=0. We take a unique "soft abort" approach - we open a macro but don't close it! This works everywhere EXCEPT inside a %include inside a macro. For that, we recommend you use <a class="el" href="mp__include_8sas.html" title="Performs a wrapped %include.">mp_include.sas</a> to perform the include, and then call %mp_abort(mode=INCLUDE) from the source program (ie, OUTSIDE of the top-parent macro).</li>
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
