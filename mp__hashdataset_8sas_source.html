@@ -180,7 +180,7 @@ $(document).ready(function(){initNavTree('mp__hashdataset_8sas_source.html','');
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  %put %str(ERR)OR: Dataset &amp;libds is not a dataset;</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>%end;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>%<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  data &amp;outds(rename=(&amp;keyvar=hashkey) keep=&amp;keyvar);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  data &amp;outds(rename=(&amp;keyvar=hashkey) keep=&amp;keyvar)/nonote2err;</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    length &amp;prevkeyvar &amp;keyvar $32;</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    retain &amp;prevkeyvar <span class="stringliteral">&quot;%sysfunc(md5(%str(&amp;salt)),$hex32.)&quot;</span>;</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keyword">set</span> &amp;libds end=&amp;lastvar;</div>
