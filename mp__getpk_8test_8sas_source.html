@@ -200,6 +200,52 @@ $(document).ready(function(){initNavTree('mp__getpk_8test_8sas_source.html','');
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>%mp_getpk(work,outds=test4)</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>%mp_assertdsobs(work.test4,test=ATLEAST 2)</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">/* unique &amp; not null INDEX captured */</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>proc sql;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>create table work.example5(</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  TX_FROM <span class="keywordtype">float</span> format=datetime19.,</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  DD_TYPE <span class="keywordtype">char</span>(16),</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  DD_SOURCE <span class="keywordtype">char</span>(2048),</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  DD_SHORTDESC <span class="keywordtype">char</span>(256)</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>proc datasets lib=work noprint;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  modify example5;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  index create tx_from /nomiss unique;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>quit;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>%mp_getpk(work,ds=example5,outds=test5)</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>data _null_;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  set work.test5;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  call symputx(&#39;test5&#39;,pk_fields);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>run;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>%mp_assert(</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  iftrue=(&quot;&amp;test5&quot;=&quot;TX_FROM&quot;),</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  desc=mp_getpk captures single column not null unique index,</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  outds=work.test_results</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>)</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment">/* unique &amp; not null COMPOSITE INDEX captured */</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>proc sql;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>create table work.example6(</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  TX_FROM <span class="keywordtype">float</span> format=datetime19.,</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  DD_TYPE <span class="keywordtype">char</span>(16),</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  DD_SOURCE <span class="keywordtype">char</span>(2048),</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  DD_SHORTDESC <span class="keywordtype">char</span>(256)</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>proc datasets lib=work noprint;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  modify example6;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  index create pk_6=(tx_from dd_type) /nomiss unique;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>quit;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>%mp_getpk(work,ds=example6,outds=test6)</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>data _null_;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  set work.test6;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  call symputx(&#39;test6&#39;,pk_fields);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>run;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>%mp_assert(</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  iftrue=(&quot;&amp;test6&quot;=&quot;TX_FROM DD_TYPE&quot;),</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  desc=mp_getpk captures multiple column not null unique index,</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  outds=work.test_results</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>)</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
