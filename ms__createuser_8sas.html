@@ -130,6 +130,7 @@ $(document).ready(function(){initNavTree('ms__createuser_8sas.html',''); initRes
     <tr><td class="paramdir">[in]</td><td class="paramname">password</td><td>The initial password to set. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">isadmin=</td><td>(false) Set to true to give the user admin rights </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">displayName=</td><td>(0) Set a friendly name (spaces &amp; special characters are ok). If not provided, username will be used instead. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>(0) Set to 1 to enable DEBUG messages </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.ms_createuser) This output dataset will contain the values from the JSON response (such as the id of the new user) <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">ID:best.   </th><th class="markdownTableHeadNone">DISPLAYNAME:$8.   </th><th class="markdownTableHeadNone">USERNAME:$8.   </th><th class="markdownTableHeadNone">ISACTIVE:best.   </th><th class="markdownTableHeadNone">ISADMIN:best.    </th></tr>
@@ -137,7 +138,6 @@ $(document).ready(function(){initNavTree('ms__createuser_8sas.html',''); initRes
 <td class="markdownTableBodyNone"><code>6</code>   </td><td class="markdownTableBodyNone"><code>New User</code>   </td><td class="markdownTableBodyNone"><code>newuser</code>   </td><td class="markdownTableBodyNone"><code>1</code>   </td><td class="markdownTableBodyNone"><code>0</code>   </td></tr>
 </table>
 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>(0) Set to 1 to enable DEBUG messages</td></tr>
   </table>
   </dd>
 </dl>
@@ -145,7 +145,12 @@ $(document).ready(function(){initNavTree('ms__createuser_8sas.html',''); initRes
 <ul>
 <li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
 <li><a class="el" href="mf__getuniquelibref_8sas.html" title="Returns an unused libref.">mf_getuniquelibref.sas</a> </li>
-<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
+<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a></li>
+</ul>
+<h4>Related Files </h4>
+<ul>
+<li>ms_createuser.test.sas </li>
+<li><a class="el" href="ms__getusers_8sas.html" title="Fetches the list of users from SASjs Server.">ms_getusers.sas</a> </li>
 </ul>
 
 <p class="definition">Definition in file <a class="el" href="ms__createuser_8sas_source.html">ms_createuser.sas</a>.</p>
