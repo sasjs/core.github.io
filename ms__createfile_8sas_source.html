@@ -172,48 +172,51 @@ $(document).ready(function(){initNavTree('ms__createfile_8sas_source.html',''); 
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>run;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>data _null_;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  file &amp;fname1;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  put <span class="stringliteral">&quot;Content-Type: multipart/form-data; boundary=&amp;boundary&quot;</span>;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>run;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>%<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  data _null_;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    infile &amp;fname0;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    input;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    put _infile_;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  data _null_;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    infile &amp;fname1;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    input;</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    put _infile_;</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  run;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>%end;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>proc http method=<span class="stringliteral">&#39;POST&#39;</span> in=&amp;fname0 headerin=&amp;fname1 out=&amp;fname2</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  url=<span class="stringliteral">&quot;&amp;_sasjs_apiserverurl/SASjsApi/drive/file&quot;</span>;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>%<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  debug level=1;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>%end;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>run;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>%let statcd=0;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>data _null_;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  infile &amp;fname2;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  input;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  putlog _infile_;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <span class="keywordflow">if</span> _infile_=<span class="stringliteral">&#39;{&quot;status&quot;:&quot;success&quot;}&#39;</span> then call symputx(<span class="stringliteral">&#39;statcd&#39;</span>,1,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="keywordflow">else</span> call symputx(<span class="stringliteral">&#39;msg&#39;</span>,_infile_,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>run;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>%mp_abort(</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  iftrue=(&amp;statcd=0)</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  ,mac=ms_createfile.sas</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  ,msg=%superq(msg)</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>)</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">/* reset options */</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>options &amp;optval;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  file &amp;fname1 lrecl=1000;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  infile <span class="stringliteral">&quot;&amp;_sasjs_tokenfile&quot;</span> lrecl=1000;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  input;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  put <span class="stringliteral">&quot;Content-Type: multipart/form-data; boundary=&amp;boundary&quot;</span>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  put <span class="stringliteral">&quot;Authorization: Bearer &quot;</span> _infile_;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>run;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>%<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  data _null_;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    infile &amp;fname0;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    input;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    put _infile_;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  data _null_;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    infile &amp;fname1;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    input;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    put _infile_;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  run;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>%end;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>proc http method=<span class="stringliteral">&#39;POST&#39;</span> in=&amp;fname0 headerin=&amp;fname1 out=&amp;fname2</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  url=<span class="stringliteral">&quot;&amp;_sasjs_apiserverurl/SASjsApi/drive/file&quot;</span>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>%<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  debug level=1;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>%end;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>run;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>%let statcd=0;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>data _null_;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  infile &amp;fname2;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  input;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  putlog _infile_;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  <span class="keywordflow">if</span> _infile_=<span class="stringliteral">&#39;{&quot;status&quot;:&quot;success&quot;}&#39;</span> then call symputx(<span class="stringliteral">&#39;statcd&#39;</span>,1,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <span class="keywordflow">else</span> call symputx(<span class="stringliteral">&#39;msg&#39;</span>,_infile_,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>run;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>%mp_abort(</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  iftrue=(&amp;statcd=0)</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  ,mac=ms_createfile.sas</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  ,msg=%superq(msg)</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>)</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>%mend ms_createfile;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">/* reset options */</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>options &amp;optval;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>%mend ms_createfile;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
