@@ -5,6 +5,7 @@ var dir_41e1742e44e2de38b3bc91f993fed282 =
     [ "ms_createuser.sas", "ms__createuser_8sas.html", null ],
     [ "ms_deletefile.sas", "ms__deletefile_8sas.html", null ],
     [ "ms_getfile.sas", "ms__getfile_8sas.html", null ],
+    [ "ms_getusers.sas", "ms__getusers_8sas.html", null ],
     [ "ms_runstp.sas", "ms__runstp_8sas.html", null ],
     [ "ms_webout.sas", "ms__webout_8sas.html", null ]
 ];

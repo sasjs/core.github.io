@@ -156,13 +156,13 @@ $(document).ready(function(){initNavTree('ms__createuser_8sas_source.html',''); 
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>%mp_abort(</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  iftrue=(&amp;syscc ne 0)</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  ,mac=ms_createuser.sas</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  ,msg=%superq(syscc=&amp;syscc on macro entry)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  ,msg=%str(syscc=&amp;syscc on macro entry)</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>)</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>%local fname0 fname1 fname2 libref optval rc msg;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>%let fname0=%mf_getuniquefileref();</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>%let fname1=%mf_getuniquefileref();</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>%let fname2=%mf_getuniquefileref();</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>%local fref0 fref1 fref2 libref optval rc msg;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>%let fref0=%mf_getuniquefileref();</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>%let fref1=%mf_getuniquefileref();</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>%let fref2=%mf_getuniquefileref();</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>%let libref=%mf_getuniquelibref();</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">/* avoid sending bom marker to API */</span></div>
@@ -170,7 +170,7 @@ $(document).ready(function(){initNavTree('ms__createuser_8sas_source.html',''); 
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>options nobomfile;</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>data _null_;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  file &amp;fname0 termstr=crlf;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  file &amp;fref0 termstr=crlf;</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  username=quote(cats(symget(<span class="stringliteral">&#39;username&#39;</span>)));</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  password=quote(cats(symget(<span class="stringliteral">&#39;password&#39;</span>)));</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  isadmin=symget(<span class="stringliteral">&#39;isadmin&#39;</span>);</div>
@@ -190,7 +190,7 @@ $(document).ready(function(){initNavTree('ms__createuser_8sas_source.html',''); 
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>run;</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>data _null_;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  file &amp;fname1 lrecl=1000;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  file &amp;fref1 lrecl=1000;</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  infile <span class="stringliteral">&quot;&amp;_sasjs_tokenfile&quot;</span> lrecl=1000;</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  input;</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  put <span class="stringliteral">&quot;Authorization: Bearer &quot;</span> _infile_;</div>
@@ -200,17 +200,17 @@ $(document).ready(function(){initNavTree('ms__createuser_8sas_source.html',''); 
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>%<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  data _null_;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    infile &amp;fname0;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    infile &amp;fref0;</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    input;</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    put _infile_;</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  data _null_;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    infile &amp;fname1;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    infile &amp;fref1;</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    input;</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    put _infile_;</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  run;</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>%end;</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>proc http method=<span class="stringliteral">&#39;POST&#39;</span> in=&amp;fname0 headerin=&amp;fname1 out=&amp;fname2</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>proc http method=<span class="stringliteral">&#39;POST&#39;</span> in=&amp;fref0 headerin=&amp;fref1 out=&amp;fref2</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  url=<span class="stringliteral">&quot;&amp;_sasjs_apiserverurl/SASjsApi/user&quot;</span>;</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>%<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  debug level=1;</div>
@@ -220,10 +220,10 @@ $(document).ready(function(){initNavTree('ms__createuser_8sas_source.html',''); 
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>%mp_abort(</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  iftrue=(&amp;syscc ne 0)</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  ,mac=ms_createuser.sas</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  ,msg=%superq(Issue submitting query to SASjsApi/user)</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  ,msg=%str(Issue submitting query to SASjsApi/user)</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>)</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>libname &amp;libref JSON fileref=&amp;fname2;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>libname &amp;libref JSON fileref=&amp;fref2;</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>data &amp;outds;</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  <span class="keyword">set</span> &amp;libref..root;</div>
@@ -234,7 +234,7 @@ $(document).ready(function(){initNavTree('ms__createuser_8sas_source.html',''); 
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>%mp_abort(</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  iftrue=(&amp;syscc ne 0)</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  ,mac=ms_createuser.sas</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  ,msg=%superq(Issue reading response JSON)</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  ,msg=%str(Issue reading response JSON)</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>)</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">/* reset options */</span></div>
