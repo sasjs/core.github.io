@@ -56,6 +56,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_assertscope.sas", "mp__assertscope_8sas.html", null ],
     [ "mp_base64copy.sas", "mp__base64copy_8sas.html", null ],
     [ "mp_binarycopy.sas", "mp__binarycopy_8sas.html", null ],
+    [ "mp_chop.sas", "mp__chop_8sas.html", null ],
     [ "mp_cleancsv.sas", "mp__cleancsv_8sas.html", null ],
     [ "mp_cntlout.sas", "mp__cntlout_8sas.html", null ],
     [ "mp_copyfolder.sas", "mp__copyfolder_8sas.html", null ],

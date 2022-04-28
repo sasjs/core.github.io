@@ -131,7 +131,8 @@ $(document).ready(function(){initNavTree('mf__getuniquefileref_8sas.html',''); i
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">prefix=</td><td>(_) first part of fileref. Remember that filerefs can only be 8 characters, so a 7 letter prefix would mean <code>maxtries</code> should be 10. if using zero (0) as the prefix, a native assignment is used. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">maxtries=</td><td>(1000) the last part of the libref. Must be an integer.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">maxtries=</td><td>(1000) the last part of the libref. Must be an integer. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lrecl=</td><td>(32767) Provide a default lrecl with which to initialise the generated fileref.</td></tr>
   </table>
   </dd>
 </dl>

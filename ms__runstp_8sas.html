@@ -125,13 +125,41 @@ $(document).ready(function(){initNavTree('ms__runstp_8sas.html',''); initResizab
     <tr><td class="paramdir">[in]</td><td class="paramname">pgm</td><td>The full path to the Stored Program in SASjs Drive (_program parameter) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">debug=</td><td>(131) The value to supply to the _debug URL parameter </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>(0) Set to 1 to enable DEBUG messages </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>(outweb) The output fileref to contain the response JSON (will be created using temp engine)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">inputparams=(&lt;em&gt;null&lt;/em&gt;)</td><td>A dataset containing name/value pairs in the following format: <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">name:$32   </th><th class="markdownTableHeadNone">value:$10000    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">stpmacname   </td><td class="markdownTableBodyNone">some value    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">mustbevalidname   </td><td class="markdownTableBodyNone">can be anything, oops, abort!!   </td></tr>
+</table>
+</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">inputfiles=</td><td>(<em>null</em>) A dataset containing fileref/name/filename in the following format: <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">fileref:$8   </th><th class="markdownTableHeadNone">name:$32   </th><th class="markdownTableHeadNone">filename:$256    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">someref   </td><td class="markdownTableBodyNone">some_name   </td><td class="markdownTableBodyNone">some_filename.xls    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">fref2   </td><td class="markdownTableBodyNone">another_file   </td><td class="markdownTableBodyNone">zyx_v2.csv   </td></tr>
+</table>
+</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>(outweb) The output fileref to contain the response JSON (will be created using temp engine) </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outlogds=</td><td>(<em>null</em>) Set to the name of a dataset to contain the log. Table format: <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">line:$2000    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">log line 1    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">log line 2   </td></tr>
+</table>
+</td></tr>
   </table>
   </dd>
 </dl>
 <h4>SAS Macros </h4>
 <ul>
 <li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
+<li><a class="el" href="mf__getuniquelibref_8sas.html" title="Returns an unused libref.">mf_getuniquelibref.sas</a> </li>
 <li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
 </ul>
 

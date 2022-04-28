@@ -181,7 +181,7 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas_source.html',''); ini
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>%<span class="keywordflow">if</span> &amp;action=OPEN %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  options nobomfile;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  data _null_;file &amp;jref encoding=<span class="stringliteral">&#39;utf-8&#39;</span> ;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  data _null_;file &amp;jref encoding=<span class="stringliteral">&#39;utf-8&#39;</span> lrecl=200;</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    put <span class="stringliteral">&#39;{&quot;PROCESSED_DTTM&quot; : &quot;&#39;</span> <span class="stringliteral">&quot;%sysfunc(datetime(),E8601DT26.6)&quot;</span> <span class="charliteral">&#39;&quot;&#39;</span>;</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  run;</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>%end;</div>

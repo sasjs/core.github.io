@@ -150,9 +150,17 @@ $(document).ready(function(){initNavTree('ml__gsubfile_8sas_source.html',''); in
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  put <span class="stringliteral">&#39;io.close(file) &#39;</span>;</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>run;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>%inc <span class="stringliteral">&quot;%sysfunc(pathname(work))/ml_gsubfile.lua&quot;</span> /source2;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>%mend ml_gsubfile;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">/* ensure big enough lrecl to avoid lua compilation issues */</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>%local optval;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>%let optval=%sysfunc(getoption(lrecl));</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>options lrecl=1024;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">/* execute the lua code by using a .lua extension */</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>%inc <span class="stringliteral">&quot;%sysfunc(pathname(work))/ml_gsubfile.lua&quot;</span> /source2;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>options lrecl=&amp;optval;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>%mend ml_gsubfile;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

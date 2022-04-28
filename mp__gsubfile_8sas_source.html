@@ -159,7 +159,7 @@ $(document).ready(function(){initNavTree('mp__gsubfile_8sas_source.html',''); in
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  outfile=0</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  %<span class="keywordflow">if</span> <span class="stringliteral">&quot;%substr(&amp;sysver,1,4)&quot;</span>=<span class="stringliteral">&quot;V.04&quot;</span> %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  %<span class="keywordflow">if</span> <span class="stringliteral">&quot;%substr(&amp;sysver.XX,1,4)&quot;</span>=<span class="stringliteral">&quot;V.04&quot;</span> %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    %put %str(ERR)OR: Viya 4 does not support the IO library in lua;</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    %<span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  %end;</div>

@@ -500,9 +500,17 @@ $(document).ready(function(){initNavTree('ml__json_8sas_source.html',''); initRe
 <div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>  put <span class="stringliteral">&#39;-- JSON.LUA ENDS HERE &#39;</span>;</div>
 <div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>run;</div>
 <div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span> </div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>%inc <span class="stringliteral">&quot;%sysfunc(pathname(work))/ml_json.lua&quot;</span> /source2;</div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span> </div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>%mend ml_json;</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span><span class="comment">/* ensure big enough lrecl to avoid lua compilation issues */</span></div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>%local optval;</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>%let optval=%sysfunc(getoption(lrecl));</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>options lrecl=1024;</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span> </div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span><span class="comment">/* execute the lua code by using a .lua extension */</span></div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>%inc <span class="stringliteral">&quot;%sysfunc(pathname(work))/ml_json.lua&quot;</span> /source2;</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span> </div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>options lrecl=&amp;optval;</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span> </div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>%mend ml_json;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
