@@ -179,8 +179,8 @@ $(document).ready(function(){initNavTree('ms__createfile_8sas_source.html',''); 
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  file &amp;fname1 lrecl=1000;</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  infile <span class="stringliteral">&quot;&amp;_sasjs_tokenfile&quot;</span> lrecl=1000;</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  input;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  put <span class="stringliteral">&quot;Content-Type: multipart/form-data; boundary=&amp;boundary&quot;</span>;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  put <span class="stringliteral">&quot;Authorization: Bearer &quot;</span> _infile_;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <span class="keywordflow">if</span> _n_=1 then put <span class="stringliteral">&quot;Content-Type: multipart/form-data; boundary=&amp;boundary&quot;</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  put _infile_;</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>run;</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>%<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
