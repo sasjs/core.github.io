@@ -178,7 +178,7 @@ $(document).ready(function(){initNavTree('mp__init_8sas_source.html',''); initRe
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  validvarname=V7         <span class="comment">/* avoid special characters etc in variable names */</span></div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  varinitchk=%str(ERR)OR  <span class="comment">/* avoid data mistakes from variable name typos   */</span></div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  varlenchk=%str(ERR)OR   <span class="comment">/* fail hard if truncation (data loss) can result */</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>%<span class="keywordflow">if</span> %substr(&amp;sysver,1,1) ne 4 %then %do;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>%<span class="keywordflow">if</span> <span class="stringliteral">&quot;%substr(&amp;sysver,1,1)&quot;</span> ne <span class="stringliteral">&quot;4&quot;</span> and <span class="stringliteral">&quot;%substr(&amp;sysver,1,1)&quot;</span> ne <span class="stringliteral">&quot;5&quot;</span> %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  noautocorrect           <span class="comment">/* disallow misspelled procedure names            */</span></div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  dsoptions=note2err      <span class="comment">/* undocumented - convert bad NOTEs to ERRs       */</span></div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>%end;</div>

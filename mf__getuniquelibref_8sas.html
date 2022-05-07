@@ -115,10 +115,13 @@ $(document).ready(function(){initNavTree('mf__getuniquelibref_8sas.html',''); in
 
 <p><a href="mf__getuniquelibref_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Use as follows:</p>
-<p >libname mclib0 (work); libname mclib1 (work); libname mclib2 (work);</p>
-<p >let libref=mf_getuniquelibref(); put &amp;=libref;</p>
-<p >which returns:</p>
+<div class="textblock"><p >Use as follows: </p><pre class="fragment">libname mclib0 (work);
+libname mclib1 (work);
+libname mclib2 (work);
+
+%let libref=%mf_getuniquelibref();
+%put &amp;=libref;
+</pre><p> which returns:</p>
 <blockquote class="doxtable">
 <p >mclib3 </p>
 </blockquote>

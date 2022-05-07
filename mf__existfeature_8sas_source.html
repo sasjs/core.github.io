@@ -141,7 +141,7 @@ $(document).ready(function(){initNavTree('mf__existfeature_8sas_source.html','')
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    %put No feature was requested <span class="keywordflow">for</span> detection;</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  %end;</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">if</span> &amp;feature=COLCONSTRAINTS %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    %<span class="keywordflow">if</span> %substr(&amp;sysver,1,1)=4 %then 0;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    %<span class="keywordflow">if</span> <span class="stringliteral">&quot;%substr(&amp;sysver,1,1)&quot;</span>=<span class="stringliteral">&quot;4&quot;</span> or <span class="stringliteral">&quot;%substr(&amp;sysver,1,1)&quot;</span>=<span class="stringliteral">&quot;5&quot;</span> %then 0;</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    %<span class="keywordflow">else</span> 1;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  %end;</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">if</span> &amp;feature=PROCLUA %then %<span class="keywordflow">do</span>;</div>

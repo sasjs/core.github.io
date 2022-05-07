@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('mp__streamfile_8sas.html',''); initRes
 
 <p><a href="mp__streamfile_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Will set headers using appropriate functions (SAS 9 vs Viya) and send content as a binary stream.</p>
+<div class="textblock"><p >Will set headers using appropriate functions per the server type (Viya, EBI, <a href="https://github.com/sasjs/server">SASjs Server</a>) and stream content using mp_binarycopy().</p>
 <p >Usage: </p><pre class="fragment">filename mc url
   "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %inc mc;
@@ -123,7 +123,14 @@ $(document).ready(function(){initNavTree('mp__streamfile_8sas.html',''); initRes
 %mp_streamfile(contenttype=csv,inloc=/some/where.txt,outname=myfile.txt)
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">contenttype=</td><td>(TEXT) Either TEXT, ZIP, CSV, EXCEL </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">contenttype=</td><td>(TEXT) Supported: <ul>
+<li>CSV </li>
+<li>EXCEL </li>
+<li>MARKDOWN </li>
+<li>TEXT </li>
+<li>ZIP Feel free to submit PRs to support more mime types! The official list is here: <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">https://www.iana.org/assignments/media-types/media-types.xhtml</a> </li>
+</ul>
+</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">inloc=</td><td>/path/to/file.ext to be sent </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">inref=</td><td>fileref of file to be sent (if provided, overrides <code>inloc</code>) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">iftrue=</td><td>(1=1) Provide a condition under which to execute. </td></tr>

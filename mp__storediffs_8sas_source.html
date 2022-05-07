@@ -236,7 +236,7 @@ $(document).ready(function(){initNavTree('mp__storediffs_8sas_source.html',''); 
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>data &amp;ds1;</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  <span class="keyword">set</span> &amp;dslist indsname=&amp;inds_auto;</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  &amp;hashkey=put(md5(catx(<span class="charliteral">&#39;|&#39;</span>,%mf_getquotedstr(&amp;key,quote=N))),$hex32.);</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  &amp;inds_keep=&amp;inds_auto;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  &amp;inds_keep=upcase(&amp;inds_auto);</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>proc sort;</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  by &amp;inds_keep &amp;hashkey;</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>run;</div>
@@ -271,8 +271,8 @@ $(document).ready(function(){initNavTree('mp__storediffs_8sas_source.html',''); 
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  tgtvar_nm=upcase(tgtvar_nm);</div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  <span class="keywordflow">if</span> tgtvar_nm in (%upcase(&amp;vlist));</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  <span class="keywordflow">if</span> &amp;inds_auto=<span class="stringliteral">&quot;&amp;ds2&quot;</span> then tgtvar_type=<span class="charliteral">&#39;N&#39;</span>;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> &amp;inds_auto=<span class="stringliteral">&quot;&amp;ds3&quot;</span> then tgtvar_type=<span class="charliteral">&#39;C&#39;</span>;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  <span class="keywordflow">if</span> upcase(&amp;inds_auto)=<span class="stringliteral">&quot;&amp;ds2&quot;</span> then tgtvar_type=<span class="charliteral">&#39;N&#39;</span>;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> upcase(&amp;inds_auto)=<span class="stringliteral">&quot;&amp;ds3&quot;</span> then tgtvar_type=<span class="charliteral">&#39;C&#39;</span>;</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  <span class="keywordflow">else</span> <span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    putlog <span class="stringliteral">&quot;%str(ERR)OR: unidentified vartype input!&quot;</span> &amp;inds_auto;</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    call symputx(<span class="stringliteral">&#39;syscc&#39;</span>,98);</div>

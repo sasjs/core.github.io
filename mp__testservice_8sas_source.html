@@ -398,16 +398,18 @@ $(document).ready(function(){initNavTree('mp__testservice_8sas_source.html','');
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>%end;</div>
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>%if &amp;mdebug=0 %then %do;</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>  filename &amp;webref clear;</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>  filename &amp;fref1 clear;</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>  filename &amp;fref2 clear;</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>%end;</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>%else %do;</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>  %put &amp;sysmacroname exit vars:;</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>  %put _local_;</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>%end;</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>%mend mp_testservice;</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>  filename &amp;fref1 clear;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>  %if &amp;platform ne SASJS %then %do;</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    filename &amp;fref2 clear;</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    filename &amp;webref clear;</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>  %end;</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>%end;</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>%else %do;</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>  %put &amp;sysmacroname exit vars:;</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>  %put _local_;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>%end;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>%mend mp_testservice;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
