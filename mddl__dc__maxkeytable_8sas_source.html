@@ -128,11 +128,20 @@ $(document).ready(function(){initNavTree('mddl__dc__maxkeytable_8sas_source.html
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>      max_key num label=</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="stringliteral">&#39;Integer representing current max RK or SK value in the KEYTABLE&#39;</span>,</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>      processed_dttm num format=E8601DT26.6</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        label=<span class="stringliteral">&#39;Datetime this value was last updated&#39;</span>,</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    constraint pk_mpe_maxkeyvalues</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        primary key(keytable));</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>%mend mddl_dc_maxkeytable;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        label=<span class="stringliteral">&#39;Datetime this value was last updated&#39;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  );</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  %local lib;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  %let libds=%upcase(&amp;libds);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  %<span class="keywordflow">if</span> %index(&amp;libds,.)=0 %then %let lib=WORK;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  %<span class="keywordflow">else</span> %let lib=%scan(&amp;libds,1,.);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  proc datasets lib=&amp;lib noprint;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    modify %scan(&amp;libds,-1,.);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    index create keytable /nomiss unique;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  quit;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>%mend mddl_dc_maxkeytable;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

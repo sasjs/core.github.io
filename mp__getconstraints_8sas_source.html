@@ -152,59 +152,75 @@ $(document).ready(function(){initNavTree('mp__getconstraints_8sas_source.html','
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>%let ds=%upcase(&amp;ds);</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"></span> </div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">  * Neither dictionary tables nor sashelp provides a constraint order column,</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">  * however they DO arrive in the correct order.  So, create the col.</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">  **/</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>%local vw;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>%let vw=%mf_getuniquename(prefix=mp_getconstraints_vw_);</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>data &amp;vw /view=&amp;vw;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keyword">set</span> sashelp.vcncolu;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  where table_catalog=<span class="stringliteral">&quot;&amp;lib&quot;</span>;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  <span class="comment">/* use retain approach to reset the constraint order with each constraint */</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  length tmp $1000;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  retain tmp;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  drop tmp;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keywordflow">if</span> tmp ne catx(<span class="charliteral">&#39;|&#39;</span>,table_catalog,table_name,constraint_name) then <span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    constraint_order=1;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  end;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keywordflow">else</span> constraint_order+1;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  tmp=catx(<span class="charliteral">&#39;|&#39;</span>,table_catalog, table_name,constraint_name);</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>run;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">/* must use SQL as proc datasets does not support length changes */</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>proc sql noprint;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>create table &amp;outds as</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  select upcase(a.TABLE_CATALOG) as libref</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    ,upcase(a.TABLE_NAME) as TABLE_NAME</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    ,a.constraint_type</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    ,a.constraint_name</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    ,b.column_name</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    ,b.constraint_order</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  from dictionary.TABLE_CONSTRAINTS a</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  left join &amp;vw  b</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  on upcase(a.TABLE_CATALOG)=upcase(b.TABLE_CATALOG)</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    and upcase(a.TABLE_NAME)=upcase(b.TABLE_NAME)</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    and a.constraint_name=b.constraint_name<span class="comment"></span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">  * We cannot apply this clause to the underlying dictionary table.  See:</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">  * https://communities.sas.com/t5/SAS-Programming/Unexpected-Where-Clause-behaviour-in-dictionary-TABLE/m-p/771554#M244867</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">  */</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  where calculated libref=&quot;&amp;lib&quot;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  %if &quot;&amp;ds&quot; ne &quot;&quot; %then %do;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    and upcase(a.TABLE_NAME)=&quot;&amp;ds&quot;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    and upcase(b.TABLE_NAME)=&quot;&amp;ds&quot;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  %end;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  order by libref, table_name, constraint_name, constraint_order</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  ;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">/* tidy up */</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>%mp_dropmembers(</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  &amp;vw,</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  iftrue=(&amp;mdebug=0)</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>)</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>%mend mp_getconstraints;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">  * Cater for environments where sashelp.vcncolu is not available</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">  */</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>%<span class="keywordflow">if</span> %sysfunc(exist(sashelp.vcncolu,view))=0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  proc sql;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  create table &amp;outds(</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      libref <span class="keywordtype">char</span>(8)</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    ,TABLE_NAME <span class="keywordtype">char</span>(32)</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    ,constraint_type <span class="keywordtype">char</span>(8)     label=<span class="stringliteral">&#39;Constraint Type&#39;</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    ,constraint_name <span class="keywordtype">char</span>(32)     label=<span class="stringliteral">&#39;Constraint Name&#39;</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    ,column_name <span class="keywordtype">char</span>(32)     label=<span class="stringliteral">&#39;Column&#39;</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    ,constraint_order num</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  );</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  %<span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>%end;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment"></span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">  * Neither dictionary tables nor sashelp provides a constraint order column,</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">  * however they DO arrive in the correct order.  So, create the col.</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">  **/</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>%local vw;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>%let vw=%mf_getuniquename(prefix=mp_getconstraints_vw_);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>data &amp;vw /view=&amp;vw;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keyword">set</span> sashelp.vcncolu;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  where table_catalog=<span class="stringliteral">&quot;&amp;lib&quot;</span>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="comment">/* use retain approach to reset the constraint order with each constraint */</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  length tmp $1000;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  retain tmp;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  drop tmp;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="keywordflow">if</span> tmp ne catx(<span class="charliteral">&#39;|&#39;</span>,table_catalog,table_name,constraint_name) then <span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    constraint_order=1;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  end;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <span class="keywordflow">else</span> constraint_order+1;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  tmp=catx(<span class="charliteral">&#39;|&#39;</span>,table_catalog, table_name,constraint_name);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>run;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">/* must use SQL as proc datasets does not support length changes */</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>proc sql noprint;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>create table &amp;outds as</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  select upcase(a.TABLE_CATALOG) as libref</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    ,upcase(a.TABLE_NAME) as TABLE_NAME</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    ,a.constraint_type</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    ,a.constraint_name</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    ,b.column_name</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    ,b.constraint_order</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  from dictionary.TABLE_CONSTRAINTS a</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  left join &amp;vw  b</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  on upcase(a.TABLE_CATALOG)=upcase(b.TABLE_CATALOG)</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    and upcase(a.TABLE_NAME)=upcase(b.TABLE_NAME)</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    and a.constraint_name=b.constraint_name<span class="comment"></span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">  * We cannot apply this clause to the underlying dictionary table.  See:</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">  * https://communities.sas.com/t5/SAS-Programming/Unexpected-Where-Clause-behaviour-in-dictionary-TABLE/m-p/771554#M244867</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">  */</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  where calculated libref=&quot;&amp;lib&quot;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  %if &quot;&amp;ds&quot; ne &quot;&quot; %then %do;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    and upcase(a.TABLE_NAME)=&quot;&amp;ds&quot;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    and upcase(b.TABLE_NAME)=&quot;&amp;ds&quot;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  %end;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  order by libref, table_name, constraint_name, constraint_order</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  ;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">/* tidy up */</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>%mp_dropmembers(</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  &amp;vw,</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  iftrue=(&amp;mdebug=0)</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>)</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>%mend mp_getconstraints;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

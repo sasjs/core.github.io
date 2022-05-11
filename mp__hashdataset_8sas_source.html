@@ -180,20 +180,24 @@ $(document).ready(function(){initNavTree('mp__hashdataset_8sas_source.html','');
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  %put %str(ERR)OR: Dataset &amp;libds is not a dataset;</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>%end;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>%<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  data &amp;outds(rename=(&amp;keyvar=hashkey) keep=&amp;keyvar)/nonote2err;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    length &amp;prevkeyvar &amp;keyvar $32;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    retain &amp;prevkeyvar <span class="stringliteral">&quot;%sysfunc(md5(%str(&amp;salt)),$hex32.)&quot;</span>;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keyword">set</span> &amp;libds end=&amp;lastvar;</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="comment">/* hash should include previous row */</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    &amp;keyvar=%mp_md5(</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>      cvars=%mf_getvarlist(&amp;libds,typefilter=C) &amp;prevkeyvar,</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>      nvars=%mf_getvarlist(&amp;libds,typefilter=N)</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    );</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    &amp;prevkeyvar=&amp;keyvar;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordflow">if</span> &amp;lastvar then output;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  run;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>%end;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>%mend mp_hashdataset;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  data &amp;outds(rename=(&amp;keyvar=hashkey) keep=&amp;keyvar)</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  %<span class="keywordflow">if</span> <span class="stringliteral">&quot;%substr(&amp;sysver,1,1)&quot;</span> ne <span class="stringliteral">&quot;4&quot;</span> and <span class="stringliteral">&quot;%substr(&amp;sysver,1,1)&quot;</span> ne <span class="stringliteral">&quot;5&quot;</span> %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    /nonote2err</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  %end;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  ;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    length &amp;prevkeyvar &amp;keyvar $32;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    retain &amp;prevkeyvar <span class="stringliteral">&quot;%sysfunc(md5(%str(&amp;salt)),$hex32.)&quot;</span>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keyword">set</span> &amp;libds end=&amp;lastvar;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="comment">/* hash should include previous row */</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    &amp;keyvar=%mp_md5(</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      cvars=%mf_getvarlist(&amp;libds,typefilter=C) &amp;prevkeyvar,</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>      nvars=%mf_getvarlist(&amp;libds,typefilter=N)</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    );</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    &amp;prevkeyvar=&amp;keyvar;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordflow">if</span> &amp;lastvar then output;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  run;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>%end;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>%mend mp_hashdataset;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

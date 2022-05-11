@@ -117,7 +117,7 @@ $(document).ready(function(){initNavTree('mp__ds2cards_8sas.html',''); initResiz
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Uses dataset attributes to convert all data into datalines. Running the generated file will rebuild the original dataset. Includes support for large decimals, binary data, PROCESSED_DTTM columns, and alternative encoding. If the input dataset is empty, the cards file will still be created.</p>
 <p >Additional support to generate a random sample and max rows.</p>
-<p >Usage: </p><pre class="fragment">%mp_ds2cards(base_ds=sashelp.class
+<p >Usage: </p><pre class="fragment">%mp_ds2cards(sashelp.class
   , tgt_ds=work.class
   , cards_file= "C:\temp\class.sas"
   , showlog=NO
@@ -130,7 +130,7 @@ $(document).ready(function(){initNavTree('mp__ds2cards_8sas.html',''); initResiz
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">base_ds=</td><td>Should be two level - eg work.blah. This is the table that is converted to a cards file. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">base_ds</td><td>Should be two level - eg work.blah. This is the table that is converted to a cards file. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">tgt_ds=</td><td>Table that the generated cards file would create. Optional - if omitted, will be same as BASE_DS. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">cards_file=</td><td>("%sysfunc(pathname(work))/cardgen.sas") Location in which to write the (.sas) cards file </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">maxobs=</td><td>(max) To limit output to the first <code>maxobs</code> observations, enter an integer here. </td></tr>

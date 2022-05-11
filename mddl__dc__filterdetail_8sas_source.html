@@ -120,22 +120,35 @@ $(document).ready(function(){initNavTree('mddl__dc__filterdetail_8sas_source.htm
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>%macro mddl_dc_filterdetail(libds=WORK.FILTER_DETAIL);</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  proc sql;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  create table &amp;libds(</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>      filter_hash <span class="keywordtype">char</span>(32) not <span class="keyword">null</span>,</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>      filter_line num not <span class="keyword">null</span>,</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>      group_logic <span class="keywordtype">char</span>(3) not <span class="keyword">null</span>,</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>      subgroup_logic <span class="keywordtype">char</span>(3) not <span class="keyword">null</span>,</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>      subgroup_id num not <span class="keyword">null</span>,</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>      variable_nm varchar(32) not <span class="keyword">null</span>,</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>      operator_nm varchar(12) not <span class="keyword">null</span>,</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>      raw_value varchar(4000) not <span class="keyword">null</span>,</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>      processed_dttm num not <span class="keyword">null</span> format=E8601DT26.6,</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    constraint pk_mpe_filteranytable</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>      primary key(filter_hash,filter_line)</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  );</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>%mend mddl_dc_filterdetail;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>%local nn lib;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>%<span class="keywordflow">if</span> <span class="stringliteral">&quot;%substr(&amp;sysver,1,1)&quot;</span> ne <span class="stringliteral">&quot;4&quot;</span> and <span class="stringliteral">&quot;%substr(&amp;sysver,1,1)&quot;</span> ne <span class="stringliteral">&quot;5&quot;</span> %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  %let nn=not <span class="keyword">null</span>;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>%end;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>%<span class="keywordflow">else</span> %let nn=;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  proc sql;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  create table &amp;libds(</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>      filter_hash <span class="keywordtype">char</span>(32) &amp;nn,</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>      filter_line num &amp;nn,</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>      group_logic <span class="keywordtype">char</span>(3) &amp;nn,</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>      subgroup_logic <span class="keywordtype">char</span>(3) &amp;nn,</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>      subgroup_id num &amp;nn,</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>      variable_nm varchar(32) &amp;nn,</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>      operator_nm varchar(12) &amp;nn,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>      raw_value varchar(4000) &amp;nn,</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>      processed_dttm num &amp;nn format=E8601DT26.6</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  );</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  %let libds=%upcase(&amp;libds);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  %<span class="keywordflow">if</span> %index(&amp;libds,.)=0 %then %let lib=WORK;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  %<span class="keywordflow">else</span> %let lib=%scan(&amp;libds,1,.);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  proc datasets lib=&amp;lib noprint;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    modify %scan(&amp;libds,-1,.);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    index create pk_mpe_filterdetail=(filter_hash filter_line)/nomiss unique;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  quit;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>%mend mddl_dc_filterdetail;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

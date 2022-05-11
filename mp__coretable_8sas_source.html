@@ -176,10 +176,11 @@ $(document).ready(function(){initNavTree('mp__coretable_8sas_source.html',''); i
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>%end;</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>%<span class="keywordflow">if</span> &amp;libds=0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  describe table &amp;syslast;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  drop table &amp;syslast;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>%end;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>%mend mp_coretable;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  proc sql;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  describe table &amp;syslast;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  drop table &amp;syslast;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>%end;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>%mend mp_coretable;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
