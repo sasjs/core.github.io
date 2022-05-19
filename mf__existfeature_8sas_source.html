@@ -151,12 +151,18 @@ $(document).ready(function(){initNavTree('mf__existfeature_8sas_source.html','')
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    %<span class="keywordflow">else</span> %<span class="keywordflow">if</span> <span class="stringliteral">&quot;&amp;SYSVLONG&quot;</span> &lt; <span class="stringliteral">&quot;9.04.01M3&quot;</span> %then 0;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    %<span class="keywordflow">else</span> 1;</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  %end;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    -1</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    %put &amp;sysmacroname: &amp;feature not found;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  %end;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>%mend mf_existfeature;<span class="comment"></span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">/** @endcond */</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">if</span> &amp;feature=EXPORTXLS %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="comment">/* is it possible to PROC EXPORT an excel file? */</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    %<span class="keywordflow">if</span> <span class="stringliteral">&quot;%substr(&amp;sysver,1,1)&quot;</span>=<span class="stringliteral">&quot;4&quot;</span> or <span class="stringliteral">&quot;%substr(&amp;sysver,1,1)&quot;</span>=<span class="stringliteral">&quot;5&quot;</span> %then 1;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    %<span class="keywordflow">else</span> %<span class="keywordflow">if</span> %sysfunc(sysprod(SAS/ACCESS Interface to PC Files)) = 1 %then 1;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    %<span class="keywordflow">else</span> 0;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  %end;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    -1</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    %put &amp;sysmacroname: &amp;feature not found;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  %end;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>%mend mf_existfeature;<span class="comment"></span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">/** @endcond */</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

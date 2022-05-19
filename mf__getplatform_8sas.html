@@ -116,7 +116,13 @@ $(document).ready(function(){initNavTree('mf__getplatform_8sas.html',''); initRe
 <p><a href="mf__getplatform_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Enables platform specific variables to be returned </p><pre class="fragment">%put %mf_getplatform();
-</pre><p> returns: SASMETA (or SASVIYA)</p>
+</pre><p> returns one of:</p>
+<ul>
+<li>SASMETA </li>
+<li>SASVIYA </li>
+<li>SASJS </li>
+<li>BASESAS</li>
+</ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">switch</td><td>the param for which to return a platform specific variable</td></tr>

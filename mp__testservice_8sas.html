@@ -110,36 +110,13 @@ $(document).ready(function(){initNavTree('mp__testservice_8sas.html',''); initRe
 </div><!--header-->
 <div class="contents">
 
-<p>Will execute a SASjs web service on SAS 9 or Viya.  
+<p>To be deprecated. Will execute a SASjs web service on SAS 9 or Viya.  
 <a href="#details">More...</a></p>
 
 <p><a href="mp__testservice_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Prepares the input files and retrieves the resulting datasets from the response JSON.</p>
-<p >Note - the _webout fileref should NOT be assigned prior to running this macro.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">program</td><td>The _PROGRAM endpoint to test </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">inputfiles=(0)</td><td>A list of space seperated fileref:filename pairs as follows: inputfiles=inref:filename inref2:filename2 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">inputdatasets=</td><td>(0) All datasets in this space seperated list are converted into SASJS-formatted CSVs (see <a class="el" href="mp__ds2csv_8sas.html" title="Export a dataset to a CSV file WITH leading blanks.">mp_ds2csv.sas</a>) files and added to the list of <code>inputfiles</code> for ingestion. The dataset will be sent with the same name (no need for a colon modifier). </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">inputparams=(0)</td><td>A dataset containing name/value pairs in the following format: <table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">name:$32   </th><th class="markdownTableHeadNone">value:$1000    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">stpmacname   </td><td class="markdownTableBodyNone">some value    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">mustbevalidname   </td><td class="markdownTableBodyNone">can be anything, oops, abort!!   </td></tr>
-</table>
-</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">debug=</td><td>(log) Provide the _debug value </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>(0) Set to 1 to provide macro debugging </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">viyaresult=</td><td>(WEBOUT_JSON) The Viya result type to return. For more info, see <a class="el" href="mv__getjobresult_8sas.html" title="Extract the result from a completed SAS Viya Job.">mv_getjobresult.sas</a> </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">viyacontext=</td><td>(SAS Job Execution compute context) The Viya compute context on which to run the service </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outlib=</td><td>(0) Output libref to contain the final tables. Set to 0 if the service output is not in JSON format. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>(0) Output fileref to create, to contain the full _webout response.</td></tr>
-  </table>
-  </dd>
-</dl>
+<div class="textblock"><p >Use the following macro instead (documentation can be found there):</p>
+<p >mx_testservice.sas</p>
 <h4>SAS Macros </h4>
 <ul>
 <li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
@@ -155,7 +132,7 @@ $(document).ready(function(){initNavTree('mp__testservice_8sas.html',''); initRe
 </ul>
 <h4>Related Programs </h4>
 <ul>
-<li><a class="el" href="mp__testservice_8test_8sas.html" title="Testing mp_testservice.sas macro.">mp_testservice.test.sas</a></li>
+<li>mp_testservice.test.sas</li>
 </ul>
 <dl class="section version"><dt>Version</dt><dd>9.4 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
