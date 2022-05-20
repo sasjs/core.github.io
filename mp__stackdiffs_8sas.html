@@ -200,7 +200,7 @@ In this case they are added to the <code>&amp;errDS.</code> table instead.  </td
 <div class="dotgraph">
 <img src="dot_inline_dotgraph_1.png" alt="dot_inline_dotgraph_1.png" border="0" usemap="#dot_inline_dotgraph_1.map"/>
 </div>
-<p >For examples of usage, check out the mp_stackdiffs.test.sas program.</p>
+<p >For examples of usage, check out the <a class="el" href="mp__stackdiffs_8test_8sas.html" title="Testing mp_storediffs macro.">mp_stackdiffs.test.sas</a> program.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">baselibds</td><td>Base Table against which the changes will be applied, in libref.dataset format. </td></tr>
@@ -235,7 +235,7 @@ In this case they are added to the <code>&amp;errDS.</code> table instead.  </td
 <h4>Related Macros </h4>
 <ul>
 <li><a class="el" href="mp__coretable_8sas.html" title="Create the permanent Core tables.">mp_coretable.sas</a> </li>
-<li>mp_stackdiffs.test.sas </li>
+<li><a class="el" href="mp__stackdiffs_8test_8sas.html" title="Testing mp_storediffs macro.">mp_stackdiffs.test.sas</a> </li>
 <li><a class="el" href="mp__storediffs_8sas.html" title="Converts deletes/changes/appends into a single audit table.">mp_storediffs.sas</a></li>
 </ul>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>The current approach assumes that a variable called KEY_HASH is not on the base table. This part will need to be refactored (eg using <a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a>) when such a use case arises.</dd></dl>

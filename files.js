@@ -8,5 +8,6 @@ var files =
     [ "metax", "dir_53de1256625febba12641a03c01ee14f.html", "dir_53de1256625febba12641a03c01ee14f" ],
     [ "server", "dir_41e1742e44e2de38b3bc91f993fed282.html", "dir_41e1742e44e2de38b3bc91f993fed282" ],
     [ "tests", "dir_59425e443f801f1f2fd8bbe4959a3ccf.html", "dir_59425e443f801f1f2fd8bbe4959a3ccf" ],
-    [ "viya", "dir_f3c9615c6d389fd64e9075885fcd8e6e.html", "dir_f3c9615c6d389fd64e9075885fcd8e6e" ]
+    [ "viya", "dir_f3c9615c6d389fd64e9075885fcd8e6e.html", "dir_f3c9615c6d389fd64e9075885fcd8e6e" ],
+    [ "xplatform", "dir_fbd73da3281f521ea3654e12eb2e19c2.html", "dir_fbd73da3281f521ea3654e12eb2e19c2" ]
 ];

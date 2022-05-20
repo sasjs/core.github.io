@@ -110,52 +110,16 @@ $(document).ready(function(){initNavTree('mp__createwebservice_8sas.html',''); i
 </div><!--header-->
 <div class="contents">
 
-<p>Create a web service in SAS 9 or Viya.  
+<p>Create a web service in SAS 9, Viya or SASjs Server.  
 <a href="#details">More...</a></p>
 
 <p><a href="mp__createwebservice_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Creates a SASJS ready Stored Process in SAS 9 or Job Execution Service in SAS Viya</p>
-<p >Usage: </p><pre class="fragment">%* compile macros ;
-filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
-%inc mc;
-
-%* write some code;
-filename ft15f001 temp;
-parmcards4;
-    %* fetch any data from frontend ;
-    %webout(FETCH)
-    data example1 example2;
-      set sashelp.class;
-    run;
-    %* send data back;
-    %webout(OPEN)
-    %webout(ARR,example1) * Array format, fast, suitable for large tables ;
-    %webout(OBJ,example2) * Object format, easier to work with ;
-    %webout(CLOSE)
-;;;;
-%mp_createwebservice(path=/Public/app/common,name=appInit,replace=YES)
-</pre> <h4>SAS Macros </h4>
+<div class="textblock"><p >This is actually a wrapper for <a class="el" href="mx__createwebservice_8sas.html" title="Create a web service in SAS 9, Viya or SASjs.">mx_createwebservice.sas</a>, remaining for legacy purposes. For new apps, use <a class="el" href="mx__createwebservice_8sas.html" title="Create a web service in SAS 9, Viya or SASjs.">mx_createwebservice.sas</a>.</p>
+<h4>SAS Macros </h4>
 <ul>
-<li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
-<li><a class="el" href="mm__createwebservice_8sas.html" title="Create a Web Ready Stored Process.">mm_createwebservice.sas</a> </li>
-<li><a class="el" href="ms__createwebservice_8sas.html" title="Create a Web-Ready Stored Program.">ms_createwebservice.sas</a> </li>
-<li><a class="el" href="mv__createwebservice_8sas.html" title="Creates a JobExecution web service if it doesn&#39;t already exist.">mv_createwebservice.sas</a></li>
+<li><a class="el" href="mx__createwebservice_8sas.html" title="Create a web service in SAS 9, Viya or SASjs.">mx_createwebservice.sas</a> </li>
 </ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">path=</td><td>The full folder path where the service will be created </td></tr>
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">name=</td><td>Service name. Avoid spaces. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">desc=</td><td>The description of the service (optional) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">precode=</td><td>Space separated list of filerefs, pointing to the code that needs to be attached to the beginning of the service (optional) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">code=</td><td>(ft15f001) Space seperated fileref(s) of the actual code to be added </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">replace=</td><td>(YES) Select YES to replace any existing service in that location </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mDebug=</td><td>(0) set to 1 to show debug messages in the log</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="mp__createwebservice_8sas_source.html">mp_createwebservice.sas</a>.</p>
 </div></div><!-- contents -->
