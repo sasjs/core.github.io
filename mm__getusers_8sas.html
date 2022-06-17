@@ -117,6 +117,7 @@ $(document).ready(function(){initNavTree('mm__getusers_8sas.html',''); initResiz
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Only shows a limited number of attributes as some sites will have a LOT of users.</p>
 <p >Usage: </p><pre class="fragment">%mm_getusers()
+</pre><p> Optionally, filter for a user (useful to get the uri): </p><pre class="fragment">%mm_getusers(user=&amp;_metaperson)
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">outds</td><td>the dataset to create that contains the list of libraries</td></tr>
@@ -128,10 +129,13 @@ $(document).ready(function(){initNavTree('mm__getusers_8sas.html',''); initResiz
 <li>name</li>
 </ul>
 </dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>The following filenames are created and then de-assigned: <pre class="fragment">filename sxlemap clear;
-filename response clear;
-libname _XML_ clear;
-</pre> </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user=</td><td>(0) Set to a metadata user to filter on that user </td></tr>
+    <tr><td class="paramname">outds=</td><td>(work.mm_getusers) The output table to create</td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section version"><dt>Version</dt><dd>9.3 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
