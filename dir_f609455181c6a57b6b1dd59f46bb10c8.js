@@ -1,6 +1,7 @@
 var dir_f609455181c6a57b6b1dd59f46bb10c8 =
 [
     [ "mfs_httpheader.test.sas", "mfs__httpheader_8test_8sas.html", null ],
+    [ "ms_adduser2group.test.sas", "ms__adduser2group_8test_8sas.html", null ],
     [ "ms_createfile.test.sas", "ms__createfile_8test_8sas.html", null ],
     [ "ms_creategroup.test.sas", "ms__creategroup_8test_8sas.html", null ],
     [ "ms_createuser.test.sas", "ms__createuser_8test_8sas.html", null ],

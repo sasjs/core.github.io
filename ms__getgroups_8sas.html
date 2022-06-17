@@ -115,11 +115,13 @@ $(document).ready(function(){initNavTree('ms__getgroups_8sas.html',''); initResi
 
 <p><a href="ms__getgroups_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Fetches the list of groups from SASjs Server and writes them to an output dataset.</p>
+<div class="textblock"><p >Fetches the list of groups from SASjs Server and writes them to an output dataset. Provide a username to filter for the groups for a particular user.</p>
 <p >Example: </p><pre class="fragment">%ms_getgroups(outds=userlist)
+</pre><p> With filter: </p><pre class="fragment">%ms_getgroups(outds=userlist, user=James)
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>(0) Set to 1 to enable DEBUG messages </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">user=</td><td>(0) Provide the username on which to filter </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.ms_getgroups) This output dataset will contain the list of groups. Format: <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">NAME:$32.   </th><th class="markdownTableHeadNone">DESCRIPTION:$64.   </th><th class="markdownTableHeadNone">GROUPID:best.    </th></tr>
@@ -143,7 +145,7 @@ $(document).ready(function(){initNavTree('ms__getgroups_8sas.html',''); initResi
 <h4>Related Files </h4>
 <ul>
 <li><a class="el" href="ms__creategroup_8sas.html" title="Creates a group on SASjs Server.">ms_creategroup.sas</a> </li>
-<li><a class="el" href="ms__getusers_8test_8sas.html" title="Testing ms_getusers.sas macro.">ms_getusers.test.sas</a> </li>
+<li><a class="el" href="ms__getgroups_8test_8sas.html" title="Testing ms_getgroups.sas macro.">ms_getgroups.test.sas</a> </li>
 </ul>
 
 <p class="definition">Definition in file <a class="el" href="ms__getgroups_8sas_source.html">ms_getgroups.sas</a>.</p>

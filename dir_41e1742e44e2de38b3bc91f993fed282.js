@@ -1,6 +1,7 @@
 var dir_41e1742e44e2de38b3bc91f993fed282 =
 [
     [ "mfs_httpheader.sas", "mfs__httpheader_8sas.html", null ],
+    [ "ms_adduser2group.sas", "ms__adduser2group_8sas.html", null ],
     [ "ms_createfile.sas", "ms__createfile_8sas.html", null ],
     [ "ms_creategroup.sas", "ms__creategroup_8sas.html", null ],
     [ "ms_createuser.sas", "ms__createuser_8sas.html", null ],

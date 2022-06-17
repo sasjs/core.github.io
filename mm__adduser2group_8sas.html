@@ -116,17 +116,21 @@ $(document).ready(function(){initNavTree('mm__adduser2group_8sas.html',''); init
 <p><a href="mm__adduser2group_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Adds a user to a metadata group. The macro first checks whether the user is in that group, and if not, the user is added.</p>
+<p >Note that the macro does not check inherited group memberships - it looks at direct members only.</p>
 <p >Usage: </p><pre class="fragment">%mm_adduser2group(user=sasdemo
   ,group=someGroup)
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">user=</td><td>the user name (not displayname) </td></tr>
     <tr><td class="paramname">group=</td><td>the group to which to add the user </td></tr>
-    <tr><td class="paramname">mdebug=</td><td>set to 1 to show debug info in log</td></tr>
+    <tr><td class="paramname">mdebug=</td><td>(0) set to 1 to show debug info in log</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section warning"><dt>Warning</dt><dd>the macro does not check inherited group memberships - it looks at direct members only</dd></dl>
+<h4>Related Files </h4>
+<ul>
+<li><a class="el" href="ms__adduser2group_8sas.html" title="Adds a user to a group on SASjs Server.">ms_adduser2group.sas</a></li>
+</ul>
 <dl class="section version"><dt>Version</dt><dd>9.3 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
