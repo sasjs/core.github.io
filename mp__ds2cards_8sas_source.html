@@ -162,7 +162,7 @@ $(document).ready(function(){initNavTree('mp__ds2cards_8sas_source.html',''); in
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">  @cond</span></div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">**/</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>%macro mp_ds2cards(base_ds=, tgt_ds=</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>%macro mp_ds2cards(base_ds, tgt_ds=</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    ,cards_file=<span class="stringliteral">&quot;%sysfunc(pathname(work))/cardgen.sas&quot;</span></div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    ,maxobs=max</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    ,random_sample=NO</div>
@@ -365,40 +365,41 @@ $(document).ready(function(){initNavTree('mp__ds2cards_8sas_source.html',''); in
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        ;</div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>      %end;</div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>      put &quot;;&quot;;</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>      put &quot;datalines4;&quot;;</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    end;</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>  end;</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>  set &amp;setds end=__lastobs nobs=__nobs;</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="comment">/* remove all formats for write purposes - some have long underlying decimals */</span></div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>  format _numeric_ best30.29;</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>  length __dataline $32767;</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>  __dataline=catq(&#39;cqtmb&#39;,&amp;datalines);</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>  put __dataline;</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>  if __lastobs then do;</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    put &#39;;;;;&#39;;</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    put &#39;run;&#39;;</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    put &#39;<span class="comment">/** @endcond **/</span>&#39;;</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    stop;</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>  end;</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>run;</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>proc sql;</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>  drop table &amp;setds;</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>quit;</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>%if &amp;showlog=YES %then %do;</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>  data _null_;</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    infile &amp;cards_file lrecl=32767;</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    input;</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    put _infile_;</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>  run;</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>%end;</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>%put NOTE: CARDS FILE SAVED IN:;</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>%put NOTE-;%put NOTE-;</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>%put NOTE- %sysfunc(dequote(&amp;cards_file.));</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>%put NOTE-;%put NOTE-;</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>%mend mp_ds2cards;<span class="comment"></span></div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span><span class="comment">/** @endcond **/</span></div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>      put &#39;missing a b c d e f g h i j k l m n o p q r s t u v w x y z _;&#39;;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>      put &quot;datalines4;&quot;;</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    end;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>  end;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>  set &amp;setds end=__lastobs nobs=__nobs;</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span><span class="comment">/* remove all formats for write purposes - some have long underlying decimals */</span></div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>  format _numeric_ best30.29;</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>  length __dataline $32767;</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>  __dataline=catq(&#39;cqtmb&#39;,&amp;datalines);</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>  put __dataline;</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>  if __lastobs then do;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    put &#39;;;;;&#39;;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    put &#39;run;&#39;;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    put &#39;<span class="comment">/** @endcond **/</span>&#39;;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    stop;</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>  end;</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>run;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>proc sql;</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>  drop table &amp;setds;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>quit;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span> </div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>%if &amp;showlog=YES %then %do;</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>  data _null_;</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    infile &amp;cards_file lrecl=32767;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    input;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    put _infile_;</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>  run;</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>%end;</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span> </div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>%put NOTE: CARDS FILE SAVED IN:;</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>%put NOTE-;%put NOTE-;</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>%put NOTE- %sysfunc(dequote(&amp;cards_file.));</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>%put NOTE-;%put NOTE-;</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>%mend mp_ds2cards;<span class="comment"></span></div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span><span class="comment">/** @endcond **/</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
