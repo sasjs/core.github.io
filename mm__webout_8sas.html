@@ -115,8 +115,9 @@ $(document).ready(function(){initNavTree('mm__webout_8sas.html',''); initResizab
 
 <p><a href="mm__webout_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >This macro should be added to the start of each Stored Process, immediately** followed by a call to: </p><pre class="fragment">%mm_webout(FETCH)
-</pre><p> This will read all the input data and create same-named SAS datasets in the WORK library. You can then insert your code, and send data back using the following syntax: </p><pre class="fragment">data some datasets; * make some data ;
+<div class="textblock"><p >This macro should be added to the start of each Stored Process, immediately** followed by a call to:</p>
+<p >mm_webout(FETCH)</p>
+<p >This will read all the input data and create same-named SAS datasets in the WORK library. You can then insert your code, and send data back using the following syntax: </p><pre class="fragment">data some datasets; * make some data ;
 retain some columns;
 run;
 
@@ -136,6 +137,10 @@ run;
   </table>
   </dd>
 </dl>
+<h4>SAS Macros </h4>
+<ul>
+<li><a class="el" href="mp__jsonout_8sas.html" title="Writes JSON in SASjs format to a fileref.">mp_jsonout.sas</a></li>
+</ul>
 <dl class="section version"><dt>Version</dt><dd>9.3 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 

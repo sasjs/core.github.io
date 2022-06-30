@@ -115,7 +115,9 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas.html',''); initResiza
 
 <p><a href="mp__jsonout_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >PROC JSON is faster but will produce errs like the ones below if special chars are encountered.</p>
+<div class="textblock"><p >This macro can be used to OPEN a JSON stream and send one or more tables as arrays of rows, where each row can be an object or a nested array.</p>
+<p >There are two engines available - DATASTEP or PROCJSON.</p>
+<p >PROC JSON is fast but will produce errs like the ones below if special chars are encountered.</p>
 <blockquote class="doxtable">
 <p >&zwj;(ERR)OR: Some code points did not transcode. </p>
 </blockquote>
@@ -126,6 +128,7 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas.html',''); initResiza
 <p >&zwj;Date value out of range </p>
 </blockquote>
 <p>If this happens, try running with ENGINE=DATASTEP.</p>
+<p >The DATASTEP engine is used to handle special SAS missing numerics, and can also convert entire datasets to formatted values. Output JSON is always in UTF-8.</p>
 <p >Usage: </p><pre class="fragment">  filename tmp temp;
   data class; set sashelp.class;run;
 

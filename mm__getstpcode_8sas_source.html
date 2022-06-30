@@ -169,7 +169,7 @@ $(document).ready(function(){initNavTree('mm__getstpcode_8sas_source.html',''); 
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    cnt=1;</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">do</span> <span class="keywordflow">while</span> (metadata_getnasn(uri,<span class="stringliteral">&quot;Notes&quot;</span>,cnt,tsuri)&gt;0);</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>      rc=metadata_getattr(tsuri,<span class="stringliteral">&quot;Name&quot;</span>,value);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      put tsuri= value=;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      &amp;mD.put tsuri= value=;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>      <span class="keywordflow">if</span> value=<span class="stringliteral">&quot;SourceCode&quot;</span> then <span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="comment">/* found it! */</span></div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        rc=metadata_getattr(tsuri,<span class="stringliteral">&quot;Id&quot;</span>,value);</div>
