@@ -134,7 +134,7 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas.html',''); initResiza
 
   %mp_jsonout(OPEN,jref=tmp)
   %mp_jsonout(OBJ,class,jref=tmp)
-  %mp_jsonout(OBJ,class,dslabel=class2,jref=tmp,showmeta=YES)
+  %mp_jsonout(OBJ,class,dslabel=class2,jref=tmp,showmeta=Y)
   %mp_jsonout(CLOSE,jref=tmp)
 
   data _null_;
@@ -161,7 +161,8 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas.html',''); initResiza
 </ul>
 </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">missing=</td><td>(NULL) Special numeric missing values can be sent as NULL (eg <code>null</code>) or as STRING values (eg <code>".a"</code> or <code>".b"</code>) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">showmeta=</td><td>(NO) Set to YES to output metadata alongside each table, such as the column formats and types. The metadata is contained inside an object with the same name as the table but prefixed with a dollar sign - ie, <code>,"$tablename":{"formats":{"col1":"$CHAR1"},"types":{"COL1":"C"}}</code></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">showmeta=</td><td>(N) Set to Y to output metadata alongside each table, such as the column formats and types. The metadata is contained inside an object with the same name as the table but prefixed with a dollar sign - ie, <code>,"$tablename":{"formats":{"col1":"$CHAR1"},"types":{"COL1":"C"}}</code> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">maxobs=</td><td>(MAX) Provide an integer to limit the number of input rows that should be converted to JSON</td></tr>
   </table>
   </dd>
 </dl>

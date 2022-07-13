@@ -19,6 +19,7 @@ var dir_a49f9b051925a4cbbe82ac92a0123656 =
     [ "mf_getuniquelibref.test.sas", "mf__getuniquelibref_8test_8sas.html", null ],
     [ "mf_getvarcount.test.sas", "mf__getvarcount_8test_8sas.html", null ],
     [ "mf_getvarlist.test.sas", "mf__getvarlist_8test_8sas.html", null ],
+    [ "mf_increment.test.sas", "mf__increment_8test_8sas.html", null ],
     [ "mf_isint.test.sas", "mf__isint_8test_8sas.html", null ],
     [ "mf_islibds.test.sas", "mf__islibds_8test_8sas.html", null ],
     [ "mf_verifymacvars.test.sas", "mf__verifymacvars_8test_8sas.html", null ],
