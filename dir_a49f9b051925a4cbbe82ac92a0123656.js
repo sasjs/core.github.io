@@ -36,6 +36,7 @@ var dir_a49f9b051925a4cbbe82ac92a0123656 =
     [ "mp_base64copy.test.sas", "mp__base64copy_8test_8sas.html", null ],
     [ "mp_binarycopy.test.sas", "mp__binarycopy_8test_8sas.html", null ],
     [ "mp_chop.test.sas", "mp__chop_8test_8sas.html", null ],
+    [ "mp_cleancsv.test.sas", "mp__cleancsv_8test_8sas.html", null ],
     [ "mp_cntlout.test.sas", "mp__cntlout_8test_8sas.html", null ],
     [ "mp_copyfolder.test.sas", "mp__copyfolder_8test_8sas.html", null ],
     [ "mp_coretable.test.sas", "mp__coretable_8test_8sas.html", null ],
