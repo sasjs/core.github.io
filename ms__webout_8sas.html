@@ -145,10 +145,12 @@ run;
     <tr><td class="paramdir">[in]</td><td class="paramname">action</td><td>Either FETCH, OPEN, ARR, OBJ or CLOSE </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ds</td><td>The dataset to send back to the frontend </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">dslabel=</td><td>value to use instead of table name for sending to JSON </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">fmt=</td><td>(Y) Set to N to send back unformatted values </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fmt=</td><td>(N) Setting Y converts all vars to their formatted values </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">fref=</td><td>(_webout) The fileref to which to write the JSON </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">missing=</td><td>(NULL) Special numeric missing values can be sent as NULL (eg <code>null</code>) or as STRING values (eg <code>".a"</code> or <code>".b"</code>) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">showmeta=</td><td>(N) Set to Y to output metadata alongside each table, such as the column formats and types. The metadata is contained inside an object with the same name as the table but prefixed with a dollar sign - ie, <code>,"$tablename":{"formats":{"col1":"$CHAR1"},"types":{"COL1":"C"}}</code></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">showmeta=</td><td>(N) Set to Y to output metadata alongside each table, such as the column formats and types. The metadata is contained inside an object with the same name as the table but prefixed with a dollar sign - ie, <code>,"$tablename":{"formats":{"col1":"$CHAR1"},"types":{"COL1":"C"}}</code> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">workobs=</td><td>(0) When set to a positive integer, will create a new output object (WORK) which contains this number of observations from all tables in the WORK library. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">maxobs=</td><td>(MAX) Provide an integer to limit the number of input rows that should be converted to output JSON</td></tr>
   </table>
   </dd>
 </dl>

@@ -126,14 +126,17 @@ $(document).ready(function(){initNavTree('mp__perflog_8sas.html',''); initResiza
 </div><!--header-->
 <div class="contents">
 
-<p>Logs the time the macro was executed in a control dataset.  
+<p>Logs a message in a dataset every time it is invoked.  
 <a href="#details">More...</a></p>
 
 <p><a href="mp__perflog_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >If the dataset does not exist, it is created. Usage:</p>
-<p >mp_perflog(started) mp_perflog() mp_perflog(startanew,libds=work.newdataset) mp_perflog(finished,libds=work.newdataset) mp_perflog(finished)</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<div class="textblock"><p >If the dataset does not exist, it is created. Usage: </p><pre class="fragment">%mp_perflog(started)
+%mp_perflog()
+%mp_perflog(startanew,libds=work.newdataset)
+%mp_perflog(finished,libds=work.newdataset)
+%mp_perflog(finished)
+</pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">label</td><td>Provide label to go into the control dataset </td></tr>
     <tr><td class="paramname">libds=</td><td>Provide a dataset in which to store performance stats. Default name is <code>work.mp_perflog</code>;</td></tr>
