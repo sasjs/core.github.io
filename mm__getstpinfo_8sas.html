@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Macros for SAS Application Developers" />
   <meta name="og:description" content="Macros for SAS Application Developers" />
-  <title>base/mp_jsonout.sas File Reference</title>
+  <title>meta/mm_getstpinfo.sas File Reference</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="dynsections.js"></script>
@@ -103,7 +103,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('mp__jsonout_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mm__getstpinfo_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,74 +122,39 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas.html',''); initResiza
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">mp_jsonout.sas File Reference</div></div>
+  <div class="headertitle"><div class="title">mm_getstpinfo.sas File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Writes JSON in SASjs format to a fileref.  
+<p>Get the properties of a Stored Process.  
 <a href="#details">More...</a></p>
 
-<p><a href="mp__jsonout_8sas_source.html">Go to the source code of this file.</a></p>
+<p><a href="mm__getstpinfo_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >This macro can be used to OPEN a JSON stream and send one or more tables as arrays of rows, where each row can be an object or a nested array.</p>
-<p >There are two engines available - DATASTEP or PROCJSON.</p>
-<p >PROC JSON is fast but will produce errs like the ones below if special chars are encountered.</p>
-<blockquote class="doxtable">
-<p >&zwj;(ERR)OR: Some code points did not transcode. </p>
-</blockquote>
-<blockquote class="doxtable">
-<p >&zwj;An object or array close is not valid at this point in the JSON text. </p>
-</blockquote>
-<blockquote class="doxtable">
-<p >&zwj;Date value out of range </p>
-</blockquote>
-<p>If this happens, try running with ENGINE=DATASTEP.</p>
-<p >The DATASTEP engine is used to handle special SAS missing numerics, and can also convert entire datasets to formatted values. Output JSON is always in UTF-8.</p>
-<p >Usage: </p><pre class="fragment">  filename tmp temp;
-  data class; set sashelp.class;run;
-
-  %mp_jsonout(OPEN,jref=tmp)
-  %mp_jsonout(OBJ,class,jref=tmp)
-  %mp_jsonout(OBJ,class,dslabel=class2,jref=tmp,showmeta=Y)
-  %mp_jsonout(CLOSE,jref=tmp)
-
-  data _null_;
-  infile tmp;
-  input;putlog _infile_;
-  run;
-</pre><p> If you are building web apps with SAS then you are strongly encouraged to use the mX_createwebservice macros in combination with the <a href="https://github.com/sasjs/adapter">sasjs adapter</a>. For more information see <a href="https://sasjs.io">https://sasjs.io</a></p>
+<div class="textblock"><p >Extracts various properties and creates an output table in the structure below:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">STP_URI:$200.   </th><th class="markdownTableHeadNone">SERVERCONTEXT:$200.   </th><th class="markdownTableHeadNone">STOREDPROCESSCONFIGURATION:$1000.   </th><th class="markdownTableHeadNone">SOURCECODE_FIRST32K:$32767.   </th><th class="markdownTableHeadNone">PATH:$76.    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>A5DN9TDQ.BH0000C8</code>   </td><td class="markdownTableBodyNone"><code>SASApp</code>   </td><td class="markdownTableBodyNone"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;StoredProcess&gt;&lt;ServerContext LogicalServerType="Sps" OtherAllowed="false"/&gt;&lt;ResultCapabilities Package="false" Streaming="true"/&gt;&lt;OutputParameters/&gt;&lt;/StoredProcess&gt;</code>   </td><td class="markdownTableBodyNone"><code>put first 32767 bytes of code;</code>   </td><td class="markdownTableBodyNone"><code>/path/to/my/stp</code>   </td></tr>
+</table>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">action</td><td>Valid values: <ul>
-<li>OPEN - opens the JSON </li>
-<li>OBJ - sends a table with each row as an object </li>
-<li>ARR - sends a table with each row in an array </li>
-<li>CLOSE - closes the JSON </li>
-</ul>
-</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ds</td><td>The dataset to send. Must be a work table. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">jref=</td><td>(_webout) The fileref to which to send the JSON </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">dslabel=</td><td>The name to give the table in the exported JSON </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">fmt=</td><td>(Y) Whether to keep (Y) or strip (N) formats from the table </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">engine=</td><td>(DATASTEP) Which engine to use to send the JSON. Options: <ul>
-<li>PROCJSON (default) </li>
-<li>DATASTEP (more reliable when data has non standard characters) </li>
-</ul>
-</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">missing=</td><td>(NULL) Special numeric missing values can be sent as NULL (eg <code>null</code>) or as STRING values (eg <code>".a"</code> or <code>".b"</code>) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">showmeta=</td><td>(N) Set to Y to output metadata alongside each table, such as the column formats and types. The metadata is contained inside an object with the same name as the table but prefixed with a dollar sign - ie, <code>,"$tablename":{"formats":{"col1":"$CHAR1"},"types":{"COL1":"C"}}</code> </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">maxobs=</td><td>(MAX) Provide an integer to limit the number of input rows that should be converted to JSON</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pgm</td><td>The metadata path of the Stored Process </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mm_getstpinfo) The output table to create </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>(0) Set to 1 to enable DEBUG messages</td></tr>
   </table>
   </dd>
 </dl>
 <h4>Related Files </h4>
 <ul>
-<li><a class="el" href="mp__ds2fmtds_8sas.html" title="Converts every value in a dataset to formatted value.">mp_ds2fmtds.sas</a></li>
+<li><a class="el" href="mm__getstpcode_8sas.html" title="Writes the code of an STP to an external file.">mm_getstpcode.sas</a> </li>
+<li><a class="el" href="mm__getstps_8sas.html" title="Returns a dataset with all Stored Processes, or just those in a particular folder / with a particular...">mm_getstps.sas</a> </li>
+<li><a class="el" href="mm__createstp_8sas.html" title="Create a type 1 Stored Process (9.2 compatible)">mm_createstp.sas</a> </li>
+<li><a class="el" href="mm__deletestp_8sas.html" title="Deletes a Stored Process using path as reference.">mm_deletestp.sas</a> </li>
 </ul>
-<dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe @source <a href="https://github.com/sasjs/core">https://github.com/sasjs/core</a> </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="mp__jsonout_8sas_source.html">mp_jsonout.sas</a>.</p>
+<p class="definition">Definition in file <a class="el" href="mm__getstpinfo_8sas_source.html">mm_getstpinfo.sas</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
@@ -197,7 +162,7 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas.html',''); initResiza
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e914ee4d4a44400f1fdb170cb4ead18a.html">base</a></li><li class="navelem"><a class="el" href="mp__jsonout_8sas.html">mp_jsonout.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_0d92069d5a23b1d3125c326d74f1a07c.html">meta</a></li><li class="navelem"><a class="el" href="mm__getstpinfo_8sas.html">mm_getstpinfo.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">

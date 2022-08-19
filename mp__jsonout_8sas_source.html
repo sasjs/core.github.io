@@ -189,7 +189,7 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas_source.html',''); ini
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">  @param [in] maxobs= (MAX) Provide an integer to limit the number of input rows</span></div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">    that should be converted to JSON</span></div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"></span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">  &lt;h4&gt; Related Macros &lt;/h4&gt;</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">  &lt;h4&gt; Related Files &lt;/h4&gt;</span></div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">  @li mp_ds2fmtds.sas</span></div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"></span> </div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">  @version 9.2</span></div>
@@ -337,7 +337,7 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas_source.html',''); ini
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        order by 1;</div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>      create table &amp;tmpds2(</div>
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>          FMTNAME <span class="keywordtype">char</span>(32),</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>          MAX num length=3</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>          LENGTH num</div>
 <div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>      );</div>
 <div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>      %local catlist cat fmtlist i;</div>
 <div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>      select distinct fmtcat into: catlist separated by &#39; &#39; from &amp;tmpds1;</div>
@@ -346,16 +346,16 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas_source.html',''); ini
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        proc sql;</div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        select distinct fmtname into: fmtlist separated by &#39; &#39;</div>
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>          from &amp;tmpds1 where fmtcat=&quot;&amp;cat&quot;;</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        proc format lib=&amp;cat cntlout=&amp;tmpds3(keep=fmtname max);</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        proc format lib=&amp;cat cntlout=&amp;tmpds3(keep=fmtname length);</div>
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>          select &amp;fmtlist;</div>
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        run;</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        proc sql;</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        insert into &amp;tmpds2 select distinct fmtname,max from &amp;tmpds3;</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        insert into &amp;tmpds2 select distinct fmtname,length from &amp;tmpds3;</div>
 <div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>      %end;</div>
 <div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>      proc sql;</div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>      create table &amp;tmpds4 as</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        select a.*, b.max as maxw</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        select a.*, b.length as maxw</div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        from &amp;colinfo a</div>
 <div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        left join &amp;tmpds2 b</div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        on cats(a.format)=cats(upcase(b.fmtname))</div>
