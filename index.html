@@ -139,7 +139,7 @@ BASE folder (All Platforms)</h2>
 <li>OS independent</li>
 <li>Works on all SAS Platforms</li>
 <li>No X command</li>
-<li>Prefixes: <em>mf</em>, <em>mp</em></li>
+<li>Prefixes: <code>mf_</code>, <code>mp_</code></li>
 </ul>
 <h2><a class="anchor" id="autotoc_md3"></a>
 DDL folder (All Platforms)</h2>
@@ -147,14 +147,14 @@ DDL folder (All Platforms)</h2>
 <li>OS independent</li>
 <li>Works on all SAS Platforms</li>
 <li>No X command</li>
-<li>Prefixes: <em>mddl</em>(lib)_ -&gt; where lib can be "SAS" (in relation to a SAS component) or "DC" (in relation to a Data Controller component)</li>
+<li>Prefixes: <code>mddl_(lib)_</code> -&gt; where lib can be "SAS" (in relation to a SAS component) or "DC" (in relation to a Data Controller component)</li>
 </ul>
 <p >This library will not be used for storing data entries (such as formats or datalines). Where this becomes necessary in the future, a new repo will be created, in order to keep the NPM bundle size down (for the benefit of those looking to embed purely macros in their applications).</p>
 <h2><a class="anchor" id="autotoc_md4"></a>
 FCMP folder (All Platforms)</h2>
 <ul>
 <li>Function and macro names are identical, except for special cases</li>
-<li>Prefixes: <em>mcf</em></li>
+<li>Prefixes: <code>mcf_</code></li>
 </ul>
 <p >The fcmp macros are used to generate fcmp functions, and can be used with or without the <code>proc fcmp</code> wrapper.</p>
 <h2><a class="anchor" id="autotoc_md5"></a>
@@ -171,7 +171,7 @@ LUA folder</h2>
 <div class="line">endsubmit;</div>
 <div class="line">run;</div>
 </div><!-- fragment --><ul>
-<li>Prefixes: <em>ml</em></li>
+<li>Prefixes: <code>ml_</code></li>
 </ul>
 <h2><a class="anchor" id="autotoc_md6"></a>
 META folder (SAS9 only)</h2>
@@ -180,7 +180,7 @@ META folder (SAS9 only)</h2>
 <li>OS independent</li>
 <li>Metadata aware</li>
 <li>No X command</li>
-<li>Prefixes: <em>mm</em></li>
+<li>Prefixes: <code>mm_</code></li>
 </ul>
 <h2><a class="anchor" id="autotoc_md7"></a>
 METAX folder (SAS9 only)</h2>
@@ -188,7 +188,7 @@ METAX folder (SAS9 only)</h2>
 <li>OS specific</li>
 <li>Metadata aware</li>
 <li>X command enabled</li>
-<li>Prefixes: <em>mmw</em>,<em>mmu</em>,<em>mmx</em></li>
+<li>Prefixes: <code>mmx_</code></li>
 </ul>
 <h2><a class="anchor" id="autotoc_md8"></a>
 SERVER folder (@sasjs/server only)</h2>
@@ -197,7 +197,7 @@ SERVER folder (@sasjs/server only)</h2>
 <li>OS independent</li>
 <li>@sasjs/server aware</li>
 <li>No X command</li>
-<li>Prefixes: <em>ms</em></li>
+<li>Prefixes: <code>ms_</code></li>
 </ul>
 <h2><a class="anchor" id="autotoc_md9"></a>
 VIYA folder (Viya only)</h2>
@@ -205,7 +205,7 @@ VIYA folder (Viya only)</h2>
 <ul>
 <li>OS independent</li>
 <li>No X command</li>
-<li>Prefixes: <em>mv</em>, <em>mvf</em></li>
+<li>Prefixes: <code>mv_</code>, <code>mvf_</code></li>
 </ul>
 <h2><a class="anchor" id="autotoc_md10"></a>
 XPLATFORM folder (Viya, Meta, and Server)</h2>
@@ -213,7 +213,7 @@ XPLATFORM folder (Viya, Meta, and Server)</h2>
 <ul>
 <li>OS independent</li>
 <li>No X command</li>
-<li>Prefixes: <em>mx</em></li>
+<li>Prefixes: <code>mx_</code></li>
 </ul>
 <h1><a class="anchor" id="autotoc_md11"></a>
 Installation</h1>

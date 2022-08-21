@@ -49,6 +49,7 @@ var dir_a49f9b051925a4cbbe82ac92a0123656 =
     [ "mp_ds2inserts.test.sas", "mp__ds2inserts_8test_8sas.html", null ],
     [ "mp_ds2md.test.sas", "mp__ds2md_8test_8sas.html", null ],
     [ "mp_ds2squeeze.test.sas", "mp__ds2squeeze_8test_8sas.html", null ],
+    [ "mp_dsmeta.test.sas", "mp__dsmeta_8test_8sas.html", null ],
     [ "mp_filtercheck.test.sas", "mp__filtercheck_8test_8sas.html", null ],
     [ "mp_filtergenerate.test.sas", "mp__filtergenerate_8test_8sas.html", null ],
     [ "mp_filterstore.test.1.sas", "mp__filterstore_8test_81_8sas.html", null ],

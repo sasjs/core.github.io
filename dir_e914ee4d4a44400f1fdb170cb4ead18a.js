@@ -78,6 +78,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_ds2inserts.sas", "mp__ds2inserts_8sas.html", null ],
     [ "mp_ds2md.sas", "mp__ds2md_8sas.html", null ],
     [ "mp_ds2squeeze.sas", "mp__ds2squeeze_8sas.html", null ],
+    [ "mp_dsmeta.sas", "mp__dsmeta_8sas.html", null ],
     [ "mp_filtercheck.sas", "mp__filtercheck_8sas.html", null ],
     [ "mp_filtergenerate.sas", "mp__filtergenerate_8sas.html", null ],
     [ "mp_filterstore.sas", "mp__filterstore_8sas.html", null ],
