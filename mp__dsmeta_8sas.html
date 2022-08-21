@@ -201,7 +201,8 @@ $(document).ready(function(){initNavTree('mp__dsmeta_8sas.html',''); initResizab
 <p >Example usage: </p><pre class="fragment">%mp_dsmeta(sashelp.class,outds=work.mymeta)
 proc print data=work.mymeta;
 run;
-</pre> <dl class="params"><dt>Parameters</dt><dd>
+</pre><p> For more details on creating datasets from PROC CONTENTS check out this excellent <a href="https://support.sas.com/resources/papers/proceedings14/1549-2014.pdf">paper</a> by <a href="https://www.linkedin.com/in/louisehadden/">Louise Hadden</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">libds</td><td>The library.dataset to export the metadata for </td></tr>
     <tr><td class="paramname">outds=</td><td>(work.dsmeta) The output table to contain the metadata</td></tr>
