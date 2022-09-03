@@ -147,13 +147,16 @@ $(document).ready(function(){initNavTree('mp__createconstraints_8sas.html',''); 
 %mp_createconstraints(inds=work.constraints,outds=created,execute=YES)
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">inds=</td><td>The input table containing the constraint info </td></tr>
-    <tr><td class="paramname">outds=</td><td>a table containing the create statements (create_statement column) </td></tr>
-    <tr><td class="paramname">execute=</td><td><code>YES|NO</code> - default is NO. To actually create, use YES.</td></tr>
+    <tr><td class="paramname">inds=</td><td>(work.mp_getconstraints) The input table containing the constraint info </td></tr>
+    <tr><td class="paramname">outds=</td><td>(work.mp_createconstraints) A table containing the create statements (create_statement column) </td></tr>
+    <tr><td class="paramname">execute=</td><td>(NO) To actually create, use YES.</td></tr>
   </table>
   </dd>
 </dl>
-<h4>SAS Macros </h4>
+<h4>Related Files </h4>
+<ul>
+<li><a class="el" href="mp__getconstraints_8sas.html" title="Get constraint details at column level.">mp_getconstraints.sas</a></li>
+</ul>
 <dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 

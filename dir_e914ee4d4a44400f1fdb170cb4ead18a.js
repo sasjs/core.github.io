@@ -68,6 +68,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_csv2ds.sas", "mp__csv2ds_8sas.html", null ],
     [ "mp_deleteconstraints.sas", "mp__deleteconstraints_8sas.html", null ],
     [ "mp_deletefolder.sas", "mp__deletefolder_8sas.html", null ],
+    [ "mp_dictionary.sas", "mp__dictionary_8sas.html", null ],
     [ "mp_dirlist.sas", "mp__dirlist_8sas.html", null ],
     [ "mp_distinctfmtvalues.sas", "mp__distinctfmtvalues_8sas.html", null ],
     [ "mp_dropmembers.sas", "mp__dropmembers_8sas.html", null ],

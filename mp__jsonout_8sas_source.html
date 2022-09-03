@@ -273,7 +273,7 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas_source.html',''); ini
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    call symputx(cats(<span class="stringliteral">&#39;label&#39;</span>,_n_),coalescec(label,name),<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="comment">/* overwritten when fmt=Y and a custom format exists in catalog */</span></div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keywordflow">if</span> typelong=<span class="stringliteral">&#39;num&#39;</span> then call symputx(cats(<span class="stringliteral">&#39;fmtlen&#39;</span>,_n_),200,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="keywordflow">else</span> call symputx(cats(<span class="stringliteral">&#39;fmtlen&#39;</span>,_n_),min(32767,ceil((length+3)*1.5)),<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="keywordflow">else</span> call symputx(cats(<span class="stringliteral">&#39;fmtlen&#39;</span>,_n_),min(32767,ceil((length+10)*1.5)),<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  run;</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  %let tempds=%substr(_%sysfunc(compress(%sysfunc(uuidgen()),-)),1,32);</div>
@@ -329,8 +329,8 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas_source.html',''); ini
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>      %let tmpds4=%substr(col%sysfunc(compress(%sysfunc(uuidgen()),-)),1,32);</div>
 <div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>      proc sql noprint;</div>
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>      create table &amp;tmpds1 as</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>          select cats(libname,&#39;.&#39;,memname) as fmtcat,</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>          fmtname</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>          select cats(libname,&#39;.&#39;,memname) as FMTCAT,</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>          FMTNAME</div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        from dictionary.formats</div>
 <div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        where fmttype=&#39;F&#39; and libname is not null</div>
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>          and fmtname in (select format from &amp;colinfo where format is not null)</div>
@@ -355,7 +355,7 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas_source.html',''); ini
 <div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>      proc sql;</div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>      create table &amp;tmpds4 as</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        select a.*, b.length as maxw</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        select a.*, b.length as MAXW</div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        from &amp;colinfo a</div>
 <div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        left join &amp;tmpds2 b</div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        on cats(a.format)=cats(upcase(b.fmtname))</div>
@@ -366,7 +366,7 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas_source.html',''); ini
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        call symputx(</div>
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>          cats(&#39;fmtlen&#39;,_n_),</div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>          <span class="comment">/* vars need extra padding due to JSON escaping of special chars */</span></div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>          min(32767,ceil((max(length,maxw)+3)*1.5))</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>          min(32767,ceil((max(length,maxw)+10)*1.5))</div>
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>          ,&#39;l&#39;</div>
 <div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        );</div>
 <div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>      run;</div>
@@ -441,7 +441,7 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas_source.html',''); ini
 <div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>      format _numeric_ bart.;</div>
 <div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    %do i=1 %to &amp;numcols;</div>
 <div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>      %if &amp;&amp;typelong&amp;i=<span class="keywordtype">char</span> or &amp;fmt=Y %then %do;</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>        if findc(&amp;&amp;name&amp;i,&#39;&quot;\&#39;!!&#39;0A0D09000E0F01021011&#39;x) then do;</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>        if findc(&amp;&amp;name&amp;i,&#39;&quot;\&#39;!!&#39;0A0D09000E0F010210111A&#39;x) then do;</div>
 <div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>          &amp;&amp;name&amp;i=&#39;&quot;&#39;!!trim(</div>
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>            prxchange(&#39;s/&quot;/\\&quot;/&#39;,-1,        <span class="comment">/* double quote */</span></div>
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>            prxchange(&#39;s/\x0A/\n/&#39;,-1,      <span class="comment">/* new line */</span></div>
@@ -454,82 +454,83 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas_source.html',''); ini
 <div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>            prxchange(&#39;s/\x02/\\u0002/&#39;,-1, <span class="comment">/* STX */</span></div>
 <div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>            prxchange(&#39;s/\x10/\\u0010/&#39;,-1, <span class="comment">/* DLE */</span></div>
 <div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>            prxchange(&#39;s/\x11/\\u0011/&#39;,-1, <span class="comment">/* DC1 */</span></div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>            prxchange(&#39;s/\\/\\\\/&#39;,-1,&amp;&amp;name&amp;i)</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>          ))))))))))))!!&#39;&quot;&#39;;</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>        end;</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>        else &amp;&amp;name&amp;i=quote(cats(&amp;&amp;name&amp;i));</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>      %end;</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    %end;</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    run;</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    filename _sjs3 temp lrecl=131068 ;</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    data _null_;</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>      file _sjs3 encoding=&#39;utf-8&#39;;</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>      if _n_=1 then put &quot;[&quot;;</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>      set &amp;tempds;</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>      if _n_&gt;1 then put &quot;,&quot; @; put</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>      %if &amp;action=ARR %then &quot;[&quot; ; %else &quot;{<span class="stringliteral">&quot; ;</span></div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span><span class="stringliteral">      %do i=1 %to &amp;numcols;</span></div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span><span class="stringliteral">        %if &amp;i&gt;1 %then  &quot;</span>,<span class="stringliteral">&quot; ;</span></div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span><span class="stringliteral">        %if &amp;action=OBJ %then &quot;</span><span class="stringliteral">&quot;&quot;</span>&amp;&amp;name&amp;i<span class="stringliteral">&quot;&quot;</span>:<span class="stringliteral">&quot; ;</span></div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span><span class="stringliteral">        &quot;</span>&amp;&amp;name&amp;i<span class="stringliteral">&quot;n /* name literal for reserved variable names */</span></div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span><span class="stringliteral">      %end;</span></div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span><span class="stringliteral">      %if &amp;action=ARR %then &quot;</span>]<span class="stringliteral">&quot; ; %else &quot;</span>}<span class="stringliteral">&quot; ; ;</span></div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span><span class="stringliteral"></span> </div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span><span class="stringliteral">    /* close out the table */</span></div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span><span class="stringliteral">    data _null_;</span></div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span><span class="stringliteral">      file _sjs3 mod encoding=&#39;utf-8&#39;;</span></div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span><span class="stringliteral">      put &#39;]&#39;;</span></div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span><span class="stringliteral">    run;</span></div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span><span class="stringliteral">    data _null_;</span></div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span><span class="stringliteral">      infile _sjs3 lrecl=1 recfm=n;</span></div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span><span class="stringliteral">      file &amp;jref mod lrecl=1 recfm=n;</span></div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span><span class="stringliteral">      input sourcechar $char1. @@;</span></div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span><span class="stringliteral">      format sourcechar hex2.;</span></div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span><span class="stringliteral">      put sourcechar char1. @@;</span></div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span><span class="stringliteral">    run;</span></div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span><span class="stringliteral">    filename _sjs3 clear;</span></div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span><span class="stringliteral">  %end;</span></div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span><span class="stringliteral"></span> </div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span><span class="stringliteral">  proc sql;</span></div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span><span class="stringliteral">  drop table &amp;colinfo, &amp;tempds;</span></div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span><span class="stringliteral"></span> </div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span><span class="stringliteral">  %if %substr(&amp;showmeta,1,1)=Y %then %do;</span></div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span><span class="stringliteral">    filename _sjs4 temp lrecl=131068 encoding=&#39;utf-8&#39;;</span></div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span><span class="stringliteral">    data _null_;</span></div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span><span class="stringliteral">      file _sjs4;</span></div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span><span class="stringliteral">      length label $350;</span></div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span><span class="stringliteral">      put &quot;</span>, <span class="stringliteral">&quot;&quot;</span>$%lowcase(%sysfunc(coalescec(&amp;dslabel,&amp;ds)))<span class="stringliteral">&quot;&quot;</span>:{<span class="stringliteral">&quot;&quot;</span>vars<span class="stringliteral">&quot;&quot;</span>:{<span class="stringliteral">&quot;;</span></div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span><span class="stringliteral">      do i=1 to &amp;numcols;</span></div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span><span class="stringliteral">        name=quote(trim(symget(cats(&#39;name&#39;,i))));</span></div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span><span class="stringliteral">        format=quote(trim(symget(cats(&#39;fmt&#39;,i))));</span></div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span><span class="stringliteral">        label=quote(prxchange(&#39;s/\\/\\\\/&#39;,-1,trim(symget(cats(&#39;label&#39;,i)))));</span></div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span><span class="stringliteral">        length=quote(trim(symget(cats(&#39;length&#39;,i))));</span></div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span><span class="stringliteral">        type=quote(trim(symget(cats(&#39;typelong&#39;,i))));</span></div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span><span class="stringliteral">        if i&gt;1 then put &quot;</span>,<span class="stringliteral">&quot; @@;</span></div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span><span class="stringliteral">        put name &#39;:{&quot;</span>format<span class="stringliteral">&quot;:&#39; format &#39;,&quot;</span>label<span class="stringliteral">&quot;:&#39; label</span></div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span><span class="stringliteral">          &#39;,&quot;</span>length<span class="stringliteral">&quot;:&#39; length &#39;,&quot;</span>type<span class="stringliteral">&quot;:&#39; type &#39;}&#39;;</span></div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span><span class="stringliteral">      end;</span></div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span><span class="stringliteral">      put &#39;}}&#39;;</span></div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span><span class="stringliteral">    run;</span></div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span><span class="stringliteral">    /* send back to webout */</span></div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span><span class="stringliteral">    data _null_;</span></div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span><span class="stringliteral">      infile _sjs4 lrecl=1 recfm=n;</span></div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span><span class="stringliteral">      file &amp;jref mod lrecl=1 recfm=n;</span></div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span><span class="stringliteral">      input sourcechar $char1. @@;</span></div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span><span class="stringliteral">      format sourcechar hex2.;</span></div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span><span class="stringliteral">      put sourcechar char1. @@;</span></div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span><span class="stringliteral">    run;</span></div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span><span class="stringliteral">    filename _sjs4 clear;</span></div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span><span class="stringliteral">  %end;</span></div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span><span class="stringliteral">%end;</span></div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span><span class="stringliteral"></span> </div>
-<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span><span class="stringliteral">%else %if &amp;action=CLOSE %then %do;</span></div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span><span class="stringliteral">  data _null_; file &amp;jref encoding=&#39;utf-8&#39; mod ;</span></div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span><span class="stringliteral">    put &quot;</span>}<span class="stringliteral">&quot;;</span></div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span><span class="stringliteral">  run;</span></div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span><span class="stringliteral">%end;</span></div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span><span class="stringliteral">%mend mp_jsonout;</span></div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>            prxchange(&#39;s/\x1A/\\u001A/&#39;,-1, <span class="comment">/* SUB */</span></div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>            prxchange(&#39;s/\\/\\\\/&#39;,-1,&amp;&amp;name&amp;i)</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>          )))))))))))))!!&#39;&quot;&#39;;</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>        end;</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>        else &amp;&amp;name&amp;i=quote(cats(&amp;&amp;name&amp;i));</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>      %end;</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    %end;</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    run;</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span> </div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    filename _sjs3 temp lrecl=131068 ;</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    data _null_;</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>      file _sjs3 encoding=&#39;utf-8&#39;;</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>      if _n_=1 then put &quot;[&quot;;</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>      set &amp;tempds;</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>      if _n_&gt;1 then put &quot;,&quot; @; put</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>      %if &amp;action=ARR %then &quot;[&quot; ; %else &quot;{<span class="stringliteral">&quot; ;</span></div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span><span class="stringliteral">      %do i=1 %to &amp;numcols;</span></div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span><span class="stringliteral">        %if &amp;i&gt;1 %then  &quot;</span>,<span class="stringliteral">&quot; ;</span></div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span><span class="stringliteral">        %if &amp;action=OBJ %then &quot;</span><span class="stringliteral">&quot;&quot;</span>&amp;&amp;name&amp;i<span class="stringliteral">&quot;&quot;</span>:<span class="stringliteral">&quot; ;</span></div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span><span class="stringliteral">        &quot;</span>&amp;&amp;name&amp;i<span class="stringliteral">&quot;n /* name literal for reserved variable names */</span></div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span><span class="stringliteral">      %end;</span></div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span><span class="stringliteral">      %if &amp;action=ARR %then &quot;</span>]<span class="stringliteral">&quot; ; %else &quot;</span>}<span class="stringliteral">&quot; ; ;</span></div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span><span class="stringliteral"></span> </div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span><span class="stringliteral">    /* close out the table */</span></div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span><span class="stringliteral">    data _null_;</span></div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span><span class="stringliteral">      file _sjs3 mod encoding=&#39;utf-8&#39;;</span></div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span><span class="stringliteral">      put &#39;]&#39;;</span></div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span><span class="stringliteral">    run;</span></div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span><span class="stringliteral">    data _null_;</span></div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span><span class="stringliteral">      infile _sjs3 lrecl=1 recfm=n;</span></div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span><span class="stringliteral">      file &amp;jref mod lrecl=1 recfm=n;</span></div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span><span class="stringliteral">      input sourcechar $char1. @@;</span></div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span><span class="stringliteral">      format sourcechar hex2.;</span></div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span><span class="stringliteral">      put sourcechar char1. @@;</span></div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span><span class="stringliteral">    run;</span></div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span><span class="stringliteral">    filename _sjs3 clear;</span></div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span><span class="stringliteral">  %end;</span></div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span><span class="stringliteral"></span> </div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span><span class="stringliteral">  proc sql;</span></div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span><span class="stringliteral">  drop table &amp;colinfo, &amp;tempds;</span></div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span><span class="stringliteral"></span> </div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span><span class="stringliteral">  %if %substr(&amp;showmeta,1,1)=Y %then %do;</span></div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span><span class="stringliteral">    filename _sjs4 temp lrecl=131068 encoding=&#39;utf-8&#39;;</span></div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span><span class="stringliteral">    data _null_;</span></div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span><span class="stringliteral">      file _sjs4;</span></div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span><span class="stringliteral">      length label $350;</span></div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span><span class="stringliteral">      put &quot;</span>, <span class="stringliteral">&quot;&quot;</span>$%lowcase(%sysfunc(coalescec(&amp;dslabel,&amp;ds)))<span class="stringliteral">&quot;&quot;</span>:{<span class="stringliteral">&quot;&quot;</span>vars<span class="stringliteral">&quot;&quot;</span>:{<span class="stringliteral">&quot;;</span></div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span><span class="stringliteral">      do i=1 to &amp;numcols;</span></div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span><span class="stringliteral">        name=quote(trim(symget(cats(&#39;name&#39;,i))));</span></div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span><span class="stringliteral">        format=quote(trim(symget(cats(&#39;fmt&#39;,i))));</span></div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span><span class="stringliteral">        label=quote(prxchange(&#39;s/\\/\\\\/&#39;,-1,trim(symget(cats(&#39;label&#39;,i)))));</span></div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span><span class="stringliteral">        length=quote(trim(symget(cats(&#39;length&#39;,i))));</span></div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span><span class="stringliteral">        type=quote(trim(symget(cats(&#39;typelong&#39;,i))));</span></div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span><span class="stringliteral">        if i&gt;1 then put &quot;</span>,<span class="stringliteral">&quot; @@;</span></div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span><span class="stringliteral">        put name &#39;:{&quot;</span>format<span class="stringliteral">&quot;:&#39; format &#39;,&quot;</span>label<span class="stringliteral">&quot;:&#39; label</span></div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span><span class="stringliteral">          &#39;,&quot;</span>length<span class="stringliteral">&quot;:&#39; length &#39;,&quot;</span>type<span class="stringliteral">&quot;:&#39; type &#39;}&#39;;</span></div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span><span class="stringliteral">      end;</span></div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span><span class="stringliteral">      put &#39;}}&#39;;</span></div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span><span class="stringliteral">    run;</span></div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span><span class="stringliteral">    /* send back to webout */</span></div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span><span class="stringliteral">    data _null_;</span></div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span><span class="stringliteral">      infile _sjs4 lrecl=1 recfm=n;</span></div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span><span class="stringliteral">      file &amp;jref mod lrecl=1 recfm=n;</span></div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span><span class="stringliteral">      input sourcechar $char1. @@;</span></div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span><span class="stringliteral">      format sourcechar hex2.;</span></div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span><span class="stringliteral">      put sourcechar char1. @@;</span></div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span><span class="stringliteral">    run;</span></div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span><span class="stringliteral">    filename _sjs4 clear;</span></div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span><span class="stringliteral">  %end;</span></div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span><span class="stringliteral">%end;</span></div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span><span class="stringliteral"></span> </div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span><span class="stringliteral">%else %if &amp;action=CLOSE %then %do;</span></div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span><span class="stringliteral">  data _null_; file &amp;jref encoding=&#39;utf-8&#39; mod ;</span></div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span><span class="stringliteral">    put &quot;</span>}<span class="stringliteral">&quot;;</span></div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span><span class="stringliteral">  run;</span></div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span><span class="stringliteral">%end;</span></div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span><span class="stringliteral">%mend mp_jsonout;</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

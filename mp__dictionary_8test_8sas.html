@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Macros for SAS Application Developers" />
   <meta name="og:description" content="Macros for SAS Application Developers" />
-  <title>viya/mv_createjob.sas File Reference</title>
+  <title>tests/base/mp_dictionary.test.sas File Reference</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="dynsections.js"></script>
@@ -103,7 +103,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('mv__createjob_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mp__dictionary_8test_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,70 +122,22 @@ $(document).ready(function(){initNavTree('mv__createjob_8sas.html',''); initResi
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">mv_createjob.sas File Reference</div></div>
+  <div class="headertitle"><div class="title">mp_dictionary.test.sas File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Creates a Viya Job.  
+<p>Testing <a class="el" href="mp__dictionary_8sas.html" title="Creates a portal (libref) into the SQL Dictionary Views.">mp_dictionary.sas</a> macro.  
 <a href="#details">More...</a></p>
 
-<p><a href="mv__createjob_8sas_source.html">Go to the source code of this file.</a></p>
+<p><a href="mp__dictionary_8test_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Code is passed in as one or more filerefs. </p><pre class="fragment">%* Step 1 - compile macros ;
-filename mc url
-  "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
-%inc mc;
-
-%* Step 2 - Create some SAS code and add it to a job;
-filename ft15f001 temp;
-parmcards4;
-    data some_code;
-      set sashelp.class;
-    run;
-;;;;
-%mv_createjob(path=/Public/app/sasjstemp/jobs/myjobs,name=myjob)
-</pre><p> The path to the job will then be shown in the log, eg as follows:</p>
-<p ><img src="https://i.imgur.com/XRUDHgA.png" alt="viya job location" class="inline"/></p>
-<h4>SAS Macros </h4>
+<div class="textblock"><h4>SAS Macros </h4>
 <ul>
-<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
-<li><a class="el" href="mv__createfolder_8sas.html" title="Creates a viya folder if that folder does not already exist.">mv_createfolder.sas</a> </li>
-<li><a class="el" href="mf__getuniquelibref_8sas.html" title="Returns an unused libref.">mf_getuniquelibref.sas</a> </li>
-<li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
-<li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
-<li><a class="el" href="mf__isblank_8sas.html" title="Checks whether a macro variable is empty (blank)">mf_isblank.sas</a> </li>
-<li><a class="el" href="mv__deletejes_8sas.html" title="Deletes a Viya Job, if it exists.">mv_deletejes.sas</a></li>
+<li><a class="el" href="mp__dictionary_8sas.html" title="Creates a portal (libref) into the SQL Dictionary Views.">mp_dictionary.sas</a> </li>
+<li><a class="el" href="mp__assert_8sas.html" title="Generic assertion.">mp_assert.sas</a> </li>
 </ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">path=</td><td>The full path (on SAS Drive) where the job will be created </td></tr>
-    <tr><td class="paramname">name=</td><td>The name of the job </td></tr>
-    <tr><td class="paramname">desc=</td><td>(Created by the <a class="el" href="mv__createjob_8sas.html" title="Creates a Viya Job.">mv_createjob.sas</a> macro) The job description </td></tr>
-    <tr><td class="paramname">precode=</td><td>Space separated list of filerefs, pointing to the code that needs to be attached to the beginning of the job </td></tr>
-    <tr><td class="paramname">code=</td><td>(ft15f001) Fileref(s) of the actual code to be added </td></tr>
-    <tr><td class="paramname">access_token_var=</td><td>(ACCESS_TOKEN) Global macro variable containing the access token </td></tr>
-    <tr><td class="paramname">grant_type=</td><td>(sas_services) Valid values: <ul>
-<li>sas_services </li>
-<li>detect </li>
-<li>authorization_code </li>
-<li>password </li>
-</ul>
-</td></tr>
-    <tr><td class="paramname">replace=</td><td>(YES) select NO to avoid replacing any existing job </td></tr>
-    <tr><td class="paramname">addjesbeginendmacros=</td><td>(false) Relates to the <code>_addjesbeginendmacros</code> setting. Normally this would always be false however due to a Viya bug (<a href="https://github.com/sasjs/cli/issues/1229">https://github.com/sasjs/cli/issues/1229</a>) this is now configurable. Valid values: <ul>
-<li>true </li>
-<li>false </li>
-<li>0 - this will prevent the flag from being set (job will default to true) </li>
-</ul>
-</td></tr>
-    <tr><td class="paramname">contextname=</td><td>Choose a specific context on which to run the Job. Leave blank to use the default context. From Viya 3.5 it is possible to configure a shared context - see <a href="https://go.documentation.sas.com/?docsetId=calcontexts&docsetTarget=n1hjn8eobk5pyhn1wg3ja0drdl6h.htm&docsetVersion=3.5&locale=en">https://go.documentation.sas.com/?docsetId=calcontexts&amp;docsetTarget=n1hjn8eobk5pyhn1wg3ja0drdl6h.htm&amp;docsetVersion=3.5&amp;locale=en</a></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section version"><dt>Version</dt><dd>VIYA V.03.04 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd><a href="https://www.linkedin.com/in/allanbowe">Allan Bowe</a> </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="mv__createjob_8sas_source.html">mv_createjob.sas</a>.</p>
+<p class="definition">Definition in file <a class="el" href="mp__dictionary_8test_8sas_source.html">mp_dictionary.test.sas</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
@@ -193,7 +145,7 @@ parmcards4;
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_f3c9615c6d389fd64e9075885fcd8e6e.html">viya</a></li><li class="navelem"><a class="el" href="mv__createjob_8sas.html">mv_createjob.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_59425e443f801f1f2fd8bbe4959a3ccf.html">tests</a></li><li class="navelem"><a class="el" href="dir_a49f9b051925a4cbbe82ac92a0123656.html">base</a></li><li class="navelem"><a class="el" href="mp__dictionary_8test_8sas.html">mp_dictionary.test.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">
