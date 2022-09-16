@@ -133,8 +133,7 @@ $(document).ready(function(){initNavTree('mp__hashdirectory_8sas.html',''); init
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Hashes each file in each directory, and then hashes the hashes to create a hash for each directory also.</p>
 <p >This makes use of the new <code>hashing_file()</code> and <code>hashing</code> functions, available since 9.4m6. Interestingly, these can even be used in pure macro, eg: </p><pre class="fragment">%put %sysfunc(hashing_file(md5,/path/to/file.blob,0));
-</pre><p> An example of this logic being applied in JavaScript is available in the @sasjs/utils library.</p>
-<p >Usage: </p><pre class="fragment">%let fpath=/some/directory;
+</pre><p> Usage: </p><pre class="fragment">%let fpath=/some/directory;
 
 %mp_hashdirectory(&amp;fpath,outds=myhash,maxdepth=2)
 
