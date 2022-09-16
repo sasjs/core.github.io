@@ -144,6 +144,7 @@ $(document).ready(function(){initNavTree('mp__dirlist_8sas.html',''); initResiza
     <tr><td class="paramdir">[in]</td><td class="paramname">path=</td><td>(sysfunc(pathname(work))) Path for which to return contents </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">fref=</td><td>(0) Provide a DISK engine fileref as an alternative to PATH </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">maxdepth=</td><td>(0) Set to a positive integer to indicate the level of subdirectory scan recursion - eg 3, to go <code>./3/levels/deep</code>. For unlimited recursion, set to MAX. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">showparent=</td><td>(NO) By default, the initial parent directory is not part of the results. Set to YES to include it. For this record only, directory=filepath. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mp_dirlist) The output dataset to create </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">getattrs=</td><td>(NO) If getattrs=YES then the doptname / foptname functions are used to scan all properties - any characters that are not valid in a SAS name (v7) are simply stripped, and the table is transposed so theat each property is a column and there is one file per row. An attempt is made to get all properties whether a file or folder, but some files/folders cannot be accessed, and so not all properties can / will be populated.</td></tr>
   </table>

@@ -64,6 +64,7 @@ var dir_a49f9b051925a4cbbe82ac92a0123656 =
     [ "mp_getpk.test.sas", "mp__getpk_8test_8sas.html", null ],
     [ "mp_gsubfile.test.sas", "mp__gsubfile_8test_8sas.html", null ],
     [ "mp_hashdataset.test.sas", "mp__hashdataset_8test_8sas.html", null ],
+    [ "mp_hashdirectory.test.sas", "mp__hashdirectory_8test_8sas.html", null ],
     [ "mp_init.test.sas", "mp__init_8test_8sas.html", null ],
     [ "mp_jsonout.test.1.sas", "mp__jsonout_8test_81_8sas.html", null ],
     [ "mp_jsonout.test.2.sas", "mp__jsonout_8test_82_8sas.html", null ],

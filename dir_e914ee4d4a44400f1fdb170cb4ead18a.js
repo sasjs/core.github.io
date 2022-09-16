@@ -94,6 +94,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_gsubfile.sas", "mp__gsubfile_8sas.html", null ],
     [ "mp_guesspk.sas", "mp__guesspk_8sas.html", null ],
     [ "mp_hashdataset.sas", "mp__hashdataset_8sas.html", null ],
+    [ "mp_hashdirectory.sas", "mp__hashdirectory_8sas.html", null ],
     [ "mp_include.sas", "mp__include_8sas.html", null ],
     [ "mp_init.sas", "mp__init_8sas.html", null ],
     [ "mp_jsonout.sas", "mp__jsonout_8sas.html", null ],

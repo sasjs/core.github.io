@@ -137,7 +137,7 @@ data _null_;
   set work.myhash;
   put hashkey=;
 run;
-</pre><p> <img src="https://i.imgur.com/MqF98vk.png" alt="sas md5 hash dataset log results" class="inline"/></p>
+</pre><p> <img src="https://i.4gl.io/1/KorUKoyE05.png/raw" alt="sas md5 hash dataset log results" class="inline"/></p>
 <h4>SAS Macros </h4>
 <ul>
 <li><a class="el" href="mf__getattrn_8sas.html" title="Returns a numeric attribute of a dataset.">mf_getattrn.sas</a> </li>
@@ -147,14 +147,15 @@ run;
 </ul>
 <h4>Related Files </h4>
 <ul>
-<li><a class="el" href="mp__hashdataset_8test_8sas.html" title="Testing mp_hashdataset.sas macro.">mp_hashdataset.test.sas</a></li>
+<li><a class="el" href="mp__hashdataset_8test_8sas.html" title="Testing mp_hashdataset.sas macro.">mp_hashdataset.test.sas</a> </li>
+<li><a class="el" href="mp__hashdirectory_8sas.html" title="Returns a unique hash for each file in a directory.">mp_hashdirectory.sas</a></li>
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">libds</td><td>dataset to hash </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">salt=</td><td>Provide a salt (could be, for instance, the dataset name) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">iftrue=</td><td>A condition under which the macro should be executed. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mf_hashdataset) The output dataset to create. This will contain one column (hashkey) with one observation (a $hex32. representation of the input hash) <table class="markdownTable">
+    <tr><td class="paramdir">[in]</td><td class="paramname">iftrue=</td><td>(1=1) A condition under which the macro should be executed </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work._data_) The output dataset to create. This will contain one column (hashkey) with one observation (a $hex32. representation of the input hash) <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">hashkey:$32.    </th></tr>
 <tr class="markdownTableRowOdd">
