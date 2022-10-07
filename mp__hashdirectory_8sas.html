@@ -133,7 +133,7 @@ $(document).ready(function(){initNavTree('mp__hashdirectory_8sas.html',''); init
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Hashes each file in each directory, and then hashes the hashes to create a hash for each directory also.</p>
 <p >This makes use of the new <code>hashing_file()</code> and <code>hashing</code> functions, available since 9.4m6. Interestingly, these can even be used in pure macro, eg: </p><pre class="fragment">%put %sysfunc(hashing_file(md5,/path/to/file.blob,0));
-</pre><p> Usage: </p><pre class="fragment">%let fpath=/some/directory;
+</pre><p> Actual usage: </p><pre class="fragment">%let fpath=/some/directory;
 
 %mp_hashdirectory(&amp;fpath,outds=myhash,maxdepth=2)
 
@@ -148,7 +148,8 @@ run;
 <li>Concatenate this hash with another 100 hashes and hash again </li>
 <li>Continue until the end of the folder. This is the folder hash </li>
 <li>If a folder contains other folders, start from the bottom of the tree - the folder hashes cascade upwards so you know immediately if there is a change in a sub/sub directory </li>
-<li>If the folder has no content (empty) then it is ignored. No hash created.</li>
+<li>If the folder has no content (empty) then it is ignored. No hash created. </li>
+<li>If the file is empty, it is also ignored / no hash created.</li>
 </ul>
 <h4>SAS Macros </h4>
 <ul>
