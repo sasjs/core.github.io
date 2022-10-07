@@ -17,8 +17,8 @@ var NAVTREEINDEX0 =
 "dir_f609455181c6a57b6b1dd59f46bb10c8.html":[1,7,3],
 "dir_fbd73da3281f521ea3654e12eb2e19c2.html":[1,9],
 "files.html":[1],
-"index.html":[0],
 "index.html":[],
+"index.html":[0],
 "mcf__getfmttype_8sas.html":[1,2,0],
 "mcf__getfmttype_8sas_source.html":[1,2,0],
 "mcf__getfmttype_8test_8sas.html":[1,7,0,0],
@@ -211,6 +211,8 @@ var NAVTREEINDEX0 =
 "mfv__existfolder_8sas_source.html":[1,8,1],
 "mfv__existfolder_8test_8sas.html":[1,7,4,1],
 "mfv__existfolder_8test_8sas_source.html":[1,7,4,1],
+"mfv__existsashdat_8sas.html":[1,8,2],
+"mfv__existsashdat_8sas_source.html":[1,8,2],
 "ml__gsubfile_8sas.html":[1,3,0],
 "ml__gsubfile_8sas_source.html":[1,3,0],
 "ml__json_8sas.html":[1,3,1],
@@ -247,7 +249,5 @@ var NAVTREEINDEX0 =
 "mm__getauthinfo_8test_8sas_source.html":[1,7,2,0],
 "mm__getcols_8sas.html":[1,4,14],
 "mm__getcols_8sas_source.html":[1,4,14],
-"mm__getdetails_8sas.html":[1,4,15],
-"mm__getdetails_8sas_source.html":[1,4,15],
-"mm__getdirectories_8sas.html":[1,4,16]
+"mm__getdetails_8sas.html":[1,4,15]
 };

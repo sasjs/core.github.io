@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"mm__getdetails_8sas_source.html":[1,4,15],
+"mm__getdirectories_8sas.html":[1,4,16],
 "mm__getdirectories_8sas_source.html":[1,4,16],
 "mm__getdocument_8sas.html":[1,4,17],
 "mm__getdocument_8sas_source.html":[1,4,17],
@@ -247,7 +249,5 @@ var NAVTREEINDEX1 =
 "mp__init_8test_8sas_source.html":[1,7,0,65],
 "mp__jsonout_8sas.html":[1,0,97],
 "mp__jsonout_8sas_source.html":[1,0,97],
-"mp__jsonout_8test_81_8sas.html":[1,7,0,66],
-"mp__jsonout_8test_81_8sas_source.html":[1,7,0,66],
-"mp__jsonout_8test_82_8sas.html":[1,7,0,67]
+"mp__jsonout_8test_81_8sas.html":[1,7,0,66]
 };
