@@ -91,6 +91,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_getformats.sas", "mp__getformats_8sas.html", null ],
     [ "mp_getmaxvarlengths.sas", "mp__getmaxvarlengths_8sas.html", null ],
     [ "mp_getpk.sas", "mp__getpk_8sas.html", null ],
+    [ "mp_gitreleaseinfo.sas", "mp__gitreleaseinfo_8sas.html", null ],
     [ "mp_gsubfile.sas", "mp__gsubfile_8sas.html", null ],
     [ "mp_guesspk.sas", "mp__guesspk_8sas.html", null ],
     [ "mp_hashdataset.sas", "mp__hashdataset_8sas.html", null ],

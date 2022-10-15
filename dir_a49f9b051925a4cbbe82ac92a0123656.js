@@ -62,6 +62,7 @@ var dir_a49f9b051925a4cbbe82ac92a0123656 =
     [ "mp_getformats.test.sas", "mp__getformats_8test_8sas.html", null ],
     [ "mp_getmaxvarlengths.test.sas", "mp__getmaxvarlengths_8test_8sas.html", null ],
     [ "mp_getpk.test.sas", "mp__getpk_8test_8sas.html", null ],
+    [ "mp_gitreleaseinfo.test.sas", "mp__gitreleaseinfo_8test_8sas.html", null ],
     [ "mp_gsubfile.test.sas", "mp__gsubfile_8test_8sas.html", null ],
     [ "mp_hashdataset.test.sas", "mp__hashdataset_8test_8sas.html", null ],
     [ "mp_hashdirectory.test.sas", "mp__hashdirectory_8test_8sas.html", null ],
