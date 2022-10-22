@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('mp__gitadd_8sas.html',''); initResizab
 <p><a href="mp__gitadd_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Uses the output dataset from <a class="el" href="mp__gitstatus_8sas.html" title="Creates a dataset with the output from GIT_STATUS()">mp_gitstatus.sas</a> to determine the files that should be staged.</p>
-<p >If STAGED != <code>"TRUE"</code> then the file is staged (so you could provide an empty char column if staging all observations).</p>
+<p >If <code>STAGED ne "TRUE"</code> then the file is staged.</p>
 <p >Usage: </p><pre class="fragment">%let dir=%sysfunc(pathname(work))/core;
 %let repo=https://github.com/sasjs/core;
 %put source clone rc=%sysfunc(GITFN_CLONE(&amp;repo,&amp;dir));

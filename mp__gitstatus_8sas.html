@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('mp__gitstatus_8sas.html',''); initResi
 
 <p><a href="mp__gitstatus_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Uses <code>git_status()</code> to fetch the number of changed files, then iterates through with <code>git_status_get()</code> and <code>git_index_add()</code> for each change - which is created in an output dataset.</p>
+<div class="textblock"><p >Uses <code>git_status()</code> to fetch the number of changed files, then iterates with <code>git_status_get()</code>, inserting all attributes into an output dataset.</p>
 <p >Usage: </p><pre class="fragment">%let dir=%sysfunc(pathname(work))/core;
 %let repo=https://github.com/sasjs/core;
 %put source clone rc=%sysfunc(GITFN_CLONE(&amp;repo,&amp;dir));
