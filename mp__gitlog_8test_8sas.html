@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Macros for SAS Application Developers" />
   <meta name="og:description" content="Macros for SAS Application Developers" />
-  <title>base/mp_hashdirectory.sas File Reference</title>
+  <title>tests/base/mp_gitlog.test.sas File Reference</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="dynsections.js"></script>
@@ -103,7 +103,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('mp__hashdirectory_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mp__gitlog_8test_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,76 +122,24 @@ $(document).ready(function(){initNavTree('mp__hashdirectory_8sas.html',''); init
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">mp_hashdirectory.sas File Reference</div></div>
+  <div class="headertitle"><div class="title">mp_gitlog.test.sas File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Returns a unique hash for each file in a directory.  
+<p>Testing <a class="el" href="mp__gitlog_8sas.html" title="Creates a dataset with the commit history of a local repository.">mp_gitlog.sas</a> macro.  
 <a href="#details">More...</a></p>
 
-<p><a href="mp__hashdirectory_8sas_source.html">Go to the source code of this file.</a></p>
+<p><a href="mp__gitlog_8test_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Hashes each file in each directory, and then hashes the hashes to create a hash for each directory also.</p>
-<p >This makes use of the new <code>hashing_file()</code> and <code>hashing</code> functions, available since 9.4m6. Interestingly, those functions can be used in pure macro, eg: </p><pre class="fragment">%put %sysfunc(hashing_file(md5,/path/to/file.blob,0));
-</pre><p> Actual usage: </p><pre class="fragment">%let fpath=/some/directory;
-
-%mp_hashdirectory(&amp;fpath,outds=myhash,maxdepth=2)
-
-data _null_;
-  set work.myhash;
-  put (_all_)(=);
-run;
-</pre><p> Whilst files are hashed in their entirety, the logic for creating a folder hash is as follows:</p>
+<div class="textblock"><h4>SAS Macros </h4>
 <ul>
-<li>Sort the files by filename (case sensitive, uppercase then lower) </li>
-<li>Take the first 100 hashes, concatenate and hash </li>
-<li>Concatenate this hash with another 100 hashes and hash again </li>
-<li>Continue until the end of the folder. This is the folder hash </li>
-<li>If a folder contains other folders, start from the bottom of the tree - the folder hashes cascade upwards so you know immediately if there is a change in a sub/sub directory </li>
-<li>If a subfolder has no content (empty) then it is ignored. No hash created. </li>
-<li>If the file is empty, it is also ignored / no hash created. </li>
-<li>If the target directory (&amp;inloc) is empty, &amp;outds will also be empty</li>
+<li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a> </li>
+<li><a class="el" href="mp__gitlog_8sas.html" title="Creates a dataset with the commit history of a local repository.">mp_gitlog.sas</a> </li>
+<li><a class="el" href="mp__assert_8sas.html" title="Generic assertion.">mp_assert.sas</a> </li>
+<li><a class="el" href="mp__assertscope_8sas.html" title="Used to capture scope leakage of macro variables.">mp_assertscope.sas</a> </li>
 </ul>
-<h4>SAS Macros </h4>
-<ul>
-<li><a class="el" href="mp__dirlist_8sas.html" title="Returns all files and subdirectories within a specified parent.">mp_dirlist.sas</a></li>
-</ul>
-<h4>Related Files </h4>
-<ul>
-<li><a class="el" href="mp__hashdataset_8sas.html" title="Returns a unique hash for a dataset.">mp_hashdataset.sas</a> </li>
-<li><a class="el" href="mp__hashdirectory_8test_8sas.html" title="Testing mp_hashdirectory.sas macro.">mp_hashdirectory.test.sas</a> </li>
-<li><a class="el" href="mp__md5_8sas.html" title="Generates an md5 expression for hashing a set of variables.">mp_md5.sas</a></li>
-</ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">inloc</td><td>Full filepath of the file to be hashed (unquoted) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">iftrue=</td><td>(1=1) A condition under which the macro should be executed </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">maxdepth=</td><td>(0) Set to a positive integer to indicate the level of subdirectory scan recursion - eg 3, to go <code>./3/levels/deep</code>. For unlimited recursion, set to MAX. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">method=</td><td>(MD5) the hashing method to use. Available options: <ul>
-<li>MD5 </li>
-<li>SH1 </li>
-<li>SHA256 </li>
-<li>SHA384 </li>
-<li>SHA512 </li>
-<li>CRC32 </li>
-</ul>
-</td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mp_hashdirectory) The output dataset. Contains: <ul>
-<li>directory - the parent folder </li>
-<li>file_hash - the hash output </li>
-<li>hash_duration - how long the hash took (first hash always takes longer) </li>
-<li>file_path - /full/path/to/each/file.ext </li>
-<li>file_or_folder - contains either "file" or "folder" </li>
-<li>level - the depth of the directory (top level is 0)</li>
-</ul>
-</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section version"><dt>Version</dt><dd>9.4m6 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="mp__hashdirectory_8sas_source.html">mp_hashdirectory.sas</a>.</p>
+<p class="definition">Definition in file <a class="el" href="mp__gitlog_8test_8sas_source.html">mp_gitlog.test.sas</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
@@ -199,7 +147,7 @@ run;
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e914ee4d4a44400f1fdb170cb4ead18a.html">base</a></li><li class="navelem"><a class="el" href="mp__hashdirectory_8sas.html">mp_hashdirectory.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_59425e443f801f1f2fd8bbe4959a3ccf.html">tests</a></li><li class="navelem"><a class="el" href="dir_a49f9b051925a4cbbe82ac92a0123656.html">base</a></li><li class="navelem"><a class="el" href="mp__gitlog_8test_8sas.html">mp_gitlog.test.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">
