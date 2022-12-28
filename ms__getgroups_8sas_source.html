@@ -149,7 +149,7 @@ $(document).ready(function(){initNavTree('ms__getgroups_8sas_source.html',''); i
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">  @param [in] uid= (0) Provide the userid on which to filter</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">  @param [out] outds= (work.ms_getgroups) This output dataset will contain the</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">    list of groups. Format:</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">|NAME:$32.|DESCRIPTION:$64.|GROUPID:best.|</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">|NAME:$32.|DESCRIPTION:$256.|GROUPID:best.|</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">|---|---|---|</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">|`SomeGroup `|`A group `|`1`|</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">|`Another Group`|`this is a different group`|`2`|</span></div>
@@ -185,7 +185,7 @@ $(document).ready(function(){initNavTree('ms__getgroups_8sas_source.html',''); i
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>%<span class="keywordflow">if</span> %sysget(MODE)=desktop %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="comment">/* groups api does not exist in desktop mode */</span></div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  data &amp;outds;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    length NAME $32 DESCRIPTION $64. GROUPID 8;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    length NAME $32 DESCRIPTION $256. GROUPID 8;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    name=<span class="stringliteral">&quot;&amp;sysuserid&quot;</span>;</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    description=<span class="stringliteral">&quot;&amp;sysuserid (group - desktop mode)&quot;</span>;</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    groupid=1;</div>
@@ -241,7 +241,7 @@ $(document).ready(function(){initNavTree('ms__getgroups_8sas_source.html',''); i
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>%<span class="keywordflow">if</span> <span class="stringliteral">&quot;&amp;user&quot;</span>=<span class="stringliteral">&quot;0&quot;</span> and <span class="stringliteral">&quot;&amp;uid&quot;</span>=<span class="stringliteral">&quot;0&quot;</span> %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  data &amp;outds;</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    length NAME $32 DESCRIPTION $64. GROUPID 8;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    length NAME $32 DESCRIPTION $256. GROUPID 8;</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordflow">if</span> _n_=1 then call missing(of _all_);</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keyword">set</span> &amp;libref..root;</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    drop ordinal_root;</div>
@@ -249,7 +249,7 @@ $(document).ready(function(){initNavTree('ms__getgroups_8sas_source.html',''); i
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>%end;</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>%<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  data &amp;outds;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    length NAME $32 DESCRIPTION $64. GROUPID 8;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    length NAME $32 DESCRIPTION $256. GROUPID 8;</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">if</span> _n_=1 then call missing(of _all_);</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keyword">set</span> &amp;libref..groups;</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    drop ordinal_:;</div>
