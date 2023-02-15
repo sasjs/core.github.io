@@ -208,24 +208,25 @@ $(document).ready(function(){initNavTree('mm__adduser2group_8sas_source.html',''
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>filename __us2grp temp;</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>proc metadata in= <span class="stringliteral">&quot;&lt;UpdateMetadata&gt;&lt;Reposid&gt;$METAREPOSITORY&lt;/Reposid&gt;&lt;Metadata&gt;</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="stringliteral">    &lt;Person Id=&#39;&amp;uuri&#39;&gt;&lt;IdentityGroups&gt;&lt;IdentityGroup ObjRef=&#39;&amp;guri&#39; /&gt;</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="stringliteral">    &lt;/IdentityGroups&gt;&lt;/Person&gt;&lt;/Metadata&gt;</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="stringliteral">    &lt;NS&gt;SAS&lt;/NS&gt;&lt;Flags&gt;268435456&lt;/Flags&gt;&lt;/UpdateMetadata&gt;&quot;</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  out=__us2grp verbose;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>run;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>%<span class="keywordflow">if</span> &amp;mdebug ne 0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <span class="comment">/* write the response to the log for debugging */</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  data _null_;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    infile __us2grp lrecl=32767;</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    input;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    put _infile_;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  run;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>%end;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>filename __us2grp clear;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>%mend mm_adduser2group;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="stringliteral">    &lt;Person Id=&#39;%nrstr(&amp;uuri)&#39;&gt;</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="stringliteral">    &lt;IdentityGroups&gt;&lt;IdentityGroup ObjRef=&#39;%nrstr(&amp;guri)&#39; /&gt;</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="stringliteral">    &lt;/IdentityGroups&gt;&lt;/Person&gt;&lt;/Metadata&gt;</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="stringliteral">    &lt;NS&gt;SAS&lt;/NS&gt;&lt;Flags&gt;268435456&lt;/Flags&gt;&lt;/UpdateMetadata&gt;&quot;</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  out=__us2grp verbose;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>run;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>%<span class="keywordflow">if</span> &amp;mdebug ne 0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <span class="comment">/* write the response to the log for debugging */</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  data _null_;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    infile __us2grp lrecl=32767;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    input;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    put _infile_;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  run;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>%end;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>filename __us2grp clear;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>%mend mm_adduser2group;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
