@@ -156,6 +156,7 @@ else do;
   aligndp4e49996=right(aligndp4e49996);
   myvar=aligndp4e49996;
 end;
+drop aligndp4e49996;
 </pre><p> Results (myvar variable): </p><pre class="fragment">          0.7683559324
         122.8232796
       99419.50552
@@ -178,7 +179,7 @@ end;
     7998580.8415
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">var</td><td>The (data step) variable to create </td></tr>
+    <tr><td class="paramname">var</td><td>The (data step, character) variable to modify </td></tr>
     <tr><td class="paramname">width=</td><td>(8) The number of characters BEFORE the decimal point</td></tr>
   </table>
   </dd>
