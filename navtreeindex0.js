@@ -132,6 +132,7 @@ var NAVTREEINDEX0 =
 "mf__getgitbranch_8test_8sas.html":[1,7,0,15],
 "mf__getgitbranch_8test_8sas_source.html":[1,7,0,15],
 "mf__getkeyvalue_8sas.html":[1,0,18],
+"mf__getkeyvalue_8sas.html#aec87c64534ff69a655b72e5b8b16f96f":[1,0,18,0],
 "mf__getkeyvalue_8sas_source.html":[1,0,18],
 "mf__getplatform_8sas.html":[1,0,19],
 "mf__getplatform_8sas_source.html":[1,0,19],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "ml__json_8sas.html":[1,3,1],
 "ml__json_8sas_source.html":[1,3,1],
 "mm__adduser2group_8sas.html":[1,4,0],
-"mm__adduser2group_8sas_source.html":[1,4,0],
-"mm__assigndirectlib_8sas.html":[1,4,1]
+"mm__adduser2group_8sas_source.html":[1,4,0]
 };

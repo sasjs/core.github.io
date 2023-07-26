@@ -10,7 +10,7 @@ var dir_f609455181c6a57b6b1dd59f46bb10c8 =
     [ "ms_getfile.test.sas", "ms__getfile_8test_8sas.html", null ],
     [ "ms_getgroups.test.sas", "ms__getgroups_8test_8sas.html", "ms__getgroups_8test_8sas" ],
     [ "ms_getusers.test.sas", "ms__getusers_8test_8sas.html", "ms__getusers_8test_8sas" ],
-    [ "ms_runstp.test.sas", "ms__runstp_8test_8sas.html", null ],
+    [ "ms_runstp.test.sas", "ms__runstp_8test_8sas.html", "ms__runstp_8test_8sas" ],
     [ "ms_testservice.test.sas", "ms__testservice_8test_8sas.html", "ms__testservice_8test_8sas" ],
     [ "ms_webout.test.sas", "ms__webout_8test_8sas.html", null ]
 ];

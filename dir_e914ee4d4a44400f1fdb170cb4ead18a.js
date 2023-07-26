@@ -18,7 +18,7 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mf_getfmtlist.sas", "mf__getfmtlist_8sas.html", null ],
     [ "mf_getfmtname.sas", "mf__getfmtname_8sas.html", null ],
     [ "mf_getgitbranch.sas", "mf__getgitbranch_8sas.html", null ],
-    [ "mf_getkeyvalue.sas", "mf__getkeyvalue_8sas.html", null ],
+    [ "mf_getkeyvalue.sas", "mf__getkeyvalue_8sas.html", "mf__getkeyvalue_8sas" ],
     [ "mf_getplatform.sas", "mf__getplatform_8sas.html", null ],
     [ "mf_getquotedstr.sas", "mf__getquotedstr_8sas.html", null ],
     [ "mf_getschema.sas", "mf__getschema_8sas.html", null ],

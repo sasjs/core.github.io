@@ -198,7 +198,7 @@ $(document).ready(function(){initNavTree('mp__validatecol_8sas_source.html','');
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    retain &amp;tempcol;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    &amp;tempcol=prxparse(<span class="stringliteral">&#39;/^[_a-z]\w{0,7}\.[_a-z]\w{0,31}$/i&#39;</span>);</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">if</span> missing(&amp;tempcol) then <span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      putlog <span class="stringliteral">&quot;%str(ERR)OR: Invalid expression for LIBDS&quot;</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      putlog <span class="stringliteral">&#39;ERR&#39;</span> +(-1) <span class="stringliteral">&quot;OR: Invalid expression for LIBDS&quot;</span>;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      stop;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    end;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    drop &amp;tempcol;</div>
@@ -212,7 +212,7 @@ $(document).ready(function(){initNavTree('mp__validatecol_8sas_source.html','');
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    retain &amp;tempcol;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    &amp;tempcol=prxparse(<span class="stringliteral">&#39;/^[_a-z\$]\w{0,31}\.[0-9]*$/i&#39;</span>);</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordflow">if</span> missing(&amp;tempcol) then <span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      putlog <span class="stringliteral">&quot;%str(ERR)OR: Invalid expression for FORMAT&quot;</span>;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      putlog <span class="stringliteral">&#39;ERR&#39;</span> +(-1) <span class="stringliteral">&quot;OR: Invalid expression for FORMAT&quot;</span>;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      stop;</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    end;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    drop &amp;tempcol;</div>

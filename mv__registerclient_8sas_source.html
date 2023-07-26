@@ -152,11 +152,11 @@ $(document).ready(function(){initNavTree('mv__registerclient_8sas_source.html','
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">        &quot;https://raw.githubusercontent.com/sasjs/core/main/all.sas&quot;;</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">      %inc mc;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">      %* generate random client using consul token as input parameter;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">      %mv_registerclient(consul_token=12x34sa43v2345n234lasd)</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">      %* generate random client details with openid scope;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">      %mv_registerclient(scopes=openid )</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">      %* generate random client details with all scopes;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">      %mv_registerclient(scopes=openid *)</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">      %* generate random client using consul token as input parameter;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">      %mv_registerclient(consul_token=12x34sa43v2345n234lasd)</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">      %* specific client with just openid scope;</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">      %mv_registerclient(client_id=YourClient</span></div>
@@ -165,7 +165,7 @@ $(document).ready(function(){initNavTree('mv__registerclient_8sas_source.html','
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">      )</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">      %* generate random client with 90/180 second access/refresh token expiry;</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">      %mv_registerclient(scopes=openid *</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">      %mv_registerclient(scopes=openid</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">        ,access_token_validity=90</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">        ,refresh_token_validity=180</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">      )</span></div>

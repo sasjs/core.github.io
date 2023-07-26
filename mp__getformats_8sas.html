@@ -133,7 +133,10 @@ $(document).ready(function(){initNavTree('mp__getformats_8sas.html',''); initRes
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Formats are exported from the first (if any) catalog entry in the FMTSEARCH path.</p>
 <p>Formats are taken from the library / dataset reference and / or a static format list.</p>
+<p>Note - the source for this information is the dictionary.formats table. This cannot show formats that are not already declared in the FMTSEARCH path.</p>
 <p>Example usage: </p><pre class="fragment">%mp_getformats(lib=sashelp,ds=prdsale,outsummary=work.dictable)
+
+%mp_getformats(fmtlist=FORMAT1 $FORMAT2 @INFMT3,outsummary=work.table2)
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">lib=</td><td>(0) The libref for which to return formats. </td></tr>
@@ -190,7 +193,9 @@ $(document).ready(function(){initNavTree('mp__getformats_8sas.html',''); initRes
 </ul>
 <h4>Related Macros </h4>
 <ul>
+<li><a class="el" href="mf__getfmtlist_8sas.html" title="Returns a distinct list of formats from a table.">mf_getfmtlist.sas</a> </li>
 <li><a class="el" href="mp__applyformats_8sas.html" title="Apply a set of formats to a table.">mp_applyformats.sas</a> </li>
+<li><a class="el" href="mp__cntlout_8sas.html" title="Creates a cntlout dataset in a consistent format.">mp_cntlout.sas</a> </li>
 <li><a class="el" href="mp__getformats_8test_8sas.html" title="Testing mp_getformats.sas macro.">mp_getformats.test.sas</a></li>
 </ul>
 <dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>

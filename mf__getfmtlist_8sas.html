@@ -134,11 +134,10 @@ $(document).ready(function(){initNavTree('mf__getfmtlist_8sas.html',''); initRes
 <div class="textblock"><p>Reads the dataset header and returns a distinct list of formats applied. </p><pre class="fragment">  %put NOTE- %mf_getfmtlist(sashelp.prdsale);
   %put NOTE- %mf_getfmtlist(sashelp.shoes);
   %put NOTE- %mf_getfmtlist(sashelp.demographics);
-</pre><p> returns:</p>
-<blockquote class="doxtable">
-<p>DOLLAR $CHAR W MONNAME $CHAR BEST DOLLAR BEST Z $CHAR COMMA PERCENTN </p>
-</blockquote>
-<dl class="params"><dt>Parameters</dt><dd>
+</pre><p> returns: </p><pre class="fragment">DOLLAR $CHAR W MONNAME
+$CHAR BEST DOLLAR
+BEST Z $CHAR COMMA PERCENTN
+</pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">libds</td><td>Two part library.dataset reference.</td></tr>
   </table>

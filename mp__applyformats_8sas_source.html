@@ -221,7 +221,7 @@ $(document).ready(function(){initNavTree('mp__applyformats_8sas_source.html','')
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keywordflow">if</span> libref(lib) ne 0 then <span class="keywordflow">do</span>;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    msg=catx(<span class="charliteral">&#39; &#39;</span>,<span class="stringliteral">&#39;libref&#39;</span>,lib,<span class="stringliteral">&#39;is not assigned!&#39;</span>);</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    %<span class="keywordflow">if</span> &amp;errds=0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      putlog <span class="stringliteral">&quot;%str(ERR)OR: &quot;</span> msg;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      putlog <span class="stringliteral">&#39;ERR&#39;</span> +(-1) <span class="stringliteral">&quot;OR: &quot;</span> msg;</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    %end;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    output;</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">return</span>;</div>
@@ -229,7 +229,7 @@ $(document).ready(function(){initNavTree('mp__applyformats_8sas_source.html','')
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="keywordflow">if</span> exist(cats(lib,<span class="charliteral">&#39;.&#39;</span>,ds)) ne 1 then <span class="keywordflow">do</span>;</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    msg=catx(<span class="charliteral">&#39; &#39;</span>,<span class="stringliteral">&#39;libds&#39;</span>,lib,<span class="charliteral">&#39;.&#39;</span>,ds,<span class="stringliteral">&#39;does not exist!&#39;</span>);</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    %<span class="keywordflow">if</span> &amp;errds=0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;      putlog <span class="stringliteral">&quot;%str(ERR)OR: &quot;</span> msg;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;      putlog <span class="stringliteral">&#39;ERR&#39;</span> +(-1) <span class="stringliteral">&quot;OR: &quot;</span> msg;</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    %end;</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    output;</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">return</span>;</div>
@@ -238,7 +238,7 @@ $(document).ready(function(){initNavTree('mp__applyformats_8sas_source.html','')
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="keywordflow">if</span> is_fmt=0 then <span class="keywordflow">do</span>;</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    msg=catx(<span class="charliteral">&#39; &#39;</span>,<span class="stringliteral">&#39;format&#39;</span>,fmt,<span class="stringliteral">&#39;on libds&#39;</span>,lib,<span class="charliteral">&#39;.&#39;</span>,ds,<span class="charliteral">&#39;.&#39;</span>,var,<span class="stringliteral">&#39;is not valid!&#39;</span>);</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    %<span class="keywordflow">if</span> &amp;errds=0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;      putlog <span class="stringliteral">&quot;%str(ERR)OR: &quot;</span> msg;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;      putlog <span class="stringliteral">&#39;ERR&#39;</span> +(-1) <span class="stringliteral">&quot;OR: &quot;</span> msg;</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    %end;</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    output;</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordflow">return</span>;</div>
@@ -250,7 +250,7 @@ $(document).ready(function(){initNavTree('mp__applyformats_8sas_source.html','')
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">if</span> dsid=0 then <span class="keywordflow">do</span>;</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;      msg=catx(<span class="charliteral">&#39; &#39;</span>,<span class="stringliteral">&#39;libds&#39;</span>,lib,<span class="charliteral">&#39;.&#39;</span>,ds,<span class="stringliteral">&#39; could not be opened!&#39;</span>);</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;      %<span class="keywordflow">if</span> &amp;errds=0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        putlog <span class="stringliteral">&quot;%str(ERR)OR: &quot;</span> msg;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        putlog <span class="stringliteral">&#39;ERR&#39;</span> +(-1) <span class="stringliteral">&quot;OR: &quot;</span> msg;</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;      %end;</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;      output;</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;      <span class="keywordflow">return</span>;</div>
@@ -258,7 +258,7 @@ $(document).ready(function(){initNavTree('mp__applyformats_8sas_source.html','')
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordflow">if</span> varnum(dsid,var)&lt;1 then <span class="keywordflow">do</span>;</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;      msg=catx(<span class="charliteral">&#39; &#39;</span>,<span class="stringliteral">&#39;Variable&#39;</span>,lib,<span class="charliteral">&#39;.&#39;</span>,ds,<span class="charliteral">&#39;.&#39;</span>,var,<span class="stringliteral">&#39; was not found!&#39;</span>);</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;      %<span class="keywordflow">if</span> &amp;errds=0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        putlog <span class="stringliteral">&quot;%str(ERR)OR: &quot;</span> msg;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        putlog <span class="stringliteral">&#39;ERR&#39;</span> +(-1) <span class="stringliteral">&quot;OR: &quot;</span> msg;</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;      %end;</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;      output;</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    end;</div>

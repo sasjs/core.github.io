@@ -185,7 +185,7 @@ $(document).ready(function(){initNavTree('mm__getstpinfo_8sas_source.html',''); 
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    rc5=metadata_getattr(tsuri,<span class="stringliteral">&quot;Name&quot;</span>,servercontext);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  end;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordflow">else</span> <span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    put <span class="stringliteral">&quot;%str(ERR)OR: could not find &quot;</span> path;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    put <span class="stringliteral">&#39;ERR&#39;</span> +(-1) <span class="stringliteral">&quot;OR: could not find &quot;</span> path;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    put (_all_)(=);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  end;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  &amp;md.put (_all_)(=);</div>
