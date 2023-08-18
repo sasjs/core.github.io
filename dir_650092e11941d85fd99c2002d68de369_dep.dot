@@ -1,0 +1,11 @@
+digraph "tests/viyaonly"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  compound=true
+  subgraph clusterdir_59425e443f801f1f2fd8bbe4959a3ccf {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", style="filled,dashed,", label="tests", fontname="Helvetica", fontsize="10", URL="dir_59425e443f801f1f2fd8bbe4959a3ccf.html"]
+  dir_650092e11941d85fd99c2002d68de369 [shape=box, label="viyaonly", style="filled,bold,", fillcolor="#edf0f7", color="grey25", URL="dir_650092e11941d85fd99c2002d68de369.html"];
+  }
+}
