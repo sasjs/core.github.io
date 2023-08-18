@@ -147,10 +147,10 @@ data _null_;
 run;
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">file=</td><td>(0) The file to perform the substitution on </td></tr>
-    <tr><td class="paramname">patternvar=</td><td>A macro variable containing the Lua <a href="https://www.lua.org/pil/20.2.html">pattern</a> to search for. Due to the use of special (magic) characters in Lua patterns, it is safer to pass the NAME of the macro variable containing the string, rather than the value itself. </td></tr>
-    <tr><td class="paramname">replacevar=</td><td>The name of the macro variable containing the replacement <em>string</em>. </td></tr>
-    <tr><td class="paramname">outfile=</td><td>(0) The file to write the output to. If zero, then the file is overwritten in-place.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">file=</td><td>(0) The file to perform the substitution on </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">patternvar=</td><td>A macro variable containing the Lua <a href="https://www.lua.org/pil/20.2.html">pattern</a> to search for. Due to the use of special (magic) characters in Lua patterns, it is safer to pass the NAME of the macro variable containing the string, rather than the value itself. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">replacevar=</td><td>() The name of the macro variable containing the replacement <em>string</em>. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outfile=</td><td>(0) The file to write the output to. If zero, then the file is overwritten in-place.</td></tr>
   </table>
   </dd>
 </dl>

@@ -149,15 +149,15 @@ $(document).ready(function(){initNavTree('mp__gsubfile_8sas_source.html',''); in
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">        list;</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">      run;</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"></span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">  @param file= (0) The file to perform the substitution on</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">  @param patternvar= A macro variable containing the Lua</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">  @param [in] file= (0) The file to perform the substitution on</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">  @param [in] patternvar= A macro variable containing the Lua</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">    [pattern](https://www.lua.org/pil/20.2.html) to search for.  Due to the use</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">    of special (magic) characters in Lua patterns, it is safer to pass the NAME</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">    of the macro variable containing the string, rather than the value itself.</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">  @param replacevar= The name of the macro variable containing the replacement</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">    _string_.</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">  @param outfile= (0) The file to write the output to. If zero, then the file</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">    is overwritten in-place.</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">  @param [in] replacevar= ()</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">    The name of the macro variable containing the replacement _string_.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">  @param [out] outfile= (0) The file to write the output to.</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">    If zero, then the file is overwritten in-place.</span></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"></span> </div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">  @li ml_gsubfile.sas</span></div>

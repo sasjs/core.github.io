@@ -145,15 +145,15 @@ $(document).ready(function(){initNavTree('mm__createapplication_8sas.html',''); 
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">tree=</td><td>The metadata folder uri, or the metadata path, in which to create the object. This must exist. </td></tr>
-    <tr><td class="paramname">name=</td><td>Application object name. Avoid spaces. </td></tr>
-    <tr><td class="paramname">ClassIdentifier=</td><td>the class of applications to which this app belongs </td></tr>
-    <tr><td class="paramname">params=</td><td>name=value pairs which will become public properties of the application object. These are delimited using &amp;#x0a; (newline character)</td></tr>
-    <tr><td class="paramname">desc=</td><td>Application description (optional). Avoid ampersands as these are illegal characters (unless they are escapted- eg &amp;) </td></tr>
-    <tr><td class="paramname">version=</td><td>version number of application </td></tr>
-    <tr><td class="paramname">frefin=</td><td>fileref to use (enables change if there is a conflict). The filerefs are left open, to enable inspection after running the macro (or importing into an xmlmap if needed). </td></tr>
-    <tr><td class="paramname">frefout=</td><td>fileref to use (enables change if there is a conflict) </td></tr>
-    <tr><td class="paramname">mDebug=</td><td>set to 1 to show debug messages in the log</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tree=</td><td>The metadata folder uri, or the metadata path, in which to create the object. This must exist. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">name=</td><td>Application object name. Avoid spaces. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ClassIdentifier=</td><td>The class of applications to which this app belongs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">params=</td><td>name=value pairs which will become public properties of the application object. These are delimited using &amp;#x0a; (newline character)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">desc=</td><td>Application description (optional). Avoid ampersands as these are illegal characters (unless they are escapted- eg &amp;) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">version=</td><td>version number of application </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">frefin=</td><td>fileref to use (enables change if there is a conflict). The filerefs are left open, to enable inspection after running the macro (or importing into an xmlmap if needed). </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">frefout=</td><td>fileref to use (enables change if there is a conflict) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mDebug=</td><td>set to 1 to show debug messages in the log</td></tr>
   </table>
   </dd>
 </dl>
