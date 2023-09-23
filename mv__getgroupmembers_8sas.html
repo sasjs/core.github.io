@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('mv__getgroupmembers_8sas.html',''); in
 
 <p><a href="mv__getgroupmembers_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>First, be sure you have an access token (which requires an app token).</p>
+<div class="textblock"><p>First, be sure you have an access token (which requires an app token)</p>
 <p>Using the macros here: </p><pre class="fragment">filename mc url
   "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %inc mc;
@@ -145,9 +145,10 @@ providerId char(5),
 implicit num
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
-    <tr><td class="paramname">grant_type=</td><td>valid values are "password" or "authorization_code" (unquoted). The default is authorization_code. </td></tr>
-    <tr><td class="paramname">outds=</td><td>The library.dataset to be created that contains the list of groups</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">group</td><td>Group id for which to return group members </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>(ACCESS_TOKEN) The global macro variable to contain the access token </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>(sas_services) valid values are "password" or "authorization_code" (unquoted). </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.viyagroupmembers) The library.dataset to be created that contains the list of group members</td></tr>
   </table>
   </dd>
 </dl>

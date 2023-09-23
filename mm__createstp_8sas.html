@@ -154,19 +154,19 @@ run;
   ,stptype=2)
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">stpname=</td><td>Stored Process name. Avoid spaces - testing has shown that the check to avoid creating multiple STPs in the same folder with the same name does not work when the name contains spaces. </td></tr>
-    <tr><td class="paramname">stpdesc=</td><td>Stored Process description (optional) </td></tr>
-    <tr><td class="paramname">filename=</td><td>the name of the .sas program to run </td></tr>
-    <tr><td class="paramname">directory=</td><td>The directory uri, or the actual path to the sas program (no trailing slash). If more than uri is found with that path, then the first one will be used. </td></tr>
-    <tr><td class="paramname">tree=</td><td>The metadata folder uri, or the metadata path, in which to create the STP. </td></tr>
-    <tr><td class="paramname">server=</td><td>The server which will run the STP. Server name or uri is fine. </td></tr>
-    <tr><td class="paramname">outds=</td><td>The two level name of the output dataset. Will contain all the meta uris. Defaults to work.mm_createstp. </td></tr>
-    <tr><td class="paramname">mDebug=</td><td>set to 1 to show debug messages in the log </td></tr>
-    <tr><td class="paramname">stptype=</td><td>Default is 1 (STP code saved on filesystem). Set to 2 if source code is to be saved in metadata (9.3 and above feature). </td></tr>
-    <tr><td class="paramname">minify=</td><td>set to YES to strip comments / blank lines etc </td></tr>
-    <tr><td class="paramname">frefin=</td><td>fileref to use (enables change if there is a conflict). The filerefs are left open, to enable inspection after running the macro (or importing into an xmlmap if needed). </td></tr>
-    <tr><td class="paramname">frefout=</td><td>fileref to use (enables change if there is a conflict) </td></tr>
-    <tr><td class="paramname">repo=</td><td>ServerContext is tied to a repo, if you are not using the foundation repo then select a different one here</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stpname=</td><td>(SASjs Default STP) Stored Process name. Avoid spaces - testing has shown that the check to avoid creating multiple STPs in the same folder with the same name does not work when the name contains spaces. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stpdesc=</td><td>Stored Process description (optional) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">filename=</td><td>the name of the .sas program to run </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">directory=</td><td>(SASEnvironment/sascode) The directory uri or the actual path to the sas program (no trailing slash). If more than uri is found with that path, then the first one will be used. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tree=</td><td>The metadata folder uri, or the metadata path, in which to create the STP. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">server=</td><td>(SASApp) The server which will run the STP. Server name or uri is fine. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mm_createstp) The two level name of the output dataset. Will contain all the meta uris. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mDebug=</td><td>set to 1 to show debug messages in the log </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">stptype=</td><td>Default is 1 (STP code saved on filesystem). Set to 2 if source code is to be saved in metadata (9.3 and above feature). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">minify=</td><td>set to YES to strip comments / blank lines etc </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">frefin=</td><td>(mm_in) fileref to use (enables change if there is a conflict). The filerefs are left open, to enable inspection after running the macro (or importing into an xmlmap if needed). </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">frefout=</td><td>(mm_out) fileref to use (enables change if there is a conflict) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">repo=</td><td>ServerContext is tied to a repo, if you are not using the foundation repo then select a different one here</td></tr>
   </table>
   </dd>
 </dl>

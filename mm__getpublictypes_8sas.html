@@ -134,7 +134,13 @@ $(document).ready(function(){initNavTree('mm__getpublictypes_8sas.html',''); ini
 <div class="textblock"><p>More info: <a href="https://support.sas.com/documentation/cdl/en/bisag/65422/HTML/default/viewer.htm#n1nkrdzsq5iunln18bk2236istkb.htm">https://support.sas.com/documentation/cdl/en/bisag/65422/HTML/default/viewer.htm#n1nkrdzsq5iunln18bk2236istkb.htm</a></p>
 <p>Usage: </p><pre class="fragment">    dataset will contain one column - publictype ($64);
   %mm_getpublictypes(outds=types)
-</pre> <dl class="section return"><dt>Returns</dt><dd>outds= dataset containing all types</dd></dl>
+</pre> <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mm_getpublictypes) The library.dataset to create</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>outds= dataset containing all types</dd></dl>
 <dl class="section version"><dt>Version</dt><dd>9.3 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 

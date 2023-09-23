@@ -154,15 +154,15 @@ parmcards4;
 </pre><p> For more examples of using these web services with the SASjs Adapter, see: <a href="https://github.com/sasjs/adapter#readme">https://github.com/sasjs/adapter#readme</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path=</td><td>The full path (in SAS Metadata) where the service will be created </td></tr>
-    <tr><td class="paramname">name=</td><td>Stored Process name. Avoid spaces - testing has shown that the check to avoid creating multiple STPs in the same folder with the same name does not work when the name contains spaces. </td></tr>
-    <tr><td class="paramname">desc=</td><td>The description of the service (optional) </td></tr>
-    <tr><td class="paramname">precode=</td><td>Space separated list of filerefs, pointing to the code that needs to be attached to the beginning of the service (optional) </td></tr>
-    <tr><td class="paramname">code=</td><td>(ft15f001) Space seperated fileref(s) of the actual code to be added </td></tr>
-    <tr><td class="paramname">server=</td><td>(SASApp) The server which will run the STP. Server name or uri is fine. </td></tr>
-    <tr><td class="paramname">mDebug=</td><td>(0) set to 1 to show debug messages in the log </td></tr>
-    <tr><td class="paramname">replace=</td><td>(YES) select NO to avoid replacing an existing service in that location </td></tr>
-    <tr><td class="paramname">adapter=</td><td>(sasjs) the macro uses the sasjs adapter by default. To use another adapter, add a (different) fileref here.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">path=</td><td>() The full path (in SAS Metadata) where the service will be created </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">name=</td><td>Stored Process name. Avoid spaces - testing has shown that the check to avoid creating multiple STPs in the same folder with the same name does not work when the name contains spaces. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">desc=</td><td>The description of the service (optional) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">precode=</td><td>() Space separated list of filerefs, pointing to the code that needs to be attached to the beginning of the service (optional) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">code=</td><td>(ft15f001) Space seperated fileref(s) of the actual code to be added </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">server=</td><td>(SASApp) The server which will run the STP. Server name or uri is fine. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mDebug=</td><td>(0) set to 1 to show debug messages in the log </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">replace=</td><td>(YES) select NO to avoid replacing an existing service in that location </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">adapter=</td><td>(sasjs) the macro uses the sasjs adapter by default. To use another adapter, add a (different) fileref here.</td></tr>
   </table>
   </dd>
 </dl>

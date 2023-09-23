@@ -146,17 +146,17 @@ $(document).ready(function(){initNavTree('mv__tokenauth_8sas.html',''); initResi
 <p><a href="https://blogs.sas.com/content/sgf/2019/01/25/authentication-to-sas-viya/">https://blogs.sas.com/content/sgf/2019/01/25/authentication-to-sas-viya/</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">inds=</td><td>A dataset containing client_id, client_secret, and auth_code </td></tr>
-    <tr><td class="paramname">outds=</td><td>A dataset containing access_token and refresh_token </td></tr>
-    <tr><td class="paramname">client_id=</td><td>The client name </td></tr>
-    <tr><td class="paramname">client_secret=</td><td>client secret </td></tr>
-    <tr><td class="paramname">grant_type=</td><td>valid values are "password" or "authorization_code" (unquoted). The default is authorization_code. </td></tr>
-    <tr><td class="paramname">code=</td><td>If grant_type=authorization_code then provide the necessary code here </td></tr>
-    <tr><td class="paramname">user=</td><td>If grant_type=password then provide the username here </td></tr>
-    <tr><td class="paramname">pass=</td><td>If grant_type=password then provide the password here </td></tr>
-    <tr><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
-    <tr><td class="paramname">refresh_token_var=</td><td>The global macro variable to contain the refresh token </td></tr>
-    <tr><td class="paramname">base_uri=</td><td>The Viya API server location</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">inds=</td><td>A dataset containing client_id, client_secret, and auth_code </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">outds=</td><td>A dataset containing access_token and refresh_token </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">client_id=</td><td>The client name </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">client_secret=</td><td>client secret </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>valid values are "password" or "authorization_code" (unquoted). The default is authorization_code. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">code=</td><td>() If grant_type=authorization_code then provide the necessary code here </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">user=</td><td>If grant_type=password then provide the username here </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pass=</td><td>If grant_type=password then provide the password here </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>(ACCESS_TOKEN) The global macro variable to contain the access token </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">refresh_token_var=</td><td>(REFRESH_TOKEN) The global macro variable to contain the refresh token </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">base_uri=</td><td>The Viya API server location</td></tr>
   </table>
   </dd>
 </dl>

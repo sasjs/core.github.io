@@ -141,16 +141,16 @@ $(document).ready(function(){initNavTree('mp__abort_8sas.html',''); initResizabl
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mac=</td><td>(<a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a>) To contain the name of the calling macro. Do not use &amp;sysmacroname as this will always resolve to MP_ABORT. </td></tr>
-    <tr><td class="paramname">msg=</td><td>message to be returned </td></tr>
-    <tr><td class="paramname">iftrue=</td><td>(1=1) Supply a condition for which the macro should be executed </td></tr>
-    <tr><td class="paramname">errds=</td><td>(work.mp_abort_errds) There is no clean way to end a process within a include called within a macro. Furthermore, there is no way to test if a macro is called within a include. To handle this particular scenario, the include should be switched for the <a class="el" href="mp__include_8sas.html" title="Performs a wrapped %include.">mp_include.sas</a> macro. This provides an indicator that we are running a macro within a %include (<code>_SYSINCLUDEFILEDEVICE</code>) and allows us to provide a dataset with the abort values (msg, mac). We can then run an abort cancel FILE to stop the include running, and pass the dataset back to the calling program to run a regular %mp_abort(). The dataset will contain the following fields: <ul>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mac=</td><td>(<a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a>) To contain the name of the calling macro. Do not use &amp;sysmacroname as this will always resolve to MP_ABORT. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">msg=</td><td>message to be returned </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">iftrue=</td><td>(1=1) Condition under which the macro should be executed </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">errds=</td><td>(work.mp_abort_errds) There is no clean way to end a process within a include called within a macro. Furthermore, there is no way to test if a macro is called within a include. To handle this particular scenario, the include should be switched for the <a class="el" href="mp__include_8sas.html" title="Performs a wrapped %include.">mp_include.sas</a> macro. This provides an indicator that we are running a macro within a %include (<code>_SYSINCLUDEFILEDEVICE</code>) and allows us to provide a dataset with the abort values (msg, mac). We can then run an abort cancel FILE to stop the include running, and pass the dataset back to the calling program to run a regular %mp_abort(). The dataset will contain the following fields: <ul>
 <li>iftrue (1=1) </li>
 <li>msg (the message) </li>
 <li>mac (the mac param)</li>
 </ul>
 </td></tr>
-    <tr><td class="paramname">mode=</td><td>(REGULAR) If mode=INCLUDE then the &amp;errds dataset is checked for an abort status. Valid values: <ul>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mode=</td><td>(REGULAR) If mode=INCLUDE then the &amp;errds dataset is checked for an abort status. Valid values: <ul>
 <li>REGULAR (default) </li>
 <li>INCLUDE</li>
 </ul>

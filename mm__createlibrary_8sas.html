@@ -149,17 +149,17 @@ $(document).ready(function(){initNavTree('mm__createlibrary_8sas.html',''); init
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">libname=</td><td>Library name (as displayed to user, 256 chars). Duplicates are not created (case sensitive). </td></tr>
-    <tr><td class="paramname">libref=</td><td>Library libref (8 chars). Duplicate librefs are not created, HOWEVER- the check is not case sensitive - if <em>libref</em> exists, <em>LIBREF</em> will still be created. Librefs created will always be uppercased. </td></tr>
-    <tr><td class="paramname">engine=</td><td>Library engine (currently only BASE supported) </td></tr>
-    <tr><td class="paramname">tree=</td><td>The metadata folder uri, or the metadata path, in which to create the library. </td></tr>
-    <tr><td class="paramname">servercontext=</td><td>The SAS server against which the library is registered. </td></tr>
-    <tr><td class="paramname">IsPreassigned=</td><td>set to 1 if the library should be pre-assigned.</td></tr>
-    <tr><td class="paramname">libdesc=</td><td>Library description (optional) </td></tr>
-    <tr><td class="paramname">directory=</td><td>Required for the BASE engine. The metadata directory objects are searched to find an existing one with a matching physical path. If more than one uri found with that path, then the first one will be used. If no URI is found, a new directory object will be created. The physical path will also be created, if it doesn't exist.</td></tr>
-    <tr><td class="paramname">mDebug=</td><td>set to 1 to show debug messages in the log </td></tr>
-    <tr><td class="paramname">frefin=</td><td>fileref to use (enables change if there is a conflict). The filerefs are left open, to enable inspection after running the macro (or importing into an xmlmap if needed). </td></tr>
-    <tr><td class="paramname">frefout=</td><td>fileref to use (enables change if there is a conflict)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">libname=</td><td>(My New Library) Library name (as displayed to user, 256 chars). Duplicates are not created (case sensitive). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">libref=</td><td>(mynewlib) Library libref (8 chars). Duplicate librefs are not created, HOWEVER- the check is not case sensitive - if libref* exists, <em>LIBREF</em> will still be created. Librefs created will always be uppercased. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">engine=</td><td>Library engine (currently only BASE supported) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tree=</td><td>The metadata folder uri, or the metadata path, in which to create the library. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">servercontext=</td><td>(SASApp) The SAS server against which the library is registered. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">IsPreassigned=</td><td>set to 1 if the library should be pre-assigned.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">libdesc=</td><td>Library description (optional) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">directory=</td><td>(/tmp/somelib) Required for the BASE engine. The metadata directory objects are searched to find an existing one with a matching physical path. If more than one uri found with that path, then the first one will be used. If no URI is found, a new directory object will be created. The physical path will also be created, if it doesn't exist.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mDebug=</td><td>set to 1 to show debug messages in the log </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">frefin=</td><td>fileref to use (enables change if there is a conflict). The filerefs are left open, to enable inspection after running the macro (or importing into an xmlmap if needed). </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">frefout=</td><td>fileref to use (enables change if there is a conflict)</td></tr>
   </table>
   </dd>
 </dl>

@@ -146,11 +146,11 @@ quit;
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">libref</td><td>the libref (not name) of the metadata library </td></tr>
-    <tr><td class="paramname">open_passthrough=</td><td>provide an alias to produce the CONNECT TO statement for the relevant external database </td></tr>
-    <tr><td class="paramname">sql_options=</td><td>an override default output fileref to avoid naming clash </td></tr>
-    <tr><td class="paramname">mDebug=</td><td>set to 1 to show debug messages in the log </td></tr>
-    <tr><td class="paramname">mAbort=</td><td>set to 1 to call mp_abort().</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">libref</td><td>the libref (not name) of the metadata library </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">open_passthrough=</td><td>() Provide an alias to produce the CONNECT TO statement for the relevant external database </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">sql_options=</td><td>() Add any options to add to proc sql statement, eg outobs= (only valid for pass through) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mDebug=</td><td>(0) set to 1 to show debug messages in the log </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mAbort=</td><td>(0) set to 1 to call mp_abort().</td></tr>
   </table>
   </dd>
 </dl>

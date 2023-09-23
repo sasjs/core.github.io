@@ -152,51 +152,52 @@ $(document).ready(function(){initNavTree('mf__getvarformat_8sas_source.html','')
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">  @param [in] libds Two part dataset (or view) reference.</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">  @param [in] var Variable name for which a format should be returned</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">  @param [in] force=(0) Set to 1 to supply a default if the variable has no format</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">  @returns outputs format</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">  @author Allan Bowe</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">  @version 9.2</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;%macro mf_getVarFormat(libds <span class="comment">/* two level ds name */</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;      , var <span class="comment">/* variable name from which to return the format */</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      , force=0</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  %local dsid vnum vformat rc vlen vtype;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="comment">/* Open dataset */</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  %let dsid = %sysfunc(open(&amp;libds));</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  %<span class="keywordflow">if</span> &amp;dsid &gt; 0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">/* Get variable number */</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    %let vnum = %sysfunc(varnum(&amp;dsid, &amp;var));</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">/* Get variable format */</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    %<span class="keywordflow">if</span>(&amp;vnum &gt; 0) %then %let vformat=%sysfunc(varfmt(&amp;dsid, &amp;vnum));</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      %put NOTE: Variable &amp;var does not exist in &amp;libds;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      %let rc = %sysfunc(close(&amp;dsid));</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      %<span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    %end;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  %end;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    %put &amp;sysmacroname: dataset &amp;libds not opened! (rc=&amp;dsid);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    %put &amp;sysmacroname: %sysfunc(sysmsg());</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    %<span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  %end;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="comment">/* supply a default if no format available */</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  %<span class="keywordflow">if</span> %length(&amp;vformat)&lt;2 &amp; &amp;force=1 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    %let vlen = %sysfunc(varlen(&amp;dsid, &amp;vnum));</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    %let vtype = %sysfunc(vartype(&amp;dsid, &amp;vnum.));</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    %<span class="keywordflow">if</span> &amp;vtype=C %then %let vformat=$&amp;vlen..;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    %<span class="keywordflow">else</span> %let vformat=best.;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  %end;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">  @param [in] force= (0) Set to 1 to supply a default if the variable has no</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    format</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">  @returns outputs format</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">  @author Allan Bowe</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">  @version 9.2</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;%macro mf_getVarFormat(libds <span class="comment">/* two level ds name */</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      , var <span class="comment">/* variable name from which to return the format */</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;      , force=0</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  %local dsid vnum vformat rc vlen vtype;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="comment">/* Open dataset */</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  %let dsid = %sysfunc(open(&amp;libds));</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  %<span class="keywordflow">if</span> &amp;dsid &gt; 0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">/* Get variable number */</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    %let vnum = %sysfunc(varnum(&amp;dsid, &amp;var));</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="comment">/* Get variable format */</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    %<span class="keywordflow">if</span>(&amp;vnum &gt; 0) %then %let vformat=%sysfunc(varfmt(&amp;dsid, &amp;vnum));</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      %put NOTE: Variable &amp;var does not exist in &amp;libds;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      %let rc = %sysfunc(close(&amp;dsid));</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      %<span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    %end;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  %end;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    %put &amp;sysmacroname: dataset &amp;libds not opened! (rc=&amp;dsid);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    %put &amp;sysmacroname: %sysfunc(sysmsg());</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    %<span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  %end;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="comment">/* supply a default if no format available */</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  %<span class="keywordflow">if</span> %length(&amp;vformat)&lt;2 &amp; &amp;force=1 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    %let vlen = %sysfunc(varlen(&amp;dsid, &amp;vnum));</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    %let vtype = %sysfunc(vartype(&amp;dsid, &amp;vnum.));</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    %<span class="keywordflow">if</span> &amp;vtype=C %then %let vformat=$&amp;vlen..;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    %<span class="keywordflow">else</span> %let vformat=best.;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  %end;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="comment">/* Close dataset */</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  %let rc = %sysfunc(close(&amp;dsid));</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="comment">/* Return variable format */</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  &amp;vformat</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;%mend mf_getVarFormat;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="comment">/* Close dataset */</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  %let rc = %sysfunc(close(&amp;dsid));</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="comment">/* Return variable format */</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  &amp;vformat</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;%mend mf_getVarFormat;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

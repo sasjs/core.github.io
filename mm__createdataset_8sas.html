@@ -144,10 +144,10 @@ $(document).ready(function(){initNavTree('mm__createdataset_8sas.html',''); init
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">libds=</td><td>library.dataset metadata source. Note - table names in metadata can be longer than 32 chars (just fyi, not an issue here) </td></tr>
-    <tr><td class="paramname">tableuri=</td><td>Metadata URI of the table to be created </td></tr>
-    <tr><td class="paramname">outds=</td><td>(work.mm_createdataset) The dataset to create. The table name needs to be 32 chars or less as per SAS naming rules. </td></tr>
-    <tr><td class="paramname">mdebug=</td><td>(0) Set to 1 to enable DEBUG messages</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">libds=</td><td>library.dataset metadata source. Note - table names in metadata can be longer than 32 chars (just fyi, not an issue here) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tableuri=</td><td>Metadata URI of the table to be created </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mm_createdataset) The dataset to create. The table name needs to be 32 chars or less as per SAS naming rules. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>(0) Set to 1 to enable DEBUG messages</td></tr>
   </table>
   </dd>
 </dl>

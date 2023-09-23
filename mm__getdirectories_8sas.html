@@ -134,9 +134,9 @@ $(document).ready(function(){initNavTree('mm__getdirectories_8sas.html',''); ini
 <div class="textblock"><p>Provide a file path to get matching directory objects, or leave blank to return all directories. The Directory object is used to reference a physical filepath (eg when registering a .sas program in a Stored process)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path=</td><td>the physical path for which to return a meta Directory object </td></tr>
-    <tr><td class="paramname">outds=</td><td>the dataset to create that contains the list of directories </td></tr>
-    <tr><td class="paramname">mDebug=</td><td>set to 1 to show debug messages in the log</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">path=</td><td>Physical path for which to return a meta Directory object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mm_getdirectories) the dataset to create that contains the list of directories </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mDebug=</td><td>(0) set to 1 to show debug messages in the log</td></tr>
   </table>
   </dd>
 </dl>

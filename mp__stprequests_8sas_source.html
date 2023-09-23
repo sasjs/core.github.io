@@ -148,57 +148,58 @@ $(document).ready(function(){initNavTree('mp__stprequests_8sas_source.html','');
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    %mp_stprequests(status_cd=INIT, libds=YOURLIB.DATASET )</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">  @param status_cd= Use INIT for INIT and TERM for TERM events</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">  @param libds= Location of base table (library.dataset).  To minimise risk</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">    of table locks, we HIGHLY recommend using a database (NOT a SAS dataset).</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">    THE LIBRARY SHOULD BE ASSIGNED ALREADY - eg in autoexec or earlier in the</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">    init program proper.</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">  @version 9.2</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">  @author Allan Bowe</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">  @source https://github.com/sasjs/core</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;%macro mp_stprequests(status_cd= <span class="comment">/* $4 eg INIT or TERM */</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      ,libds=somelib.stp_requests <span class="comment">/* base table location  */</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="comment">/* set nosyntaxcheck so the code runs regardless */</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  %local etls_syntaxcheck;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  %let etls_syntaxcheck=%sysfunc(getoption(syntaxcheck));</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  options nosyntaxcheck;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  data ;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">if</span> 0 then <span class="keyword">set</span> &amp;libds;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    request_dttm=datetime();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    status_cd=<span class="stringliteral">&quot;&amp;status_cd&quot;</span>;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    _METAPERSON=<span class="stringliteral">&quot;&amp;_metaperson&quot;</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    _PROGRAM=<span class="stringliteral">&quot;&amp;_program&quot;</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    SYSUSERID=<span class="stringliteral">&quot;&amp;sysuserid&quot;</span>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    SYSJOBID=<span class="stringliteral">&quot;&amp;sysjobid&quot;</span>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  %<span class="keywordflow">if</span> not %symexist(_SESSIONID) %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="comment">/* session id is stored in the replay variable but needs to be extracted */</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    _replay=symget(<span class="stringliteral">&#39;_replay&#39;</span>);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    _replay=subpad(_replay,index(_replay,<span class="stringliteral">&#39;_sessionid=&#39;</span>)+11,length(_replay));</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    index=index(_replay,<span class="charliteral">&#39;&amp;&#39;</span>)-1;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">if</span> index=-1 then index=length(_replay);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    _replay=substr(_replay,1,index);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    _SESSIONID=_replay;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    drop _replay index;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  %end;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">/* explicitly created sessions are automatically available */</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    _SESSIONID=symget(<span class="stringliteral">&#39;_SESSIONID&#39;</span>);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  %end;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    output;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    stop;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  run;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  proc append base=&amp;libds data=&amp;syslast nowarn;run;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  options &amp;etls_syntaxcheck;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;%mend mp_stprequests;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">  @param [in] status_cd= Use INIT for INIT and TERM for TERM events</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">  @param [in] libds= (somelib.stp_requests) Location of base table</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">    (library.dataset).  To minimise risk of table locks, we HIGHLY recommend</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">    using a database (NOT a SAS dataset).</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">    THE LIBRARY SHOULD BE ASSIGNED ALREADY - eg in autoexec or earlier in the</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    init program proper.</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">  @version 9.2</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">  @author Allan Bowe</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">  @source https://github.com/sasjs/core</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;%macro mp_stprequests(status_cd= <span class="comment">/* $4 eg INIT or TERM */</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;      ,libds=somelib.stp_requests <span class="comment">/* base table location  */</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="comment">/* set nosyntaxcheck so the code runs regardless */</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  %local etls_syntaxcheck;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  %let etls_syntaxcheck=%sysfunc(getoption(syntaxcheck));</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  options nosyntaxcheck;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  data ;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">if</span> 0 then <span class="keyword">set</span> &amp;libds;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    request_dttm=datetime();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    status_cd=<span class="stringliteral">&quot;&amp;status_cd&quot;</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    _METAPERSON=<span class="stringliteral">&quot;&amp;_metaperson&quot;</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    _PROGRAM=<span class="stringliteral">&quot;&amp;_program&quot;</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    SYSUSERID=<span class="stringliteral">&quot;&amp;sysuserid&quot;</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    SYSJOBID=<span class="stringliteral">&quot;&amp;sysjobid&quot;</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  %<span class="keywordflow">if</span> not %symexist(_SESSIONID) %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">/* session id is stored in the replay variable but needs to be extracted */</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    _replay=symget(<span class="stringliteral">&#39;_replay&#39;</span>);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    _replay=subpad(_replay,index(_replay,<span class="stringliteral">&#39;_sessionid=&#39;</span>)+11,length(_replay));</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    index=index(_replay,<span class="charliteral">&#39;&amp;&#39;</span>)-1;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">if</span> index=-1 then index=length(_replay);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    _replay=substr(_replay,1,index);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    _SESSIONID=_replay;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    drop _replay index;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  %end;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="comment">/* explicitly created sessions are automatically available */</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    _SESSIONID=symget(<span class="stringliteral">&#39;_SESSIONID&#39;</span>);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  %end;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    output;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    stop;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  run;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  proc append base=&amp;libds data=&amp;syslast nowarn;run;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  options &amp;etls_syntaxcheck;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;%mend mp_stprequests;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

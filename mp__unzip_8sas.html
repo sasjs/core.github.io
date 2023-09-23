@@ -140,8 +140,8 @@ $(document).ready(function(){initNavTree('mp__unzip_8sas.html',''); initResizabl
 </pre><p> More info: <a href="https://blogs.sas.com/content/sasdummy/2015/05/11/using-filename-zip-to-unzip-and-read-data-files-in-sas/">https://blogs.sas.com/content/sasdummy/2015/05/11/using-filename-zip-to-unzip-and-read-data-files-in-sas/</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ziploc=</td><td>Fileref or quoted full path to zip file ("/path/to/file.zip") </td></tr>
-    <tr><td class="paramname">outdir=</td><td>(sysfunc(pathname(work))) Directory in which to write the outputs (created if non existant)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ziploc=</td><td>Fileref or quoted full path, eg: "/path/to/file.zip" </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outdir=</td><td>(sysfunc(pathname(work))) Directory in which to write the outputs (created if needed)</td></tr>
   </table>
   </dd>
 </dl>

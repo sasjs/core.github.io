@@ -135,10 +135,10 @@ $(document).ready(function(){initNavTree('mp__searchcols_8sas.html',''); initRes
 <p>Usage: </p><pre class="fragment">%mp_searchcols(libs=sashelp work, cols=name sex age)
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">libs=(SASHELP)</td><td>Space separated list of libraries to search for columns </td></tr>
-    <tr><td class="paramname">cols=</td><td>Space separated list of column names to search for (not case sensitive) </td></tr>
-    <tr><td class="paramname">outds=(mp_searchcols)</td><td>the table to create with the results. Will have one line per table match. </td></tr>
-    <tr><td class="paramname">match=(ANY)</td><td>The match type. Valid values: <ul>
+    <tr><td class="paramdir">[in]</td><td class="paramname">libs=</td><td>(SASHELP) Space separated list of libraries to search for columns </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cols=</td><td>Space separated list of column names to search for (not case sensitive) </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(mp_searchcols) The table to create with the results. Will have one line per table match. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">match=</td><td>(ANY) The match type. Valid values: <ul>
 <li>ANY - The table contains at least one of the columns </li>
 <li>WILD - The table contains a column with a name that partially matches</li>
 </ul>

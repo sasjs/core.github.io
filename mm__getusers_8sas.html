@@ -134,21 +134,15 @@ $(document).ready(function(){initNavTree('mm__getusers_8sas.html',''); initResiz
 <div class="textblock"><p>Only shows a limited number of attributes as some sites will have a LOT of users.</p>
 <p>Usage: </p><pre class="fragment">%mm_getusers()
 </pre><p> Optionally, filter for a user (useful to get the uri): </p><pre class="fragment">%mm_getusers(user=&amp;_metaperson)
-</pre> <dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">outds</td><td>the dataset to create that contains the list of libraries</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>outds dataset containing all users, with the following columns:<ul>
+</pre> <dl class="section return"><dt>Returns</dt><dd>outds dataset containing all users, with the following columns:<ul>
 <li>uri</li>
 <li>name</li>
 </ul>
 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">user=</td><td>(0) Set to a metadata user to filter on that user </td></tr>
-    <tr><td class="paramname">outds=</td><td>(work.mm_getusers) The output table to create</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">user=</td><td>(0) Set to a metadata user to filter on that user </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mm_getusers) The output table to create</td></tr>
   </table>
   </dd>
 </dl>

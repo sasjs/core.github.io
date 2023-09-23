@@ -143,16 +143,16 @@ run;
 %mp_binarycopy(inref=tmp1, outref=tmp2, mode=APPEND)
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">inloc</td><td>quoted "path/and/filename.ext" of the file to be copied </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outloc</td><td>quoted "path/and/filename.ext" of the file to be created </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">inref</td><td>(____in) If provided, this fileref will take precedence over the <code>inloc</code> parameter </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outref</td><td>(____in) If provided, this fileref will take precedence over the <code>outloc</code> parameter. It must already exist! </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mode</td><td>(CREATE) Valid values: <ul>
+    <tr><td class="paramdir">[in]</td><td class="paramname">inloc=</td><td>() quoted "path/and/filename.ext" of the file to be copied </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outloc=</td><td>() quoted "path/and/filename.ext" of the file to create </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">inref=</td><td>(____in) If provided, this fileref takes precedence over the <code>inloc</code> parameter </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>(____in) If provided, this fileref takes precedence over the <code>outloc</code> parameter. It must already exist! </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mode=</td><td>(CREATE) Valid values: <ul>
 <li>CREATE - Create the file (even if it already exists) </li>
 <li>APPEND - Append to the file (don't overwrite) </li>
 </ul>
 </td></tr>
-    <tr><td class="paramdir"></td><td class="paramname">iftrue=</td><td>(1=1) Supply a condition for which the macro should be executed</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">iftrue=</td><td>(1=1) Supply a condition for which the macro should be executed</td></tr>
   </table>
   </dd>
 </dl>

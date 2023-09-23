@@ -134,11 +134,11 @@ $(document).ready(function(){initNavTree('mp__distinctfmtvalues_8sas.html',''); 
 <div class="textblock"><p>If no format is supplied, then the original value is used instead. There is also a dependency on other macros within the Macro Core library. Usage: </p><pre class="fragment">%mp_distinctfmtvalues(libds=sashelp.class,var=age,outvar=age,outds=test)
 </pre> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">libds</td><td>input dataset </td></tr>
-    <tr><td class="paramname">var</td><td>variable to get distinct values for </td></tr>
-    <tr><td class="paramname">outvar</td><td>variable to create. Default: <code>formatted_value</code> </td></tr>
-    <tr><td class="paramname">outds</td><td>dataset to create. Default: work.mp_distinctfmtvalues </td></tr>
-    <tr><td class="paramname">varlen</td><td>length of variable to create (default 200)</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">libds=</td><td>() input dataset </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">var=</td><td>(0) variable to get distinct values for </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outvar=</td><td>(formatteed_value) variable to create. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mp_distinctfmtvalues) dataset to create. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">varlen=</td><td>(2000) length of variable to create</td></tr>
   </table>
   </dd>
 </dl>

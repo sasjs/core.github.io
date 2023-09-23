@@ -144,39 +144,41 @@ $(document).ready(function(){initNavTree('mp__deleteconstraints_8sas_source.html
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">      %mp_getconstraints(lib=work,ds=example,outds=work.constraints)</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">      %mp_deleteconstraints(inds=work.constraints,outds=dropped,execute=YES)</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">  @param inds= The input table containing the constraint info</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">  @param outds= a table containing the drop statements (drop_statement column)</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">  @param execute= `YES|NO` - default is NO. To actually drop, use YES.</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">  @version 9.2</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">  @author Allan Bowe</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;%macro mp_deleteconstraints(inds=mp_getconstraints</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  ,outds=mp_deleteconstraints</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  ,execute=NO</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;proc sort data=&amp;inds out=&amp;outds;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  by libref table_name constraint_name;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;run;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;data &amp;outds;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keyword">set</span> &amp;outds;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  by libref table_name constraint_name;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  length drop_statement $500;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordflow">if</span> _n_=1 and <span class="stringliteral">&quot;&amp;execute&quot;</span>=<span class="stringliteral">&quot;YES&quot;</span> then call execute(<span class="stringliteral">&#39;proc sql;&#39;</span>);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keywordflow">if</span> first.constraint_name then <span class="keywordflow">do</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    drop_statement=catx(<span class="stringliteral">&quot; &quot;</span>,<span class="stringliteral">&quot;alter table&quot;</span>,libref,<span class="stringliteral">&quot;.&quot;</span>,table_name</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      ,<span class="stringliteral">&quot;drop constraint&quot;</span>,constraint_name,<span class="stringliteral">&quot;;&quot;</span>);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    output;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">if</span> <span class="stringliteral">&quot;&amp;execute&quot;</span>=<span class="stringliteral">&quot;YES&quot;</span> then call execute(drop_statement);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  end;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;run;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;%mend mp_deleteconstraints;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">  @param [in] inds= (mp_getconstraints)</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    The input table containing constraint info</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">  @param [out] outds= (mp_deleteconstraints)</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    Table containing the drop statements (drop_statement column)</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">  @param [in] execute= (NO) `YES|NO` - default is NO. To actually drop, use YES.</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">  @version 9.2</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">  @author Allan Bowe</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;%macro mp_deleteconstraints(inds=mp_getconstraints</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  ,outds=mp_deleteconstraints</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  ,execute=NO</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;proc sort data=&amp;inds out=&amp;outds;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  by libref table_name constraint_name;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;run;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;data &amp;outds;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keyword">set</span> &amp;outds;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  by libref table_name constraint_name;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  length drop_statement $500;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keywordflow">if</span> _n_=1 and <span class="stringliteral">&quot;&amp;execute&quot;</span>=<span class="stringliteral">&quot;YES&quot;</span> then call execute(<span class="stringliteral">&#39;proc sql;&#39;</span>);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keywordflow">if</span> first.constraint_name then <span class="keywordflow">do</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    drop_statement=catx(<span class="stringliteral">&quot; &quot;</span>,<span class="stringliteral">&quot;alter table&quot;</span>,libref,<span class="stringliteral">&quot;.&quot;</span>,table_name</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      ,<span class="stringliteral">&quot;drop constraint&quot;</span>,constraint_name,<span class="stringliteral">&quot;;&quot;</span>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    output;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">if</span> <span class="stringliteral">&quot;&amp;execute&quot;</span>=<span class="stringliteral">&quot;YES&quot;</span> then call execute(drop_statement);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  end;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;run;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;%mend mp_deleteconstraints;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

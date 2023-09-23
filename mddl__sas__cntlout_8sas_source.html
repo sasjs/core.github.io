@@ -162,26 +162,37 @@ $(document).ready(function(){initNavTree('mddl__sas__cntlout_8sas_source.html','
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    ,NOEDIT num length=3  label=<span class="stringliteral">&#39;Is picture string noedit?&#39;</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    ,SEXCL <span class="keywordtype">char</span>(1)        label=<span class="stringliteral">&#39;Start exclusion&#39;</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    ,EEXCL <span class="keywordtype">char</span>(1)        label=<span class="stringliteral">&#39;End exclusion&#39;</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    ,HLO <span class="keywordtype">char</span>(13)         label=<span class="stringliteral">&#39;Additional information. M=MultiLabel&#39;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    ,DECSEP <span class="keywordtype">char</span>(1)       label=<span class="stringliteral">&#39;Decimal separator&#39;</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    ,DIG3SEP <span class="keywordtype">char</span>(1)      label=<span class="stringliteral">&#39;Three-digit separator&#39;</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    ,DATATYPE <span class="keywordtype">char</span>(8)     label=<span class="stringliteral">&#39;Date/time/datetime?&#39;</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    ,LANGUAGE <span class="keywordtype">char</span>(8)     label=<span class="stringliteral">&#39;Language for date strings&#39;</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  );</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  %local lib;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  %let libds=%upcase(&amp;libds);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  %<span class="keywordflow">if</span> %index(&amp;libds,.)=0 %then %let lib=WORK;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  %<span class="keywordflow">else</span> %let lib=%scan(&amp;libds,1,.);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  proc datasets lib=&amp;lib noprint;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    modify %scan(&amp;libds,-1,.);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    index create</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;      pk_cntlout=(type fmtname fmtrow)</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      /nomiss unique;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  quit;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;%mend mddl_sas_cntlout;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    ,HLO <span class="keywordtype">char</span>(13)         label=<span class="stringliteral">&#39;Additional information.</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="stringliteral">F=Standard format/informat.</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="stringliteral">H=Range ending value is HIGH.</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="stringliteral">I=Numeric informat.</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="stringliteral">J=Justification for an informat.</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="stringliteral">L=Range starting value is LOW.</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="stringliteral">M=MultiLabel.</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="stringliteral">N=Format or informat has no ranges, including no OTHER= range.</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="stringliteral">O=Range is OTHER.</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="stringliteral">R=ROUND option is in effect.</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="stringliteral">S=Specifies that NOTSORTED is in effect.</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="stringliteral">U=Specifies that the UPCASE option for an informat be used.&#39;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    ,DECSEP <span class="keywordtype">char</span>(1)       label=<span class="stringliteral">&#39;Decimal separator&#39;</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    ,DIG3SEP <span class="keywordtype">char</span>(1)      label=<span class="stringliteral">&#39;Three-digit separator&#39;</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    ,DATATYPE <span class="keywordtype">char</span>(8)     label=<span class="stringliteral">&#39;Date/time/datetime?&#39;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    ,LANGUAGE <span class="keywordtype">char</span>(8)     label=<span class="stringliteral">&#39;Language for date strings&#39;</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  );</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  %local lib;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  %let libds=%upcase(&amp;libds);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  %<span class="keywordflow">if</span> %index(&amp;libds,.)=0 %then %let lib=WORK;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  %<span class="keywordflow">else</span> %let lib=%scan(&amp;libds,1,.);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  proc datasets lib=&amp;lib noprint;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    modify %scan(&amp;libds,-1,.);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    index create</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      pk_cntlout=(type fmtname fmtrow)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      /nomiss unique;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  quit;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;%mend mddl_sas_cntlout;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

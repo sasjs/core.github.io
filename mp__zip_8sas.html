@@ -141,16 +141,16 @@ $(document).ready(function(){initNavTree('mp__zip_8sas.html',''); initResizable(
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">in=</td><td>unquoted filepath, dataset of files or directory to zip </td></tr>
-    <tr><td class="paramname">type=</td><td>(FILE) Valid values: <ul>
+    <tr><td class="paramdir">[in]</td><td class="paramname">in=</td><td>unquoted filepath, dataset of files or directory to zip </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">type=</td><td>(FILE) Valid values: <ul>
 <li>FILE - /full/path/and/filename.extension to a particular file </li>
 <li>DATASET - a dataset containing a list of files to zip (see <code>incol</code>) </li>
 <li>DIRECTORY - a directory to zip </li>
 </ul>
 </td></tr>
-    <tr><td class="paramname">outname=</td><td>(FILE) Output file to create, <em>without</em> .zip extension </td></tr>
-    <tr><td class="paramname">outpath=</td><td>(sysfunc(pathname(WORK))) Parent folder for output zip file </td></tr>
-    <tr><td class="paramname">incol=</td><td>if DATASET input, say which column contains the filepath</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outname=</td><td>(FILE) Output file to create, <em>without</em> .zip extension </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outpath=</td><td>(sysfunc(pathname(WORK))) Parent folder for zip file </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">incol=</td><td>() If DATASET input, say which column contains the filepath</td></tr>
   </table>
   </dd>
 </dl>

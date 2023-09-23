@@ -177,11 +177,11 @@ run;
 <p>If you have one or more jobs that you'd like to wait for completion you can also use the <a href="/mv__jobwaitfor_8sas.html">mv_jobwaitfor</a> macro.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>(ACCESS_TOKEN) The global macro variable to contain the access token </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>valid values: <ul>
 <li>password </li>
 <li>authorization_code </li>
-<li>detect - will check if access_token exists, if not will use sas_services if a SASStudioV session else authorization_code. Default option. </li>
+<li>detect - will check if access_token exists, if not will use sas_services if a SASStudioV session else authorization_code. </li>
 <li>sas_services - will use oauth_bearer=sas_services. </li>
 </ul>
 </td></tr>

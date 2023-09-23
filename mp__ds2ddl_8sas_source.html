@@ -127,34 +127,46 @@ $(document).ready(function(){initNavTree('mp__ds2ddl_8sas_source.html',''); init
 <div class="contents">
 <a href="mp__ds2ddl_8sas.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  @file</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  @brief A wrapper for mp_getddl.sas</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  @details In the next release, this will be the main version.</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">  @brief Fetches DDL for a specific table</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">  @details Uses mp_getddl under the hood</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">  @li mp_getddl.sas</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;%macro mp_ds2ddl(libds,fref=getddl,flavour=SAS,showlog=YES,schema=</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  ,applydttm=NO</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;%local libref;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;%let libds=%upcase(&amp;libds);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;%let libref=%scan(&amp;libds,1,.);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;%<span class="keywordflow">if</span> &amp;libref=&amp;libds %then %let libds=WORK.&amp;libds;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;%mp_getddl(%scan(&amp;libds,1,.)</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  ,%scan(&amp;libds,2,.)</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  ,fref=&amp;fref</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  ,flavour=SAS</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  ,showlog=&amp;showlog</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  ,schema=&amp;schema</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  ,applydttm=&amp;applydttm</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;)</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;%mend mp_ds2ddl;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">  @param [in] libds library.dataset to create ddl for</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">  @param [in] fref= (getddl) the fileref to which to _append_ the DDL.  If it</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">    does not exist, it will be created.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">  @param [in] flavour= (SAS) The type of DDL to create. Options:</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">    @li SAS</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">    @li TSQL</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">  @param [in]showlog= (NO) Set to YES to show the DDL in the log</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">  @param [in] schema= () Choose a preferred schema name (default is to use</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">    actual schema, else libref)</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">  @param [in] applydttm= (NO) For non SAS DDL, choose if columns are created with</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">    native datetime2 format or regular decimal type</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">  @li mp_getddl.sas</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;%macro mp_ds2ddl(libds,fref=getddl,flavour=SAS,showlog=YES,schema=</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  ,applydttm=NO</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;%local libref;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;%let libds=%upcase(&amp;libds);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;%let libref=%scan(&amp;libds,1,.);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;%<span class="keywordflow">if</span> &amp;libref=&amp;libds %then %let libds=WORK.&amp;libds;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;%mp_getddl(%scan(&amp;libds,1,.)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  ,%scan(&amp;libds,2,.)</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  ,fref=&amp;fref</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  ,flavour=SAS</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  ,showlog=&amp;showlog</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  ,schema=&amp;schema</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  ,applydttm=&amp;applydttm</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;%mend mp_ds2ddl;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

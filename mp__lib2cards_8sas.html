@@ -147,10 +147,10 @@ $(document).ready(function(){initNavTree('mp__lib2cards_8sas.html',''); initResi
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">lib=</td><td>Library in which to convert all datasets </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outloc=</td><td>Location in which to store output. Defaults to WORK library. No quotes. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outfile=</td><td>Optional output file NAME - if provided, then will create a single output file instead of one file per input table. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">maxobs=</td><td>limit output to the first <code>maxobs</code> observations</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">lib=</td><td>() Library in which to convert all datasets </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outloc=</td><td>(sysfunc(pathname(work))) Location in which to store output. No quotes. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outfile=</td><td>(0) Optional output file NAME - if provided, then will create a single output file instead of one file per input table. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">maxobs=</td><td>(max) limit output to the first <code>maxobs</code> rows</td></tr>
   </table>
   </dd>
 </dl>

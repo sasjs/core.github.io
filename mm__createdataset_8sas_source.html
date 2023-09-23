@@ -149,12 +149,12 @@ $(document).ready(function(){initNavTree('mm__createdataset_8sas_source.html',''
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">  @li mm_gettables.sas</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">  @li mm_getcols.sas</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">  @param libds= library.dataset metadata source.  Note - table names in metadata</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">  @param [in] libds= library.dataset metadata source.  Note - table names in metadata</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">    can be longer than 32 chars (just fyi, not an issue here)</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">  @param tableuri= Metadata URI of the table to be created</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">  @param outds= (work.mm_createdataset) The dataset to create.  The table name</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    needs to be 32 chars or less as per SAS naming rules.</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">  @param mdebug= (0) Set to 1 to enable DEBUG messages</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">  @param [in] tableuri= Metadata URI of the table to be created</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">  @param [out] outds= (work.mm_createdataset) The dataset to create.  The table</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    name needs to be 32 chars or less as per SAS naming rules.</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">  @param [in] mdebug= (0) Set to 1 to enable DEBUG messages</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">  @version 9.4</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">  @author Allan Bowe</span></div>

@@ -151,19 +151,19 @@ $(document).ready(function(){initNavTree('mp__lib2cards_8sas_source.html',''); i
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">  @li mf_trimstr.sas</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">  @li mp_ds2cards.sas</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">  @param [in] lib= Library in which to convert all datasets</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">  @param [out] outloc= Location in which to store output.  Defaults to WORK</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    library. No quotes.</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">  @param [out] outfile= Optional output file NAME - if provided, then will create</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">  a single output file instead of one file per input table.</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">  @param [in] maxobs= limit output to the first &lt;code&gt;maxobs&lt;/code&gt; observations</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">  @param [in] lib= () Library in which to convert all datasets</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">  @param [out] outloc= (%sysfunc(pathname(work))) Location in which to store</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    output. No quotes.</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">  @param [out] outfile= (0) Optional output file NAME - if provided, then</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    will create a single output file instead of one file per input table.</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">  @param [in] maxobs= (max) limit output to the first &lt;code&gt;maxobs&lt;/code&gt; rows</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">  @version 9.2</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">  @author Allan Bowe</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;%macro mp_lib2cards(lib=</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    ,outloc=%sysfunc(pathname(work)) <span class="comment">/* without trailing slash */</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    ,outloc=%sysfunc(pathname(work))</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    ,maxobs=max</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    ,random_sample=NO</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    ,outfile=0</div>

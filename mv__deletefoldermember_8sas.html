@@ -138,11 +138,11 @@ $(document).ready(function(){initNavTree('mv__deletefoldermember_8sas.html','');
 %mv_deletejes(path=/Public/test, name=blah)
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path=</td><td>The full path of the folder containing the item to be deleted </td></tr>
-    <tr><td class="paramname">name=</td><td>The name of the item to be deleted </td></tr>
-    <tr><td class="paramname">contenttype=</td><td>The contenttype of the item, eg: file, jobDefinition </td></tr>
-    <tr><td class="paramname">access_token_var=</td><td>The global macro variable to contain the access token </td></tr>
-    <tr><td class="paramname">grant_type=</td><td>valid values are "password" or "authorization_code" (unquoted). The default is "detect" (which will run in Studio 5+ without a token).</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">path=</td><td>() The full path of the folder containing the item to be deleted </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">name=</td><td>The name of the item to be deleted </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">contenttype=</td><td>The contenttype of the item, eg: file, jobDefinition </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>(ACCESS_TOKEN) The global macro variable to contain the access token </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>(sas_services) valid values are "password" or "authorization_code" (unquoted).</td></tr>
   </table>
   </dd>
 </dl>

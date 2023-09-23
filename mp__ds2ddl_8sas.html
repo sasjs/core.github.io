@@ -126,16 +126,25 @@ $(document).ready(function(){initNavTree('mp__ds2ddl_8sas.html',''); initResizab
 </div><!--header-->
 <div class="contents">
 
-<p>A wrapper for <a class="el" href="mp__getddl_8sas.html" title="Extract DDL in various formats, by table or library.">mp_getddl.sas</a>.  
+<p>Fetches DDL for a specific table.  
 <a href="#details">More...</a></p>
 
 <p><a href="mp__ds2ddl_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>In the next release, this will be the main version.</p>
-<h4>SAS Macros </h4>
-<ul>
-<li><a class="el" href="mp__getddl_8sas.html" title="Extract DDL in various formats, by table or library.">mp_getddl.sas</a> </li>
+<div class="textblock"><p>Uses mp_getddl under the hood</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">libds</td><td>library.dataset to create ddl for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fref=</td><td>(getddl) the fileref to which to <em>append</em> the DDL. If it does not exist, it will be created. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">flavour=</td><td>(SAS) The type of DDL to create. Options: <ul>
+<li>SAS </li>
+<li>TSQL</li>
 </ul>
+</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname"></td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition in file <a class="el" href="mp__ds2ddl_8sas_source.html">mp_ds2ddl.sas</a>.</p>
 </div></div><!-- contents -->
