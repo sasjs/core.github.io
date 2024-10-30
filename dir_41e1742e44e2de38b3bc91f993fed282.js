@@ -12,5 +12,6 @@ var dir_41e1742e44e2de38b3bc91f993fed282 =
     [ "ms_getusers.sas", "ms__getusers_8sas.html", null ],
     [ "ms_runstp.sas", "ms__runstp_8sas.html", null ],
     [ "ms_testservice.sas", "ms__testservice_8sas.html", null ],
+    [ "ms_triggerstp.sas", "ms__triggerstp_8sas.html", null ],
     [ "ms_webout.sas", "ms__webout_8sas.html", null ]
 ];
