@@ -139,7 +139,7 @@ $(function(){initNavTree('ms__triggerstp_8sas.html',''); initResizable(true); })
 </div><!--header-->
 <div class="contents">
 
-<p>Triggers a SASjs Server STP using the /SASjsApi/code/trigger endpoint.  
+<p>Triggers a SASjs Server STP using the /SASjsApi/stp/trigger endpoint.  
 <a href="#details">More...</a></p>
 
 <p><a href="ms__triggerstp_8sas_source.html">Go to the source code of this file.</a></p>
@@ -172,6 +172,7 @@ $(function(){initNavTree('ms__triggerstp_8sas.html',''); initResizable(true); })
 <td class="markdownTableBodyNone">fref2   </td><td class="markdownTableBodyNone">another_file   </td><td class="markdownTableBodyNone">zyx_v2.csv   </td></tr>
 </table>
 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">expiresaftermins=</td><td>(15) The number of minutes to retain the session folder after the session ends.</td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.ms_triggerstp) Set to the name of a dataset to contain the sessionId. If this dataset already exists, and contains the sessionId, it will be appended to. Format: <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">sessionId:$36    </th></tr>
@@ -185,8 +186,11 @@ $(function(){initNavTree('ms__triggerstp_8sas.html',''); initResizable(true); })
 <h4>SAS Macros </h4>
 <ul>
 <li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
+<li><a class="el" href="mf__getuniquelibref_8sas.html" title="Returns an unused libref.">mf_getuniquelibref.sas</a> </li>
 <li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
 <li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
+<li><a class="el" href="mp__dropmembers_8sas.html" title="Drops tables / views (if they exist) without warnings in the log.">mp_dropmembers.sas</a> </li>
+<li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a> </li>
 </ul>
 
 <p class="definition">Definition in file <a class="el" href="ms__triggerstp_8sas_source.html">ms_triggerstp.sas</a>.</p>
