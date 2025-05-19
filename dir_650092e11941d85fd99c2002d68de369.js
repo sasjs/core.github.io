@@ -2,6 +2,7 @@ var dir_650092e11941d85fd99c2002d68de369 =
 [
     [ "mfv_existfile.test.sas", "mfv__existfile_8test_8sas.html", null ],
     [ "mfv_existfolder.test.sas", "mfv__existfolder_8test_8sas.html", null ],
+    [ "mfv_getpathuri.test.sas", "mfv__getpathuri_8test_8sas.html", null ],
     [ "mv_createfile.test.sas", "mv__createfile_8test_8sas.html", null ],
     [ "mv_createfolder.test.sas", "mv__createfolder_8test_8sas.html", null ],
     [ "mv_createwebservice.test.sas", "mv__createwebservice_8test_8sas.html", null ],

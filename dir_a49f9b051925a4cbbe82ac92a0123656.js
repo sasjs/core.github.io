@@ -23,6 +23,7 @@ var dir_a49f9b051925a4cbbe82ac92a0123656 =
     [ "mf_increment.test.sas", "mf__increment_8test_8sas.html", null ],
     [ "mf_isint.test.sas", "mf__isint_8test_8sas.html", null ],
     [ "mf_islibds.test.sas", "mf__islibds_8test_8sas.html", null ],
+    [ "mf_mimetype.test.sas", "mf__mimetype_8test_8sas.html", null ],
     [ "mf_readfile.test.sas", "mf__readfile_8test_8sas.html", null ],
     [ "mf_verifymacvars.test.sas", "mf__verifymacvars_8test_8sas.html", null ],
     [ "mf_wordsinstr1andstr2.test.sas", "mf__wordsinstr1andstr2_8test_8sas.html", null ],
