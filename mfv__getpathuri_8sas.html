@@ -144,9 +144,9 @@ $(function(){initNavTree('mfv__getpathuri_8sas.html',''); initResizable(true); }
 
 <p><a href="mfv__getpathuri_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The automatic variable <em>FILESRVC</em>[fref]_URI is used after assigning a fileref using the filesrvc engine.</p>
-<p>Usage: </p><pre class="fragment">%put %mfv_existfile(/Public/folder/file.txt);
-%put %mfv_existfile(/Public/folder);
+<div class="textblock"><p>The automatic variable <code>_FILESRVC_[fref]_URI</code> is used after assigning a fileref using the filesrvc engine.</p>
+<p>Usage: </p><pre class="fragment">%put %mfv_getpathuri(/Public/folder/file.txt);
+%put %mfv_getpathuri(/Public/folder);
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">filepath</td><td>The full path to the file on SAS drive (eg /Public/myfile.txt)</td></tr>
