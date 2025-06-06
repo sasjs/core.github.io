@@ -163,7 +163,7 @@ $(function(){initNavTree('mv__createfile_8test_8sas_source.html',''); initResiza
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  put <span class="stringliteral">&#39;hello testings&#39;</span>;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>run;</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>%mp_assertscope(SNAPSHOT)</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>%mv_createfile(path=&amp;mcTestAppLoc/temp, name=&amp;file..txt,inref=somefile,mdebug=1)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>%mv_createfile(path=&amp;mcTestAppLoc, name=&amp;file..txt,inref=somefile,mdebug=1)</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>%mp_assertscope(COMPARE</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  ,ignorelist=MCLIB0_JADP1LEN MCLIB0_JADP2LEN MCLIB0_JADPNUM</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    MCLIB0_JADVLEN MCLIB2_JADP1LEN</div>
@@ -172,7 +172,7 @@ $(function(){initNavTree('mv__createfile_8test_8sas_source.html',''); initResiza
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>)</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>%mp_assert(</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  iftrue=(%mfv_existfile(&amp;mcTestAppLoc/temp/&amp;file..txt)=1),</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  iftrue=(%mfv_existfile(&amp;mcTestAppLoc/&amp;file..txt)=1),</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  desc=Check <span class="keywordflow">if</span> created file exists</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>)</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
@@ -182,10 +182,10 @@ $(function(){initNavTree('mv__createfile_8test_8sas_source.html',''); initResiza
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  file f2;</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  put <span class="stringliteral">&#39;&lt;html&gt;&lt;body&gt;&lt;p&gt;Hello world&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&#39;</span>;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>run;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>%mv_createfile(path=&amp;mcTestAppLoc/temp, name=test.html,inref=f2,mdebug=1)</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>%mv_createfile(path=&amp;mcTestAppLoc, name=test.html,inref=f2,mdebug=1)</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>%mp_assert(</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  iftrue=(%mfv_existfile(&amp;mcTestAppLoc/temp/test.html)=1),</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  iftrue=(%mfv_existfile(&amp;mcTestAppLoc/test.html)=1),</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  desc=Check <span class="keywordflow">if</span> created file exists</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>)</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
@@ -195,10 +195,10 @@ $(function(){initNavTree('mv__createfile_8test_8sas_source.html',''); initResiza
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>run;</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>filename ds <span class="stringliteral">&quot;%sysfunc(pathname(work))/temp.sas7bdat&quot;</span>;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>%mv_createfile(path=&amp;mcTestAppLoc/temp, name=&amp;file..sas7bdat,inref=ds,mdebug=1)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>%mv_createfile(path=&amp;mcTestAppLoc, name=&amp;file..sas7bdat,inref=ds,mdebug=1)</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>%mp_assert(</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  iftrue=(%mfv_existfile(&amp;mcTestAppLoc/temp/&amp;file..sas7bdat)=1),</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  iftrue=(%mfv_existfile(&amp;mcTestAppLoc/&amp;file..sas7bdat)=1),</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  desc=Check <span class="keywordflow">if</span> created dataset exists</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>)</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
@@ -208,22 +208,47 @@ $(function(){initNavTree('mv__createfile_8test_8sas_source.html',''); initResiza
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  file f4;</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  put <span class="stringliteral">&#39;%put hello FromSASStudioBailey; &#39;</span>;</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>run;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>%mv_createfile(path=&amp;mcTestAppLoc/temp, name=test4.sas,inref=f4,mdebug=1)</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>%mv_createfile(path=&amp;mcTestAppLoc, name=test4.sas,inref=f4,mdebug=1)</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>%mp_assert(</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  iftrue=(%mfv_existfile(&amp;mcTestAppLoc/temp/test4.sas)=1),</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  iftrue=(%mfv_existfile(&amp;mcTestAppLoc/test4.sas)=1),</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  desc=Check <span class="keywordflow">if</span> created sas program exists</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>)</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>%put TEST 5 - reading from files service and writing back;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>filename sendfrom filesrvc folderpath=<span class="stringliteral">&quot;&amp;mcTestAppLoc/temp&quot;</span> filename=<span class="stringliteral">&#39;test4.sas&#39;</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>filename sendfrom filesrvc folderpath=<span class="stringliteral">&quot;&amp;mcTestAppLoc&quot;</span> filename=<span class="stringliteral">&#39;test4.sas&#39;</span>;</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>OPTIONS MERROR SYMBOLGEN MLOGIC MPRINT;</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>%mv_createfile(path=&amp;mcTestAppLoc/temp,name=test5.sas,inref=sendfrom,mdebug=1) ;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>%mv_createfile(path=&amp;mcTestAppLoc,name=test5.sas,inref=sendfrom,mdebug=1) ;</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>%put TEST 6 - <span class="keywordflow">try</span> the find and replace;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>filename f6 temp;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>data _null_;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  file f6;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  put <span class="stringliteral">&#39;//Hello world!&#39;</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  put <span class="stringliteral">&#39;let var=/some/path/name;&#39;</span>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>run;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>%let in=/some/path/name;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>%let out=/<span class="keyword">final</span>/destination;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>%mv_createfile(path=&amp;mcTestAppLoc, name=test6.js,inref=f6,mdebug=1,swap=in out)</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>filename getback filesrvc folderpath=<span class="stringliteral">&quot;&amp;mcTestAppLoc&quot;</span> filename=<span class="stringliteral">&#39;test6.js&#39;</span>;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>%let test6=0;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>data _null_;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  infile getback;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  input;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <span class="keywordflow">if</span> _infile_=<span class="stringliteral">&quot;let var=&amp;out;&quot;</span> then call symputx(<span class="stringliteral">&#39;test6&#39;</span>,1);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  putlog _infile_;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>run;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>%mp_assert(</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  iftrue=(&amp;test6=1),</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  desc=Check <span class="keywordflow">if</span> find &amp; replace worked</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>)</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

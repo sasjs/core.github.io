@@ -152,6 +152,14 @@ data _null_;
   put 'something';
 run;
 %mv_createfile(path=/Public/temp,name=newfile.txt,inref=myfile)
+</pre><p>The macro also supports find &amp; replace (used by the SASjs Streaming App build program). This allows one string to be replaced by another at the point at which the file is created. This is done by passing in the NAMES of the macro variables containing the values to be swapped, eg: </p><pre class="fragment">filename fref temp;
+data _null_;
+  file fref;
+  put 'whenever life gets you down, Mrs Brown..';
+run;
+%let f=Mrs Brown;
+%let r=just remember that you're standing on a planet that's evolving;
+%mv_createfile(path=/Public,name=life.md,inref=fref,fin,swap=f r)
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">path=</td><td>The parent (SAS Drive) folder in which to create the file </td></tr>
@@ -175,6 +183,8 @@ run;
 <li>sas_services </li>
 </ul>
 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">force=</td><td>(YES) Will overwrite (delete / recreate) files by default. Set to NO to abort if a file already exists in that location. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">pin]</td><td>swap= (0) Provide two macro variable NAMES that contain the values to be swapped, eg swap=find replace (see also the example above) </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(<em>null</em>) Output dataset with the uri of the new file</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>(0) Set to 1 to enable DEBUG messages</td></tr>
   </table>
@@ -187,8 +197,10 @@ run;
 <li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
 <li><a class="el" href="mf__isblank_8sas.html" title="Checks whether a macro variable is empty (blank)">mf_isblank.sas</a> </li>
 <li><a class="el" href="mf__mimetype_8sas.html" title="Returns a mime type from a file extension.">mf_mimetype.sas</a> </li>
+<li><a class="el" href="mfv__getpathuri_8sas.html" title="Returns the uri of a file or folder.">mfv_getpathuri.sas</a> </li>
 <li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
 <li><a class="el" href="mp__base64copy_8sas.html" title="Convert a file to/from base64 format.">mp_base64copy.sas</a> </li>
+<li><a class="el" href="mp__replace_8sas.html" title="Performs a text substitution on a file.">mp_replace.sas</a> </li>
 <li><a class="el" href="mv__createfolder_8sas.html" title="Creates a viya folder if that folder does not already exist.">mv_createfolder.sas</a></li>
 </ul>
 <h4>Related Macros</h4>

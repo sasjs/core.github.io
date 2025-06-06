@@ -1,5 +1,9 @@
 var NAVTREEINDEX1 =
 {
+"mm__createfolder_8sas_source.html":[1,4,6],
+"mm__createlibrary_8sas.html":[1,4,7],
+"mm__createlibrary_8sas_source.html":[1,4,7],
+"mm__createstp_8sas.html":[1,4,8],
 "mm__createstp_8sas_source.html":[1,4,8],
 "mm__createwebservice_8sas.html":[1,4,9],
 "mm__createwebservice_8sas_source.html":[1,4,9],
@@ -245,9 +249,5 @@ var NAVTREEINDEX1 =
 "mp__getmaxvarlengths_8sas_source.html":[1,0,93],
 "mp__getmaxvarlengths_8test_8sas.html":[1,7,0,65],
 "mp__getmaxvarlengths_8test_8sas_source.html":[1,7,0,65],
-"mp__getpk_8sas.html":[1,0,94],
-"mp__getpk_8sas_source.html":[1,0,94],
-"mp__getpk_8test_8sas.html":[1,7,0,66],
-"mp__getpk_8test_8sas_source.html":[1,7,0,66],
-"mp__gitadd_8sas.html":[1,0,95]
+"mp__getpk_8sas.html":[1,0,94]
 };

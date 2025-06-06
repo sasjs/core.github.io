@@ -3,6 +3,7 @@ var dir_f3c9615c6d389fd64e9075885fcd8e6e =
     [ "mfv_existfile.sas", "mfv__existfile_8sas.html", null ],
     [ "mfv_existfolder.sas", "mfv__existfolder_8sas.html", null ],
     [ "mfv_existsashdat.sas", "mfv__existsashdat_8sas.html", null ],
+    [ "mfv_getfolderpath.sas", "mfv__getfolderpath_8sas.html", null ],
     [ "mfv_getpathuri.sas", "mfv__getpathuri_8sas.html", null ],
     [ "mv_createfile.sas", "mv__createfile_8sas.html", null ],
     [ "mv_createfolder.sas", "mv__createfolder_8sas.html", null ],
