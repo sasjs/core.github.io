@@ -328,211 +328,213 @@ $(function(){initNavTree('mv__jobflow_8sas_source.html',''); initResizable(true)
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    %<span class="keywordflow">if</span> %mf_existvarList(&amp;inds,FLOW_ID)=0 %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>      retain FLOW_ID 0;</div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    %end;</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keyword">set</span> &amp;inds;</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    &amp;dbg. putlog (_all_)(=);</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>  run;</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>%end;</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>%local missings;</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>proc sql noprint;</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>select count(*) into: missings</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>  from &amp;inds</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>  where flow_id is null or _program is null;</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>%mp_abort(iftrue=(&amp;missings&gt;0)</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>  ,mac=&amp;sysmacroname</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>  ,msg=%str(input dataset has &amp;missings missing values for FLOW_ID or _PROGRAM)</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>)</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>%if %mf_nobs(&amp;inds)=0 %then %do;</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>  %put No observations in &amp;inds!  Leaving macro &amp;sysmacroname;</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>  %return;</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>%end;</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="comment">/* ensure output table is available */</span></div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>data &amp;outds;run;</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>proc sql;</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>drop table &amp;outds;</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>options noquotelenmax;</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>%local base_uri; <span class="comment">/* location of rest apis */</span></div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>%let base_uri=%mf_getplatform(VIYARESTAPI);</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="comment">/* get flows */</span></div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>proc sort data=&amp;inds;</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>  by flow_id;</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>run;</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>data _null_;</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>  set &amp;inds (keep=flow_id) end=last;</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  by flow_id;</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  if last.flow_id then do;</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    cnt+1;</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    call symputx(cats(&#39;flow&#39;,cnt),flow_id,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>  end;</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>  if last then call symputx(&#39;flowcnt&#39;,cnt,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>run;</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="comment">/* prepare temporary datasets and frefs */</span></div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>%local fid jid jds jjson jdsapp jdsrunning jdswaitfor jfref;</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>data;run;%let jds=&amp;syslast;</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>data;run;%let jjson=&amp;syslast;</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>data;run;%let jdsapp=&amp;syslast;</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>data;run;%let jdsrunning=&amp;syslast;</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>data;run;%let jdswaitfor=&amp;syslast;</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>%let jfref=%mf_getuniquefileref();</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="comment">/* start loop */</span></div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>%do fid=1 %to &amp;flowcnt;</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>  %if not ( &amp;raise_err and &amp;syscc ) %then %do;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="comment">/* https://github.com/sasjs/adapter/pull/845#issuecomment-2956589644 */</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    retain _omitSessionResults <span class="stringliteral">&quot;false&quot;</span>;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <span class="keyword">set</span> &amp;inds;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    &amp;dbg. putlog (_all_)(=);</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>  run;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>%end;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>%local missings;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>proc sql noprint;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>select count(*) into: missings</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>  from &amp;inds</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>  where flow_id is null or _program is null;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>%mp_abort(iftrue=(&amp;missings&gt;0)</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>  ,mac=&amp;sysmacroname</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>  ,msg=%str(input dataset has &amp;missings missing values for FLOW_ID or _PROGRAM)</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>)</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>%if %mf_nobs(&amp;inds)=0 %then %do;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>  %put No observations in &amp;inds!  Leaving macro &amp;sysmacroname;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  %return;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>%end;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="comment">/* ensure output table is available */</span></div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>data &amp;outds;run;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>proc sql;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>drop table &amp;outds;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>options noquotelenmax;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>%local base_uri; <span class="comment">/* location of rest apis */</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>%let base_uri=%mf_getplatform(VIYARESTAPI);</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="comment">/* get flows */</span></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>proc sort data=&amp;inds;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>  by flow_id;</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>run;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>data _null_;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  set &amp;inds (keep=flow_id) end=last;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>  by flow_id;</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>  if last.flow_id then do;</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    cnt+1;</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    call symputx(cats(&#39;flow&#39;,cnt),flow_id,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>  end;</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>  if last then call symputx(&#39;flowcnt&#39;,cnt,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>run;</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="comment">/* prepare temporary datasets and frefs */</span></div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>%local fid jid jds jjson jdsapp jdsrunning jdswaitfor jfref;</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>data;run;%let jds=&amp;syslast;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>data;run;%let jjson=&amp;syslast;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>data;run;%let jdsapp=&amp;syslast;</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>data;run;%let jdsrunning=&amp;syslast;</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>data;run;%let jdswaitfor=&amp;syslast;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>%let jfref=%mf_getuniquefileref();</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="comment">/* start loop */</span></div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>%do fid=1 %to &amp;flowcnt;</div>
 <div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span> </div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    %put preparing job attributes for flow &amp;&amp;flow&amp;fid;</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    %local jds jcnt;</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    data &amp;jds(drop=_contextName _program);</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>      set &amp;inds(where=(flow_id=&amp;&amp;flow&amp;fid));</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>      if _contextName=&#39;&#39; then _contextName=<span class="stringliteral">&quot;SAS Job Execution compute context&quot;</span>;</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>      call symputx(cats(&#39;job&#39;,_n_),_program,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>      call symputx(cats(&#39;context&#39;,_n_),_contextName,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>      call symputx(&#39;jcnt&#39;,_n_,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>      &amp;dbg. if _n_= 1 then putlog <span class="stringliteral">&quot;Loop &amp;fid&quot;</span>;</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>      &amp;dbg. putlog (_all_)(=);</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    run;</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    %put exporting job variables in json format;</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    %do jid=1 %to &amp;jcnt;</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>      data &amp;jjson;</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        set &amp;jds;</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>        if _n_=&amp;jid then do;</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>          output;</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>          stop;</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        end;</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>      run;</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>      proc json out=&amp;jfref;</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        export &amp;jjson / nosastags fmtnumeric;</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>      run;</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>      data _null_;</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        infile &amp;jfref lrecl=32767;</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        input;</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        jparams=cats(&#39;jparams&#39;,symget(&#39;jid&#39;));</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        call symputx(jparams,substr(_infile_,3,length(_infile_)-4));</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>      run;</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>      %local jobuid&amp;jid;</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>      %let jobuid&amp;jid=0; <span class="comment">/* used in next loop */</span></div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    %end;</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    %local concurrency completed;</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    %let concurrency=0;</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    %let completed=0;</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    proc sql; drop table &amp;jdsrunning;</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    %do jid=1 %to &amp;jcnt;<span class="comment"></span></div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span><span class="comment">      /**</span></div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span><span class="comment">        * now we can execute the jobs up to the maxconcurrency setting</span></div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span><span class="comment">        */</span></div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>      %if <span class="stringliteral">&quot;&amp;&amp;job&amp;jid&quot;</span> ne <span class="stringliteral">&quot;0&quot;</span> %then %do; <span class="comment">/* this var is zero if job finished */</span></div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span> </div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>        <span class="comment">/* check to see if the job finished in the previous round */</span></div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        %if %sysfunc(exist(&amp;outds))=1 %then %do;</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>          %local jobcheck;  %let jobcheck=0;</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>          proc sql noprint;</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>          select count(*) into: jobcheck</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>            from &amp;outds where uuid=<span class="stringliteral">&quot;&amp;&amp;jobuid&amp;jid&quot;</span>;</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>          %if &amp;jobcheck&gt;0 %then %do;</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>            %put &amp;&amp;job&amp;jid in flow &amp;fid with uid &amp;&amp;jobuid&amp;jid completed!;</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>            %let job&amp;jid=0;</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>          %end;</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>        %end;</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>        <span class="comment">/* check if job was triggered and, if</span></div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span><span class="comment">            so, if we have enough slots to run? */</span></div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>        %if (<span class="stringliteral">&quot;&amp;&amp;jobuid&amp;jid&quot;</span>=<span class="stringliteral">&quot;0&quot;</span>) and (&amp;concurrency&lt;&amp;maxconcurrency) %then %do;</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>          <span class="comment">/* But only start if no issues detected so far */</span></div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>          %if not ( &amp;raise_err and &amp;syscc ) %then %do;</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>            %local jobname jobpath;</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>            %let jobname=%scan(&amp;&amp;job&amp;jid,-1,/);</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>            %let jobpath=</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>                  %substr(&amp;&amp;job&amp;jid,1,%length(&amp;&amp;job&amp;jid)-%length(&amp;jobname)-1);</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span> </div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>            %put executing &amp;jobpath/&amp;jobname with paramstring &amp;&amp;jparams&amp;jid;</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>            %mv_jobexecute(path=&amp;jobpath</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>              ,name=&amp;jobname</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>              ,paramstring=%superq(jparams&amp;jid)</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>              ,outds=&amp;jdsapp</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>              ,contextname=&amp;&amp;context&amp;jid</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>            )</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>            data &amp;jdsapp;</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>              format jobparams $32767.;</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>              set &amp;jdsapp(where=(method=&#39;GET&#39; and rel=&#39;state&#39;));</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>              jobparams=symget(<span class="stringliteral">&quot;jparams&amp;jid&quot;</span>);</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>              <span class="comment">/* uri here has the /state suffix */</span></div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>              uuid=scan(uri,-2,<span class="charliteral">&#39;/&#39;</span>);</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>              call symputx(<span class="stringliteral">&quot;jobuid&amp;jid&quot;</span>,uuid,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>            run;</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>            proc append base=&amp;jdsrunning data=&amp;jdsapp;</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>  %if not ( &amp;raise_err and &amp;syscc ) %then %do;</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    %put preparing job attributes for flow &amp;&amp;flow&amp;fid;</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    %local jds jcnt;</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    data &amp;jds(drop=_contextName _program);</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>      set &amp;inds(where=(flow_id=&amp;&amp;flow&amp;fid));</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>      if _contextName=&#39;&#39; then _contextName=<span class="stringliteral">&quot;SAS Job Execution compute context&quot;</span>;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>      call symputx(cats(&#39;job&#39;,_n_),_program,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>      call symputx(cats(&#39;context&#39;,_n_),_contextName,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>      call symputx(&#39;jcnt&#39;,_n_,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>      &amp;dbg. if _n_= 1 then putlog <span class="stringliteral">&quot;Loop &amp;fid&quot;</span>;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>      &amp;dbg. putlog (_all_)(=);</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    run;</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    %put exporting job variables in json format;</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    %do jid=1 %to &amp;jcnt;</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>      data &amp;jjson;</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        set &amp;jds;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        if _n_=&amp;jid then do;</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>          output;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>          stop;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        end;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>      run;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>      proc json out=&amp;jfref;</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        export &amp;jjson / nosastags fmtnumeric;</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>      run;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>      data _null_;</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        infile &amp;jfref lrecl=32767;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        input;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        jparams=cats(&#39;jparams&#39;,symget(&#39;jid&#39;));</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        call symputx(jparams,substr(_infile_,3,length(_infile_)-4));</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>      run;</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>      %local jobuid&amp;jid;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>      %let jobuid&amp;jid=0; <span class="comment">/* used in next loop */</span></div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    %end;</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    %local concurrency completed;</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    %let concurrency=0;</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    %let completed=0;</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    proc sql; drop table &amp;jdsrunning;</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    %do jid=1 %to &amp;jcnt;<span class="comment"></span></div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span><span class="comment">      /**</span></div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span><span class="comment">        * now we can execute the jobs up to the maxconcurrency setting</span></div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span><span class="comment">        */</span></div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>      %if <span class="stringliteral">&quot;&amp;&amp;job&amp;jid&quot;</span> ne <span class="stringliteral">&quot;0&quot;</span> %then %do; <span class="comment">/* this var is zero if job finished */</span></div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span> </div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        <span class="comment">/* check to see if the job finished in the previous round */</span></div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>        %if %sysfunc(exist(&amp;outds))=1 %then %do;</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>          %local jobcheck;  %let jobcheck=0;</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>          proc sql noprint;</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>          select count(*) into: jobcheck</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>            from &amp;outds where uuid=<span class="stringliteral">&quot;&amp;&amp;jobuid&amp;jid&quot;</span>;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>          %if &amp;jobcheck&gt;0 %then %do;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>            %put &amp;&amp;job&amp;jid in flow &amp;fid with uid &amp;&amp;jobuid&amp;jid completed!;</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>            %let job&amp;jid=0;</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>          %end;</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>        %end;</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span> </div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>        <span class="comment">/* check if job was triggered and, if</span></div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span><span class="comment">            so, if we have enough slots to run? */</span></div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        %if (<span class="stringliteral">&quot;&amp;&amp;jobuid&amp;jid&quot;</span>=<span class="stringliteral">&quot;0&quot;</span>) and (&amp;concurrency&lt;&amp;maxconcurrency) %then %do;</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span> </div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>          <span class="comment">/* But only start if no issues detected so far */</span></div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>          %if not ( &amp;raise_err and &amp;syscc ) %then %do;</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span> </div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>            %local jobname jobpath;</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>            %let jobname=%scan(&amp;&amp;job&amp;jid,-1,/);</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>            %let jobpath=</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>                  %substr(&amp;&amp;job&amp;jid,1,%length(&amp;&amp;job&amp;jid)-%length(&amp;jobname)-1);</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span> </div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>            %put executing &amp;jobpath/&amp;jobname with paramstring &amp;&amp;jparams&amp;jid;</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>            %mv_jobexecute(path=&amp;jobpath</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>              ,name=&amp;jobname</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>              ,paramstring=%superq(jparams&amp;jid)</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>              ,outds=&amp;jdsapp</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>              ,contextname=&amp;&amp;context&amp;jid</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>            )</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>            data &amp;jdsapp;</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>              format jobparams $32767.;</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>              set &amp;jdsapp(where=(method=&#39;GET&#39; and rel=&#39;state&#39;));</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>              jobparams=symget(<span class="stringliteral">&quot;jparams&amp;jid&quot;</span>);</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>              <span class="comment">/* uri here has the /state suffix */</span></div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>              uuid=scan(uri,-2,<span class="charliteral">&#39;/&#39;</span>);</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>              call symputx(<span class="stringliteral">&quot;jobuid&amp;jid&quot;</span>,uuid,<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>            run;</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>            %let concurrency=%eval(&amp;concurrency+1);</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>            <span class="comment">/* sleep one second after every request to smooth the impact */</span></div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>            data _null_;</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>              call sleep(1,1);</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>            run;</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>          %end;</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>          %else %do; <span class="comment">/* Job was skipped due to problems */</span></div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>            %put jobid &amp;&amp;job&amp;jid in flow &amp;fid skipped due to SYSCC (&amp;syscc);</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>            %let completed = %eval(&amp;completed+1);</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>            %let job&amp;jid=0; <span class="comment">/* Indicate job has finished */</span></div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span> </div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>          %end;</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>            proc append base=&amp;jdsrunning data=&amp;jdsapp;</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>            run;</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>            %let concurrency=%eval(&amp;concurrency+1);</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>            <span class="comment">/* sleep one second after every request to smooth the impact */</span></div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>            data _null_;</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>              call sleep(1,1);</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>            run;</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span> </div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>          %end;</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>          %else %do; <span class="comment">/* Job was skipped due to problems */</span></div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span> </div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>            %put jobid &amp;&amp;job&amp;jid in flow &amp;fid skipped due to SYSCC (&amp;syscc);</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>            %let completed = %eval(&amp;completed+1);</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>            %let job&amp;jid=0; <span class="comment">/* Indicate job has finished */</span></div>
 <div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span> </div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        %end;</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>      %end;</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>      %if &amp;jid=&amp;jcnt %then %do;</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>        <span class="comment">/* we are at the end of the loop - check which jobs have finished */</span></div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>        %mv_jobwaitfor(ANY,inds=&amp;jdsrunning,outds=&amp;jdswaitfor,outref=&amp;outref</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>                      ,raise_err=&amp;raise_err,mdebug=&amp;mdebug)</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        %local done;</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>        %let done=%mf_nobs(&amp;jdswaitfor);</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        %if &amp;done&gt;0 %then %do;</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>          %let completed=%eval(&amp;completed+&amp;done);</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>          %let concurrency=%eval(&amp;concurrency-&amp;done);</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>          data &amp;jdsapp;</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>            set &amp;jdswaitfor;</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>            flow_id=&amp;&amp;flow&amp;fid;</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>            uuid=scan(uri,-1,<span class="charliteral">&#39;/&#39;</span>);</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>          run;</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>          proc append base=&amp;outds data=&amp;jdsapp;</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>          %end;</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span> </div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>        %end;</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>      %end;</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>      %if &amp;jid=&amp;jcnt %then %do;</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>        <span class="comment">/* we are at the end of the loop - check which jobs have finished */</span></div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        %mv_jobwaitfor(ANY,inds=&amp;jdsrunning,outds=&amp;jdswaitfor,outref=&amp;outref</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>                      ,raise_err=&amp;raise_err,mdebug=&amp;mdebug)</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        %local done;</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>        %let done=%mf_nobs(&amp;jdswaitfor);</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        %if &amp;done&gt;0 %then %do;</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>          %let completed=%eval(&amp;completed+&amp;done);</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>          %let concurrency=%eval(&amp;concurrency-&amp;done);</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>          data &amp;jdsapp;</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>            set &amp;jdswaitfor;</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>            flow_id=&amp;&amp;flow&amp;fid;</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>            uuid=scan(uri,-1,<span class="charliteral">&#39;/&#39;</span>);</div>
 <div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>          run;</div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        %end;</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>        proc sql;</div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>        delete from &amp;jdsrunning</div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>          where uuid in (select uuid from &amp;outds</div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>            where state in (&#39;canceled<span class="charliteral">&#39;,&#39;</span>completed<span class="charliteral">&#39;,&#39;</span>failed&#39;)</div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>          );</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span> </div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>        <span class="comment">/* loop again if jobs are left */</span></div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>        %if &amp;completed &lt; &amp;jcnt %then %do;</div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>          %let jid=0;</div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>          %put looping flow &amp;fid again;</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>          %put &amp;completed of &amp;jcnt jobs completed, &amp;concurrency jobs running;</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>        %end;</div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>      %end;</div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    %end;</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span> </div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>  %end;</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>  %else %do;</div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span> </div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    %put Flow &amp;&amp;flow&amp;fid skipped due to SYSCC (&amp;syscc);</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>          proc append base=&amp;outds data=&amp;jdsapp;</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>          run;</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>        %end;</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>        proc sql;</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>        delete from &amp;jdsrunning</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>          where uuid in (select uuid from &amp;outds</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>            where state in (&#39;canceled<span class="charliteral">&#39;,&#39;</span>completed<span class="charliteral">&#39;,&#39;</span>failed&#39;)</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>          );</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span> </div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>        <span class="comment">/* loop again if jobs are left */</span></div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        %if &amp;completed &lt; &amp;jcnt %then %do;</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>          %let jid=0;</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>          %put looping flow &amp;fid again;</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>          %put &amp;completed of &amp;jcnt jobs completed, &amp;concurrency jobs running;</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>        %end;</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>      %end;</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    %end;</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span> </div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>  %end;</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>  %else %do;</div>
 <div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span> </div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>  %end;</div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>  <span class="comment">/* back up and execute the next flow */</span></div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>%end;</div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span> </div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>%if &amp;mdebug=1 %then %do;</div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>  %put &amp;sysmacroname exit vars:;</div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>  %put _local_;</div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>%end;</div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span> </div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>%mend mv_jobflow;</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>    %put Flow &amp;&amp;flow&amp;fid skipped due to SYSCC (&amp;syscc);</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span> </div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>  %end;</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>  <span class="comment">/* back up and execute the next flow */</span></div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>%end;</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span> </div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>%if &amp;mdebug=1 %then %do;</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>  %put &amp;sysmacroname exit vars:;</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>  %put _local_;</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>%end;</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span> </div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>%mend mv_jobflow;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

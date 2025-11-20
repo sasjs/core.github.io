@@ -266,7 +266,7 @@ $(function(){initNavTree('mv__getjoblog_8sas_source.html',''); initResizable(tru
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  uri=symget(<span class="stringliteral">&#39;uri&#39;</span>);</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  <span class="keywordflow">if</span> length(uri)&lt;12 then <span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    call symputx(<span class="stringliteral">&#39;errflg&#39;</span>,1);</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    call symputx(<span class="stringliteral">&#39;errmsg&#39;</span>,<span class="stringliteral">&quot;URI is invalid (too short) - &#39;&amp;uri&#39;&quot;</span>,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    call symputx(<span class="stringliteral">&#39;errmsg&#39;</span>,<span class="stringliteral">&quot;URI is too short - &quot;</span>!!uri,<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  end;</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  <span class="keywordflow">if</span> scan(uri,-1)=<span class="stringliteral">&#39;state&#39;</span> or scan(uri,1) ne &#39;jobExecution&#39; then do;</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    call symputx(&#39;errflg&#39;,1);</div>
@@ -331,7 +331,7 @@ $(function(){initNavTree('mv__getjoblog_8sas_source.html',''); initResizable(tru
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>  uri=symget(&#39;loglocation&#39;);</div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>  if length(uri)&lt;12 then do;</div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    call symputx(&#39;errflg&#39;,1);</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    call symputx(&#39;errmsg&#39;,<span class="stringliteral">&quot;URI is invalid (too short) - &#39;&amp;uri&#39;&quot;</span>,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    call symputx(&#39;errmsg&#39;,<span class="stringliteral">&quot;URI is too short - &quot;</span>!!uri,<span class="charliteral">&#39;l&#39;</span>);</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>  end;</div>
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>  else if (scan(uri,1,<span class="charliteral">&#39;/&#39;</span>) ne &#39;compute&#39; or scan(uri,2,<span class="charliteral">&#39;/&#39;</span>) ne &#39;sessions&#39;)</div>
 <div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    and (scan(uri,1,<span class="charliteral">&#39;/&#39;</span>) ne &#39;files&#39; or scan(uri,2,<span class="charliteral">&#39;/&#39;</span>) ne &#39;files&#39;)</div>

@@ -166,7 +166,7 @@ $(function(){initNavTree('mf__getuniquelibref_8sas_source.html',''); initResizab
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">  @author Allan Bowe</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">**/</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>%macro mf_getuniquelibref(prefix=mclib,maxtries=1000);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>%macro mf_getuniquelibref(prefix=mc,maxtries=1000);</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  %local x;</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  %<span class="keywordflow">if</span> ( %length(&amp;prefix) gt 7 ) %then %<span class="keywordflow">do</span>;</div>

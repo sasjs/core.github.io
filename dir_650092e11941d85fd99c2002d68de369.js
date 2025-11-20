@@ -12,6 +12,7 @@ var dir_650092e11941d85fd99c2002d68de369 =
     [ "mv_getjobcode.test.sas", "mv__getjobcode_8test_8sas.html", null ],
     [ "mv_getjoblog.test.sas", "mv__getjoblog_8test_8sas.html", null ],
     [ "mv_getjobresult.test.sas", "mv__getjobresult_8test_8sas.html", null ],
+    [ "mv_getviyafileextparms.test.sas", "mv__getviyafileextparms_8test_8sas.html", null ],
     [ "mv_jobflow.test.1.sas", "mv__jobflow_8test_81_8sas.html", null ],
     [ "mv_jobflow.test.2.sas", "mv__jobflow_8test_82_8sas.html", null ],
     [ "mv_registerclient.test.1.sas", "mv__registerclient_8test_81_8sas.html", null ],
