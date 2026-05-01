@@ -18,6 +18,7 @@ var dir_a49f9b051925a4cbbe82ac92a0123656 =
     [ "mf_getgitbranch.test.sas", "mf__getgitbranch_8test_8sas.html", null ],
     [ "mf_getuniquefileref.test.sas", "mf__getuniquefileref_8test_8sas.html", null ],
     [ "mf_getuniquelibref.test.sas", "mf__getuniquelibref_8test_8sas.html", null ],
+    [ "mf_getvalue.test.sas", "mf__getvalue_8test_8sas.html", null ],
     [ "mf_getvarcount.test.sas", "mf__getvarcount_8test_8sas.html", null ],
     [ "mf_getvarlist.test.sas", "mf__getvarlist_8test_8sas.html", null ],
     [ "mf_increment.test.sas", "mf__increment_8test_8sas.html", null ],

@@ -33,11 +33,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "dir_0d92069d5a23b1d3125c326d74f1a07c.html",
-"mm__createfolder_8sas_source.html",
-"mp__getpk_8sas_source.html",
-"mv__getjobresult_8sas_source.html"
+"mm__assigndirectlib_8test_8sas_source.html",
+"mp__getddl_8test_8sas_source.html",
+"mv__getclients_8sas_source.html"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronization';
-var SYNCOFFMSG = 'click to enable panel synchronization';
-var LISTOFALLMEMBERS = 'List of all members';
+var SYNCONMSG = 'click to disable panel synchronisation';
+var SYNCOFFMSG = 'click to enable panel synchronisation';
