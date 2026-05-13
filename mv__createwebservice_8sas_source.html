@@ -735,13 +735,13 @@ $(document).ready(function(){initNavTree('mv__createwebservice_8sas_source.html'
 <div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span><span class="stringliteral">  put &#39;); &#39;;</span></div>
 <div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span><span class="stringliteral">  put &#39;%global _webin_file_count _webin_fileuri _debug _omittextlog _webin_name &#39;;</span></div>
 <div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span><span class="stringliteral">  put &#39;  sasjs_tables SYS_JES_JOB_URI _EXECUTIONTASKS; &#39;;</span></div>
-<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span><span class="stringliteral">  put &#39;%if %index(&quot;</span>&amp;_debug<span class="stringliteral">&quot;,log) %then %let _debug=131; &#39;;</span></div>
+<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span><span class="stringliteral">  put &#39;%if %index(&quot;</span>&amp;_debug<span class="stringliteral">&quot;,log) %then %let _debug=128; &#39;;</span></div>
 <div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span><span class="stringliteral">  put &#39; &#39;;</span></div>
 <div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span><span class="stringliteral">  put &#39;%local i tempds table; &#39;;</span></div>
 <div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span><span class="stringliteral">  put &#39;%let action=%upcase(&amp;action); &#39;;</span></div>
 <div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span><span class="stringliteral">  put &#39; &#39;;</span></div>
 <div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span><span class="stringliteral">  put &#39;%if &amp;action=FETCH %then %do; &#39;;</span></div>
-<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span><span class="stringliteral">  put &#39;  %if %upcase(&amp;_omittextlog)=FALSE or %str(&amp;_debug) ge 131 %then %do; &#39;;</span></div>
+<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span><span class="stringliteral">  put &#39;  %if %upcase(&amp;_omittextlog)=FALSE or %str(&amp;_debug) ge 128 %then %do; &#39;;</span></div>
 <div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span><span class="stringliteral">  put &#39;    options mprint notes mprintnest; &#39;;</span></div>
 <div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span><span class="stringliteral">  put &#39;  %end; &#39;;</span></div>
 <div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span><span class="stringliteral">  put &#39; &#39;;</span></div>
@@ -804,7 +804,7 @@ $(document).ready(function(){initNavTree('mv__createwebservice_8sas_source.html'
 <div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span><span class="stringliteral">  put &#39;      infile indata termstr=crlf lrecl=32767; &#39;;</span></div>
 <div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span><span class="stringliteral">  put &#39;      input; &#39;;</span></div>
 <div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span><span class="stringliteral">  put &#39;      if _n_=1 then call symputx(&#39;&#39;input_statement&#39;&#39;,_infile_); &#39;;</span></div>
-<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span><span class="stringliteral">  put &#39;      %if %str(&amp;_debug) ge 131 %then %do; &#39;;</span></div>
+<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span><span class="stringliteral">  put &#39;      %if %str(&amp;_debug) ge 128 %then %do; &#39;;</span></div>
 <div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span><span class="stringliteral">  put &#39;        if _n_&lt;20 then putlog _infile_; &#39;;</span></div>
 <div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span><span class="stringliteral">  put &#39;        else stop; &#39;;</span></div>
 <div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span><span class="stringliteral">  put &#39;      %end; &#39;;</span></div>
@@ -837,7 +837,7 @@ $(document).ready(function(){initNavTree('mv__createwebservice_8sas_source.html'
 <div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span><span class="stringliteral">  put &#39; &#39;;</span></div>
 <div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span><span class="stringliteral">  put &#39;  /* setup json */ &#39;;</span></div>
 <div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span><span class="stringliteral">  put &#39;  data _null_;file &amp;fref; &#39;;</span></div>
-<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span><span class="stringliteral">  put &#39;  %if %str(&amp;_debug) ge 131 and &amp;_EXECUTIONTASKS=true %then %do; &#39;;</span></div>
+<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span><span class="stringliteral">  put &#39;  %if %str(&amp;_debug) ge 128 and &amp;_EXECUTIONTASKS=true %then %do; &#39;;</span></div>
 <div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span><span class="stringliteral">  put &#39;    put &#39;&#39;&gt;&gt;weboutBEGIN&lt;&lt;&#39;&#39;; &#39;;</span></div>
 <div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span><span class="stringliteral">  put &#39;  %end; &#39;;</span></div>
 <div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span><span class="stringliteral">  put &#39;    put &#39;&#39;{&quot;</span>SYSDATE<span class="stringliteral">&quot; : &quot;</span><span class="stringliteral">&#39;&#39;</span> <span class="stringliteral">&quot;&amp;SYSDATE&quot;</span> <span class="stringliteral">&#39;&#39;</span><span class="stringliteral">&quot;&#39;&#39;; &#39;;</span></div>
@@ -952,7 +952,7 @@ $(document).ready(function(){initNavTree('mv__createwebservice_8sas_source.html'
 <div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span><span class="stringliteral">  put &#39;    memsize=quote(cats(memsize)); &#39;;</span></div>
 <div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span><span class="stringliteral">  put &#39;    put &#39;&#39;,&quot;</span>MEMSIZE<span class="stringliteral">&quot; : &#39;&#39; memsize; &#39;;</span></div>
 <div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span><span class="stringliteral">  put &#39;    put &quot;</span>}<span class="stringliteral">&quot;; &#39;;</span></div>
-<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span><span class="stringliteral">  put &#39;  %if %str(&amp;_debug) ge 131 and &amp;_EXECUTIONTASKS=true %then %do; &#39;;</span></div>
+<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span><span class="stringliteral">  put &#39;  %if %str(&amp;_debug) ge 128 and &amp;_EXECUTIONTASKS=true %then %do; &#39;;</span></div>
 <div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span><span class="stringliteral">  put &#39;    put &#39;&#39;&gt;&gt;weboutEND&lt;&lt;&#39;&#39;; &#39;;</span></div>
 <div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span><span class="stringliteral">  put &#39;  %end; &#39;;</span></div>
 <div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span><span class="stringliteral">  put &#39;  %if %upcase(&amp;fref) ne _WEBOUT and &amp;stream=Y %then %do; &#39;;</span></div>
