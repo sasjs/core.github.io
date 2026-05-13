@@ -196,13 +196,13 @@ $(document).ready(function(){initNavTree('mv__webout_8sas_source.html',''); init
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>);</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>%global _webin_file_count _webin_fileuri _debug _omittextlog _webin_name</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  sasjs_tables SYS_JES_JOB_URI _EXECUTIONTASKS;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>%<span class="keywordflow">if</span> %index(<span class="stringliteral">&quot;&amp;_debug&quot;</span>,log) %then %let _debug=131;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>%<span class="keywordflow">if</span> %index(<span class="stringliteral">&quot;&amp;_debug&quot;</span>,log) %then %let _debug=128;</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>%local i tempds table;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>%let action=%upcase(&amp;action);</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>%<span class="keywordflow">if</span> &amp;action=FETCH %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  %<span class="keywordflow">if</span> %upcase(&amp;_omittextlog)=FALSE or %str(&amp;_debug) ge 131 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  %<span class="keywordflow">if</span> %upcase(&amp;_omittextlog)=FALSE or %str(&amp;_debug) ge 128 %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    options mprint notes mprintnest;</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  %end;</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
@@ -265,7 +265,7 @@ $(document).ready(function(){initNavTree('mv__webout_8sas_source.html',''); init
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>      infile indata termstr=crlf lrecl=32767;</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>      input;</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>      <span class="keywordflow">if</span> _n_=1 then call symputx(<span class="stringliteral">&#39;input_statement&#39;</span>,_infile_);</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>      %<span class="keywordflow">if</span> %str(&amp;_debug) ge 131 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>      %<span class="keywordflow">if</span> %str(&amp;_debug) ge 128 %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="keywordflow">if</span> _n_&lt;20 then putlog _infile_;</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        <span class="keywordflow">else</span> stop;</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>      %end;</div>
@@ -298,7 +298,7 @@ $(document).ready(function(){initNavTree('mv__webout_8sas_source.html',''); init
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  <span class="comment">/* setup json */</span></div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  data _null_;file &amp;fref;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  %<span class="keywordflow">if</span> %str(&amp;_debug) ge 131 and &amp;_EXECUTIONTASKS=<span class="keyword">true</span> %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  %<span class="keywordflow">if</span> %str(&amp;_debug) ge 128 and &amp;_EXECUTIONTASKS=<span class="keyword">true</span> %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    put <span class="stringliteral">&#39;&gt;&gt;weboutBEGIN&lt;&lt;&#39;</span>;</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  %end;</div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    put <span class="stringliteral">&#39;{&quot;SYSDATE&quot; : &quot;&#39;</span> <span class="stringliteral">&quot;&amp;SYSDATE&quot;</span> <span class="charliteral">&#39;&quot;&#39;</span>;</div>
@@ -413,7 +413,7 @@ $(document).ready(function(){initNavTree('mv__webout_8sas_source.html',''); init
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span><span class="stringliteral">    memsize=quote(cats(memsize));</span></div>
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span><span class="stringliteral">    put &#39;,&quot;</span>MEMSIZE<span class="stringliteral">&quot; : &#39; memsize;</span></div>
 <div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span><span class="stringliteral">    put &quot;</span>}<span class="stringliteral">&quot;;</span></div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span><span class="stringliteral">  %if %str(&amp;_debug) ge 131 and &amp;_EXECUTIONTASKS=true %then %do;</span></div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span><span class="stringliteral">  %if %str(&amp;_debug) ge 128 and &amp;_EXECUTIONTASKS=true %then %do;</span></div>
 <div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span><span class="stringliteral">    put &#39;&gt;&gt;weboutEND&lt;&lt;&#39;;</span></div>
 <div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span><span class="stringliteral">  %end;</span></div>
 <div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span><span class="stringliteral">  %if %upcase(&amp;fref) ne _WEBOUT and &amp;stream=Y %then %do;</span></div>
