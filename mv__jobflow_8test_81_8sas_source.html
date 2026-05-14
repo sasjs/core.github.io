@@ -173,19 +173,19 @@ $(document).ready(function(){initNavTree('mv__jobflow_8test_81_8sas_source.html'
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  ;</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>run;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>%mv_createjob(path=/Public/temp,name=demo1,code=testprog)</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>%mv_createjob(path=/Public/temp,name=demo2,code=testprog)</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>%mv_createjob(path=&amp;mcTestAppLoc,name=demo1,code=testprog)</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>%mv_createjob(path=&amp;mcTestAppLoc,name=demo2,code=testprog)</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>data work.inputjobs;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  _contextName=<span class="stringliteral">&#39;SAS Job Execution compute context&#39;</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  _contextName=<span class="stringliteral">&quot;&amp;mcTestContext&quot;</span>;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="keywordflow">do</span> flow_id=1 to 2;</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordflow">do</span> i=1 to 4;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      _program=<span class="stringliteral">&#39;/Public/temp/demo1&#39;</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      _program=<span class="stringliteral">&quot;&amp;mcTestAppLoc/demo1&quot;</span>;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      macrovar1=10*i;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>      macrovar2=4*i;</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>      output;</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      i+1;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      _program=<span class="stringliteral">&#39;/Public/temp/demo2&#39;</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      _program=<span class="stringliteral">&quot;&amp;mcTestAppLoc/demo2&quot;</span>;</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      macrovar1=40*i;</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      macrovar2=44*i;</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      output;</div>
