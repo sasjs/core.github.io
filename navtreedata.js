@@ -35,7 +35,7 @@ var NAVTREEINDEX =
 "dir_0d92069d5a23b1d3125c326d74f1a07c.html",
 "mm__assigndirectlib_8test_8sas_source.html",
 "mp__getddl_8test_8sas_source.html",
-"mv__getclients_8sas_source.html"
+"mv__deleteviyafolder_8sas_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

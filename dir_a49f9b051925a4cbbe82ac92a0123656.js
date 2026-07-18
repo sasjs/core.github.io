@@ -90,6 +90,7 @@ var dir_a49f9b051925a4cbbe82ac92a0123656 =
     [ "mp_reseterror.test.sas", "mp__reseterror_8test_8sas.html", null ],
     [ "mp_resetoption.test.sas", "mp__resetoption_8test_8sas.html", null ],
     [ "mp_retainedkey.test.sas", "mp__retainedkey_8test_8sas.html", null ],
+    [ "mp_rowhash.test.sas", "mp__rowhash_8test_8sas.html", null ],
     [ "mp_searchcols.test.sas", "mp__searchcols_8test_8sas.html", null ],
     [ "mp_searchdata.test.sas", "mp__searchdata_8test_8sas.html", null ],
     [ "mp_sortinplace.test.sas", "mp__sortinplace_8test_8sas.html", null ],

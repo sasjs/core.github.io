@@ -214,21 +214,8 @@ $(document).ready(function(){initNavTree('mf__getvalue_8test_8sas_source.html','
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  desc=Test fetching value from 1st row of empty (filtered) data,</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  outds=work.test_results</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>)</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>%let syscc = 0; <span class="comment">/* Reset w@rning To ensure confidence in next test */</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">/* - Test 6 -</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">  Get value from default observation.</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">  Dataset does not exist.</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">*/</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>%let test_value=%mf_getvalue(work.test_data_x,i);</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>%mp_assert(</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  iftrue=(&amp;test_value=%str() and &amp;syscc gt 0),</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  desc=Test fetching value from 1st row of non-existent data,</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  outds=work.test_results</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>)</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>%let syscc = 0; <span class="comment">/* To reset expected error and allow test job to exit clean. */</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>%let syscc=0;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

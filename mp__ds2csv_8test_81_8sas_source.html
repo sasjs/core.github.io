@@ -225,7 +225,7 @@ $(document).ready(function(){initNavTree('mp__ds2csv_8test_81_8sas_source.html',
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>run;</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>%mp_assert(</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  iftrue=(&quot;&amp;test3a&quot;=&quot;X:best. Y:$char7. Z:best.&quot;),</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  iftrue=(&quot;&amp;test3a&quot;=&quot;X:best32. Y:$char7. Z:best32.&quot;),</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  desc=Checking header row Test 3,</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  outds=work.test_results</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>)</div>
@@ -236,74 +236,154 @@ $(document).ready(function(){initNavTree('mp__ds2csv_8test_81_8sas_source.html',
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>)</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">/* test 4 - sasjs with compare */</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>filename example temp;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>%mp_ds2csv(sashelp.air,outref=example,headerformat=SASJS)</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>data _null_; infile example; input;put _infile_; if _n_&gt;5 then stop;run;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>data _null_;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  infile example;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  input;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  call symputx(&#39;stmnt&#39;,_infile_);</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  stop;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>run;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>data work.want;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  infile example dsd firstobs=2;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  input &amp;stmnt;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>run;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>%mp_assert(</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  iftrue=(&amp;syscc =0),</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  desc=Checking syscc prior to compare of sashelp.air,</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  outds=work.test_results</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>)</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>proc compare base=want compare=sashelp.air;</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>run;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>%mp_assert(</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  iftrue=(&amp;sysinfo le 41),</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  desc=Checking compare of sashelp.air,</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  outds=work.test_results</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>)</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment">/* test 5 - sasjs with time/datetime/date */</span></div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>filename f2 temp;</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>data work.test5;</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  do x=1 to 5;</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    y=x;</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    z=x;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  end;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  format x date9. y datetime19. z time.;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>run;</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>%mp_ds2csv(work.test5,outref=f2,headerformat=SASJS)</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>data _null_; infile example; input;put _infile_; if _n_&gt;5 then stop;run;</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>data _null_;</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>  infile f2;</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  input;</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  putlog _infile_;</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  call symputx(&#39;stmnt2&#39;,_infile_);</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  stop;</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>run;</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>data work.want5;</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  infile f2 dsd firstobs=2;</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  input &amp;stmnt2;</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  putlog _infile_;</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>run;</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>%mp_assert(</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  iftrue=(&amp;syscc=0),</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>  desc=Checking syscc prior to compare of test5,</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>  outds=work.test_results</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>)</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>proc compare base=want5 compare=work.test5;</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>run;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>%mp_assert(</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  iftrue=(&amp;sysinfo le 41),</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  desc=Checking compare of work.test5,</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  outds=work.test_results</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>)</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>data work.baseball ;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>attrib</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>Name                             length= $18 label=&quot;Player&#39;s Name&quot;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>Team                             length= $14 label=&quot;Team at the End of 1986&quot;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>nAtBat                           length= 8 label=&quot;Times at Bat in 1986&quot;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>nHits                            length= 8 label=&quot;Hits in 1986&quot;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>nHome                            length= 8 label=&quot;Home Runs in 1986&quot;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>nRuns                            length= 8 label=&quot;Runs in 1986&quot;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>nRBI                             length= 8 label=&quot;RBIs in 1986&quot;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>nBB                              length= 8 label=&quot;Walks in 1986&quot;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>YrMajor                          length= 8 label=&quot;Years in the Major Leagues&quot;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>CrAtBat                          length= 8 label=&quot;Career Times at Bat&quot;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>CrHits                           length= 8 label=&quot;Career Hits&quot;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>CrHome                           length= 8 label=&quot;Career Home Runs&quot;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>CrRuns                           length= 8 label=&quot;Career Runs&quot;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>CrRbi                            length= 8 label=&quot;Career RBIs&quot;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>CrBB                             length= 8 label=&quot;Career Walks&quot;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>League                           length= $8 label=&quot;League at the End of 1986&quot;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>Division                         length= $8 label=&quot;Division at the End of 1986&quot;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>Position                         length= $8 label=&quot;Position(s) in 1986&quot;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>nOuts                            length= 8 label=&quot;Put Outs in 1986&quot;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>nAssts                           length= 8 label=&quot;Assists in 1986&quot;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>nError                           length= 8 label=&quot;Errors in 1986&quot;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>Salary                           length= 8 label=&quot;1987 Salary in $ Thousands&quot;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>Div                              length= $16 label=&quot;League and Division&quot;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>logSalary                        length= 8 label=&quot;Log Salary&quot;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>infile cards dsd;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>input</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  Name                             :$char.</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  Team                             :$char.</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  nAtBat</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  nHits</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  nHome</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  nRuns</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  nRBI</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  nBB</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  YrMajor</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  CrAtBat</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  CrHits</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  CrHome</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>  CrRuns</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>  CrRbi</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  CrBB</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  League                           :$char.</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  Division                         :$char.</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  Position                         :$char.</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  nOuts</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  nAssts</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  nError</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  Salary</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  Div                              :$char.</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  logSalary</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>missing a b c d e f g h i j k l m n o p q r s t u v w x y z _;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="comment">/* fix precision issues */</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>if not missing(logSalary) then logsalary=logSalary*1;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>datalines4;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>&quot;Allanson, Andy&quot;,Cleveland,293,66,1,30,29,14,1,293,66,1,30,29,14,American,East,C,446,33,20,.,AE,.</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>&quot;Ashby, Alan&quot;,Houston,315,81,7,24,38,39,14,3449,835,69,321,414,375,National,West,C,632,43,10,475,NW,6.16331480403464</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>&quot;Davis, Alan&quot;,Seattle,479,130,18,66,72,76,3,1624,457,63,224,266,263,American,West,1B,880,82,14,480,AW,6.17378610390193</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>&quot;Dawson, Andre&quot;,Montreal,496,141,20,65,78,37,11,5628,1575,225,828,838,354,National,East,RF,200,11,3,500,NE,6.21460809842219</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>&quot;Galarraga, Andres&quot;,Montreal,321,87,10,39,42,30,2,396,101,12,48,46,33,National,East,1B,805,40,4,91.5,NE,4.51633897228147</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>&quot;Griffin, Alfredo&quot;,Oakland,594,169,4,74,51,35,11,4408,1133,19,501,336,194,American,West,SS,282,421,25,750,AW,6.62007320653035</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>&quot;Newman, Al&quot;,Montreal,185,37,1,23,8,21,2,214,42,1,30,9,24,National,East,2B,76,127,7,70,NE,4.24849524204936</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>&quot;Salazar, Argenis&quot;,Kansas City,298,73,0,24,24,7,3,509,108,0,41,37,12,American,West,SS,121,283,9,100,AW,4.60517018598809</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>&quot;Thomas, Andres&quot;,Atlanta,323,81,6,26,32,8,2,341,86,6,32,34,8,National,West,SS,143,290,19,75,NW,4.31748811353631</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>&quot;Thornton, Andre&quot;,Cleveland,401,92,17,49,66,65,13,5206,1332,253,784,890,866,American,East,DH,0,0,0,1100,AE,7.00306545878646</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>&quot;Trammell, Alan&quot;,Detroit,574,159,21,107,75,59,10,4631,1300,90,702,504,488,American,East,SS,238,445,22,517.143,AE,6.24831943200756</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>&quot;Trevino, Alex&quot;,Los Angeles,202,53,4,31,26,27,9,1876,467,15,192,186,161,National,West,C,304,45,11,512.5,NW,6.23930071101256</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>&quot;Van Slyke, Andy&quot;,St Louis,418,113,13,48,61,47,4,1512,392,41,205,204,203,National,East,RF,211,11,7,550,NE,6.30991827822651</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>&quot;Wiggins, Alan&quot;,Baltimore,239,60,0,30,11,22,6,1941,510,4,309,103,207,American,East,2B,121,151,6,700,AE,6.5510803350434</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>&quot;Almon, Bill&quot;,Pittsburgh,196,43,7,29,27,30,13,3231,825,36,376,290,238,National,East,UT,80,45,8,240,NE,5.48063892334199</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>&quot;Beane, Billy&quot;,Minneapolis,183,39,3,20,15,11,3,201,42,3,20,16,11,American,West,OF,118,0,0,.,AW,.</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>&quot;Bell, Buddy&quot;,Cincinnati,568,158,20,89,75,73,15,8068,2273,177,1045,993,732,National,West,3B,105,290,10,775,NW,6.65286302935334</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>&quot;Biancalana, Buddy&quot;,Kansas City,190,46,2,24,8,15,5,479,102,5,65,23,39,American,West,SS,102,177,16,175,AW,5.16478597392351</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>&quot;Bochte, Bruce&quot;,Oakland,407,104,6,57,43,65,12,5233,1478,100,643,658,653,American,West,1B,912,88,9,.,AW,.</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>;;;;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>run;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>filename example temp lrecl=5000;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>%mp_ds2csv(work.baseball,outref=example,headerformat=SASJS)</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>data _null_; infile example; input;put _infile_; if _n_&gt;5 then stop;run;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>data _null_;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>  infile example;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>  input;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>  call symputx(&#39;stmnt&#39;,_infile_);</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>  stop;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>run;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>data work.want;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>  infile example dsd firstobs=2;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>  input &amp;stmnt;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>run;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>%mp_assert(</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>  iftrue=(&amp;syscc =0),</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>  desc=Checking syscc prior to compare of work.baseball,</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>  outds=work.test_results</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>)</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>proc compare base=want compare=work.baseball</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>  method = absolute criterion = 0.0000000001   ;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>run;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>%mp_assert(</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>  iftrue=(&amp;sysinfo le 41),</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>  desc=Checking compare of work.baseball,</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>  outds=work.test_results</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>)</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="comment">/* test 5 - sasjs with time/datetime/date */</span></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>filename f2 temp;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>data work.test5;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>  do x=1 to 5;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    y=x;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    z=x;</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  end;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  format x date9. y datetime19. z time.;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>run;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>%mp_ds2csv(work.test5,outref=f2,headerformat=SASJS)</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>data _null_; infile example; input;put _infile_; if _n_&gt;5 then stop;run;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>data _null_;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>  infile f2;</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>  input;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>  putlog _infile_;</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>  call symputx(&#39;stmnt2&#39;,_infile_);</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>  stop;</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>run;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>data work.want5;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  infile f2 dsd firstobs=2;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>  input &amp;stmnt2;</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>  putlog _infile_;</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>run;</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>%mp_assert(</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>  iftrue=(&amp;syscc=0),</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>  desc=Checking syscc prior to compare of test5,</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>  outds=work.test_results</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>)</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>proc compare base=want5 compare=work.test5;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>run;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>%mp_assert(</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>  iftrue=(&amp;sysinfo le 41),</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>  desc=Checking compare of work.test5,</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>  outds=work.test_results</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>)</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
