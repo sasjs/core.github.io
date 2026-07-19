@@ -139,7 +139,9 @@ $(document).ready(function(){initNavTree('mf__wordsinstr1andstr2_8sas.html','');
 
 <p><a href="mf__wordsinstr1andstr2_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Compares two space separated strings and returns the words that are in both. Usage: </p><pre class="fragment">%put %mf_wordsInStr1andStr2(
+<div class="textblock"><p>Compares two space separated strings and returns the words that are in both.</p>
+<p>If either string is empty, nothing is returned.</p>
+<p>Usage: </p><pre class="fragment">%put %mf_wordsinstr1andstr2(
   Str1=blah sss blaaah brah bram boo
   ,Str2=   blah blaaah brah ssss
 );

@@ -141,7 +141,8 @@ $(document).ready(function(){initNavTree('mf__wordsinstr1butnotstr2_8sas.html','
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Compares two space separated strings and returns the words that are in the first but not in the second.</p>
 <p>Note - case sensitive!</p>
-<p>Usage: </p><pre class="fragment">%let x= %mf_wordsInStr1ButNotStr2(
+<p>If str1 is empty, nothing is returned. If str2 is empty, all the words in str1 are returned.</p>
+<p>Usage: </p><pre class="fragment">%let x= %mf_wordsinstr1butnotstr2(
   Str1=blah sss blaaah brah bram boo
   ,Str2=   blah blaaah brah ssss
 );
