@@ -12,8 +12,8 @@
   <meta name="author" content="Allan Bowe">
   <meta name="generator" content="Doxygen 1.9.8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Macros for SAS Application Developers" />
-  <meta name="og:description" content="Macros for SAS Application Developers" />
+  <meta name="description" content="Production-quality MIT-licensed SAS macro library (mf_*, mp_*, mm* macros) for SAS 9 and Viya application development" />
+  <meta name="og:description" content="Production-quality MIT-licensed SAS macro library (mf_*, mp_*, mm* macros) for SAS 9 and Viya application development" />
   <title>tests/base/mp_searchdata.test.sas Source File</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
@@ -148,25 +148,31 @@ $(document).ready(function(){initNavTree('mp__searchdata_8test_8sas_source.html'
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"></span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"></span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"></span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">/** Test 1 - generic useage */</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>%mp_searchdata(lib=sashelp, ds=<span class="keyword">class</span>, <span class="keywordtype">string</span>=a)</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>%mp_assert(</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  iftrue=(&amp;syscc=0),</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  desc=No errors in regular usage,</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  outds=work.test_results</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>)</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">/** Test 2 - with obs issue  */</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>%mp_searchdata(lib=sashelp, ds=<span class="keyword">class</span>, <span class="keywordtype">string</span>=l,outobs=5)</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>%mp_assert(</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  iftrue=(<span class="stringliteral">&quot;&amp;SYSWARNINGTEXT&quot;</span> = <span class="stringliteral">&quot;&quot;</span>),</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  desc=Ensuring WARN status is clean,</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  outds=work.test_results</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>)</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">/* SYSWARNINGTEXT is an automatic variable and cannot be modified, so</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">  capture the session start state (may contain a license expiry warning,</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">  which is an environment issue) and later assert nothing new was added */</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>%let initwarningtext=%superq(syswarningtext);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">/** Test 1 - generic useage */</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>%mp_searchdata(lib=sashelp, ds=<span class="keyword">class</span>, <span class="keywordtype">string</span>=a)</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>%mp_assert(</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  iftrue=(&amp;syscc=0),</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  desc=No errors in regular usage,</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  outds=work.test_results</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>)</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">/** Test 2 - with obs issue  */</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>%mp_searchdata(lib=sashelp, ds=<span class="keyword">class</span>, <span class="keywordtype">string</span>=l,outobs=5)</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">/* assert that mp_searchdata itself raised no new warnings */</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>%mp_assert(</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  iftrue=(<span class="stringliteral">&quot;%superq(syswarningtext)&quot;</span>=<span class="stringliteral">&quot;%superq(initwarningtext)&quot;</span>),</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  desc=Ensuring WARN status is clean,</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  outds=work.test_results</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>)</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

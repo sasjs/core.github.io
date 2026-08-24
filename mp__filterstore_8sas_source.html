@@ -12,8 +12,8 @@
   <meta name="author" content="Allan Bowe">
   <meta name="generator" content="Doxygen 1.9.8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Macros for SAS Application Developers" />
-  <meta name="og:description" content="Macros for SAS Application Developers" />
+  <meta name="description" content="Production-quality MIT-licensed SAS macro library (mf_*, mp_*, mm* macros) for SAS 9 and Viya application development" />
+  <meta name="og:description" content="Production-quality MIT-licensed SAS macro library (mf_*, mp_*, mm* macros) for SAS 9 and Viya application development" />
   <title>base/mp_filterstore.sas Source File</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
@@ -163,7 +163,7 @@ $(document).ready(function(){initNavTree('mp__filterstore_8sas_source.html','');
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">|AND|AND|1|SOME_TIME|=|77333|</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">  @param [in] filter_summary= (PERM.FILTER_SUMMARY) Permanent table containing</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">    summary filter values.  The definition is available by running</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">    mp_coretable.sas as follows:  `mp_coretable(FILTER_SUMMARY)`. Example</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">    mddl_dc_filtersummary.sas as follows:  `%mddl_dc_filtersummary()`. Example</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">    values:</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">|FILTER_RK:best.|FILTER_HASH:$32.|FILTER_TABLE:$41.|PROCESSED_DTTM:datetime19.|</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">|---|---|---|---|</span></div>
@@ -172,7 +172,7 @@ $(document).ready(function(){initNavTree('mp__filterstore_8sas_source.html','');
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">|`3 `|`8048BD908DBBD83D013560734E90D394 `|`VIYA6014.MPE_TABLES `|`1956093620.6`|</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">  @param [in] filter_detail= (PERM.FILTER_DETAIL) Permanent table containing</span></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">    detailed (raw) filter values. The definition is available by running</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">    mp_coretable.sas as follows:  `mp_coretable(FILTER_DETAIL)`. Example</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">    mddl_dc_filterdetail.sas as follows:  `%mddl_dc_filterdetail()`. Example</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">    values:</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">|FILTER_HASH:$32.|FILTER_LINE:best.|GROUP_LOGIC:$3.|SUBGROUP_LOGIC:$3.|SUBGROUP_ID:best.|VARIABLE_NM:$32.|OPERATOR_NM:$12.|RAW_VALUE:$4000.|PROCESSED_DTTM:datetime19.|</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">|---|---|---|---|---|---|---|---|---|</span></div>
@@ -181,7 +181,7 @@ $(document).ready(function(){initNavTree('mp__filterstore_8sas_source.html','');
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">|`87737DB9EEE2650F5C89956CEAD0A14F `|`1 `|`AND `|`AND `|`1 `|`PRIMARY_KEY_FIELD `|`IN `|`(1,2,3) `|`1956084451.9 `|</span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">  @param [in] lock_table= (PERM.LOCK_TABLE) Permanent locking table.  Used to</span></div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">    manage concurrent access.  The definition is available by running</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">    mp_coretable.sas as follows:  `mp_coretable(LOCKTABLE)`.</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">    mddl_dc_locktable.sas as follows:  `%mddl_dc_locktable()`.</span></div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">  @param [in] maxkeytable= (0) Optional permanent reference table used for</span></div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">    retained key tracking.  Described in mp_retainedkey.sas.</span></div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">  @param [in] mdebug= (1) set to 1 to enable DEBUG messages</span></div>

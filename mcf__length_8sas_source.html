@@ -12,8 +12,8 @@
   <meta name="author" content="Allan Bowe">
   <meta name="generator" content="Doxygen 1.9.8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Macros for SAS Application Developers" />
-  <meta name="og:description" content="Macros for SAS Application Developers" />
+  <meta name="description" content="Production-quality MIT-licensed SAS macro library (mf_*, mp_*, mm* macros) for SAS 9 and Viya application development" />
+  <meta name="og:description" content="Production-quality MIT-licensed SAS macro library (mf_*, mp_*, mm* macros) for SAS 9 and Viya application development" />
   <title>fcmp/mcf_length.sas Source File</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
@@ -153,7 +153,7 @@ $(document).ready(function(){initNavTree('mcf__length_8sas_source.html',''); ini
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"></span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">  Usage:</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"></span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">      %mcf_length(wrap=YES, insert_cmplib=YES)</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">      %mcf_length()</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"></span> </div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">      data _null_;</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">        ina=1;</span></div>
@@ -171,63 +171,60 @@ $(document).ready(function(){initNavTree('mcf__length_8sas_source.html',''); ini
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"></span> </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">  &gt; outa=3 outb=4 outc=5 outd=0</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"></span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">  @param [out] wrap= (NO) Choose YES to add the proc fcmp wrapper.</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">  @param [out] wrap= (YES) Choose NO to omit the proc fcmp wrapper.</span></div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">  @param [out] lib= (work) The output library in which to create the catalog.</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">  @param [out] cat= (sasjs) The output catalog in which to create the package.</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">  @param [out] pkg= (utils) The output package in which to create the function.</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">    Uses a 3 part format:  libref.catalog.package</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">  @param [out] insert_cmplib= DEPRECATED - The CMPLIB option is checked and</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">    values inserted only if needed.</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"></span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">  @li mcf_init.sas</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"></span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">  &lt;h4&gt; Related Programs &lt;/h4&gt;</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">  @li mcf_length.test.sas</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">  @li mp_init.sas</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment"></span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>%macro mcf_length(wrap=NO</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  ,insert_cmplib=DEPRECATED</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  ,lib=WORK</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  ,cat=SASJS</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  ,pkg=UTILS</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>%local i var cmpval found;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>%<span class="keywordflow">if</span> %mcf_init(mcf_length)=1 %then %<span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>%<span class="keywordflow">if</span> &amp;wrap=YES  %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  proc fcmp outlib=&amp;lib..&amp;cat..&amp;pkg;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>%end;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keyword">function</span> mcf_length(var);</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keywordflow">if</span> var=. then len=0;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> missing(var) or trunc(var,3)=var then len=3;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> trunc(var,4)=var then len=4;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> trunc(var,5)=var then len=5;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> trunc(var,6)=var then len=6;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> trunc(var,7)=var then len=7;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <span class="keywordflow">else</span> len=8;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keywordflow">return</span>(len);</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>endsub;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>%<span class="keywordflow">if</span> &amp;wrap=YES %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  quit;</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>%end;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">/* insert the CMPLIB if not already there */</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>%let cmpval=%sysfunc(getoption(cmplib));</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>%let found=0;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>%<span class="keywordflow">do</span> i=1 %to %sysfunc(countw(&amp;cmpval,%str( %(%))));</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  %let var=%scan(&amp;cmpval,&amp;i,%str( %(%)));</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  %<span class="keywordflow">if</span> &amp;var=&amp;lib..&amp;cat %then %let found=1;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"></span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">  @li mcf_init.sas</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"></span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">  &lt;h4&gt; Related Programs &lt;/h4&gt;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">  @li mcf_length.test.sas</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">  @li mp_init.sas</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"></span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>%macro mcf_length(wrap=YES</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  ,lib=WORK</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  ,cat=SASJS</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  ,pkg=UTILS</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>%local i var cmpval found;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>%<span class="keywordflow">if</span> %mcf_init(mcf_length)=1 %then %<span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>%<span class="keywordflow">if</span> &amp;wrap=YES  %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  proc fcmp outlib=&amp;lib..&amp;cat..&amp;pkg;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>%end;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">function</span> mcf_length(var);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keywordflow">if</span> var=. then len=0;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> missing(var) or trunc(var,3)=var then len=3;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> trunc(var,4)=var then len=4;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> trunc(var,5)=var then len=5;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> trunc(var,6)=var then len=6;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> trunc(var,7)=var then len=7;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keywordflow">else</span> len=8;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordflow">return</span>(len);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>endsub;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>%<span class="keywordflow">if</span> &amp;wrap=YES %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  quit;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>%end;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">/* insert the CMPLIB if not already there */</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>%let cmpval=%sysfunc(getoption(cmplib));</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>%let found=0;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>%<span class="keywordflow">do</span> i=1 %to %sysfunc(countw(&amp;cmpval,%str( %(%))));</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  %let var=%scan(&amp;cmpval,&amp;i,%str( %(%)));</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  %<span class="keywordflow">if</span> &amp;var=&amp;lib..&amp;cat %then %let found=1;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>%end;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>%<span class="keywordflow">if</span> &amp;found=0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  options insert=(CMPLIB=(&amp;lib..&amp;cat));</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>%end;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>%<span class="keywordflow">if</span> &amp;found=0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  options insert=(CMPLIB=(&amp;lib..&amp;cat));</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>%end;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>%mend mcf_length;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>%mend mcf_length;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

@@ -12,8 +12,8 @@
   <meta name="author" content="Allan Bowe">
   <meta name="generator" content="Doxygen 1.9.8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Macros for SAS Application Developers" />
-  <meta name="og:description" content="Macros for SAS Application Developers" />
+  <meta name="description" content="Production-quality MIT-licensed SAS macro library (mf_*, mp_*, mm* macros) for SAS 9 and Viya application development" />
+  <meta name="og:description" content="Production-quality MIT-licensed SAS macro library (mf_*, mp_*, mm* macros) for SAS 9 and Viya application development" />
   <title>tests/base/mcf_getfmttype.test.sas Source File</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
@@ -150,7 +150,7 @@ $(document).ready(function(){initNavTree('mcf__getfmttype_8test_8sas_source.html
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">**/</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>%mp_assertscope(SNAPSHOT)</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>%mcf_getfmttype(wrap=YES, insert_cmplib=YES)</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>%mcf_getfmttype()</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>%mp_assertscope(COMPARE,ignorelist=SASJS_FUNCTIONS)</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>%mp_assert(</div>
@@ -171,7 +171,7 @@ $(document).ready(function(){initNavTree('mcf__getfmttype_8test_8sas_source.html
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>)</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">/* test 2 - compile again test for warnings */</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>%mcf_getfmttype(wrap=YES, insert_cmplib=YES)</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>%mcf_getfmttype()</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>%mp_assert(</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  iftrue=(&amp;syscc=0),</div>

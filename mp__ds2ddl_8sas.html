@@ -12,8 +12,8 @@
   <meta name="author" content="Allan Bowe">
   <meta name="generator" content="Doxygen 1.9.8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Macros for SAS Application Developers" />
-  <meta name="og:description" content="Macros for SAS Application Developers" />
+  <meta name="description" content="Production-quality MIT-licensed SAS macro library (mf_*, mp_*, mm* macros) for SAS 9 and Viya application development" />
+  <meta name="og:description" content="Production-quality MIT-licensed SAS macro library (mf_*, mp_*, mm* macros) for SAS 9 and Viya application development" />
   <title>base/mp_ds2ddl.sas File Reference</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
@@ -134,36 +134,50 @@ $(document).ready(function(){initNavTree('mp__ds2ddl_8sas.html',''); initResizab
 </div><!--header-->
 <div class="contents">
 
-<p>Fetches DDL for a specific table.  
+<p>Extract DDL in various formats, by table or library.  
 <a href="#details">More...</a></p>
 
 <p><a href="mp__ds2ddl_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Uses mp_getddl under the hood</p>
+<div class="textblock"><p>Data Definition Language relates to a set of SQL instructions used to create tables in SAS or a database. The macro can be used at table or library level. The default behaviour is to create DDL in SAS format.</p>
+<p>Note - views are not currently supported.</p>
+<p>Usage: </p><pre class="fragment">data test(index=(pk=(x y)/unique /nomiss));
+  x=1;
+  y='blah';
+  label x='blah';
+run;
+proc sql; describe table &amp;syslast;
+%mp_ds2ddl(work,test,flavour=tsql,showlog=YES)
+</pre> <h4>SAS Macros </h4>
+<ul>
+<li><a class="el" href="mf__existfileref_8sas.html" title="Checks whether a fileref exists.">mf_existfileref.sas</a> </li>
+<li><a class="el" href="mf__getvarcount_8sas.html" title="Returns number of variables in a dataset.">mf_getvarcount.sas</a> </li>
+<li><a class="el" href="mp__getconstraints_8sas.html" title="Get constraint details at column level.">mp_getconstraints.sas</a></li>
+</ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">libds</td><td>library.dataset to create ddl for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">libref</td><td>Libref of the library to create DDL for. Should already be assigned. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ds</td><td>dataset to create ddl for (optional) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">fref=</td><td>(getddl) the fileref to which to <em>append</em> the DDL. If it does not exist, it will be created. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">flavour=</td><td>(SAS) The type of DDL to create. Options: <ul>
 <li>SAS </li>
-<li>TSQL</li>
+<li>TSQL </li>
+<li>PGSQL</li>
 </ul>
 </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname"></td><td></td></tr>
   </table>
   </dd>
 </dl>
-<p>= (NO) Set to YES to show the DDL in the log </p><dl class="params"><dt>Parameters</dt><dd>
+<p>= (YES) Set to NO to prevent the DDL showing in the log </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">schema=</td><td>() Choose a preferred schema name (default is to use actual schema, else libref) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">applydttm=</td><td>(NO) For non SAS DDL, choose if columns are created with native datetime2 format or regular decimal type</td></tr>
   </table>
   </dd>
 </dl>
-<h4>SAS Macros </h4>
-<ul>
-<li><a class="el" href="mp__getddl_8sas.html" title="Extract DDL in various formats, by table or library.">mp_getddl.sas</a> </li>
-</ul>
+<dl class="section version"><dt>Version</dt><dd>9.3 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="mp__ds2ddl_8sas_source.html">mp_ds2ddl.sas</a>.</p>
 </div></div><!-- contents -->

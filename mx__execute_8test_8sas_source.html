@@ -12,9 +12,9 @@
   <meta name="author" content="Allan Bowe">
   <meta name="generator" content="Doxygen 1.9.8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Macros for SAS Application Developers" />
-  <meta name="og:description" content="Macros for SAS Application Developers" />
-  <title>tests/x-platform/mx_testservice.test.sas Source File</title>
+  <meta name="description" content="Production-quality MIT-licensed SAS macro library (mf_*, mp_*, mm* macros) for SAS 9 and Viya application development" />
+  <meta name="og:description" content="Production-quality MIT-licensed SAS macro library (mf_*, mp_*, mm* macros) for SAS 9 and Viya application development" />
+  <title>tests/x-platform/mx_execute.test.sas Source File</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="dynsections.js"></script>
@@ -109,7 +109,7 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('mx__testservice_8test_8sas_source.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mx__execute_8test_8sas_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -135,19 +135,19 @@ $(document).ready(function(){initNavTree('mx__testservice_8test_8sas_source.html
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">mx_testservice.test.sas</div></div>
+  <div class="headertitle"><div class="title">mx_execute.test.sas</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="mx__testservice_8test_8sas.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
+<a href="mx__execute_8test_8sas.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">  @file</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">  @brief Testing mx_testservice.sas macro</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">  @brief Testing mx_execute.sas macro</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"></span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">  Be sure to run &lt;code&gt;%let mcTestAppLoc=/Public/temp/macrocore;&lt;/code&gt; when</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">  running in Studio</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"></span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">  @li mx_createwebservice.sas</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">  @li mx_testservice.sas</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">  @li mx_execute.sas</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">  @li mp_assert.sas</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"></span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">**/</span></div>
@@ -189,7 +189,7 @@ $(document).ready(function(){initNavTree('mx__testservice_8test_8sas_source.html
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  output;</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>run;</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>%mx_testservice(&amp;mcTestAppLoc/services/sendObj,</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>%mx_execute(&amp;mcTestAppLoc/services/sendObj,</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  inputdatasets=work.somedata1 work.somedata2,</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  debug=log,</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  mdebug=1,</div>
@@ -228,7 +228,7 @@ $(document).ready(function(){initNavTree('mx__testservice_8test_8sas_source.html
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_59425e443f801f1f2fd8bbe4959a3ccf.html">tests</a></li><li class="navelem"><a class="el" href="dir_73f28b2f4ec1a9e884eccf5a03f4670b.html">x-platform</a></li><li class="navelem"><a class="el" href="mx__testservice_8test_8sas.html">mx_testservice.test.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_59425e443f801f1f2fd8bbe4959a3ccf.html">tests</a></li><li class="navelem"><a class="el" href="dir_73f28b2f4ec1a9e884eccf5a03f4670b.html">x-platform</a></li><li class="navelem"><a class="el" href="mx__execute_8test_8sas.html">mx_execute.test.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">

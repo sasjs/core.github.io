@@ -12,8 +12,8 @@
   <meta name="author" content="Allan Bowe">
   <meta name="generator" content="Doxygen 1.9.8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Macros for SAS Application Developers" />
-  <meta name="og:description" content="Macros for SAS Application Developers" />
+  <meta name="description" content="Production-quality MIT-licensed SAS macro library (mf_*, mp_*, mm* macros) for SAS 9 and Viya application development" />
+  <meta name="og:description" content="Production-quality MIT-licensed SAS macro library (mf_*, mp_*, mm* macros) for SAS 9 and Viya application development" />
   <title>fcmp/mcf_getfmttype.sas File Reference</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
@@ -148,7 +148,7 @@ $(document).ready(function(){initNavTree('mcf__getfmttype_8sas.html',''); initRe
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">fmtnm   </td><td class="markdownTableBodyNone">Format name to be tested. Can be with or without the w.d extension.   </td></tr>
 </table>
-<p>Usage: </p><pre class="fragment">%mcf_getfmttype(wrap=YES, insert_cmplib=YES)
+<p>Usage: </p><pre class="fragment">%mcf_getfmttype()
 
 data _null_;
   fmt1=mcf_getfmttype('DATE9.');
@@ -162,11 +162,10 @@ run;
 </blockquote>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">wrap=</td><td>(NO) Choose YES to add the proc fcmp wrapper. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">wrap=</td><td>(YES) Choose NO to omit the proc fcmp wrapper. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">lib=</td><td>(work) The output library in which to create the catalog. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">cat=</td><td>(sasjs) The output catalog in which to create the package. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">pkg=</td><td>(utils) The output package in which to create the function. Uses a 3 part format: libref.catalog.package </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">insert_cmplib=</td><td>DEPRECATED - The CMPLIB option is checked and values inserted only if needed.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">pkg=</td><td>(utils) The output package in which to create the function. Uses a 3 part format: libref.catalog.package</td></tr>
   </table>
   </dd>
 </dl>
