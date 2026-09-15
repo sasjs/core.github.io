@@ -160,7 +160,7 @@ $(document).ready(function(){initNavTree('mp__assert_8sas_source.html',''); init
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">  @param [in] desc= (Testing observations) The user provided test description</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">  @param [out] outds= (work.test_results) The output dataset to contain the</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">  results.  If it does not exist, it will be created, with the following format:</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">  |TEST_DESCRIPTION:$256|TEST_RESULT:$4|TEST_COMMENTS:$256|</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">  |TEST_DESCRIPTION:$256|TEST_RESULT:$5|TEST_COMMENTS:$256|</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">  |---|---|---|</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">  |User Provided description|PASS|Dataset &amp;inds contained ALL columns|</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"></span> </div>
@@ -175,7 +175,7 @@ $(document).ready(function(){initNavTree('mp__assert_8sas_source.html',''); init
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  data ;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    length test_result $4 test_description $256 test_comments $256;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    length test_result $5 test_description $256 test_comments $256;</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    test_description=symget(<span class="stringliteral">&#39;desc&#39;</span>);</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    test_comments=<span class="stringliteral">&quot;&amp;sysmacroname: Test result of &quot;</span>!!symget(<span class="stringliteral">&#39;iftrue&#39;</span>);</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  %<span class="keywordflow">if</span> %eval(%unquote(&amp;iftrue)) %then %<span class="keywordflow">do</span>;</div>

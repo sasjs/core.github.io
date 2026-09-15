@@ -1,5 +1,11 @@
 var NAVTREEINDEX3 =
 {
+"mv__deleteviyafolder_8test_8sas_source.html":[1,7,4,11],
+"mv__getclients_8sas.html":[1,8,15],
+"mv__getclients_8sas_source.html":[1,8,15],
+"mv__getfoldermembers_8sas.html":[1,8,16],
+"mv__getfoldermembers_8sas_source.html":[1,8,16],
+"mv__getfoldermembers_8test_8sas.html":[1,7,4,12],
 "mv__getfoldermembers_8test_8sas_source.html":[1,7,4,12],
 "mv__getgroupmembers_8sas.html":[1,8,17],
 "mv__getgroupmembers_8sas_source.html":[1,8,17],

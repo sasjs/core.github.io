@@ -179,7 +179,7 @@ $(document).ready(function(){initNavTree('mp__assertcols_8sas_source.html',''); 
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">    @li NONE - Test is a PASS if NONE of the columns exist in &amp;inds</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">  @param [out] outds= (work.test_results) The output dataset to contain the</span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">  results.  If it does not exist, it will be created, with the following format:</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">  |TEST_DESCRIPTION:$256|TEST_RESULT:$4|TEST_COMMENTS:$256|</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">  |TEST_DESCRIPTION:$256|TEST_RESULT:$5|TEST_COMMENTS:$256|</span></div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">  |---|---|---|</span></div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">  |User Provided description|PASS|Dataset &amp;inds contained ALL columns|</span></div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"></span> </div>
@@ -248,7 +248,7 @@ $(document).ready(function(){initNavTree('mp__assertcols_8sas_source.html',''); 
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  %end;</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  data;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    length test_result $4 test_description $256 test_comments $256;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    length test_result $5 test_description $256 test_comments $256;</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    test_description=symget(<span class="stringliteral">&#39;desc&#39;</span>);</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keywordflow">if</span> test_description=<span class="charliteral">&#39;0&#39;</span></div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    then test_description=<span class="stringliteral">&quot;Testing &amp;inds for existence of &amp;test of: &amp;cols&quot;</span>;</div>
