@@ -290,7 +290,7 @@ $(document).ready(function(){initNavTree('mp__jsonout_8sas_source.html',''); ini
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  run;</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  %let tempds=%substr(_%sysfunc(compress(%sysfunc(uuidgen()),-)),1,32);</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  proc sql;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  proc sql noprint;</div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  select count(*) into: lastobs from &amp;ds;</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>  %if &amp;maxobs ne MAX %then %let lastobs=%sysfunc(min(&amp;lastobs,&amp;maxobs));</div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>

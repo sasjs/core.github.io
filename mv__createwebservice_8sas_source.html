@@ -456,7 +456,7 @@ $(document).ready(function(){initNavTree('mv__createwebservice_8sas_source.html'
 <div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>  put <span class="stringliteral">&#39;  run; &#39;</span>;</div>
 <div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>  put <span class="charliteral">&#39; &#39;</span>;</div>
 <div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>  put <span class="stringliteral">&#39;  %let tempds=%substr(_%sysfunc(compress(%sysfunc(uuidgen()),-)),1,32); &#39;</span>;</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  put <span class="stringliteral">&#39;  proc sql; &#39;</span>;</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  put <span class="stringliteral">&#39;  proc sql noprint; &#39;</span>;</div>
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>  put <span class="stringliteral">&#39;  select count(*) into: lastobs from &amp;ds; &#39;</span>;</div>
 <div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  put <span class="stringliteral">&#39;  %if &amp;maxobs ne MAX %then %let lastobs=%sysfunc(min(&amp;lastobs,&amp;maxobs)); &#39;</span>;</div>
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>  put <span class="charliteral">&#39; &#39;</span>;</div>

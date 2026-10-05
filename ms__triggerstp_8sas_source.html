@@ -311,7 +311,7 @@ $(document).ready(function(){initNavTree('ms__triggerstp_8sas_source.html',''); 
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>  <span class="comment">/* prepare request*/</span></div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  proc http method=<span class="stringliteral">&#39;POST&#39;</span> headerin=&amp;authref in=&amp;mainref out=&amp;outref</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    url=<span class="stringliteral">&quot;&amp;_sasjs_apiserverurl/SASjsApi/stp/trigger?%trim(</span></div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="stringliteral">      )_program=&amp;pgm%str(&amp;)_debug=131%str(&amp;)expiresAfterMins=&amp;expiresaftermins&quot;</span>;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="stringliteral">      )_program=&amp;pgm%str(&amp;)_debug=&amp;debug%str(&amp;)expiresAfterMins=&amp;expiresaftermins&quot;</span>;</div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  %<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    debug level=2;</div>
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  %end;</div>
