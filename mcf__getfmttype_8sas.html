@@ -139,7 +139,7 @@ $(document).ready(function(){initNavTree('mcf__getfmttype_8sas.html',''); initRe
 
 <p><a href="mcf__getfmttype_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Returns the type, eg DATE / DATETIME / TIME (based on hard-coded lookup) else CHAR / NUM.</p>
+<div class="textblock"><p>Returns the type, eg DATE / DATETIME / TIME (based on hard-coded lookup) else CHAR / NUM. The lookup lists live in <a class="el" href="mf__dttmfmts_8sas.html" title="Returns the SAS format names that carry a date, datetime or time value.">mf_dttmfmts.sas</a>, which is also usable directly in open code.</p>
 <p>This macro may be extended in the future to support custom formats - this would necessitate a call to <code>dosubl()</code> for running a proc format with cntlout.</p>
 <p>The function itself takes the following (positional) parameters:</p>
 <table class="markdownTable">
@@ -171,7 +171,8 @@ run;
 </dl>
 <h4>SAS Macros </h4>
 <ul>
-<li><a class="el" href="mcf__init_8sas.html" title="Sets up the mcf_xx functions.">mcf_init.sas</a></li>
+<li><a class="el" href="mcf__init_8sas.html" title="Sets up the mcf_xx functions.">mcf_init.sas</a> </li>
+<li><a class="el" href="mf__dttmfmts_8sas.html" title="Returns the SAS format names that carry a date, datetime or time value.">mf_dttmfmts.sas</a></li>
 </ul>
 <h4>Related Programs </h4>
 <ul>
