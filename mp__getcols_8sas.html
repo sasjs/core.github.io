@@ -143,7 +143,7 @@ $(document).ready(function(){initNavTree('mp__getcols_8sas.html',''); initResiza
 <ul>
 <li>Blank labels are filled in with column names </li>
 <li>Formats are reconstructed with default values </li>
-<li>Types such as DATE / TIME / DATETIME are inferred from the formats</li>
+<li>Types such as DATE / TIME / DATETIME are inferred from the formats, using <a class="el" href="mf__dttmfmts_8sas.html" title="Returns the SAS format names that carry a date, datetime or time value.">mf_dttmfmts.sas</a> so every caller shares one set of format lists</li>
 </ul>
 <p>Example usage: </p><pre class="fragment">%mp_getcols(sashelp.airline,outds=work.myds)
 </pre> <dl class="params"><dt>Parameters</dt><dd>
@@ -163,6 +163,10 @@ $(document).ready(function(){initNavTree('mp__getcols_8sas.html',''); initResiza
   </table>
   </dd>
 </dl>
+<h4>SAS Macros </h4>
+<ul>
+<li><a class="el" href="mf__dttmfmts_8sas.html" title="Returns the SAS format names that carry a date, datetime or time value.">mf_dttmfmts.sas</a></li>
+</ul>
 <h4>Related Macros </h4>
 <ul>
 <li><a class="el" href="mf__getvarlist_8sas.html" title="Returns dataset variable list direct from header.">mf_getvarlist.sas</a> </li>

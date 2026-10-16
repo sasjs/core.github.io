@@ -206,7 +206,7 @@ $(document).ready(function(){initNavTree('mp__abort_8sas_source.html',''); initR
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  , mode=REGULAR</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>%global sysprocessmode sysprocessname sasjs_stpsrv_header_loc sasjsprocessmode;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>%global sysprocessmode sysprocessname _sasjs_webout_headers sasjsprocessmode;</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>%local fref fid i;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>%<span class="keywordflow">if</span> not(%eval(%unquote(&amp;iftrue))) %then %<span class="keywordflow">return</span>;</div>
@@ -311,7 +311,7 @@ $(document).ready(function(){initNavTree('mp__abort_8sas_source.html',''); initR
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        name=<span class="stringliteral">&quot;_webout.json&quot;</span> lrecl=999999 mod;</div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    %end;</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  %end;</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">if</span> %sysfunc(filename(fref,&amp;sasjs_stpsrv_header_loc))=0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">if</span> %sysfunc(filename(fref,&amp;_sasjs_webout_headers))=0 %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    options nobomfile;</div>
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="comment">/* set up http header for SASjs Server */</span></div>
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    %let fid=%sysfunc(fopen(&amp;fref,A));</div>

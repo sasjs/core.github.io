@@ -772,11 +772,11 @@ $(document).ready(function(){initNavTree('ms__createwebservice_8sas_source.html'
 <div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span><span class="stringliteral">  put &#39;%macro mfs_httpheader(header_name &#39;;</span></div>
 <div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span><span class="stringliteral">  put &#39;  ,header_value &#39;;</span></div>
 <div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span><span class="stringliteral">  put &#39;)/*/STORE SOURCE*/; &#39;;</span></div>
-<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span><span class="stringliteral">  put &#39;%global sasjs_stpsrv_header_loc; &#39;;</span></div>
+<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span><span class="stringliteral">  put &#39;%global _sasjs_webout_headers; &#39;;</span></div>
 <div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span><span class="stringliteral">  put &#39;%local fref fid i; &#39;;</span></div>
 <div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span><span class="stringliteral">  put &#39; &#39;;</span></div>
-<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span><span class="stringliteral">  put &#39;%if %sysfunc(filename(fref,&amp;sasjs_stpsrv_header_loc)) ne 0 %then %do; &#39;;</span></div>
-<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span><span class="stringliteral">  put &#39;  %put &amp;=fref &amp;=sasjs_stpsrv_header_loc; &#39;;</span></div>
+<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span><span class="stringliteral">  put &#39;%if %sysfunc(filename(fref,&amp;_sasjs_webout_headers)) ne 0 %then %do; &#39;;</span></div>
+<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span><span class="stringliteral">  put &#39;  %put &amp;=fref &amp;=_sasjs_webout_headers; &#39;;</span></div>
 <div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span><span class="stringliteral">  put &#39;  %put %str(ERR)OR: %sysfunc(sysmsg()); &#39;;</span></div>
 <div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span><span class="stringliteral">  put &#39;  %return; &#39;;</span></div>
 <div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span><span class="stringliteral">  put &#39;%end; &#39;;</span></div>
