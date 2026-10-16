@@ -162,7 +162,7 @@ $(document).ready(function(){initNavTree('mp__filtercheck_8sas.html',''); initRe
 <li>SUBGROUP_ID - only integers </li>
 <li>VARIABLE_NM - must be in the target table </li>
 <li>OPERATOR_NM - only =/&gt;/&lt;/&lt;=/&gt;=/BETWEEN/IN/NOT IN/NE/CONTAINS </li>
-<li>RAW_VALUE - no unquoted values except integers, commas and spaces.</li>
+<li>RAW_VALUE - no unquoted values except integers, commas and spaces. For numeric columns, SAS date, datetime and time literals are also accepted, eg '20APR2042'd, '01JAN1960:00:00:42'dt, '00:00:42't.</li>
 </ul>
 <dl class="section return"><dt>Returns</dt><dd>The &amp;outds table containing any bad rows, plus a REASON_CD column.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -190,7 +190,7 @@ $(document).ready(function(){initNavTree('mp__filtercheck_8sas.html',''); initRe
 </ul>
 <dl class="section version"><dt>Version</dt><dd>9.3 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Support date / hex / name literals and exponents in RAW_VALUE field </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Support hex / name literals and exponents in RAW_VALUE field </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="mp__filtercheck_8sas_source.html">mp_filtercheck.sas</a>.</p>
 </div></div><!-- contents -->
