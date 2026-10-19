@@ -144,6 +144,7 @@ $(document).ready(function(){initNavTree('mp__filterstore_8sas.html',''); initRe
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">libds=</td><td>The target dataset to be filtered (lib should be assigned). If filtering a format catalog, add the following suffix: <code>-FC</code>. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">targetds=</td><td>(&amp;libds) The dataset against which VARIABLE_NM values are validated. Defaults to &amp;libds, which is the correct behaviour for physical columns. Supply a view that adds computed columns when the filter may reference variables that do not exist in the physical table - the filter is still stored against &amp;libds. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">queryds=</td><td>(WORK.FILTERQUERY) The temporary input query dataset to be validated. Has the following format: <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">GROUP_LOGIC:$3   </th><th class="markdownTableHeadNone">SUBGROUP_LOGIC:$3   </th><th class="markdownTableHeadNone">SUBGROUP_ID:8.   </th><th class="markdownTableHeadNone">VARIABLE_NM:$32   </th><th class="markdownTableHeadNone">OPERATOR_NM:$10   </th><th class="markdownTableHeadNone">RAW_VALUE:$32767    </th></tr>

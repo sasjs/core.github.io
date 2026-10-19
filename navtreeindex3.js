@@ -1,5 +1,7 @@
 var NAVTREEINDEX3 =
 {
+"mv__deletefoldermember_8sas_source.html":[1,8,12],
+"mv__deletejes_8sas.html":[1,8,13],
 "mv__deletejes_8sas_source.html":[1,8,13],
 "mv__deleteviyafolder_8sas.html":[1,8,14],
 "mv__deleteviyafolder_8sas_source.html":[1,8,14],
