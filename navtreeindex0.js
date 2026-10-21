@@ -55,8 +55,10 @@ var NAVTREEINDEX0 =
 "mddl__dc__maxkeytable_8sas_source.html":[1,1,4],
 "mddl__dc__maxkeytable_8test_8sas.html":[1,7,1,4],
 "mddl__dc__maxkeytable_8test_8sas_source.html":[1,7,1,4],
-"mddl__sas__cntlout_8sas.html":[1,1,5],
-"mddl__sas__cntlout_8sas_source.html":[1,1,5],
+"mddl__derivedvars_8sas.html":[1,1,5],
+"mddl__derivedvars_8sas_source.html":[1,1,5],
+"mddl__sas__cntlout_8sas.html":[1,1,6],
+"mddl__sas__cntlout_8sas_source.html":[1,1,6],
 "mddl__sas__cntlout_8test_8sas.html":[1,7,1,5],
 "mddl__sas__cntlout_8test_8sas_source.html":[1,7,1,5],
 "mf__abort_8sas.html":[1,0,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX0 =
 "mfv__getpathuri_8test_8sas_source.html":[1,7,4,5],
 "ml__gsubfile_8sas.html":[1,3,0],
 "ml__gsubfile_8sas_source.html":[1,3,0],
-"ml__json_8sas.html":[1,3,1],
-"ml__json_8sas_source.html":[1,3,1],
-"mm__adduser2group_8sas.html":[1,4,0]
+"ml__json_8sas.html":[1,3,1]
 };

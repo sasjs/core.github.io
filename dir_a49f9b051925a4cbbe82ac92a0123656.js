@@ -50,6 +50,7 @@ var dir_a49f9b051925a4cbbe82ac92a0123656 =
     [ "mp_copyfolder.test.sas", "mp__copyfolder_8test_8sas.html", null ],
     [ "mp_createwebservice.test.sas", "mp__createwebservice_8test_8sas.html", null ],
     [ "mp_deletefolder.test.sas", "mp__deletefolder_8test_8sas.html", null ],
+    [ "mp_derivedvars.test.sas", "mp__derivedvars_8test_8sas.html", null ],
     [ "mp_dictionary.test.sas", "mp__dictionary_8test_8sas.html", null ],
     [ "mp_dirlist.test.sas", "mp__dirlist_8test_8sas.html", null ],
     [ "mp_ds2cards.test.sas", "mp__ds2cards_8test_8sas.html", null ],
