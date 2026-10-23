@@ -327,11 +327,18 @@ Breaking Changes</h1>
 <li>all macros - the session macro variables were renamed to the <code>_SASJS_</code> prefix, matching the names sasjs/server sets in its pre-programs. <code>SASJSWORK</code> is now <code>_SASJS_WORK</code>, <code>SASJS_INIT_NUM</code> is <code>_SASJS_INIT_NUM</code>, <code>SASJS_INIT_DTTM</code> is <code>_SASJS_INIT_DTTM</code>, <code>SASJSPROCESSMODE</code> is <code>_SASJS_PROCESSMODE</code> and <code>SASJS_FUNCTIONS</code> is <code>_SASJS_FUNCTIONS</code>. Code that built paths, tests or ignore lists from the old names must read the new ones - core no longer creates the old names and no alias variables are declared. The one name that still answers to its old form is the initialisation marker described in the next point, which is honoured rather than created.</li>
 <li><a class="el" href="mp__init_8sas.html" title="Initialise session with useful settings and variables.">mp_init.sas</a> - the <code>prefix=</code> parameter was removed, and the prefix is hard-coded as <code>_SASJS_</code>. Call <code>mp_init()</code> with no arguments. The "do not initialise" marker is renamed with everything else: set <code>_SASJS_INIT</code> (formerly <code>SASJS_PREFIX</code>) in the autoexec, to any value, to suppress initialisation. <code>SASJS_PREFIX</code> still suppresses initialisation if it is already set, so an existing autoexec keeps working unchanged; core no longer sets it.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md20"></a>
+<h2><a class="anchor" id="autotoc_md20"></a>
+Cutting a release</h2>
+<p>Releases are cut by <code>semantic-release</code> from the commit messages on <code>main</code>, so the squashed PR message is what decides the version:</p>
+<ul>
+<li>a breaking change needs a <code>BREAKING CHANGE:</code> footer in the commit body. The <code>!</code> after the type on its own did not bump the major on this pipeline - the v6 rename merged as <code>feat!:</code> and shipped as a patch release.</li>
+<li>no commit that reaches <code>main</code> may carry a skip marker (<code>[skip ci]</code> and friends), including one copied in by the squashed commit list. A skip marker suppresses every workflow for that push, the release job included, and nothing is published.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md21"></a>
 Star Gazing</h1>
 <p>If you find this library useful, please leave a <a href="https://github.com/sasjs/core/stargazers">star</a> and help us grow our star graph!</p>
 <p><img src="https://starchart.cc/sasjs/core.svg" alt="" style="pointer-events: none;" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md21"></a>
+<h1><a class="anchor" id="autotoc_md22"></a>
 Other SAS Repositories</h1>
 <p>The following repositories are also worth checking out:</p>
 <ul>
@@ -346,7 +353,7 @@ Other SAS Repositories</h1>
 <li><a href="https://github.com/xieliaing/SAS">xieliaing/SAS</a></li>
 <li><a href="https://github.com/yabwon/SAS_PACKAGES">yabwon/sas_packages</a></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md22"></a>
+<h1><a class="anchor" id="autotoc_md23"></a>
 Contributors ✨</h1>
 <p>![All Contributors](https://img.shields.io/badge/all_contributors-16-orange.svg?style=flat-square)</p>
 <p>Thanks goes to these wonderful people (<a href="https://allcontributors.org/docs/en/emoji-key">emoji key</a>):</p>

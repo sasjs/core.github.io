@@ -3,6 +3,7 @@ var searchData=
   ['changes_0',['Breaking Changes',['../index.html#autotoc_md19',1,'']]],
   ['coding_20standards_1',['Coding Standards',['../index.html#autotoc_md17',1,'']]],
   ['components_2',['Components',['../index.html#autotoc_md1',1,'']]],
-  ['contributors_20✨_3',['Contributors ✨',['../index.html#autotoc_md22',1,'']]],
-  ['core_4',['Macro Core',['../index.html',1,'']]]
+  ['contributors_20✨_3',['Contributors ✨',['../index.html#autotoc_md23',1,'']]],
+  ['core_4',['Macro Core',['../index.html',1,'']]],
+  ['cutting_20a_20release_5',['Cutting a release',['../index.html#autotoc_md20',1,'']]]
 ];
