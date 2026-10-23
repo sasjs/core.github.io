@@ -160,12 +160,12 @@ $(document).ready(function(){initNavTree('mp__ds2csv_8test_81_8sas_source.html',
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">  * Test 1 - default CSV</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">  */</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>%mp_assertscope(SNAPSHOT)</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>%mp_ds2csv(work.somedata,outfile=<span class="stringliteral">&quot;&amp;sasjswork/test1.csv&quot;</span>)</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>%mp_ds2csv(work.somedata,outfile=<span class="stringliteral">&quot;&amp;_sasjs_work/test1.csv&quot;</span>)</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>%mp_assertscope(COMPARE)</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>%let test1b=FAIL;</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>data _null_;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  infile <span class="stringliteral">&quot;&amp;sasjswork/test1.csv&quot;</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  infile <span class="stringliteral">&quot;&amp;_sasjs_work/test1.csv&quot;</span>;</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  input;</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  list;</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keywordflow">if</span> _n_=1 then call symputx(<span class="stringliteral">&#39;test1a&#39;</span>,_infile_);</div>
@@ -186,7 +186,7 @@ $(document).ready(function(){initNavTree('mp__ds2csv_8test_81_8sas_source.html',
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">/**</span></div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">  * Test 2 - NAME header with fileref and semicolons</span></div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">  */</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>filename test2 &quot;&amp;sasjswork/test2.csv&quot;;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>filename test2 &quot;&amp;_sasjs_work/test2.csv&quot;;</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>%mp_ds2csv(work.somedata,outref=test2,dlm=SEMICOLON,headerformat=NAME)</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>%let test2b=FAIL;</div>
@@ -212,7 +212,7 @@ $(document).ready(function(){initNavTree('mp__ds2csv_8test_81_8sas_source.html',
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">/**</span></div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">  * Test 3 - SASjs format</span></div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">  */</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>filename test3 &quot;&amp;sasjswork/test3.csv&quot;;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>filename test3 &quot;&amp;_sasjs_work/test3.csv&quot;;</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>%mp_ds2csv(work.somedata,outref=test3,headerformat=SASJS)</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>%let test3b=FAIL;</div>

@@ -148,9 +148,9 @@ $(document).ready(function(){initNavTree('mf__writefile_8test_8sas_source.html',
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"></span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">**/</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>%mf_writefile(&amp;sasjswork/myfile.txt,l1=some content,l2=more content)</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>%mf_writefile(&amp;_sasjs_work/myfile.txt,l1=some content,l2=more content)</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>data _null_;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  infile <span class="stringliteral">&quot;&amp;sasjswork/myfile.txt&quot;</span>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  infile <span class="stringliteral">&quot;&amp;_sasjs_work/myfile.txt&quot;</span>;</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  input;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  <span class="keywordflow">if</span> _n_=2 then call symputx(<span class="stringliteral">&#39;test1&#39;</span>,_infile_);</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>run;</div>
@@ -166,9 +166,9 @@ $(document).ready(function(){initNavTree('mf__writefile_8test_8sas_source.html',
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  outds=work.test_results</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>)</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>%mf_writefile(&amp;sasjswork/myfile.txt,l1=some content,l2=different content)</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>%mf_writefile(&amp;_sasjs_work/myfile.txt,l1=some content,l2=different content)</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>data _null_;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  infile <span class="stringliteral">&quot;&amp;sasjswork/myfile.txt&quot;</span>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  infile <span class="stringliteral">&quot;&amp;_sasjs_work/myfile.txt&quot;</span>;</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  input;</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keywordflow">if</span> _n_=2 then call symputx(<span class="stringliteral">&#39;test2&#39;</span>,_infile_);</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>run;</div>
@@ -185,13 +185,13 @@ $(document).ready(function(){initNavTree('mf__writefile_8test_8sas_source.html',
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>)</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>%global test3 test4;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>%mf_writefile(&amp;sasjswork/myfile.txt</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>%mf_writefile(&amp;_sasjs_work/myfile.txt</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  ,mode=a</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  ,l1=%str(aah, content)</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  ,l2=append content</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>)</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>data _null_;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  infile <span class="stringliteral">&quot;&amp;sasjswork/myfile.txt&quot;</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  infile <span class="stringliteral">&quot;&amp;_sasjs_work/myfile.txt&quot;</span>;</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  input;</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <span class="keywordflow">if</span> _n_=2 then call symputx(<span class="stringliteral">&#39;test3&#39;</span>,_infile_);</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keywordflow">if</span> _n_=4 then call symputx(<span class="stringliteral">&#39;test4&#39;</span>,_infile_);</div>

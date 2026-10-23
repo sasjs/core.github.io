@@ -143,9 +143,9 @@ $(document).ready(function(){initNavTree('mp__assertscope_8sas.html',''); initRe
 <p>This assertion takes a snapshot of the macro variables before and after a macro invocation. Differences are captured in the <code>&amp;outds</code> table. This makes it easy to detect whether any macro variables were modified or changed.</p>
 <p>The following variables are NOT tested (as they are known, global variables used in SASjs):</p>
 <ul>
-<li>&amp;sasjs_prefix._FUNCTIONS</li>
+<li>_SASJS_FUNCTIONS</li>
 </ul>
-<p>Global variables are initialised in <a class="el" href="mp__init_8sas.html" title="Initialise session with useful settings and variables.">mp_init.sas</a> - which will also trigger "strict mode" in your SAS session. Whilst this is a default in SASjs produced apps, if you prefer not to use this mode, simply instantiate the following variable to prevent the macro from running: <code>SASJS_PREFIX</code></p>
+<p>Global variables are initialised in <a class="el" href="mp__init_8sas.html" title="Initialise session with useful settings and variables.">mp_init.sas</a> - which will also trigger "strict mode" in your SAS session. Whilst this is a default in SASjs produced apps, if you prefer not to use this mode, simply instantiate the following variable to prevent the macro from running: <code>_SASJS_INIT</code></p>
 <p>Example usage: </p><pre class="fragment">%mp_assertscope(SNAPSHOT)
 
 %let oops=I did it again;

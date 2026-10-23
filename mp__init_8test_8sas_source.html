@@ -153,15 +153,21 @@ $(document).ready(function(){initNavTree('mp__init_8test_8sas_source.html',''); 
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">  * So lets test to make sure it will not run again</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">  */</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>%let initial_value=&amp;sasjs_init_num;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>%let initial_value=&amp;_sasjs_init_num;</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>%mp_init()</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>%mp_assert(</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  iftrue=(<span class="stringliteral">&quot;&amp;initial_value&quot;</span>=<span class="stringliteral">&quot;&amp;sasjs_init_num&quot;</span>),</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  iftrue=(<span class="stringliteral">&quot;&amp;initial_value&quot;</span>=<span class="stringliteral">&quot;&amp;_sasjs_init_num&quot;</span>),</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  desc=Check that mp_init() did not run twice,</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  outds=work.test_results</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>)</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>%mp_assert(</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  iftrue=(<span class="stringliteral">&quot;&amp;_SASJS_INIT&quot;</span>=<span class="stringliteral">&quot;1&quot;</span>),</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  desc=Check that mp_init() left the init marker <span class="keyword">set</span>,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  outds=work.test_results</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>)</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

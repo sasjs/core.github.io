@@ -141,9 +141,9 @@ $(document).ready(function(){initNavTree('mf__writefile_8sas.html',''); initResi
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Creates a text file of up to 10 lines. If further lines are desired, feel free to <a href="https://github.com/sasjs/core/issues/new">create an issue</a>, or make a pull request!</p>
 <p>The use of PARMBUFF was considered for this macro, but it would have made things problematic for writing lines containing commas.</p>
-<p>Usage: </p><pre class="fragment">%mf_writefile(&amp;sasjswork/myfile.txt,l1=some content,l2=more content)
+<p>Usage: </p><pre class="fragment">%mf_writefile(&amp;_sasjs_work/myfile.txt,l1=some content,l2=more content)
 data _null_;
-  infile "&amp;sasjswork/myfile.txt";
+  infile "&amp;_sasjs_work/myfile.txt";
   input;
   list;
 run;

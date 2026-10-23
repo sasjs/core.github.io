@@ -141,9 +141,9 @@ $(document).ready(function(){initNavTree('mf__readfile_8sas.html',''); initResiz
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Reads the first line of a file and returns it. Future versions may read each line into a macro variable array.</p>
 <p>Generally, reading data into macro variables is not great as certain nonprintable characters (such as CR, LF) may be dropped in the conversion.</p>
-<p>Usage: </p><pre class="fragment">%mf_writefile(&amp;sasjswork/myfile.txt,l1=some content,l2=more content)
+<p>Usage: </p><pre class="fragment">%mf_writefile(&amp;_sasjs_work/myfile.txt,l1=some content,l2=more content)
 
-%put %mf_readfile(&amp;sasjswork/myfile.txt);
+%put %mf_readfile(&amp;_sasjs_work/myfile.txt);
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">fpath</td><td>Full path to file to be read</td></tr>
