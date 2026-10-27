@@ -143,7 +143,7 @@ $(document).ready(function(){initNavTree('mp__init_8sas.html',''); initResizable
 <p>This macro is recommended to be compiled and invoked in the <code>initProgram</code> for SASjs <a href="https://cli.sasjs.io/sasjsconfig.html#jobConfig_initProgram">Jobs</a>, <a href="https://cli.sasjs.io/sasjsconfig.html#serviceConfig_initProgram">Services</a> and [Tests] (<a href="https://cli.sasjs.io/sasjsconfig.html#testConfig_initProgram">https://cli.sasjs.io/sasjsconfig.html#testConfig_initProgram</a>).</p>
 <p>For non SASjs projects, you could invoke in the autoexec, or in your own solution initialisation macro.</p>
 <p>If you have a good idea for another useful option, setting, or global variable - feel free to <a href="https://github.com/sasjs/core/issues/new">raise an issue</a>!</p>
-<p>All the system variables this macro creates use the hard-coded <code>_SASJS_</code> prefix - the same namespace sasjs/server uses in the pre-program it generates for each session (<code>_SASJS_WEBOUT_HEADERS</code>, <code>_SASJS_TOKENFILE</code>, <code>_SASJS_USERNAME</code> ...). There is no configurable prefix.</p>
+<p>All the system variables this macro creates use the hard-coded <code>_SASJS_</code> prefix - the same namespace sasjs/server uses in the pre-program it generates for each session (<code>_SASJS_WEBOUT_HEADERS</code>, <code>_SASJS_TOKENFILE</code>, <code>_SASJS_USERNAME</code> ...).</p>
 <p>Setting <code>_SASJS_INIT</code> before this macro runs skips it, which is how an autoexec opts out - a second pass would re-apply the options below.</p>
 <dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>

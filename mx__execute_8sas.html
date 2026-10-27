@@ -155,12 +155,14 @@ $(document).ready(function(){initNavTree('mx__execute_8sas.html',''); initResiza
 <td class="markdownTableBodyNone">mustbevalidname   </td><td class="markdownTableBodyNone">can be anything, oops, abort!!   </td></tr>
 </table>
 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">debug=</td><td>(log) Provide the _debug value </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">debug=</td><td>(131) Provide the _debug value. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>(0) Set to 1 to provide macro debugging </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">viyaresult=</td><td>(WEBOUT_JSON) The Viya result type to return. For more info, see <a class="el" href="mv__getjobresult_8sas.html" title="Extract the result from a completed SAS Viya Job.">mv_getjobresult.sas</a> </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">viyacontext=</td><td>(SAS Job Execution compute context) The Viya compute context on which to run the service </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outlib=</td><td>(0) Output libref to contain the final tables. Set to 0 if the service output is not in JSON format. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>(0) Output fileref to create, to contain the full _webout response.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>(0) Output fileref to create, to contain the full _webout response. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outlogds=</td><td>(<em>null</em>) Name of a dataset to receive the child's log (one column, line). Populated on Viya, from the job log mv_jobflow collects, and on SASjs Server, from the log the server appends to the response - ms_testservice discards that log unless this is set. Not populated on SAS 9, where proc stp returns no child log. On SASjs Server it is only populated when debug is 131 or above: the server appends the log to the response in debug mode, so a lower value returns an empty dataset. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outstatus=</td><td>(0) Name of a dataset to receive the outcome of each child run - one row per program, with columns STATE, URI, ERRMSG and PLATFORM. ERRMSG is only populated on SASjs Server, from the abort block; the Viya job flow carries a state but no message, and SAS 9 gives neither.</td></tr>
   </table>
   </dd>
 </dl>
