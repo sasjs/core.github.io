@@ -312,12 +312,14 @@ Coding Standards</h2>
 <li>Avoid naming collisions! All macro variables should be local scope. Use system generated work tables where possible - eg <code>data ; set sashelp.class; run; data &amp;output; set &amp;syslast; run;</code></li>
 <li>Where global macro variables are absolutely necessary, they must use the hard-coded <code>_SASJS_</code> prefix and be declared in <a class="el" href="mp__init_8sas.html" title="Initialise session with useful settings and variables.">mp_init.sas</a> - see <a class="el" href="mp__init_8sas.html" title="Initialise session with useful settings and variables.">mp_init.sas</a></li>
 <li>The use of <code>quit;</code> for <code>proc sql</code> is essential, to avoid <code>WARNING: You cannot disconnect or terminate session XXXX until the procedure completes.</code> when terminating CAS sessions in Viya.</li>
-<li>Use <a href="https://github.com/sasjs/lint">sasjs lint</a>!</li>
+<li>Macro logic (<code>if</code>, <code>do</code>) belongs inside a macro definition - in open code it needs SAS 9.4M5, which is later than the 9.4M0 floor in General Notes.</li>
+<li>Use <a href="https://github.com/sasjs/lint">sasjs lint</a>! The pre-commit hook blocks a commit on lint <b>errors</b> and lets warnings through, so a rule becomes a gate the same day its last violation is cleared - add it to <code>severityLevel</code> in <code>.sasjslint</code> as <code>error</code> at that point.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md18"></a>
 General Notes</h1>
 <ul>
-<li>All macros should be compatible with SAS versions from support level B and above (so currently 9.3 and later). If an earlier version is not supported, then the macro should say as such in the header documentation, and exit gracefully.</li>
+<li>All macros should be compatible with SAS 9.4 (every maintenance release, 9.4M0 and later - including the releases in Limited Support) and with SAS Viya.</li>
+<li>Where a macro needs a later release than that floor, it should say so in the header (<code>@version</code> is the EARLIEST SAS version in which the macro is known to work) and exit gracefully when it runs on an older one. The threshold is the macro's own, not the floor above: <code><a class="el" href="mm__createstp_8sas.html" title="Create a type 1 Stored Process (9.2 compatible)">mm_createstp.sas</a></code> checks <code>if sysevalf(&amp;sysver lt 9.3)</code> because type 2 stored processes need 9.3, and <code><a class="el" href="mf__fmtdttm_8sas.html" title="Returns E8601DT26.6 if compatible else DATETIME19.3.">mf_fmtdttm.sas</a></code> shows the maintenance-level form - <code>("&amp;sysver"="9.4" and "%substr(&amp;SYSVLONG,9,1)" le "3")</code>.</li>
 <li>It's <a href="https://git.datacontroller.io/dc/dc/issues/50">best to avoid</a> special / non-ASCII characters for compatibility with the widest variety of SAS installations.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md19"></a>

@@ -144,35 +144,36 @@ $(document).ready(function(){initNavTree('mfv__getpathuri_8test_8sas_source.html
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"></span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">  @li mf_uid.sas</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">  @li mfv_getpathuri.sas</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">  @li mp_assert.sas</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">  @li mv_createfile.sas</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"></span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>options mprint sgen;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>%let file=%mf_uid();</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">/* create a file */</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>filename somefile temp;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>data _null_;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  file somefile;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  put <span class="stringliteral">&#39;hello testings&#39;</span>;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>run;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>%let path=&amp;mcTestAppLoc/temp;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>%mv_createfile(path=&amp;path, name=&amp;file..txt,inref=somefile)</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">  @li mfv_existfile.sas</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">  @li mfv_getpathuri.sas</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">  @li mp_assert.sas</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">  @li mv_createfile.sas</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"></span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>options mprint sgen;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>%let file=%mf_uid();</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">/* create a file */</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>filename somefile temp;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>data _null_;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  file somefile;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  put <span class="stringliteral">&#39;hello testings&#39;</span>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>run;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>%let path=&amp;mcTestAppLoc/temp;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>%mv_createfile(path=&amp;path, name=&amp;file..txt,inref=somefile)</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>%mp_assert(</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  iftrue=(%mfv_existfile(&amp;path/&amp;file..txt)=1),</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  desc=Check <span class="keywordflow">if</span> created file exists</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>)</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>%mp_assert(</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  iftrue=(%length(%mfv_getpathuri(&amp;path/&amp;file..txt))&gt;0),</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  desc=Check that a URI was returned</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>)</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>%mp_assert(</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  iftrue=(%mfv_existfile(&amp;path/&amp;file..txt)=1),</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  desc=Check <span class="keywordflow">if</span> created file exists</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>)</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>%mp_assert(</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  iftrue=(%length(%mfv_getpathuri(&amp;path/&amp;file..txt))&gt;0),</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  desc=Check that a URI was returned</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>)</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

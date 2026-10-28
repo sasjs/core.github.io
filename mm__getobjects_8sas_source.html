@@ -156,58 +156,59 @@ $(document).ready(function(){initNavTree('mm__getobjects_8sas_source.html',''); 
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">  @version 9.2</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">  @author Allan Bowe</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"></span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>%macro mm_getobjects(</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  type=SASLibrary</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  ,outds=work.mm_getobjects</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">  @sasjslint {&quot;noBannedStrings&quot;: false}</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>%macro mm_getobjects(</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  type=SASLibrary</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  ,outds=work.mm_getobjects</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>* use a temporary fileref to hold the response;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>filename response temp;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">/* get list of libraries */</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>proc metadata in=</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="stringliteral">&quot;&lt;GetMetadataObjects&gt;&lt;Reposid&gt;$METAREPOSITORY&lt;/Reposid&gt;</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="stringliteral">    &lt;Type&gt;&amp;type&lt;/Type&gt;&lt;Objects/&gt;&lt;NS&gt;SAS&lt;/NS&gt;</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="stringliteral">    &lt;Flags&gt;0&lt;/Flags&gt;&lt;Options/&gt;&lt;/GetMetadataObjects&gt;&quot;</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    out=response;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>run;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">/* write the response to the log for debugging */</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>data _null_;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  infile response lrecl=1048576;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  input;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  put _infile_;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>run;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">/* create an XML map to read the response */</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>filename sxlemap temp;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>data _null_;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  file sxlemap;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  put <span class="stringliteral">&#39;&lt;SXLEMAP version=&quot;1.2&quot; name=&quot;SASObjects&quot;&gt;&lt;TABLE name=&quot;SASObjects&quot;&gt;&#39;</span>;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  put <span class="stringliteral">&quot;&lt;TABLE-PATH syntax=&#39;XPath&#39;&gt;/GetMetadataObjects/Objects/&amp;type&quot;</span>;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  put <span class="stringliteral">&quot;&lt;/TABLE-PATH&gt;&quot;</span>;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  put <span class="stringliteral">&#39;&lt;COLUMN name=&quot;id&quot;&gt;&#39;</span>;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  put <span class="stringliteral">&quot;&lt;PATH syntax=&#39;XPath&#39;&gt;/GetMetadataObjects/Objects/&amp;type/@Id&lt;/PATH&gt;&quot;</span>;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  put <span class="stringliteral">&quot;&lt;TYPE&gt;character&lt;/TYPE&gt;&lt;DATATYPE&gt;string&lt;/DATATYPE&gt;&lt;LENGTH&gt;200&lt;/LENGTH&gt;&quot;</span>;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  put <span class="stringliteral">&#39;&lt;/COLUMN&gt;&lt;COLUMN name=&quot;name&quot;&gt;&#39;</span>;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  put <span class="stringliteral">&quot;&lt;PATH syntax=&#39;XPath&#39;&gt;/GetMetadataObjects/Objects/&amp;type/@Name&lt;/PATH&gt;&quot;</span>;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  put <span class="stringliteral">&quot;&lt;TYPE&gt;character&lt;/TYPE&gt;&lt;DATATYPE&gt;string&lt;/DATATYPE&gt;&lt;LENGTH&gt;200&lt;/LENGTH&gt;&quot;</span>;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  put <span class="stringliteral">&#39;&lt;/COLUMN&gt;&lt;/TABLE&gt;&lt;/SXLEMAP&gt;&#39;</span>;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>run;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>libname _XML_ xml xmlfileref=response xmlmap=sxlemap;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>proc sort data= _XML_.SASObjects out=&amp;outds;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  by name;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>run;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">/* clear references */</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>filename sxlemap clear;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>filename response clear;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>libname _XML_ clear;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>%mend mm_getobjects;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>* use a temporary fileref to hold the response;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>filename response temp;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">/* get list of libraries */</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>proc metadata in=</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="stringliteral">&quot;&lt;GetMetadataObjects&gt;&lt;Reposid&gt;$METAREPOSITORY&lt;/Reposid&gt;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="stringliteral">    &lt;Type&gt;&amp;type&lt;/Type&gt;&lt;Objects/&gt;&lt;NS&gt;SAS&lt;/NS&gt;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="stringliteral">    &lt;Flags&gt;0&lt;/Flags&gt;&lt;Options/&gt;&lt;/GetMetadataObjects&gt;&quot;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    out=response;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>run;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">/* write the response to the log for debugging */</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>data _null_;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  infile response lrecl=1048576;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  input;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  put _infile_;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>run;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">/* create an XML map to read the response */</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>filename sxlemap temp;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>data _null_;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  file sxlemap;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  put <span class="stringliteral">&#39;&lt;SXLEMAP version=&quot;1.2&quot; name=&quot;SASObjects&quot;&gt;&lt;TABLE name=&quot;SASObjects&quot;&gt;&#39;</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  put <span class="stringliteral">&quot;&lt;TABLE-PATH syntax=&#39;XPath&#39;&gt;/GetMetadataObjects/Objects/&amp;type&quot;</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  put <span class="stringliteral">&quot;&lt;/TABLE-PATH&gt;&quot;</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  put <span class="stringliteral">&#39;&lt;COLUMN name=&quot;id&quot;&gt;&#39;</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  put <span class="stringliteral">&quot;&lt;PATH syntax=&#39;XPath&#39;&gt;/GetMetadataObjects/Objects/&amp;type/@Id&lt;/PATH&gt;&quot;</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  put <span class="stringliteral">&quot;&lt;TYPE&gt;character&lt;/TYPE&gt;&lt;DATATYPE&gt;string&lt;/DATATYPE&gt;&lt;LENGTH&gt;200&lt;/LENGTH&gt;&quot;</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  put <span class="stringliteral">&#39;&lt;/COLUMN&gt;&lt;COLUMN name=&quot;name&quot;&gt;&#39;</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  put <span class="stringliteral">&quot;&lt;PATH syntax=&#39;XPath&#39;&gt;/GetMetadataObjects/Objects/&amp;type/@Name&lt;/PATH&gt;&quot;</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  put <span class="stringliteral">&quot;&lt;TYPE&gt;character&lt;/TYPE&gt;&lt;DATATYPE&gt;string&lt;/DATATYPE&gt;&lt;LENGTH&gt;200&lt;/LENGTH&gt;&quot;</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  put <span class="stringliteral">&#39;&lt;/COLUMN&gt;&lt;/TABLE&gt;&lt;/SXLEMAP&gt;&#39;</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>run;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>libname _XML_ xml xmlfileref=response xmlmap=sxlemap;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>proc sort data= _XML_.SASObjects out=&amp;outds;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  by name;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>run;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">/* clear references */</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>filename sxlemap clear;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>filename response clear;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>libname _XML_ clear;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>%mend mm_getobjects;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
