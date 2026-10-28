@@ -184,18 +184,18 @@ $(document).ready(function(){initNavTree('mm__getgroupmembers_8sas_source.html',
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    drop uriGrp uriMem rcGrp rcMem rc i j arc ;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    i=1;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    * Grab the URI <span class="keywordflow">for</span> the first Group ;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="comment">/* Grab the URI for the first Group */</span></div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    %<span class="keywordflow">if</span> &amp;<span class="keywordtype">id</span>=NO %then %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      rcGrp=metadata_getnobj(<span class="stringliteral">&quot;omsobj:IdentityGroup?@Name=&#39;&amp;group&#39;&quot;</span>,i,uriGrp);</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    %end;</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      rcGrp=metadata_getnobj(<span class="stringliteral">&quot;omsobj:IdentityGroup?@Id=&#39;&amp;group&#39;&quot;</span>,i,uriGrp);</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    %end;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    * If Group found, enter <span class="keywordflow">do</span> loop ;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="comment">/* If Group found, enter do loop */</span></div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">if</span> rcGrp&gt;0 then <span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>      call missing (rcMem,uriMem,GroupId,GroupName,Group_or_Role</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        ,MemberName,MemberType);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>      * <span class="keyword">get</span> group info ;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>      <span class="comment">/* get group info */</span></div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>      rc = metadata_getattr(uriGrp,<span class="stringliteral">&quot;Id&quot;</span>,GroupId);</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>      rc = metadata_getattr(uriGrp,<span class="stringliteral">&quot;Name&quot;</span>,GroupName);</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      rc = metadata_getattr(uriGrp,<span class="stringliteral">&quot;PublicType&quot;</span>,Group_or_Role);</div>

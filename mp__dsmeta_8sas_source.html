@@ -223,7 +223,7 @@ $(document).ready(function(){initNavTree('mp__dsmeta_8sas_source.html',''); init
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    value cvalue cvalue1 cvalue2 $1000</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    nvalue nvalue1 nvalue2 8;</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <span class="keywordflow">if</span> _n_=1 then call missing (of _all_);</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  * putlog (_all_)(=);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  <span class="comment">/*putlog (_all_)(=);*/</span></div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  <span class="keyword">set</span> &amp;ds1 (in=atrs) &amp;ds2 (in=eng);</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <span class="keywordflow">if</span> atrs then <span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    ods_table=<span class="stringliteral">&#39;ATTRIBUTES&#39;</span>;</div>

@@ -221,7 +221,7 @@ $(document).ready(function(){initNavTree('mm__createwebservice_8sas_source.html'
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>%&amp;mD.put Executing mm_createwebservice.sas;</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>%&amp;mD.put _local_;</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>* <span class="keyword">remove</span> any trailing slash ;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">/* remove any trailing slash */</span></div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>%<span class="keywordflow">if</span> <span class="stringliteral">&quot;%substr(&amp;path,%length(&amp;path),1)&quot;</span> = <span class="stringliteral">&quot;/&quot;</span> %then</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  %let path=%substr(&amp;path,1,%length(&amp;path)-1);</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment"></span> </div>

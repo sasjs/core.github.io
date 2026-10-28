@@ -23,6 +23,7 @@ var dir_a49f9b051925a4cbbe82ac92a0123656 =
     [ "mf_getvarcount.test.sas", "mf__getvarcount_8test_8sas.html", null ],
     [ "mf_getvarlist.test.sas", "mf__getvarlist_8test_8sas.html", null ],
     [ "mf_increment.test.sas", "mf__increment_8test_8sas.html", null ],
+    [ "mf_isblank.test.sas", "mf__isblank_8test_8sas.html", null ],
     [ "mf_isint.test.sas", "mf__isint_8test_8sas.html", null ],
     [ "mf_islibds.test.sas", "mf__islibds_8test_8sas.html", null ],
     [ "mf_mimetype.test.sas", "mf__mimetype_8test_8sas.html", null ],

@@ -235,7 +235,7 @@ $(document).ready(function(){initNavTree('mm__getstpcode_8sas_source.html',''); 
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  start=index(_infile_,<span class="stringliteral">&#39;StoredText=&quot;&#39;</span>);</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <span class="keywordflow">if</span> start then <span class="keywordflow">do</span>;</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    call symputx(<span class="stringliteral">&quot;start&quot;</span>,start+11);</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    *putlog <span class="charliteral">&#39;&quot;&#39;</span> _infile_ <span class="charliteral">&#39;&quot;&#39;</span>;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="comment">/*putlog &#39;&quot;&#39; _infile_ &#39;&quot;&#39;;*/</span></div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  end;</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  stop;</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
