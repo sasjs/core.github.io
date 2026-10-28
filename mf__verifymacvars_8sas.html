@@ -139,7 +139,7 @@ $(document).ready(function(){initNavTree('mf__verifymacvars_8sas.html',''); init
 
 <p><a href="mf__verifymacvars_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Writes ERROR to log if abortType is SOFT, else will call mf_abort. Usage: </p><pre class="fragment">%let var1=x;
+<div class="textblock"><p>Reports a failure in the log if abortType is SOFT, else calls mf_abort. Usage: </p><pre class="fragment">%let var1=x;
 %let var2=y;
 %put %mf_verifymacvars(var1 var2);
 </pre><p> Returns: </p><blockquote class="doxtable">
@@ -157,7 +157,7 @@ $(document).ready(function(){initNavTree('mf__verifymacvars_8sas.html',''); init
   </table>
   </dd>
 </dl>
-<dl class="section warning"><dt>Warning</dt><dd>will not be able to verify the following variables due to naming clash!<ul>
+<dl class="section note"><dt>Note</dt><dd>will not be able to verify the following variables due to naming clash!<ul>
 <li>verifyVars</li>
 <li>verifyVar</li>
 <li>verifyIterator</li>
@@ -165,8 +165,7 @@ $(document).ready(function(){initNavTree('mf__verifymacvars_8sas.html',''); init
 </ul>
 </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe</dd></dl>
-<p>@sasjslint {"noBannedStrings": false} </p>
+<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="mf__verifymacvars_8sas_source.html">mf_verifymacvars.sas</a>.</p>
 </div></div><!-- contents -->

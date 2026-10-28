@@ -158,53 +158,54 @@ $(document).ready(function(){initNavTree('mm__getstpinfo_8sas_source.html',''); 
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">  @li mm_createstp.sas</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">  @li mm_deletestp.sas</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"></span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>%macro mm_getstpinfo(pgm</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  ,outds=work.mm_getstpinfo</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  ,mDebug=0</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>%local mD;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>%<span class="keywordflow">if</span> &amp;mDebug=1 %then %let mD=;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>%<span class="keywordflow">else</span> %let mD=%str(*);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>%&amp;mD.put Executing &amp;sysmacroname..sas;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>%&amp;mD.put _local_;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>data &amp;outds;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  length type stp_uri tsuri servercontext value $200</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    StoredProcessConfiguration $1000 sourcecode_first32k $32767;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  keep path stp_uri sourcecode_first32k StoredProcessConfiguration</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    servercontext;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  call missing (of _all_);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  path=<span class="stringliteral">&quot;&amp;pgm(StoredProcess)&quot;</span>;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="comment">/* first, find the STP ID */</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keywordflow">if</span> metadata_pathobj(<span class="stringliteral">&quot;&quot;</span>,path,<span class="stringliteral">&quot;StoredProcess&quot;</span>,type,stp_uri)&gt;0 then <span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="comment">/* get attributes */</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    cnt=1;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">do</span> <span class="keywordflow">while</span> (metadata_getnasn(stp_uri,<span class="stringliteral">&quot;Notes&quot;</span>,cnt,tsuri)&gt;0);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>      rc1=metadata_getattr(tsuri,<span class="stringliteral">&quot;Name&quot;</span>,value);</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      &amp;mD.put tsuri= value=;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      <span class="keywordflow">if</span> value=<span class="stringliteral">&quot;SourceCode&quot;</span> then <span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        rc2=metadata_getattr(tsuri,<span class="stringliteral">&quot;StoredText&quot;</span>,sourcecode_first32k);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      end;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> value=<span class="stringliteral">&quot;Stored Process&quot;</span> then <span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        rc3=metadata_getattr(tsuri,<span class="stringliteral">&quot;StoredText&quot;</span>,StoredProcessConfiguration);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>      end;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>      cnt+1;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    end;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="comment">/* get context (should only be one) */</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    rc4=metadata_getnasn(stp_uri,<span class="stringliteral">&quot;ComputeLocations&quot;</span>,1,tsuri);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    rc5=metadata_getattr(tsuri,<span class="stringliteral">&quot;Name&quot;</span>,servercontext);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  end;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keywordflow">else</span> <span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    put <span class="stringliteral">&#39;ERR&#39;</span> +(-1) <span class="stringliteral">&quot;OR: could not find &quot;</span> path;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    put (_all_)(=);</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  end;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  &amp;md.put (_all_)(=);</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>run;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>%mend mm_getstpinfo ;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">  @sasjslint {&quot;maxLineLength&quot;: 292}</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>%macro mm_getstpinfo(pgm</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  ,outds=work.mm_getstpinfo</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  ,mDebug=0</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>%local mD;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>%<span class="keywordflow">if</span> &amp;mDebug=1 %then %let mD=;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>%<span class="keywordflow">else</span> %let mD=%str(*);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>%&amp;mD.put Executing &amp;sysmacroname..sas;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>%&amp;mD.put _local_;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>data &amp;outds;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  length type stp_uri tsuri servercontext value $200</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    StoredProcessConfiguration $1000 sourcecode_first32k $32767;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  keep path stp_uri sourcecode_first32k StoredProcessConfiguration</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    servercontext;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  call missing (of _all_);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  path=<span class="stringliteral">&quot;&amp;pgm(StoredProcess)&quot;</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="comment">/* first, find the STP ID */</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keywordflow">if</span> metadata_pathobj(<span class="stringliteral">&quot;&quot;</span>,path,<span class="stringliteral">&quot;StoredProcess&quot;</span>,type,stp_uri)&gt;0 then <span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="comment">/* get attributes */</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    cnt=1;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">do</span> <span class="keywordflow">while</span> (metadata_getnasn(stp_uri,<span class="stringliteral">&quot;Notes&quot;</span>,cnt,tsuri)&gt;0);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      rc1=metadata_getattr(tsuri,<span class="stringliteral">&quot;Name&quot;</span>,value);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      &amp;mD.put tsuri= value=;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      <span class="keywordflow">if</span> value=<span class="stringliteral">&quot;SourceCode&quot;</span> then <span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        rc2=metadata_getattr(tsuri,<span class="stringliteral">&quot;StoredText&quot;</span>,sourcecode_first32k);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      end;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> value=<span class="stringliteral">&quot;Stored Process&quot;</span> then <span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        rc3=metadata_getattr(tsuri,<span class="stringliteral">&quot;StoredText&quot;</span>,StoredProcessConfiguration);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>      end;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      cnt+1;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    end;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="comment">/* get context (should only be one) */</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    rc4=metadata_getnasn(stp_uri,<span class="stringliteral">&quot;ComputeLocations&quot;</span>,1,tsuri);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    rc5=metadata_getattr(tsuri,<span class="stringliteral">&quot;Name&quot;</span>,servercontext);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  end;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="keywordflow">else</span> <span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    put <span class="stringliteral">&#39;ERR&#39;</span> +(-1) <span class="stringliteral">&quot;OR: could not find &quot;</span> path;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    put (_all_)(=);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  end;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  &amp;md.put (_all_)(=);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>run;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>%mend mm_getstpinfo ;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

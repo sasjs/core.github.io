@@ -153,7 +153,9 @@ run;
 REGION = &lt;expression&gt;;
 </pre><p> Type and length are declared in the control table, so the result is deterministic.</p>
 <p>VAR_DEPS lists every input the expression uses - physical columns and derived variables alike. The order the statements are generated in is the dependency order (variables with no unsatisfied dependency first, ties broken by name), so a derived variable may build on another one without the administrator maintaining a sequence number. A cycle is rejected.</p>
-<p>The declaration is checked against the expression: a derived variable that is referenced must be declared, a declared name that is not referenced is an error, and a declared name must be a column of the target table or a derived variable defined for it. Semicolons, macro triggers and comments are rejected, so a row can only ever be an expression. A derived variable may not reuse the name of a physical column, and may not reference itself: an intra-row calculation would imply a retained value, which depends on the order rows happen to arrive in.</p>
+<p>The declaration is checked against the expression: a derived variable that is referenced must be declared, a declared name that is not referenced is an error, and a declared name must be a column of the target table or a derived variable defined for it. Semicolons, macro triggers and comments are rejected, so a row can only ever be an expression.</p>
+<p>The field level rules are not here - they are in mp_derivedvarcheck, which reads the same control table and writes one row per definition that breaks one. This macro adds the two checks that need the target table, and the dependency graph, then generates the statements.</p>
+<p>A derived variable may not reuse the name of a physical column, and may not reference itself: an intra-row calculation would imply a retained value, which depends on the order rows happen to arrive in.</p>
 <p>VAR_LABEL is optional. When it is missing or blank, the label is the variable name, an equals sign and the expression - so a reader can see both what the column is and where it comes from. A configured label replaces that, and is used as given.</p>
 <p>The control table is created by <a class="el" href="mddl__derivedvars_8sas.html" title="DDL for the derived variables control table.">mddl_derivedvars.sas</a>, and must carry LIBREF, DSN, VAR_NM, VAR_DEPS, VAR_TYPE, VAR_LEN, VAR_FMT and VAR_LOGIC, with VAR_LABEL optional. Extra columns are ignored, but a control table that holds several versions of the same VAR_NM - for example a bitemporal TX_FROM / TX_TO pair - must be narrowed with where= (typically to the current versions), because two rows with the same name are rejected as a configuration error.</p>
 <h4>SAS Macros </h4>
@@ -163,7 +165,8 @@ REGION = &lt;expression&gt;;
 <li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
 <li><a class="el" href="mf__getvarlist_8sas.html" title="Returns dataset variable list direct from header.">mf_getvarlist.sas</a> </li>
 <li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a> </li>
-<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a></li>
+<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
+<li><a class="el" href="mp__derivedvarcheck_8sas.html" title="Validates derived variable definitions, one row per rule.">mp_derivedvarcheck.sas</a></li>
 </ul>
 <h4>Related Macros </h4>
 <ul>
@@ -177,11 +180,13 @@ REGION = &lt;expression&gt;;
     <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>(0) Fileref to receive the generated statements </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outvars=</td><td>(work.derived_varlist) Dataset of derived variable names </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">outview=</td><td>(0) Optional two-level name for the derived view </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">reserved=</td><td>(0) Space separated list of names that may not be used</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">reserved=</td><td>(0) Space separated list of names that may not be used </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">abort=</td><td>(YES) Set to NO to return the validation failures in errds= instead of aborting - for tests, and for a caller that wants to report every failure rather than the first. No statement is generated when any row is returned </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">errds=</td><td>(work.dv_errors) The validation failures when abort=NO: one row per offending VAR_NM per rule broken, so a definition that breaks two rules appears twice, with the rule in REASON. Empty, not absent, when the configuration is valid. The cycle in VAR_DEPS is reported as a single row, because one member identifies the cycle</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section version"><dt>Version</dt><dd>5.6 </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>5.7 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>4GL Apps Ltd </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="mp__derivedvars_8sas_source.html">mp_derivedvars.sas</a>.</p>

@@ -177,19 +177,20 @@ $(document).ready(function(){initNavTree('mp__dictionary_8sas_source.html',''); 
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">  @version 9.2</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">  @author Allan Bowe</span></div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"></span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>%macro mp_dictionary(lib=WORK)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  %local list i mem;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  proc sql noprint;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  create view &amp;lib..dictionaries as select * from dictionary.dictionaries;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  select distinct memname into: list separated by <span class="charliteral">&#39; &#39;</span>  from &amp;lib..dictionaries;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  %<span class="keywordflow">do</span> i=1 %to %sysfunc(countw(&amp;list,%str( )));</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    %let mem=%scan(&amp;list,&amp;i,%str( ));</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    create view &amp;lib..&amp;mem as select * from dictionary.&amp;mem;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  %end;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  quit;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>%mend mp_dictionary;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">  @sasjslint {&quot;maxLineLength&quot;: 107}</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>%macro mp_dictionary(lib=WORK)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  %local list i mem;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  proc sql noprint;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  create view &amp;lib..dictionaries as select * from dictionary.dictionaries;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  select distinct memname into: list separated by <span class="charliteral">&#39; &#39;</span>  from &amp;lib..dictionaries;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  %<span class="keywordflow">do</span> i=1 %to %sysfunc(countw(&amp;list,%str( )));</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    %let mem=%scan(&amp;list,&amp;i,%str( ));</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    create view &amp;lib..&amp;mem as select * from dictionary.&amp;mem;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  %end;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  quit;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>%mend mp_dictionary;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
