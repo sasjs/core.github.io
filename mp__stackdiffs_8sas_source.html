@@ -715,24 +715,31 @@ $(document).ready(function(){initNavTree('mp__stackdiffs_8sas_source.html',''); 
 <div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>        qstr=quote(trim(NEWVAL_CHAR));</div>
 <div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>        put tgtvar_nm &#39;=&#39; qstr;</div>
 <div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>      end;</div>
-<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>      else put tgtvar_nm &#39;=&#39; newval_num;</div>
-<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>      if comma=&#39;  &#39; then comma=&#39;  ,&#39;;</div>
-<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>    end;</div>
-<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>    if last.key_hash then put &#39;  where key_hash=trim(&quot;&#39; key_hash &#39;&quot;);&#39;;</div>
-<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>    if lastobs then put &quot;alter table &amp;outmod drop key_hash;&quot;;</div>
-<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>  run;</div>
-<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>  %inc &amp;fref/source2;</div>
-<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>%end;</div>
-<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span> </div>
-<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>%if &amp;mdebug=0 %then %do;</div>
-<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>  proc datasets lib=work;</div>
-<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>    delete &amp;prefix:;</div>
+<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>      else do;</div>
+<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>        <span class="comment">/* the value becomes a SQL literal, so a special missing (.A-.Z, ._)</span></div>
+<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span><span class="comment">          needs its leading period - PUT writes only the letter, which PROC SQL</span></div>
+<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span><span class="comment">          reads as a column name */</span></div>
+<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>        put tgtvar_nm &#39;=&#39; @@;</div>
+<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>        if missing(newval_num) and newval_num ne . then put &quot;.&quot; newval_num;</div>
+<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>        else put newval_num;</div>
+<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>      end;</div>
+<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>      if comma=&#39;  &#39; then comma=&#39;  ,&#39;;</div>
+<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>    end;</div>
+<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>    if last.key_hash then put &#39;  where key_hash=trim(&quot;&#39; key_hash &#39;&quot;);&#39;;</div>
+<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>    if lastobs then put &quot;alter table &amp;outmod drop key_hash;&quot;;</div>
 <div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>  run;</div>
-<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>  %put &amp;sysmacroname exit vars:;</div>
-<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>  %put _local_;</div>
-<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>%end;</div>
-<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>%mend mp_stackdiffs;<span class="comment"></span></div>
-<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span><span class="comment">/** @endcond */</span></div>
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>  %inc &amp;fref/source2;</div>
+<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>%end;</div>
+<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span> </div>
+<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>%if &amp;mdebug=0 %then %do;</div>
+<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>  proc datasets lib=work;</div>
+<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>    delete &amp;prefix:;</div>
+<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span>  run;</div>
+<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span>  %put &amp;sysmacroname exit vars:;</div>
+<div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>  %put _local_;</div>
+<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>%end;</div>
+<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span>%mend mp_stackdiffs;<span class="comment"></span></div>
+<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span><span class="comment">/** @endcond */</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
