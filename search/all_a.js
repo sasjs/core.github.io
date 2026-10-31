@@ -22,7 +22,7 @@ var searchData=
   ['mddl_5fderivedvars_2esas_19',['mddl_derivedvars.sas',['../mddl__derivedvars_8sas.html',1,'']]],
   ['mddl_5fsas_5fcntlout_2esas_20',['mddl_sas_cntlout.sas',['../mddl__sas__cntlout_8sas.html',1,'']]],
   ['mddl_5fsas_5fcntlout_2etest_2esas_21',['mddl_sas_cntlout.test.sas',['../mddl__sas__cntlout_8test_8sas.html',1,'']]],
-  ['meta_22',['&amp;prefix.meta',['../mm__getlibmetadiffs_8sas.html#autotoc_md27',1,'']]],
+  ['meta_22',['&amp;amp;prefix.meta',['../mm__getlibmetadiffs_8sas.html#autotoc_md27',1,'']]],
   ['meta_20and_20server_23',['XPLATFORM folder (Viya, Meta, and Server)',['../index.html#autotoc_md10',1,'']]],
   ['meta_20folder_20sas9_20only_24',['META folder (SAS9 only)',['../index.html#autotoc_md6',1,'']]],
   ['metax_20folder_20sas9_20only_25',['METAX folder (SAS9 only)',['../index.html#autotoc_md7',1,'']]],
