@@ -139,27 +139,29 @@ $(function(){initNavTree('mp__dirlist_8sas.html','',''); });
 <p><a href="mp__dirlist_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>When used with getattrs=NO, is not OS specific (uses dopen / dread).</p>
-<p>Credit for the rename approach: <a href="https://communities.sas.com/t5/SAS-Programming/SAS-Function-to-convert-string-to-Legal-SAS-Name/m-p/27375/highlight/true#M5003">https://communities.sas.com/t5/SAS-Programming/SAS-Function-to-convert-string-to-Legal-SAS-Name/m-p/27375/highlight/true#M5003</a></p>
 <p>Usage: </p><pre class="fragment">%mp_dirlist(path=/some/location, outds=myTable, maxdepth=MAX)
 
 %mp_dirlist(outds=cwdfileprops, getattrs=YES)
 
 %mp_dirlist(fref=MYFREF)
-</pre><dl class="section note"><dt>Note</dt><dd>In a Unix environment, the existence of a named pipe will cause this macro to hang. Therefore this tool should be used with caution in a SAS 9 web application, as it can use up all available multibridge sessions if requests are resubmitted. If anyone finds a way to positively identify a named pipe using SAS (without X CMD) do please raise an issue!</dd></dl>
+</pre><p>Entries are classified with the dopen function alone. The previous implementation also used fopen - which blocks when the entry is a named pipe (fifo), so a single fifo in a folder was enough to hang the whole session. With getattrs=NO that hazard is gone; with getattrs=YES entries are opened to read their attributes, so a fifo can still block that mode.</p>
+<dl class="section note"><dt>Note</dt><dd>Symlinks are followed. A symlink that points at one of its own parents produces an endless path (a/b/link/b/link/...), so a browse service must always pass a finite <code>maxdepth=</code>.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">path=</td><td>(sysfunc(pathname(work))) Path for which to return contents </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">path=</td><td>(sysfunc(pathname(work))) Path for which to return contents. Pass a blank value to list the platform roots instead - the drives that exist on Windows, / on Unix. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">fref=</td><td>(0) Provide a DISK engine fileref as an alternative to PATH </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">maxdepth=</td><td>(0) Set to a positive integer to indicate the level of subdirectory scan recursion - eg 3, to go <span class="tt">./3/levels/deep</span>. For unlimited recursion, set to MAX. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">maxobs=</td><td>(0) Maximum number of rows to return. Zero means no limit. Useful when the folder is expected to be huge and the caller only needs a slice of it - no further levels are scanned once the cap is hit. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">showparent=</td><td>(NO) By default, the initial parent directory is not part of the results. Set to YES to include it. For this record only, directory=filepath. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mp_dirlist) The output dataset to create </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">getattrs=</td><td>(NO) If getattrs=YES then the doptname / foptname functions are used to scan all properties - any characters that are not valid in a SAS name (v7) are simply stripped, and the table is transposed so theat each property is a column and there is one file per row. An attempt is made to get all properties whether a file or folder, but some files/folders cannot be accessed, and so not all properties can / will be populated.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">getattrs=</td><td>(NO) If getattrs=YES then the doptname / foptname functions are used to scan all properties - any characters that are not valid in a SAS name (v7) are simply stripped, and the table is transposed so theat each property is a column and there is one file per row. An attempt is made to get all properties whether a file or folder, but some files/folders cannot be accessed, and so not all properties can / will be populated. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">level=</td><td>(0) Ignored - retained so that callers of previous versions do not break. Recursion is now done in a loop rather than by re-invoking the macro.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>outds contains the following variables:<ul>
 <li>directory (containing folder)</li>
-<li>file_or_folder (file / folder)</li>
+<li>file_or_folder. folder when it can be opened as a directory, file when it is not a directory (or exists but is not readable, which the copy, hash and zip tools treat as a file), and locked when it is listed but cannot be opened at all - a broken link, for instance</li>
 <li>filepath (path/to/file.name)</li>
 <li>filename (just the file name)</li>
 <li>ext (.extension)</li>
@@ -170,9 +172,8 @@ $(function(){initNavTree('mp__dirlist_8sas.html','',''); });
 </dd></dl>
 <h4>SAS Macros </h4>
 <ul>
-<li><a class="el" href="mf__existds_8sas.html" title="Checks whether a dataset OR a view exists.">mf_existds.sas</a> </li>
-<li><a class="el" href="mf__getvarlist_8sas.html" title="Returns dataset variable list direct from header.">mf_getvarlist.sas</a> </li>
-<li><a class="el" href="mf__wordsinstr1butnotstr2_8sas.html" title="Returns words that are in string 1 but not in string 2.">mf_wordsinstr1butnotstr2.sas</a> </li>
+<li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
+<li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a> </li>
 <li><a class="el" href="mp__dropmembers_8sas.html" title="Drops tables / views (if they exist) without warnings in the log.">mp_dropmembers.sas</a></li>
 </ul>
 <h4>Related Macros </h4>

@@ -138,11 +138,12 @@ $(function(){initNavTree('mp__streamfile_8test_8sas.html','',''); });
 
 <p><a href="mp__streamfile_8test_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This is tricky to test as it streams to webout. For now just check the compilation, and for macro leakage.</p>
+<div class="textblock"><p>This is tricky to test as it streams to webout. For now just check the compilation, and for macro leakage. The PDF case streams to a temporary fileref instead, so the bytes and the headers can both be inspected without touching the response.</p>
 <h4>SAS Macros </h4>
 <ul>
 <li><a class="el" href="mp__assert_8sas.html" title="Generic assertion.">mp_assert.sas</a> </li>
 <li><a class="el" href="mp__assertscope_8sas.html" title="Used to capture scope leakage of macro variables.">mp_assertscope.sas</a> </li>
+<li><a class="el" href="mp__ds2pdf_8sas.html" title="Create a PDF report from a dataset using ODS.">mp_ds2pdf.sas</a> </li>
 <li><a class="el" href="mp__streamfile_8sas.html" title="Streams a file to _webout according to content type.">mp_streamfile.sas</a> </li>
 </ul>
 
