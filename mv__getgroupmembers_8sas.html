@@ -146,8 +146,8 @@ $(function(){initNavTree('mv__getgroupmembers_8sas.html','',''); });
 </pre><p>outputs: </p><pre class="fragment">ordinal_root num,
 ordinal_items num,
 version num,
-id char(43),
-name char(43),
+id char(256),
+name char(256),
 providerId char(5),
 implicit num
 </pre><dl class="params"><dt>Parameters</dt><dd>
@@ -155,10 +155,11 @@ implicit num
     <tr><td class="paramdir">[in]</td><td class="paramname">group</td><td>Group id for which to return group members </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>(ACCESS_TOKEN) The global macro variable to contain the access token </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">grant_type=</td><td>(sas_services) valid values are "password" or "authorization_code" (unquoted). </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.viyagroupmembers) The library.dataset to be created that contains the list of group members</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.viyagroupmembers) The library.dataset to be created that contains the list of members</td></tr>
   </table>
   </dd>
 </dl>
+<p>id and name are declared at $256, the longest active directory can hold for a display name or a SAM account name. The $43 they used to carry truncated anything longer, and a truncation fails the step on some platforms.</p>
 <dl class="section version"><dt>Version</dt><dd>VIYA V.03.04 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe, source: <a href="https://github.com/sasjs/core">https://github.com/sasjs/core</a></dd></dl>
 <h4>SAS Macros </h4>
