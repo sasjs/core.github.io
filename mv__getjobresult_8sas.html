@@ -186,7 +186,7 @@ run;
     <tr><td class="paramdir">[in]</td><td class="paramname">uri=</td><td>The uri of the running job for which to fetch the status, in the format <span class="tt">/jobExecution/jobs/$UUID</span> (unquoted).</td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">result=</td><td>(WEBOUT_JSON) The result type to capture. Resolves to "_[column name]" from the results table when parsed with the JSON libname engine. Example values: <ul>
 <li>WEBOUT_JSON </li>
-<li>WEBOUT_TXT</li>
+<li>WEBOUT_TXT A job whose webout is a binary file registers it under its own name - <span class="tt">_webout.pdf</span>, <span class="tt">_webout.xlsx</span> and so on - and a dotted key cannot be requested through this parameter. When the requested member is absent the macro falls back to the first <span class="tt">_WEBOUT*</span> member of the results that holds a files uri, so a binary webout is returned without the caller naming it.</li>
 </ul>
 </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outref=</td><td>(0) The output fileref to which to write the results </td></tr>
