@@ -344,7 +344,7 @@ $(function(){initNavTree('mx__execute_8sas_source.html','',''); });
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  <span class="comment">/* proc stp gives no job status - say so rather than imply success */</span></div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>  %if <span class="stringliteral">&quot;&amp;outstatus&quot;</span> ne <span class="stringliteral">&quot;0&quot;</span> %then %do;</div>
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    data &amp;outstatus;</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>      length state $20 uri $256 errmsg $256 platform $10;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>      length state $256 uri $256 errmsg $256 platform $10;</div>
 <div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>      state=&#39;unknown&#39;;</div>
 <div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>      uri=&#39;&#39;;</div>
 <div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>      errmsg=&#39;proc stp returns no job status&#39;;</div>
@@ -445,139 +445,145 @@ $(function(){initNavTree('mx__execute_8sas_source.html','',''); });
 <div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>  <span class="comment">/* the outcome, before the flow table goes away */</span></div>
 <div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>  %if <span class="stringliteral">&quot;&amp;outstatus&quot;</span> ne <span class="stringliteral">&quot;0&quot;</span> %then %do;</div>
 <div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    data &amp;outstatus;</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>      length state $20 uri $256 errmsg $32767 platform $10;</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>      platform=&#39;SASVIYA&#39;;</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>      errmsg=&#39;&#39;;</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>      set &amp;jobds(keep=state uri);</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    run;</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  %end;</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>  <span class="comment">/* nothing else needs the flow table - do not leave it in the caller&#39;s WORK */</span></div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  proc datasets lib=work nolist nowarn;</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    delete &amp;jobds;</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>  quit;</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>  <span class="comment">/* the abort message is not in the job state, it is in the result - so a</span></div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span><span class="comment">    * result file is needed to read it even when the caller did not ask for one */</span></div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>  %let msgref=&amp;outref;</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>  %if <span class="stringliteral">&quot;&amp;outstatus&quot;</span> ne <span class="stringliteral">&quot;0&quot;</span> and <span class="stringliteral">&quot;&amp;outref&quot;</span>=<span class="stringliteral">&quot;0&quot;</span> %then %do;</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    %let msgref=%mf_getuniquefileref();</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    %let clearmeref=1;</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>  %end;</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>  <span class="comment">/* fetch results from webout.json */</span></div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>  %mv_getjobresult(uri=&amp;uri,</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    result=&amp;viyaresult,</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>    outref=&amp;msgref,</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    outlib=&amp;outlib,</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    mdebug=&amp;mdebug</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>  )</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>  <span class="comment">/* a job that did not complete carries the abort message in its result, so</span></div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span><span class="comment">    * errmsg is filled from there rather than left blank */</span></div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>  %if <span class="stringliteral">&quot;&amp;outstatus&quot;</span> ne <span class="stringliteral">&quot;0&quot;</span> %then %do;</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>    %let abortmsg=;</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    data _null_;</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>      length line $32767 msg $32767;</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>      retain found 0;</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>      set &amp;outstatus(keep=state);</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>      if state ne &#39;completed&#39; then do;</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        infile &amp;msgref end=eof lrecl=32767;</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        do while(not eof);</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>          input;</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>          if found=0 and index(_infile_,&#39;<span class="stringliteral">&quot;MSG&quot;</span>&#39;)&gt;0 then do;</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>            line=tranwrd(_infile_,<span class="charliteral">&#39;\&quot;&#39;</span>,<span class="charliteral">&#39;&quot;&#39;</span>);</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>            if prxmatch(&#39;/<span class="stringliteral">&quot;MSG&quot;</span> *: *<span class="stringliteral">&quot;(.*)&quot;</span>/&#39;,line) then do;</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>              msg=prxchange(&#39;s/.*<span class="stringliteral">&quot;MSG&quot;</span> *: *<span class="stringliteral">&quot;(.*)&quot;</span>.*/$1/&#39;,-1,line);</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>              found=1;</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>            end;</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>          end;</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        end;</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>      end;</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>      if found then call symputx(&#39;abortmsg&#39;,msg,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>    run;</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>    %if %superq(abortmsg) ne %then %do;</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>      data &amp;outstatus;</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>        modify &amp;outstatus;</div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>        errmsg=symget(&#39;abortmsg&#39;);</div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        replace;</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>      end;</div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>    %end;</div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>  %end;</div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>  <span class="comment">/* only a ref created here may be cleared */</span></div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>  %if %length(&amp;clearmeref)&gt;0 %then %do;</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>    filename &amp;msgref clear;</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>  %end;</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span> </div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>%end;</div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>%else %if &amp;platform=SASJS %then %do;</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span> </div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>  <span class="comment">/* the response is needed to judge the outcome, even if not requested -</span></div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span><span class="comment">    * and only a ref we create here may be cleared afterwards */</span></div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>  %let respref=&amp;outref;</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>  %if <span class="stringliteral">&quot;&amp;respref&quot;</span>=<span class="stringliteral">&quot;0&quot;</span> and <span class="stringliteral">&quot;&amp;outstatus&quot;</span> ne <span class="stringliteral">&quot;0&quot;</span> %then %do;</div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    %let respref=%mf_getuniquefileref();</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    %let clearmeref=1;</div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>  %end;</div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>  %ms_testservice(&amp;program</div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>    ,inputfiles=&amp;inputfiles</div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>    ,inputdatasets=&amp;inputdatasets</div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>    ,inputparams=&amp;inputparams</div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>    ,debug=&amp;debug</div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>    ,mdebug=&amp;mdebug</div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>    ,outlib=&amp;outlib</div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>    ,outref=&amp;respref</div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>    ,outlogds=&amp;outlogds</div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>  )</div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>  %if <span class="stringliteral">&quot;&amp;outstatus&quot;</span> ne <span class="stringliteral">&quot;0&quot;</span> %then %do;</div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>    data &amp;outstatus;</div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>      length state $20 uri $256 errmsg $32767 platform $10;</div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>      length line $32767;</div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>      retain state &#39;completed&#39; uri &#39;&#39; errmsg &#39;&#39; platform &#39;SASJS&#39; abortseen 0;</div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>      infile &amp;respref end=eof lrecl=32767;</div>
-<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>      <span class="comment">/* scan the whole response - the abort block is not always on the first</span></div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span><span class="comment">        * line - but only take a message from inside that block, so a service</span></div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span><span class="comment">        * with its own MSG field does not look like an abort */</span></div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>      do while(not eof);</div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>        input;</div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>        if index(_infile_,&#39;<span class="stringliteral">&quot;sasjsAbort&quot;</span>&#39;)&gt;0 then do;</div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>          state=&#39;canceled&#39;;</div>
-<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>          abortseen=1;</div>
-<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>        end;</div>
-<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>        if abortseen=1 and errmsg=&#39;&#39; and index(_infile_,&#39;<span class="stringliteral">&quot;MSG&quot;</span>&#39;)&gt;0 then do;</div>
-<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>          <span class="comment">/* a quote inside the message arrives escaped, and the capture below</span></div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span><span class="comment">            * used to stop at it, returning the part before the first \&quot; and</span></div>
-<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span><span class="comment">            * dropping the rest.  The escaped pairs are unescaped first, so the</span></div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span><span class="comment">            * value is captured whole: the match is greedy and runs to the</span></div>
-<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span><span class="comment">            * closing quote of the value rather than to the first quote after</span></div>
-<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span><span class="comment">            * the field name. */</span></div>
-<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>          line=tranwrd(_infile_,<span class="charliteral">&#39;\&quot;&#39;</span>,<span class="charliteral">&#39;&quot;&#39;</span>);</div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>          if prxmatch(&#39;/<span class="stringliteral">&quot;MSG&quot;</span> *: *<span class="stringliteral">&quot;(.*)&quot;</span>/&#39;,line) then</div>
-<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>            errmsg=prxchange(&#39;s/.*<span class="stringliteral">&quot;MSG&quot;</span> *: *<span class="stringliteral">&quot;(.*)&quot;</span>.*/$1/&#39;,-1,line);</div>
-<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>        end;</div>
-<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>      end;</div>
-<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>      <span class="comment">/* one row, whatever the response contained */</span></div>
-<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>      output;</div>
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>    run;</div>
-<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>  %end;</div>
-<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>  %if %length(&amp;clearmeref)&gt;0 %then %do;</div>
-<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>    filename &amp;respref clear;</div>
-<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>  %end;</div>
-<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span> </div>
-<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>%end;</div>
-<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>%else %do;</div>
-<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>  %put %str(ERR)OR: Unrecognised platform:  &amp;platform;</div>
-<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>%end;</div>
-<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span> </div>
-<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>%if &amp;mdebug=0 %then %do;</div>
-<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>  filename &amp;fref1 clear;</div>
-<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>  %if &amp;platform ne SASJS %then %do;</div>
-<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>    filename &amp;fref2 clear;</div>
-<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>    filename &amp;webref clear;</div>
-<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>  %end;</div>
-<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>%end;</div>
-<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>%else %do;</div>
-<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>  %put &amp;sysmacroname exit vars:;</div>
-<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>  %put _local_;</div>
-<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>%end;</div>
-<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span> </div>
-<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>%mend mx_execute;</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>      <span class="comment">/* state is copied from the flow table, so this length is a ceiling, not a</span></div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span><span class="comment">        * target.  mp_init&#39;s strict set includes varlenchk=ERROR, so a shorter</span></div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span><span class="comment">        * one fails the step outright: OBS=0 then switches the rest of</span></div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span><span class="comment">        * the session to syntax check, and every later proc reports a problem</span></div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span><span class="comment">        * that has nothing to do with it.  256 matches uri and covers a state</span></div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="comment">        * read out of JSON. */</span></div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>      length state $256 uri $256 errmsg $32767 platform $10;</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>      platform=&#39;SASVIYA&#39;;</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>      errmsg=&#39;&#39;;</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>      set &amp;jobds(keep=state uri);</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    run;</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>  %end;</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>  <span class="comment">/* nothing else needs the flow table - do not leave it in the caller&#39;s WORK */</span></div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>  proc datasets lib=work nolist nowarn;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    delete &amp;jobds;</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>  quit;</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>  <span class="comment">/* the abort message is not in the job state, it is in the result - so a</span></div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span><span class="comment">    * result file is needed to read it even when the caller did not ask for one */</span></div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>  %let msgref=&amp;outref;</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>  %if <span class="stringliteral">&quot;&amp;outstatus&quot;</span> ne <span class="stringliteral">&quot;0&quot;</span> and <span class="stringliteral">&quot;&amp;outref&quot;</span>=<span class="stringliteral">&quot;0&quot;</span> %then %do;</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>    %let msgref=%mf_getuniquefileref();</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    %let clearmeref=1;</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>  %end;</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>  <span class="comment">/* fetch results from webout.json */</span></div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>  %mv_getjobresult(uri=&amp;uri,</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    result=&amp;viyaresult,</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    outref=&amp;msgref,</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>    outlib=&amp;outlib,</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    mdebug=&amp;mdebug</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>  )</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>  <span class="comment">/* a job that did not complete carries the abort message in its result, so</span></div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span><span class="comment">    * errmsg is filled from there rather than left blank */</span></div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>  %if <span class="stringliteral">&quot;&amp;outstatus&quot;</span> ne <span class="stringliteral">&quot;0&quot;</span> %then %do;</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    %let abortmsg=;</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    data _null_;</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>      length line $32767 msg $32767;</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>      retain found 0;</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>      set &amp;outstatus(keep=state);</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>      if state ne &#39;completed&#39; then do;</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        infile &amp;msgref end=eof lrecl=32767;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>        do while(not eof);</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>          input;</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>          if found=0 and index(_infile_,&#39;<span class="stringliteral">&quot;MSG&quot;</span>&#39;)&gt;0 then do;</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>            line=tranwrd(_infile_,<span class="charliteral">&#39;\&quot;&#39;</span>,<span class="charliteral">&#39;&quot;&#39;</span>);</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>            if prxmatch(&#39;/<span class="stringliteral">&quot;MSG&quot;</span> *: *<span class="stringliteral">&quot;(.*)&quot;</span>/&#39;,line) then do;</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>              msg=prxchange(&#39;s/.*<span class="stringliteral">&quot;MSG&quot;</span> *: *<span class="stringliteral">&quot;(.*)&quot;</span>.*/$1/&#39;,-1,line);</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>              found=1;</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>            end;</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>          end;</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>        end;</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>      end;</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>      if found then call symputx(&#39;abortmsg&#39;,msg,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    run;</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>    %if %superq(abortmsg) ne %then %do;</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>      data &amp;outstatus;</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>        modify &amp;outstatus;</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>        errmsg=symget(&#39;abortmsg&#39;);</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>        replace;</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>      run;</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    %end;</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>  %end;</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>  <span class="comment">/* only a ref created here may be cleared */</span></div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>  %if %length(&amp;clearmeref)&gt;0 %then %do;</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    filename &amp;msgref clear;</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>  %end;</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span> </div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>%end;</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>%else %if &amp;platform=SASJS %then %do;</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span> </div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>  <span class="comment">/* the response is needed to judge the outcome, even if not requested -</span></div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span><span class="comment">    * and only a ref we create here may be cleared afterwards */</span></div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>  %let respref=&amp;outref;</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>  %if <span class="stringliteral">&quot;&amp;respref&quot;</span>=<span class="stringliteral">&quot;0&quot;</span> and <span class="stringliteral">&quot;&amp;outstatus&quot;</span> ne <span class="stringliteral">&quot;0&quot;</span> %then %do;</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>    %let respref=%mf_getuniquefileref();</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>    %let clearmeref=1;</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>  %end;</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>  %ms_testservice(&amp;program</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>    ,inputfiles=&amp;inputfiles</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>    ,inputdatasets=&amp;inputdatasets</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>    ,inputparams=&amp;inputparams</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>    ,debug=&amp;debug</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>    ,mdebug=&amp;mdebug</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>    ,outlib=&amp;outlib</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>    ,outref=&amp;respref</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>    ,outlogds=&amp;outlogds</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>  )</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>  %if <span class="stringliteral">&quot;&amp;outstatus&quot;</span> ne <span class="stringliteral">&quot;0&quot;</span> %then %do;</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>    data &amp;outstatus;</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>      length state $256 uri $256 errmsg $32767 platform $10;</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>      length line $32767;</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>      retain state &#39;completed&#39; uri &#39;&#39; errmsg &#39;&#39; platform &#39;SASJS&#39; abortseen 0;</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>      infile &amp;respref end=eof lrecl=32767;</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>      <span class="comment">/* scan the whole response - the abort block is not always on the first</span></div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span><span class="comment">        * line - but only take a message from inside that block, so a service</span></div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span><span class="comment">        * with its own MSG field does not look like an abort */</span></div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>      do while(not eof);</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>        input;</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>        if index(_infile_,&#39;<span class="stringliteral">&quot;sasjsAbort&quot;</span>&#39;)&gt;0 then do;</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>          state=&#39;canceled&#39;;</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>          abortseen=1;</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>        end;</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>        if abortseen=1 and errmsg=&#39;&#39; and index(_infile_,&#39;<span class="stringliteral">&quot;MSG&quot;</span>&#39;)&gt;0 then do;</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>          <span class="comment">/* a quote inside the message arrives escaped, and the capture below</span></div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span><span class="comment">            * used to stop at it, returning the part before the first \&quot; and</span></div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span><span class="comment">            * dropping the rest.  The escaped pairs are unescaped first, so the</span></div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span><span class="comment">            * value is captured whole: the match is greedy and runs to the</span></div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span><span class="comment">            * closing quote of the value rather than to the first quote after</span></div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span><span class="comment">            * the field name. */</span></div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>          line=tranwrd(_infile_,<span class="charliteral">&#39;\&quot;&#39;</span>,<span class="charliteral">&#39;&quot;&#39;</span>);</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>          if prxmatch(&#39;/<span class="stringliteral">&quot;MSG&quot;</span> *: *<span class="stringliteral">&quot;(.*)&quot;</span>/&#39;,line) then</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>            errmsg=prxchange(&#39;s/.*<span class="stringliteral">&quot;MSG&quot;</span> *: *<span class="stringliteral">&quot;(.*)&quot;</span>.*/$1/&#39;,-1,line);</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>        end;</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>      end;</div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>      <span class="comment">/* one row, whatever the response contained */</span></div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>      output;</div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>    run;</div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>  %end;</div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>  %if %length(&amp;clearmeref)&gt;0 %then %do;</div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>    filename &amp;respref clear;</div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>  %end;</div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span> </div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>%end;</div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>%else %do;</div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>  %put %str(ERR)OR: Unrecognised platform:  &amp;platform;</div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>%end;</div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span> </div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>%if &amp;mdebug=0 %then %do;</div>
+<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>  filename &amp;fref1 clear;</div>
+<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>  %if &amp;platform ne SASJS %then %do;</div>
+<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>    filename &amp;fref2 clear;</div>
+<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>    filename &amp;webref clear;</div>
+<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>  %end;</div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>%end;</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>%else %do;</div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>  %put &amp;sysmacroname exit vars:;</div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>  %put _local_;</div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>%end;</div>
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span> </div>
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>%mend mx_execute;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
