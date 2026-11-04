@@ -223,212 +223,266 @@ $(function(){initNavTree('mv__getjobresult_8sas_source.html','',''); });
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">  @li mp_abort.sas</span></div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">  @li mp_binarycopy.sas</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">  @li mf_getplatform.sas</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">  @li mf_existfileref.sas</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">  @li mf_getuniquefileref.sas</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">  @li mf_getuniquelibref.sas</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment"></span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>%macro mv_getjobresult(uri=0</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    ,access_token_var=ACCESS_TOKEN</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    ,grant_type=sas_services</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    ,mdebug=0</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    ,result=WEBOUT_JSON</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    ,outref=0</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    ,outlib=0</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  );</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>%<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  %put &amp;sysmacroname entry vars:;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  %put _local_;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>%end;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>%local oauth_bearer;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>%<span class="keywordflow">if</span> &amp;grant_type=detect %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  %<span class="keywordflow">if</span> %symexist(&amp;access_token_var) %then %let grant_type=authorization_code;</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  %<span class="keywordflow">else</span> %let grant_type=sas_services;</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>%end;</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>%<span class="keywordflow">if</span> &amp;grant_type=sas_services %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    %let oauth_bearer=oauth_bearer=sas_services;</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    %let &amp;access_token_var=;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>%end;</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>%mp_abort(iftrue=(&amp;grant_type ne authorization_code and &amp;grant_type ne password</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    and &amp;grant_type ne sas_services</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  )</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  ,mac=&amp;sysmacroname</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  ,msg=%str(Invalid value <span class="keywordflow">for</span> grant_type: &amp;grant_type)</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>)</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">  @li mp_replace.sas</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">  @li mf_getplatform.sas</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">  @li mf_existfileref.sas</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">  @li mf_getuniquefileref.sas</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">  @li mf_getuniquelibref.sas</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment"></span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>%macro mv_getjobresult(uri=0</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    ,access_token_var=ACCESS_TOKEN</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    ,grant_type=sas_services</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    ,mdebug=0</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    ,result=WEBOUT_JSON</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    ,outref=0</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    ,outlib=0</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  );</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>%<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  %put &amp;sysmacroname entry vars:;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  %put _local_;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>%end;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>%local oauth_bearer;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>%<span class="keywordflow">if</span> &amp;grant_type=detect %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  %<span class="keywordflow">if</span> %symexist(&amp;access_token_var) %then %let grant_type=authorization_code;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  %<span class="keywordflow">else</span> %let grant_type=sas_services;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>%end;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>%<span class="keywordflow">if</span> &amp;grant_type=sas_services %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    %let oauth_bearer=oauth_bearer=sas_services;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    %let &amp;access_token_var=;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>%end;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>%mp_abort(iftrue=(&amp;grant_type ne authorization_code and &amp;grant_type ne password</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    and &amp;grant_type ne sas_services</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  )</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  ,mac=&amp;sysmacroname</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  ,msg=%str(Invalid value <span class="keywordflow">for</span> grant_type: &amp;grant_type)</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>)</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">/* validation in datastep for better character safety */</span></div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>%local errmsg errflg;</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>data _null_;</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  uri=symget(<span class="stringliteral">&#39;uri&#39;</span>);</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  <span class="keywordflow">if</span> length(uri)&lt;12 then <span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    call symputx(<span class="stringliteral">&#39;errflg&#39;</span>,1);</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    call symputx(<span class="stringliteral">&#39;errmsg&#39;</span>,<span class="stringliteral">&quot;URI is invalid (too short) - &#39;&amp;uri&#39;&quot;</span>,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  end;</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  <span class="keywordflow">if</span> scan(uri,-1)=<span class="stringliteral">&#39;state&#39;</span> or scan(uri,1) ne &#39;jobExecution&#39; then do;</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    call symputx(&#39;errflg&#39;,1);</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    call symputx(&#39;errmsg&#39;,</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>      <span class="stringliteral">&quot;URI should be in format /jobExecution/jobs/$$$$UUID$$$$&quot;</span></div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>      !!<span class="stringliteral">&quot; but is actually like: &amp;uri&quot;</span>,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  end;</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>run;</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>%mp_abort(iftrue=(&amp;errflg=1)</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  ,mac=&amp;sysmacroname</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  ,msg=%str(&amp;errmsg)</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>)</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>%if &amp;outref ne 0 and %mf_existfileref(&amp;outref) ne 1 %then %do;</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  filename &amp;outref temp;</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>%end;</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>options noquotelenmax;</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>%local base_uri; <span class="comment">/* location of rest apis */</span></div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>%let base_uri=%mf_getplatform(VIYARESTAPI);</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="comment">/* fetch job info */</span></div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>%local fname1;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>%let fname1=%mf_getuniquefileref();</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>proc http method=&#39;GET&#39; out=&amp;fname1 &amp;oauth_bearer</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  url=<span class="stringliteral">&quot;&amp;base_uri&amp;uri&quot;</span>;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  headers <span class="stringliteral">&quot;Accept&quot;</span>=<span class="stringliteral">&quot;application/json&quot;</span></div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  %if &amp;grant_type=authorization_code %then %do;</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>          <span class="stringliteral">&quot;Authorization&quot;</span>=<span class="stringliteral">&quot;Bearer &amp;&amp;&amp;access_token_var&quot;</span></div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  %end;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  ;</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>run;</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>%if &amp;SYS_PROCHTTP_STATUS_CODE ne 200 and &amp;SYS_PROCHTTP_STATUS_CODE ne 201 %then</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>%do;</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  data _null_;infile &amp;fname1;input;putlog _infile_;run;</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  %mp_abort(mac=&amp;sysmacroname</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    ,msg=%str(&amp;SYS_PROCHTTP_STATUS_CODE &amp;SYS_PROCHTTP_STATUS_PHRASE)</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  )</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>%end;</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>%if &amp;mdebug=1 %then %do;</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  data _null_;</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    infile &amp;fname1 lrecl=32767;</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    input;</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    putlog _infile_;</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>  run;</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>%end;</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="comment">/* extract results link */</span></div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>%local lib1 resuri resname resfall want;</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>%let resfall=0;</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>%let want=%upcase(_&amp;result);</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>%let lib1=%mf_getuniquelibref();</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>libname &amp;lib1 JSON fileref=&amp;fname1;</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment">/* The member is located by name rather than referenced by name: a results</span></div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment">  * table with no such column cannot be addressed in a data step at all.  A</span></div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment">  * binary webout registers itself as _webout.pdf / .xlsx / .zip, which</span></div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment">  * result= cannot express, so when the requested member is missing the first</span></div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="comment">  * _WEBOUT* column holding a files uri is taken instead - a job that</span></div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="comment">  * registered more than one binary member cannot steer this, so only one</span></div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="comment">  * binary member per job is supported. */</span></div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>data _null_;</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>  set &amp;lib1..results;</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>  array _chars{*} _character_;</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>  length _name $32 _val $512;</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>  <span class="keywordflow">do</span> _i=1 to dim(_chars);</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    _name=vname(_chars{_i});</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="keywordflow">if</span> upcase(_name)=symget(<span class="stringliteral">&#39;want&#39;</span>) then do;</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>      _val=_chars{_i};</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>      leave;</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    end;</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>  end;</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>  <span class="keywordflow">if</span> _val eq <span class="stringliteral">&#39;&#39;</span> then <span class="keywordflow">do</span> _i=1 to dim(_chars);</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    _name=vname(_chars{_i});</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keywordflow">if</span> _chars{_i}=:<span class="stringliteral">&#39;/files/&#39;</span> and upcase(_name)=:<span class="stringliteral">&#39;_WEBOUT&#39;</span> then <span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>      _val=_chars{_i};</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>      call symputx(<span class="stringliteral">&#39;resfall&#39;</span>,1,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>      leave;</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    end;</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>  end;</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  <span class="keywordflow">if</span> _val ne <span class="stringliteral">&#39;&#39;</span> then <span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    call symputx(<span class="stringliteral">&#39;resuri&#39;</span>,_val,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    call symputx(<span class="stringliteral">&#39;resname&#39;</span>,_name,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>  end;</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>  %<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    putlog <span class="stringliteral">&quot;&amp;sysmacroname results: &quot;</span> (_all_)(=);</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>  %end;</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>run;</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>%<span class="keywordflow">if</span> &amp;mdebug=1 and &amp;resfall=1 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>  %put &amp;sysmacroname: _&amp;result was not registered, <span class="keyword">using </span>&amp;resname;</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>%end;</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>%<span class="keywordflow">if</span> <span class="stringliteral">&quot;%superq(resuri)&quot;</span> eq <span class="stringliteral">&quot;&quot;</span> or <span class="stringliteral">&quot;%superq(resuri)&quot;</span> eq <span class="stringliteral">&quot;.&quot;</span> %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>  <span class="comment">/* The requested result was not registered - typical for a canceled</span></div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="comment">    * job whose session ended before the result file was created (eg a</span></div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="comment">    * job aborted by design, or a job that failed on session creation).</span></div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="comment">    * Aborting here would terminate the calling program, so write an</span></div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="comment">    * empty payload and return - the caller can check the job state</span></div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span><span class="comment">    * (from the outds of the wait macro) and decide what to do. */</span></div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>  %put &amp;sysmacroname: _&amp;result not found in job results -;</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>  %put &amp;sysmacroname: use mv_getjoblog to fetch the job log instead;</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>  %<span class="keywordflow">if</span> &amp;outref ne 0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    data _null_;</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>      file &amp;outref;</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>      put <span class="stringliteral">&quot;&amp;sysmacroname: no &amp;_result result available for job &amp;uri&quot;</span>;</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    run;</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>  %end;</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>  %<span class="keywordflow">if</span> &amp;outlib ne 0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    %local fname3;</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    %let fname3=%mf_getuniquefileref();</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    data _null_;</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>      file &amp;fname3;</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>      put <span class="stringliteral">&#39;{}&#39;</span>;</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    run;</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    libname &amp;outlib JSON fileref=&amp;fname3;</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>  %end;</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>  %<span class="keywordflow">if</span> &amp;mdebug=0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    filename &amp;fname1 clear;</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    libname &amp;lib1 clear;</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>  %end;</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>  %<span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>%end;</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span><span class="comment">/* extract results */</span></div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>%local fname2;</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>%let fname2=%mf_getuniquefileref();</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>proc http method=<span class="stringliteral">&#39;GET&#39;</span> out=&amp;fname2 &amp;oauth_bearer</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>  url=<span class="stringliteral">&quot;&amp;base_uri&amp;resuri/content?limit=10000&quot;</span>;</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>  headers <span class="stringliteral">&quot;Accept&quot;</span>=<span class="stringliteral">&quot;application/json&quot;</span></div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>  %<span class="keywordflow">if</span> &amp;grant_type=authorization_code %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>          <span class="stringliteral">&quot;Authorization&quot;</span>=<span class="stringliteral">&quot;Bearer &amp;&amp;&amp;access_token_var&quot;</span></div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>  %end;</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>  ;</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>run;</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>%<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>  <span class="comment">/* send one char at a time as the json can be very wide */</span></div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>  data _null_;</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    infile &amp;fname2 recfm=n;</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    input <span class="keywordtype">char</span> $char1. ;</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    putlog <span class="keywordtype">char</span> $char1. @;</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>  run;</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>%end;</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span> </div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>%<span class="keywordflow">if</span> &amp;outref ne 0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>  filename &amp;outref temp;</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>  %mp_binarycopy(inref=&amp;fname2,outref=&amp;outref)</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>%end;</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>%<span class="keywordflow">if</span> &amp;outlib ne 0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>  libname &amp;outlib JSON fileref=&amp;fname2;</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>%end;</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>%<span class="keywordflow">if</span> &amp;mdebug=0 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>  filename &amp;fname1 clear;</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>  filename &amp;fname2 clear;</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>  libname &amp;lib1 clear;</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>%end;</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>%<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>  %put &amp;sysmacroname exit vars:;</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>  %put _local_;</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>%end;</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span> </div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>%mend mv_getjobresult;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">/* validation in datastep for better character safety */</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>%local errmsg errflg;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>data _null_;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  uri=symget(<span class="stringliteral">&#39;uri&#39;</span>);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  <span class="keywordflow">if</span> length(uri)&lt;12 then <span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    call symputx(<span class="stringliteral">&#39;errflg&#39;</span>,1);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    call symputx(<span class="stringliteral">&#39;errmsg&#39;</span>,<span class="stringliteral">&quot;URI is invalid (too short) - &#39;&amp;uri&#39;&quot;</span>,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  end;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  <span class="keywordflow">if</span> scan(uri,-1)=<span class="stringliteral">&#39;state&#39;</span> or scan(uri,1) ne &#39;jobExecution&#39; then do;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    call symputx(&#39;errflg&#39;,1);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    call symputx(&#39;errmsg&#39;,</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>      <span class="stringliteral">&quot;URI should be in format /jobExecution/jobs/$$$$UUID$$$$&quot;</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>      !!<span class="stringliteral">&quot; but is actually like: &amp;uri&quot;</span>,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  end;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>run;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>%mp_abort(iftrue=(&amp;errflg=1)</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  ,mac=&amp;sysmacroname</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  ,msg=%str(&amp;errmsg)</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>)</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>%if &amp;outref ne 0 and %mf_existfileref(&amp;outref) ne 1 %then %do;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  filename &amp;outref temp;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>%end;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>options noquotelenmax;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>%local base_uri; <span class="comment">/* location of rest apis */</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>%let base_uri=%mf_getplatform(VIYARESTAPI);</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment">/* fetch job info */</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>%local fname1;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>%let fname1=%mf_getuniquefileref();</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>proc http method=&#39;GET&#39; out=&amp;fname1 &amp;oauth_bearer</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  url=<span class="stringliteral">&quot;&amp;base_uri&amp;uri&quot;</span>;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  headers <span class="stringliteral">&quot;Accept&quot;</span>=<span class="stringliteral">&quot;application/json&quot;</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>  %if &amp;grant_type=authorization_code %then %do;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>          <span class="stringliteral">&quot;Authorization&quot;</span>=<span class="stringliteral">&quot;Bearer &amp;&amp;&amp;access_token_var&quot;</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  %end;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  ;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>run;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>%if &amp;SYS_PROCHTTP_STATUS_CODE ne 200 and &amp;SYS_PROCHTTP_STATUS_CODE ne 201 %then</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>%do;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  data _null_;infile &amp;fname1;input;putlog _infile_;run;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  %mp_abort(mac=&amp;sysmacroname</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    ,msg=%str(&amp;SYS_PROCHTTP_STATUS_CODE &amp;SYS_PROCHTTP_STATUS_PHRASE)</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>  )</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>%end;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>%if &amp;mdebug=1 %then %do;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>  data _null_;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    infile &amp;fname1 lrecl=32767;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    input;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    putlog _infile_;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>  run;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>%end;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="comment">/* extract results link */</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>%local lib1 resuri resname resfall want;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>%let resfall=0;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>%let want=%upcase(_&amp;result);</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>%let lib1=%mf_getuniquelibref();</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>libname &amp;lib1 JSON fileref=&amp;fname1;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment">/* The member is located by name rather than referenced by name: a results</span></div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment">  * table with no such column cannot be addressed in a data step at all.  A</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment">  * binary webout registers itself as _webout.pdf / .xlsx / .zip, which</span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="comment">  * result= cannot express, so when the requested member is missing the first</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="comment">  * _WEBOUT* column holding a files uri is taken instead - a job that</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="comment">  * registered more than one binary member cannot steer this, so only one</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="comment">  * binary member per job is supported. */</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>data _null_;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>  set &amp;lib1..results;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>  array _chars{*} _character_;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>  length _name $32 _val $512;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>  <span class="keywordflow">do</span> _i=1 to dim(_chars);</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    _name=vname(_chars{_i});</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <span class="keywordflow">if</span> upcase(_name)=symget(<span class="stringliteral">&#39;want&#39;</span>) then do;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>      _val=_chars{_i};</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>      leave;</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    end;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>  end;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  <span class="keywordflow">if</span> _val eq <span class="stringliteral">&#39;&#39;</span> then <span class="keywordflow">do</span> _i=1 to dim(_chars);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    _name=vname(_chars{_i});</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="keywordflow">if</span> _chars{_i}=:<span class="stringliteral">&#39;/files/&#39;</span> and upcase(_name)=:<span class="stringliteral">&#39;_WEBOUT&#39;</span> then <span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>      _val=_chars{_i};</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>      call symputx(<span class="stringliteral">&#39;resfall&#39;</span>,1,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>      leave;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    end;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  end;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>  <span class="keywordflow">if</span> _val ne <span class="stringliteral">&#39;&#39;</span> then <span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    call symputx(<span class="stringliteral">&#39;resuri&#39;</span>,_val,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    call symputx(<span class="stringliteral">&#39;resname&#39;</span>,_name,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>  end;</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>  %<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    putlog <span class="stringliteral">&quot;&amp;sysmacroname results: &quot;</span> (_all_)(=);</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>  %end;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>run;</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>%<span class="keywordflow">if</span> &amp;mdebug=1 and &amp;resfall=1 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  %put &amp;sysmacroname: _&amp;result was not registered, <span class="keyword">using </span>&amp;resname;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>%end;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>%<span class="keywordflow">if</span> <span class="stringliteral">&quot;%superq(resuri)&quot;</span> eq <span class="stringliteral">&quot;&quot;</span> or <span class="stringliteral">&quot;%superq(resuri)&quot;</span> eq <span class="stringliteral">&quot;.&quot;</span> %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>  <span class="comment">/* The requested result was not registered - typical for a canceled</span></div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="comment">    * job whose session ended before the result file was created (eg a</span></div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="comment">    * job aborted by design, or a job that failed on session creation).</span></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="comment">    * Aborting here would terminate the calling program, so write an</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span><span class="comment">    * empty payload and return - the caller can check the job state</span></div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="comment">    * (from the outds of the wait macro) and decide what to do. */</span></div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>  %put &amp;sysmacroname: _&amp;result not found in job results -;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>  %put &amp;sysmacroname: use mv_getjoblog to fetch the job log instead;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>  %<span class="keywordflow">if</span> &amp;outref ne 0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    data _null_;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>      file &amp;outref;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>      put <span class="stringliteral">&quot;&amp;sysmacroname: no &amp;_result result available for job &amp;uri&quot;</span>;</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    run;</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>  %end;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>  %<span class="keywordflow">if</span> &amp;outlib ne 0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    %local fname3;</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    %let fname3=%mf_getuniquefileref();</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    data _null_;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>      file &amp;fname3;</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>      put <span class="stringliteral">&#39;{}&#39;</span>;</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    run;</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    libname &amp;outlib JSON fileref=&amp;fname3;</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>  %end;</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>  %<span class="keywordflow">if</span> &amp;mdebug=0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    filename &amp;fname1 clear;</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    libname &amp;lib1 clear;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>  %end;</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>  %<span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>%end;</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span><span class="comment">/* extract results */</span></div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>%local fname2;</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>%let fname2=%mf_getuniquefileref();</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>proc http method=<span class="stringliteral">&#39;GET&#39;</span> out=&amp;fname2 &amp;oauth_bearer</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>  url=<span class="stringliteral">&quot;&amp;base_uri&amp;resuri/content?limit=10000&quot;</span>;</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>  headers <span class="stringliteral">&quot;Accept&quot;</span>=<span class="stringliteral">&quot;application/json&quot;</span></div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>  %<span class="keywordflow">if</span> &amp;grant_type=authorization_code %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>          <span class="stringliteral">&quot;Authorization&quot;</span>=<span class="stringliteral">&quot;Bearer &amp;&amp;&amp;access_token_var&quot;</span></div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>  %end;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>  ;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>run;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>%<span class="keywordflow">if</span> &amp;mdebug=1 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>  <span class="comment">/* send one char at a time as the json can be very wide */</span></div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>  data _null_;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    infile &amp;fname2 recfm=n;</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    input <span class="keywordtype">char</span> $char1. ;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    putlog <span class="keywordtype">char</span> $char1. @;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>  run;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>%end;</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span> </div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>%<span class="keywordflow">if</span> &amp;outref ne 0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>  filename &amp;outref temp;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>  %mp_binarycopy(inref=&amp;fname2,outref=&amp;outref)</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>%end;</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>%<span class="keywordflow">if</span> &amp;outlib ne 0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>  <span class="comment">/* A service run through Viya job execution wraps its response in the</span></div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span><span class="comment">    * transport envelope (&gt;&gt;weboutBEGIN&lt;&lt; ... &gt;&gt;weboutEND&lt;&lt;) - that is what the</span></div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span><span class="comment">    * client frames the response with.  The text path in mx_execute strips it,</span></div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span><span class="comment">    * but the JSON engine has no such step and rejects the marker on line one,</span></div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span><span class="comment">    * which is why an aborted child&#39;s result looked unparsable when the abort</span></div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span><span class="comment">    * object inside it was perfectly good.</span></div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span><span class="comment">    *</span></div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span><span class="comment">    * Detection is the strip: mp_replace copies a byte at a time, so the markers</span></div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span><span class="comment">    * come out wherever they sit, and a smaller output than input is the answer</span></div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span><span class="comment">    * to &quot;was there an envelope&quot;.  Probing the first record instead would miss a</span></div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span><span class="comment">    * marker that is not in it, which is the failure this exists to remove,</span></div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span><span class="comment">    * and a result without an envelope keeps the direct libname. */</span></div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>  %local path2 path3 begvar endvar nil fref3 fref4 fid size2 size4;</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>  %let fref3=%mf_getuniquefileref();</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>  %let fref4=%mf_getuniquefileref();</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>  %let path2=%sysfunc(pathname(&amp;fname2));</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>  %let path3=%sysfunc(pathname(&amp;fref3));</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>  %let begvar=%str(&gt;&gt;weboutBEGIN&lt;&lt;);</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>  %let endvar=%str(&gt;&gt;weboutEND&lt;&lt;);</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  %let nil=;</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  %mp_replace(infile=<span class="stringliteral">&quot;&amp;path2&quot;</span>,findvar=begvar,replacevar=nil</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    ,outfile=<span class="stringliteral">&quot;&amp;path3&quot;</span>)</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>  %mp_replace(infile=<span class="stringliteral">&quot;&amp;path3&quot;</span>,findvar=endvar,replacevar=nil</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    ,outfile=<span class="stringliteral">&quot;%sysfunc(pathname(&amp;fref4))&quot;</span>)</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>  <span class="comment">/* a copy that could not be written is not an outcome: say so, rather than</span></div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span><span class="comment">    * handing the engine an empty file and failing at the libname instead */</span></div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>  %<span class="keywordflow">if</span> %sysfunc(fexist(&amp;fref4)) ne 1 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    %mp_abort(mac=&amp;sysmacroname</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>      ,msg=%str(Unable to strip the result envelope <span class="keywordflow">for</span> &amp;uri)</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    )</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>  %end;</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>  %let fid=%sysfunc(fopen(&amp;fname2));</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>  %let size2=%sysfunc(finfo(&amp;fid,File Size (bytes)));</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>  %let fid=%sysfunc(fclose(&amp;fid));</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  %let fid=%sysfunc(fopen(&amp;fref4));</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>  %let size4=%sysfunc(finfo(&amp;fid,File Size (bytes)));</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  %let fid=%sysfunc(fclose(&amp;fid));</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>  %<span class="keywordflow">if</span> &amp;size4 &lt; &amp;size2 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <span class="comment">/* nothing but envelope is a real outcome - a service that aborted before</span></div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span><span class="comment">      * writing anything - and becomes the empty object the not-found branch</span></div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span><span class="comment">      * hands back, rather than an empty file the engine cannot open */</span></div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    %<span class="keywordflow">if</span> &amp;size4=0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>      data _null_;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>        file &amp;fref4;</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>        put <span class="stringliteral">&#39;{}&#39;</span>;</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>      run;</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    %end;</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    libname &amp;outlib JSON fileref=&amp;fref4;</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>  %end;</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    libname &amp;outlib JSON fileref=&amp;fname2;</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>  %end;</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>  filename &amp;fref3 clear;</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>  filename &amp;fref4 clear;</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>%end;</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>%<span class="keywordflow">if</span> &amp;mdebug=0 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>  filename &amp;fname1 clear;</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>  filename &amp;fname2 clear;</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>  libname &amp;lib1 clear;</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>%end;</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>%<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>  %put &amp;sysmacroname exit vars:;</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>  %put _local_;</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>%end;</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span> </div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>%mend mv_getjobresult;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
