@@ -34,6 +34,7 @@ var dir_a49f9b051925a4cbbe82ac92a0123656 =
     [ "mf_mval.test.sas", "mf__mval_8test_8sas.html", null ],
     [ "mf_nobs.test.sas", "mf__nobs_8test_8sas.html", null ],
     [ "mf_readfile.test.sas", "mf__readfile_8test_8sas.html", null ],
+    [ "mf_trimstr.test.sas", "mf__trimstr_8test_8sas.html", null ],
     [ "mf_verifymacvars.test.sas", "mf__verifymacvars_8test_8sas.html", null ],
     [ "mf_wordsinstr1andstr2.test.sas", "mf__wordsinstr1andstr2_8test_8sas.html", null ],
     [ "mf_wordsinstr1butnotstr2.test.sas", "mf__wordsinstr1butnotstr2_8test_8sas.html", null ],

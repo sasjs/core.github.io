@@ -152,36 +152,37 @@ $(function(){initNavTree('mmx__createmetafolder_8sas_source.html','',''); });
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">  @version 9.4</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">  @author Allan Bowe</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"></span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>%macro mmx_createmetafolder(loc=,user=,pass=);</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>%local host port path connx_string msg;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>%let host=%sysfunc(getoption(metaserver));</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>%let port=%sysfunc(getoption(metaport));</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>%let path=%mf_loc(POF)/tools;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>%let connx_string= -host &amp;host -port &amp;port -user <span class="stringliteral">&#39;&amp;user&#39;</span> -password <span class="stringliteral">&#39;&amp;pass&#39;</span>;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">/* remove directory */</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>data _null_;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  infile <span class="stringliteral">&quot; &amp;path/sas-make-folder &amp;connx_string &quot;</span><span class="stringliteral">&quot;&amp;loc&quot;</span><span class="stringliteral">&quot; -makeFullPath 2&gt;&amp;1&quot;</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    pipe lrecl=10000;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  input;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  putlog _infile_;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>run;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>data _null_; <span class="comment">/* check tree exists */</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  length type uri $256;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  rc=metadata_pathobj(<span class="stringliteral">&quot;&quot;</span>,<span class="stringliteral">&quot;&amp;loc&quot;</span>,<span class="stringliteral">&quot;Folder&quot;</span>,type,uri);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  call symputx(<span class="stringliteral">&#39;foldertype&#39;</span>,type,<span class="charliteral">&#39;l&#39;</span>);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>run;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>%let msg=Location (&amp;loc) was not created!!;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>%mp_abort(iftrue= (&amp;foldertype ne Tree)</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  ,mac=&amp;_program..sas</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  ,msg=%superq(msg)</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>)</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>%mend mmx_createmetafolder;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">  @sasjslint {&quot;noXcmd&quot;: false}</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>%macro mmx_createmetafolder(loc=,user=,pass=);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>%local host port path connx_string msg;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>%let host=%sysfunc(getoption(metaserver));</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>%let port=%sysfunc(getoption(metaport));</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>%let path=%mf_loc(POF)/tools;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>%let connx_string= -host &amp;host -port &amp;port -user <span class="stringliteral">&#39;&amp;user&#39;</span> -password <span class="stringliteral">&#39;&amp;pass&#39;</span>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">/* remove directory */</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>data _null_;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  infile <span class="stringliteral">&quot; &amp;path/sas-make-folder &amp;connx_string &quot;</span><span class="stringliteral">&quot;&amp;loc&quot;</span><span class="stringliteral">&quot; -makeFullPath 2&gt;&amp;1&quot;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    pipe lrecl=10000;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  input;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  putlog _infile_;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>run;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>data _null_; <span class="comment">/* check tree exists */</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  length type uri $256;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  rc=metadata_pathobj(<span class="stringliteral">&quot;&quot;</span>,<span class="stringliteral">&quot;&amp;loc&quot;</span>,<span class="stringliteral">&quot;Folder&quot;</span>,type,uri);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  call symputx(<span class="stringliteral">&#39;foldertype&#39;</span>,type,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>run;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>%let msg=Location (&amp;loc) was not created!!;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>%mp_abort(iftrue= (&amp;foldertype ne Tree)</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  ,mac=&amp;_program..sas</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  ,msg=%superq(msg)</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>)</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>%mend mmx_createmetafolder;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
