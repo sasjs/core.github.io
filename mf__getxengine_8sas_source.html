@@ -146,35 +146,37 @@ $(function(){initNavTree('mf__getxengine_8sas_source.html','',''); });
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"></span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">  @param [in] fref The fileref to check</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">  @returns The XENGINE value in sashelp.vextfl or 0 if not found.</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">  @version 9.2</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">  @author Allan Bowe</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"></span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">  &lt;h4&gt; Related Macros &lt;/h4&gt;</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">  @li mf_getengine.sas</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"></span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>%macro mf_getxengine(fref</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  %local dsid engnum rc engine;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  %let dsid=%sysfunc(</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    open(sashelp.vextfl(where=(fileref=<span class="stringliteral">&quot;%upcase(&amp;fref)&quot;</span>)),i)</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  );</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  %<span class="keywordflow">if</span> (&amp;dsid ^= 0) %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    %let engnum=%sysfunc(varnum(&amp;dsid,XENGINE));</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    %let rc=%sysfunc(fetch(&amp;dsid));</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    %let engine=%sysfunc(getvarc(&amp;dsid,&amp;engnum));</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    %* put &amp;fref. ENGINE is &amp;engine.;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    %let rc= %sysfunc(close(&amp;dsid));</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  %end;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  %<span class="keywordflow">else</span> %let engine=0;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  &amp;engine</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">  @returns The XENGINE value in sashelp.vextfl. A fileref that has a row there</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">    but no XENGINE value - including a fileref that is not assigned - returns</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">    an empty string; 0 is returned only when sashelp.vextfl cannot be opened.</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"></span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">  @version 9.2</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">  @author Allan Bowe</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"></span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">  &lt;h4&gt; Related Macros &lt;/h4&gt;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">  @li mf_getengine.sas</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"></span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>%macro mf_getxengine(fref</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>)<span class="comment">/*/STORE SOURCE*/</span>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  %local dsid engnum rc engine;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  %let dsid=%sysfunc(</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    open(sashelp.vextfl(where=(fileref=<span class="stringliteral">&quot;%upcase(&amp;fref)&quot;</span>)),i)</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  );</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  %<span class="keywordflow">if</span> (&amp;dsid ^= 0) %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    %let engnum=%sysfunc(varnum(&amp;dsid,XENGINE));</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    %let rc=%sysfunc(fetch(&amp;dsid));</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    %let engine=%sysfunc(getvarc(&amp;dsid,&amp;engnum));</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    %* put &amp;fref. ENGINE is &amp;engine.;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    %let rc= %sysfunc(close(&amp;dsid));</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  %end;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  %<span class="keywordflow">else</span> %let engine=0;</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>%mend mf_getxengine;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  &amp;engine</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>%mend mf_getxengine;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

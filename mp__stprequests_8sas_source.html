@@ -186,27 +186,34 @@ $(function(){initNavTree('mp__stprequests_8sas_source.html','',''); });
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    SYSUSERID=<span class="stringliteral">&quot;&amp;sysuserid&quot;</span>;</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    SYSJOBID=<span class="stringliteral">&quot;&amp;sysjobid&quot;</span>;</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  %<span class="keywordflow">if</span> not %symexist(_SESSIONID) %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="comment">/* session id is stored in the replay variable but needs to be extracted */</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    _replay=symget(<span class="stringliteral">&#39;_replay&#39;</span>);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    _replay=subpad(_replay,index(_replay,<span class="stringliteral">&#39;_sessionid=&#39;</span>)+11,length(_replay));</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    index=index(_replay,<span class="charliteral">&#39;&amp;&#39;</span>)-1;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">if</span> index=-1 then index=length(_replay);</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    _replay=substr(_replay,1,index);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    _SESSIONID=_replay;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    drop _replay index;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  %end;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="comment">/* explicitly created sessions are automatically available */</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    _SESSIONID=symget(<span class="stringliteral">&#39;_SESSIONID&#39;</span>);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  %end;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    output;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    stop;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  run;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  proc append base=&amp;libds data=&amp;syslast nowarn;run;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  options &amp;etls_syntaxcheck;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>%mend mp_stprequests;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="comment">/* session id is stored in the replay variable but needs to be extracted.</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">    _replay only exists in a metadata stored process session, so guard it:</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">    symget() on a name that is not defined raises an error, not a blank. */</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    %<span class="keywordflow">if</span> %symexist(_replay) %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>      _replay=symget(<span class="stringliteral">&#39;_replay&#39;</span>);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>      _replay=subpad(_replay,index(_replay,<span class="stringliteral">&#39;_sessionid=&#39;</span>)+11,length(_replay));</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      index=index(_replay,<span class="charliteral">&#39;&amp;&#39;</span>)-1;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>      <span class="keywordflow">if</span> index=-1 then index=length(_replay);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      _replay=substr(_replay,1,index);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>      _SESSIONID=_replay;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>      drop _replay index;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    %end;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>      _SESSIONID=<span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    %end;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  %end;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  %<span class="keywordflow">else</span> %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="comment">/* explicitly created sessions are automatically available */</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    _SESSIONID=symget(<span class="stringliteral">&#39;_SESSIONID&#39;</span>);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  %end;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    output;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    stop;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  run;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  proc append base=&amp;libds data=&amp;syslast nowarn;run;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  options &amp;etls_syntaxcheck;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>%mend mp_stprequests;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

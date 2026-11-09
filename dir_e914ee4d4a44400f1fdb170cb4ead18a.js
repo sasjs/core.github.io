@@ -123,7 +123,6 @@ var dir_e914ee4d4a44400f1fdb170cb4ead18a =
     [ "mp_resetoption.sas", "mp__resetoption_8sas.html", null ],
     [ "mp_retainedkey.sas", "mp__retainedkey_8sas.html", null ],
     [ "mp_rowhash.sas", "mp__rowhash_8sas.html", null ],
-    [ "mp_runddl.sas", "mp__runddl_8sas.html", null ],
     [ "mp_searchcols.sas", "mp__searchcols_8sas.html", null ],
     [ "mp_searchdata.sas", "mp__searchdata_8sas.html", null ],
     [ "mp_setkeyvalue.sas", "mp__setkeyvalue_8sas.html", null ],

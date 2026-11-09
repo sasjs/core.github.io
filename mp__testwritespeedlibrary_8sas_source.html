@@ -184,13 +184,18 @@ $(function(){initNavTree('mp__testwritespeedlibrary_8sas_source.html','',''); })
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>drop table &amp;lib..&amp;ds;</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>data &amp;outds;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  lib=<span class="stringliteral">&quot;&amp;lib&quot;</span>;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  start_dttm=put(&amp;start,datetime19.);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  end_dttm=put(datetime(),datetime19.);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  duration_seconds=end_dttm-start_dttm;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>run;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>%mend mp_testwritespeedlibrary;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  _start=&amp;start;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  _end=datetime();</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  lib=<span class="stringliteral">&quot;&amp;lib&quot;</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  start_dttm=put(_start,datetime19.);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  end_dttm=put(_end,datetime19.);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="comment">/* both timestamps above are text, so the difference has to come from the</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">    numeric values - subtracting the strings yields a missing value */</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  duration_seconds=_end-_start;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  drop _start _end;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>run;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>%mend mp_testwritespeedlibrary;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
