@@ -13,5 +13,6 @@ var dir_f609455181c6a57b6b1dd59f46bb10c8 =
     [ "ms_runstp.test.sas", "ms__runstp_8test_8sas.html", null ],
     [ "ms_testservice.test.sas", "ms__testservice_8test_8sas.html", null ],
     [ "ms_triggerstp.test.sas", "ms__triggerstp_8test_8sas.html", null ],
-    [ "ms_webout.test.sas", "ms__webout_8test_8sas.html", null ]
+    [ "ms_webout.test.sas", "ms__webout_8test_8sas.html", null ],
+    [ "mx_createwebservice.test.sas", "mx__createwebservice_8test_8sas.html", null ]
 ];
