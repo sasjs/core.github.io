@@ -154,6 +154,19 @@ $(function(){initNavTree('mf__verifymacvars_8test_8sas_source.html','',''); });
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>)</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>%mp_assertscope(COMPARE)</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">/* an mf_ macro returns a value rather than ending the step: a failure has to</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">  come back as 0, with the reason in the log, and must not abort */</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>%mp_assert(</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  iftrue=(%mf_verifymacvars(nosuchvar_intentional, mAbort=YES)=0),</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  desc=Checking a missing macvar returns 0 even with mAbort=YES,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  outds=work.test_results</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>)</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>%mp_assert(</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  iftrue=(&amp;syscc=0),</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  desc=Checking the failure path leaves syscc alone,</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  outds=work.test_results</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>)</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

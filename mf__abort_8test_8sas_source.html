@@ -143,10 +143,10 @@ $(function(){initNavTree('mf__abort_8test_8sas_source.html','',''); });
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"></span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">**/</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">/* mf_abort is deprecated in favour of mp_abort, but its behaviour is still</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">  relied on: mf_verifymacvars and the viya mfv_* macros call it, and the</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">  default SASjs CLI service and test templates declare it as a dependency, so</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">  every compiled build inlines it.  Its behaviour is therefore pinned here.</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">/* mf_abort offers no way to capture the failure and return it to the client,</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">  which is why it is not advised in SASjs web services - mp_abort writes the</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">  standard abort JSON to _webout instead.  The macro stays available for batch</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">  and SAS 9 work, so its pass-through decision is pinned here.</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span> </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">  The aborting path cannot be exercised from a test - ABORT ends the session</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">  and the runner would never report.  What is tested is the decision in front</span></div>

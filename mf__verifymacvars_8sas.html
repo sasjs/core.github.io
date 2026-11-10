@@ -138,21 +138,17 @@ $(function(){initNavTree('mf__verifymacvars_8sas.html','',''); });
 
 <p><a href="mf__verifymacvars_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Reports a failure in the log if abortType is SOFT, else calls mf_abort. Usage: </p><pre class="fragment">%let var1=x;
+<div class="textblock"><p>Reports a failure in the log and returns 0. It never aborts: an mf_ macro returns a value, and ending the step here would leave the caller unable to see that value or to report the failure itself. Usage: </p><pre class="fragment">%let var1=x;
 %let var2=y;
 %put %mf_verifymacvars(var1 var2);
 </pre><p>Returns: </p><blockquote class="doxtable">
 <p>1 </p>
 </blockquote>
-<h4>SAS Macros </h4>
-<ul>
-<li><a class="el" href="mf__abort_8sas.html" title="Abort, ungracefully.">mf_abort.sas</a></li>
-</ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">verifyvars</td><td>Space separated list of macro variable names </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">makeupcase=</td><td>(NO) Set to YES to convert all variable VALUES to uppercase. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">mAbort=</td><td>(SOFT) Abort Type. When SOFT, simply writes an err message to the log. Set to any other value to call mf_abort (which can be configured to abort in various fashions according to context).</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mAbort=</td><td>(SOFT) Retained for backwards compatibility. The macro no longer aborts on any value - a failure is written to the log and 0 is returned, so the caller decides what to do with it.</td></tr>
   </table>
   </dd>
 </dl>

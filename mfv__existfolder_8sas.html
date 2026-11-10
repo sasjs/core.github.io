@@ -138,7 +138,8 @@ $(function(){initNavTree('mfv__existfolder_8sas.html','',''); });
 
 <p><a href="mfv__existfolder_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Returns 1 if the folder exists, and 0 if it doesn't. Works by attempting to assign a fileref with the filesrvc engine. If not found, the syscc is automatically set to a non zero value - so in this case it is reset. To avoid hiding issues, there is therefore a test at the start to ensure the syscc is zero.</p>
+<div class="textblock"><p>Returns 1 if the folder exists, and 0 if it doesn't. Works by attempting to assign a fileref with the filesrvc engine. When the folder is not found the filename function sets syscc to a non zero value, so the macro resets syscc to zero and returns 0.</p>
+<p>A non zero syscc on entry means an earlier step has already failed. The macro logs a str(ERR)OR: line and returns 0 without touching syscc, so a caller comparing the result against 1 or 0 stays valid, and can tell this case from a genuine miss by checking syscc, which a miss resets to zero.</p>
 <p>Usage: </p><pre class="fragment">%put %mfv_existfolder(/does/exist);
 %put %mfv_existfolder(/does/not/exist);
 </pre><dl class="params"><dt>Parameters</dt><dd>
@@ -149,7 +150,6 @@ $(function(){initNavTree('mfv__existfolder_8sas.html','',''); });
 </dl>
 <h4>SAS Macros </h4>
 <ul>
-<li><a class="el" href="mf__abort_8sas.html" title="Abort, ungracefully.">mf_abort.sas</a> </li>
 <li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a></li>
 </ul>
 <h4>Related Macros </h4>

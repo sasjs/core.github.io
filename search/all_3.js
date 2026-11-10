@@ -2,6 +2,5 @@ var searchData=
 [
   ['ddl_20folder_20all_20platforms_0',['DDL folder (All Platforms)',['../index.html#autotoc_md3',1,'']]],
   ['deleted_1',['&amp;amp;prefix.deleted',['../mm__getlibmetadiffs_8sas.html#autotoc_md25',1,'']]],
-  ['dependencies_2',['Dependencies',['../index.html#autotoc_md16',1,'']]],
-  ['deprecated_20list_3',['Deprecated List',['../deprecated.html',1,'']]]
+  ['dependencies_2',['Dependencies',['../index.html#autotoc_md16',1,'']]]
 ];
