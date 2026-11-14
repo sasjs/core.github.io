@@ -331,9 +331,9 @@ Breaking Changes</h1>
 </ul>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
 Cutting a release</h2>
-<p>Releases are cut by <span class="tt">semantic-release</span> from the commit messages on <span class="tt">main</span>, so the squashed PR message is what decides the version:</p>
+<p>Releases are cut by <span class="tt">@sasjs/release</span> from the commit messages on <span class="tt">main</span>, so the squashed PR message is what decides the version:</p>
 <ul>
-<li>a breaking change needs a <span class="tt">BREAKING CHANGE:</span> footer in the commit body. The <span class="tt">!</span> after the type on its own did not bump the major on this pipeline - the v6 rename merged as <span class="tt">feat!:</span> and shipped as a patch release.</li>
+<li>a breaking change bumps the major when the subject carries <span class="tt">!</span> after the type (<span class="tt">feat!:</span>) or the body carries a <span class="tt">BREAKING CHANGE:</span> footer. The previous pipeline ignored <span class="tt">!</span> on its own - the v6 rename merged as <span class="tt">feat!:</span> and shipped as a patch - and this one does not.</li>
 <li>no commit that reaches <span class="tt">main</span> may carry a skip marker (<span class="tt">[skip ci]</span> and friends), including one copied in by the squashed commit list. A skip marker suppresses every workflow for that push, the release job included, and nothing is published.</li>
 </ul>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md21"></a>

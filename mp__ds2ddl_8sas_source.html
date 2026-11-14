@@ -231,7 +231,7 @@ $(function(){initNavTree('mp__ds2ddl_8sas_source.html','',''); });
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>%local colconst; %let colconst=&amp;syslast;</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>%local constraints_used;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>%macro addConst();</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>%macro addconst();</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  data _null_;</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    length ctype $11 constraint_name_orig $256 constraints_used $5000;</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keyword">set</span> &amp;colconst(</div>
@@ -263,7 +263,7 @@ $(function(){initNavTree('mp__ds2ddl_8sas_source.html','',''); });
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  end;</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  run;</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  %put &amp;=constraints_used;</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>%mend addConst;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>%mend addconst;</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>data _null_;</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  file &amp;fref mod;</div>

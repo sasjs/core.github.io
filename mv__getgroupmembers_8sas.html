@@ -148,9 +148,12 @@ ordinal_items num,
 version num,
 id char(256),
 name char(256),
-providerId char(5),
-implicit num
-</pre><dl class="params"><dt>Parameters</dt><dd>
+providerId char(32),
+implicit num,
+type char(32)
+</pre><p><span class="tt">type</span> is the member type (user or group) and is declared on every path. <span class="tt">implicit</span> is declared so a caller reading it does not fail with "Variable
+implicit not found", but the identities API returns no such field, so the column is present and always missing. A group with no members, and a group id the server does not know, both return the columns above with zero rows.</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">group</td><td>Group id for which to return group members </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">access_token_var=</td><td>(ACCESS_TOKEN) The global macro variable to contain the access token </td></tr>
@@ -168,6 +171,7 @@ implicit num
 <li><a class="el" href="mf__getplatform_8sas.html" title="Returns platform specific variables.">mf_getplatform.sas</a> </li>
 <li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
 <li><a class="el" href="mf__getuniquelibref_8sas.html" title="Returns an unused libref.">mf_getuniquelibref.sas</a> </li>
+<li><a class="el" href="mf__existvar_8sas.html" title="Checks if a variable exists in a data set.">mf_existvar.sas</a> </li>
 </ul>
 
 <p class="definition">Definition in file <a class="el" href="mv__getgroupmembers_8sas_source.html">mv_getgroupmembers.sas</a>.</p>

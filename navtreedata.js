@@ -34,8 +34,8 @@ var NAVTREEINDEX =
 [
 "dir_0d92069d5a23b1d3125c326d74f1a07c.html",
 "mf__trimstr_8test_8sas_source.html",
-"mp__derivedvars_8sas_source.html",
-"mp__stripdiffs_8test_82_8sas_source.html"
+"mp__derivedvarcheck_8test_8sas_source.html",
+"mp__stripdiffs_8sas_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

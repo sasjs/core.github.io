@@ -139,7 +139,8 @@ $(function(){initNavTree('mv__getfoldermembers_8sas.html','',''); });
 <p><a href="mv__getfoldermembers_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Returns all members for a particular Viya folder. Works at both root level and below, and results are created in an output dataset. </p><pre class="fragment">  %mv_getfoldermembers(root=/Public, outds=work.mymembers)
-</pre><dl class="params"><dt>Parameters</dt><dd>
+</pre><p>A root with nothing to list - an empty folder, or an answer that carries no members link - still yields &amp;outds, with the documented columns and zero rows.</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">root=</td><td>(/) The path for which to return the list of folders </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mv_getfolders) The output dataset to create. Format: <table class="markdownTable">
