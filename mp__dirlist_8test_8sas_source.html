@@ -286,12 +286,33 @@ $(function(){initNavTree('mp__dirlist_8test_8sas_source.html','',''); });
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>)</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment"></span> </div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="comment">  * dump results to the log for offline inspection</span></div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="comment">  */</span></div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>data _null_;</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  set work.test_results;</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  putlog &#39;TEST_RESULT_LINE: &#39; test_result &#39; - &#39; test_description;</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>run;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="comment">  * a plain file is a file.  Some platforms answer dopen on a file with an</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="comment">  * empty sysmsg(), so the message checks alone cannot tell it from an entry</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="comment">  * that could not be opened at all</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment">  */</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>data _null_;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  file <span class="stringliteral">&quot;&amp;root/plain.txt&quot;</span>;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  put <span class="charliteral">&#39;x&#39;</span>;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>run;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>%mp_dirlist(path=&amp;root, outds=work.myTable10)</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>data _null_;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  set work.mytable10(where=(filename=&#39;plain.txt&#39;));</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>  call symputx(&#39;type_txt&#39;,file_or_folder,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  call symputx(&#39;msg_txt&#39;,msg,<span class="charliteral">&#39;l&#39;</span>);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>run;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>%mp_assert(</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>  iftrue=(<span class="stringliteral">&quot;%upcase(&amp;type_txt)&quot;</span>=<span class="stringliteral">&quot;FILE&quot;</span>),</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>  desc=A text file is classified as a file,</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  outds=work.test_results</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>)</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="comment"></span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="comment">  * dump results to the log for offline inspection</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="comment">  */</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>data _null_;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>  set work.test_results;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  putlog &#39;TEST_RESULT_LINE: &#39; test_result &#39; - &#39; test_description;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>run;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
