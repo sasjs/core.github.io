@@ -16,6 +16,8 @@ var dir_650092e11941d85fd99c2002d68de369 =
     [ "mv_deletejes.test.sas", "mv__deletejes_8test_8sas.html", null ],
     [ "mv_deleteviyafolder.test.sas", "mv__deleteviyafolder_8test_8sas.html", null ],
     [ "mv_getfoldermembers.test.2.sas", "mv__getfoldermembers_8test_82_8sas.html", null ],
+    [ "mv_getfoldermembers.test.3.sas", "mv__getfoldermembers_8test_83_8sas.html", null ],
+    [ "mv_getfoldermembers.test.4.sas", "mv__getfoldermembers_8test_84_8sas.html", null ],
     [ "mv_getfoldermembers.test.sas", "mv__getfoldermembers_8test_8sas.html", null ],
     [ "mv_getgroupmembers.test.sas", "mv__getgroupmembers_8test_8sas.html", null ],
     [ "mv_getgroups.test.sas", "mv__getgroups_8test_8sas.html", null ],
