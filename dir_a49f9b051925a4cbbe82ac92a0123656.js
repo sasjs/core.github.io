@@ -70,6 +70,7 @@ var dir_a49f9b051925a4cbbe82ac92a0123656 =
     [ "mp_assertcols.test.sas", "mp__assertcols_8test_8sas.html", null ],
     [ "mp_assertcolvals.test.sas", "mp__assertcolvals_8test_8sas.html", null ],
     [ "mp_assertdsobs.test.sas", "mp__assertdsobs_8test_8sas.html", null ],
+    [ "mp_assertmodel.test.sas", "mp__assertmodel_8test_8sas.html", null ],
     [ "mp_assertscope.test.sas", "mp__assertscope_8test_8sas.html", null ],
     [ "mp_base64copy.test.sas", "mp__base64copy_8test_8sas.html", null ],
     [ "mp_binarycopy.test.sas", "mp__binarycopy_8test_8sas.html", null ],
