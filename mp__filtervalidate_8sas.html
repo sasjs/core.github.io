@@ -120,6 +120,7 @@ $(function(){initNavTree('mp__filtervalidate_8sas.html','',''); });
 <p><a href="mp__filtervalidate_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Runs a generated filter in proc sql with the validate option. Used in <a class="el" href="mp__filtercheck_8sas.html" title="Checks an input filter table for validity.">mp_filtercheck.sas</a> in an fcmp container.</p>
+<p>A truncated comparison cannot be written in SQL, so a <span class="tt">=:</span> / <span class="tt">^=:</span> clause is validated as the equivalent truncated comparison operator (EQT / NET). The clause itself is not altered - only the generated validate query is.</p>
 <p>Built to support dynamic filtering in <a href="https://datacontroller.io">Data Controller for SAS&reg;</a>.</p>
 <p>Usage: </p><pre class="fragment">data work.filtertable;
   infile datalines4 dsd;
