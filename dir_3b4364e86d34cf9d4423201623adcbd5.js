@@ -7,5 +7,6 @@ var dir_3b4364e86d34cf9d4423201623adcbd5 =
     [ "mddl_dc_locktable.test.sas", "mddl__dc__locktable_8test_8sas.html", null ],
     [ "mddl_dc_maxkeytable.test.sas", "mddl__dc__maxkeytable_8test_8sas.html", null ],
     [ "mddl_dirlist.test.sas", "mddl__dirlist_8test_8sas.html", null ],
+    [ "mddl_getgroups.test.sas", "mddl__getgroups_8test_8sas.html", null ],
     [ "mddl_sas_cntlout.test.sas", "mddl__sas__cntlout_8test_8sas.html", null ]
 ];

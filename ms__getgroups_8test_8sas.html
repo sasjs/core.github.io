@@ -114,18 +114,24 @@ $(function(){initNavTree('ms__getgroups_8test_8sas.html','',''); });
 </div><!--header-->
 <div class="contents">
 
-<p>Testing <a class="el" href="ms__getgroups_8sas.html" title="Fetches the list of groups from SASjs Server.">ms_getgroups.sas</a> macro.  
+<p>Regression tests for ms_getgroups with isolated group fixtures.  
 <a href="#details">More...</a></p>
 
 <p><a href="ms__getgroups_8test_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><h4>SAS Macros </h4>
+<div class="textblock"><p>Requires an admin session for a local SASjs Server user. Group creation, membership changes, and deletion are performed on that server. Cleanup is best effort; a lost creation response or terminated session can leave a fixture that must be removed manually.</p>
+<h4>SAS Macros </h4>
 <ul>
-<li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
-<li><a class="el" href="ms__adduser2group_8sas.html" title="Adds a user to a group on SASjs Server.">ms_adduser2group.sas</a> </li>
-<li><a class="el" href="ms__creategroup_8sas.html" title="Creates a group on SASjs Server.">ms_creategroup.sas</a> </li>
+<li><a class="el" href="mddl__getgroups_8sas.html" title="DDL for the shared group model.">mddl_getgroups.sas</a> </li>
 <li><a class="el" href="ms__getgroups_8sas.html" title="Fetches the list of groups from SASjs Server.">ms_getgroups.sas</a> </li>
+<li><a class="el" href="ms__creategroup_8sas.html" title="Creates a group on SASjs Server.">ms_creategroup.sas</a> </li>
+<li><a class="el" href="ms__adduser2group_8sas.html" title="Adds a user to a group on SASjs Server.">ms_adduser2group.sas</a> </li>
+<li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
+<li><a class="el" href="mp__assertmodel_8sas.html" title="Assert model and optionally check key under OBS= and FIRSTOBS=.">mp_assertmodel.sas</a> </li>
 <li><a class="el" href="mp__assert_8sas.html" title="Generic assertion.">mp_assert.sas</a> </li>
+<li><a class="el" href="mf__getuser_8sas.html" title="Returns a userid according to session context.">mf_getuser.sas</a> </li>
+<li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
+<li><a class="el" href="mf__getuniquelibref_8sas.html" title="Returns an unused libref.">mf_getuniquelibref.sas</a> </li>
 <li><a class="el" href="mp__assertdsobs_8sas.html" title="Asserts the number of observations in a dataset.">mp_assertdsobs.sas</a> </li>
 <li><a class="el" href="mp__assertscope_8sas.html" title="Used to capture scope leakage of macro variables.">mp_assertscope.sas</a> </li>
 </ul>

@@ -8,5 +8,6 @@ var dir_a2b5100634f283885cc7f2e4191caec5 =
     [ "mddl_dc_maxkeytable.sas", "mddl__dc__maxkeytable_8sas.html", null ],
     [ "mddl_derivedvars.sas", "mddl__derivedvars_8sas.html", null ],
     [ "mddl_dirlist.sas", "mddl__dirlist_8sas.html", null ],
+    [ "mddl_getgroups.sas", "mddl__getgroups_8sas.html", null ],
     [ "mddl_sas_cntlout.sas", "mddl__sas__cntlout_8sas.html", null ]
 ];

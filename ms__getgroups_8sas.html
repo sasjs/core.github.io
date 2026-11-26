@@ -119,39 +119,32 @@ $(function(){initNavTree('ms__getgroups_8sas.html','',''); });
 
 <p><a href="ms__getgroups_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Fetches the list of groups from SASjs Server and writes them to an output dataset. Provide a username to filter for the groups for a particular user.</p>
-<p>Example: </p><pre class="fragment">%ms_getgroups(outds=userlist)
-</pre><p>With filter on username: </p><pre class="fragment">%ms_getgroups(outds=userlist, user=James)
-</pre><p>With filter on userid: </p><pre class="fragment">%ms_getgroups(outds=userlist, uid=1)
+<div class="textblock"><p>Fetches all groups, or the groups for a particular user. When both user and uid are provided, user takes precedence. GROUPURI is the API group uid, not the legacy numeric groupid. Desktop mode returns a synthetic group with GROUPURI=1, GROUPNAME=SYSUSERID and a desktop description.</p>
+<p>A failed HTTP request raises a failure and leaves an empty output dataset, except that a missing user returns no groups. Empty group arrays produce an empty dataset with the model. Descriptions longer than 256 bytes are truncated to fit GROUPDESC.</p>
+<p>Example: </p><pre class="fragment">%ms_getgroups(outds=work.groups)
+%ms_getgroups(user=James,outds=work.groups)
+%ms_getgroups(uid=1,outds=work.groups)
 </pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>(0) Set to 1 to enable DEBUG messages </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">user=</td><td>(0) Provide the username on which to filter </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">uid=</td><td>(0) Provide the userid on which to filter </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.ms_getgroups) This output dataset will contain the list of groups. Format: <table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">NAME:$32.  </th><th class="markdownTableHeadNone">DESCRIPTION:$256.  </th><th class="markdownTableHeadNone">GROUPID:best.  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">SomeGroup </span>  </td><td class="markdownTableBodyNone"><span class="tt">A group </span>  </td><td class="markdownTableBodyNone"><span class="tt">1</span>  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">Another Group</span>  </td><td class="markdownTableBodyNone"><span class="tt">this is a different group</span>  </td><td class="markdownTableBodyNone"><span class="tt">2</span>  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">admin</span>  </td><td class="markdownTableBodyNone"><span class="tt">Administrators </span>  </td><td class="markdownTableBodyNone"><span class="tt">3</span>  </td></tr>
-</table>
-</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>(0) Set to 1 to enable HTTP debug messages </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">user=</td><td>(0) Username used to filter groups </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">uid=</td><td>(0) User uid used to filter groups </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.ms_getgroups) Dataset with exactly GROUPURI, GROUPNAME and GROUPDESC, all character length 256.</td></tr>
   </table>
   </dd>
 </dl>
 <h4>SAS Macros </h4>
 <ul>
+<li><a class="el" href="mddl__getgroups_8sas.html" title="DDL for the shared group model.">mddl_getgroups.sas</a> </li>
 <li><a class="el" href="mf__getuniquefileref_8sas.html" title="Assigns and returns an unused fileref.">mf_getuniquefileref.sas</a> </li>
 <li><a class="el" href="mf__getuniquelibref_8sas.html" title="Returns an unused libref.">mf_getuniquelibref.sas</a> </li>
+<li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
 <li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a></li>
 </ul>
 <h4>Related Files </h4>
 <ul>
 <li><a class="el" href="ms__creategroup_8sas.html" title="Creates a group on SASjs Server.">ms_creategroup.sas</a> </li>
-<li><a class="el" href="ms__getgroups_8test_8sas.html" title="Testing ms_getgroups.sas macro.">ms_getgroups.test.sas</a> </li>
+<li><a class="el" href="ms__getgroups_8test_8sas.html" title="Regression tests for ms_getgroups with isolated group fixtures.">ms_getgroups.test.sas</a> </li>
 </ul>
 
 <p class="definition">Definition in file <a class="el" href="ms__getgroups_8sas_source.html">ms_getgroups.sas</a>.</p>

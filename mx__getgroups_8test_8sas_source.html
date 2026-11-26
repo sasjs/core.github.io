@@ -115,46 +115,72 @@ $(function(){initNavTree('mx__getgroups_8test_8sas_source.html','',''); });
 <div class="contents">
 <a href="mx__getgroups_8test_8sas.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">  @file</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">  @brief Testing mx_getgroups.test.sas macro</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">  @brief Test the cross-platform group model and memberships</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"></span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">  Be sure to run &lt;code&gt;%let mcTestAppLoc=/Public/temp/macrocore;&lt;/code&gt; when</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">  running in Studio</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"></span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">  @li mf_getuser.sas</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">  @li mf_nobs.sas</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">  @li mp_assert.sas</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">  @li mp_assertcols.sas</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">  @li mddl_getgroups.sas</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">  @li mf_getplatform.sas</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">  @li mf_getuser.sas</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">  @li mf_nobs.sas</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">  @li mp_assert.sas</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">  @li mp_assertmodel.sas</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">  @li mp_assertscope.sas</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">  @li mx_getgroups.sas</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">**/</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>%mx_getgroups(outds=work.test1)</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>%mp_assert(</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  iftrue=(%mf_nobs(work.test1)&gt;0),</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  desc=groups were found,</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  outds=work.test_results</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>)</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>%mp_assertcols(work.test1,</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  cols=groupuri groupname groupdesc,</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  test=ALL,</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  desc=check all columns exist</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>)</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">/* JSON engine globals depend on the libref allocated in this session. */</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>%macro group_scope_compare(desc=);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  %local json_globals;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  %let json_globals=;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  proc sql noprint;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    select distinct name into :json_globals separated by <span class="charliteral">&#39; &#39;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    from dictionary.macros</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    where scope=<span class="stringliteral">&#39;GLOBAL&#39;</span> and prxmatch(</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>      <span class="stringliteral">&#39;/^MC(\d{1,6}|LIB\d{1,3})_JAD(P\d+LEN|PNUM|VLEN)$/i&#39;</span>,strip(name));</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  quit;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  %mp_assertscope(COMPARE,ignorelist=&amp;json_globals</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    ,desc=&amp;desc,outds=work.test_results)</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>%mend group_scope_compare;</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>%mx_getgroups(outds=work.test2,user=%mf_getuser())</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>%mddl_getgroups(work.groupmodel)</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>%mp_assert(</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  iftrue=(%mf_nobs(work.test2)&gt;0),</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  desc=groups <span class="keywordflow">for</span> current user were found,</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  outds=work.test_results</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>)</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>%mp_assertcols(work.test2,</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  cols=groupuri groupname groupdesc,</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  test=ALL,</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  desc=check all columns exist</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>)</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>%mp_assertscope(SNAPSHOT)</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>%mx_getgroups(outds=work.allgroups)</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>%group_scope_compare(desc=All groups does not leak macro variables)</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>%mp_assertmodel(work.allgroups,base=work.groupmodel,key=groupuri,</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  desc=All groups model and identifiers)</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>%mp_assert(iftrue=(%mf_nobs(work.allgroups)&gt;0),</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  desc=All groups are not empty)</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>%mp_assertscope(SNAPSHOT)</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>%mx_getgroups(outds=work.usergroups,user=%mf_getuser())</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>%group_scope_compare(desc=User groups does not leak macro variables)</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>%mp_assertmodel(work.usergroups,base=work.groupmodel,key=groupuri,</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  desc=User groups model and identifiers)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>%mp_assert(iftrue=(%mf_nobs(work.usergroups)&gt;0),</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  desc=Current user has groups)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">/* Membership IDs and names must correspond to the all-groups list. */</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>proc sql noprint;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  select count(*) into :missing_groups trimmed</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  from work.usergroups as u</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  where not exists (select * from work.allgroups as a</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    where a.groupuri=u.groupuri and a.groupname=u.groupname);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>quit;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>%mp_assert(iftrue=(&amp;missing_groups=0),</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  desc=Membership identifiers and names match the group list)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>%macro mx_empty_user_test();</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  %if %mf_getplatform()=SASVIYA %then %do;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    %mx_getgroups(user=nosuchuser7394,outds=work.no_groups)</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    %mp_assertmodel(work.no_groups,base=work.groupmodel,key=groupuri,</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      desc=Unknown Viya user has the group model)</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    %mp_assert(iftrue=(%mf_nobs(work.no_groups)=0),</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>      desc=Unknown Viya user has no groups)</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  %end;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>%mend mx_empty_user_test;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>%mx_empty_user_test()</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
