@@ -124,16 +124,13 @@ $(function(){initNavTree('mv__getgroupmembers_8sas.html','',''); });
   "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %inc mc;
 </pre><p>Now we can run the macro! </p><pre class="fragment">%mv_getgroupmembers(All Users)
-</pre><p>outputs: </p><pre class="fragment">ordinal_root num,
-ordinal_items num,
-version num,
+</pre><p>The output contains exactly these member columns on every path: </p><pre class="fragment">version num(8),
 id char(256),
 name char(256),
 providerId char(32),
-implicit num,
 type char(32)
-</pre><p><span class="tt">type</span> is the member type (user or group) and is declared on every path. <span class="tt">implicit</span> is declared so a caller reading it does not fail with "Variable
-implicit not found", but the identities API returns no such field, so the column is present and always missing. A group with no members, and a group id the server does not know, both return the columns above with zero rows.</p>
+</pre><p>Other identities API fields and JSON engine ordinal columns are not included. <span class="tt">type</span> is the member type (user or group). A group with no members, and a group id the server does not know, return these columns with zero rows.</p>
+<p>Output schema change: callers that used <span class="tt">implicit</span>, <span class="tt">ordinal_root</span>, <span class="tt">ordinal_items</span>, or other API fields must stop relying on those columns. Obtain needed additional information from the appropriate identities API; JSON ordinals are engine-generated metadata.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">group</td><td>Group id for which to return group members </td></tr>
